@@ -1,28 +1,28 @@
 <template>
-  <q-layout view="hHh lpr fFf">
+  <q-layout view="hHh lpR fFf">
     <q-header reveal bordered height-hint="98">
-      <q-toolbar class="q-pa-md">
+      <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
           </q-avatar>
         </q-toolbar-title>
 
-        <!-- <q-btn dense flat round icon="menu" @click="right = !right" /> -->
+        <q-btn dense flat round icon="menu" @click="right = !right" />
       </q-toolbar>
 
-      <q-tabs class="bg-primary text-dark border" align="left">
+      <q-tabs align="left">
         <q-route-tab to="/page1" label="首页" />
         <q-route-tab to="/page2" label="白菜" />
         <q-route-tab to="/page3" label="排行榜" />
       </q-tabs>
 
-      <!-- <q-btn class="text-brand bg-brand" color="brand" label="Fuchsia" /> -->
+      <q-btn class="text-brand bg-brand" color="brand" label="Fuchsia" />
     </q-header>
 
-    <!-- <q-drawer v-model="right" side="right" overlay behavior="desktop" bordered> -->
-    <!-- drawer content -->
-    <!-- </q-drawer> -->
+    <q-drawer v-model="right" side="right" overlay behavior="desktop" bordered>
+      <!-- drawer content -->
+    </q-drawer>
 
     <q-page-container>
       <router-view />

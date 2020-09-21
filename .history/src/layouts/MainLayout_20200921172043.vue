@@ -1,14 +1,14 @@
 <template>
   <q-layout view="hHh lpr fFf">
     <q-header reveal bordered height-hint="98">
-      <q-toolbar class="q-pa-md">
+      <q-toolbar class="q-ma-md">
         <q-toolbar-title>
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
           </q-avatar>
         </q-toolbar-title>
 
-        <!-- <q-btn dense flat round icon="menu" @click="right = !right" /> -->
+        <q-btn dense flat round icon="menu" @click="right = !right" />
       </q-toolbar>
 
       <q-tabs class="bg-primary text-dark border" align="left">

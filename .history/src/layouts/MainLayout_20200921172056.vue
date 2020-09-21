@@ -8,7 +8,7 @@
           </q-avatar>
         </q-toolbar-title>
 
-        <!-- <q-btn dense flat round icon="menu" @click="right = !right" /> -->
+        <q-btn dense flat round icon="menu" @click="right = !right" />
       </q-toolbar>
 
       <q-tabs class="bg-primary text-dark border" align="left">
