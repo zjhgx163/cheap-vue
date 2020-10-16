@@ -1,6 +1,6 @@
 <template>
-  <div class="q-pa-md">
-    <q-list v-for="item in listData" v-bind:key="item.id" bordered>
+  <div class="q-pt-md">
+    <q-list v-for="item in listData" v-bind:key="item.id">
       <!-- 
       <q-item clickable v-ripple>
         <q-item-section avatar>
@@ -38,13 +38,57 @@
         <q-item-section>List item</q-item-section>
       </q-item> -->
 
-      <q-item clickable v-ripple>
-        <q-item-section class="q-ml-none">
+      <q-item v-ripple>
+        <q-item-section side>
           <div>
-            <img v-bind:src="`${item.thumbUrl}`" />
+            <!-- 这里用router-link代替a -->
+
+            <!-- <router-link :to="`/item/${item.id}`"> -->
+            <!-- <router-link
+              :to="{
+                path: 'item',
+                name: 'detail',
+                query: { title: `${item.title}`, detail: `${item.detail}` },
+              }"
+            >
+              <img v-bind:src="item.thumbUrl" />
+            </router-link> -->
+            <router-link
+              :to="{
+                path: 'item',
+                name: 'detail',
+                params: { id: item.id },
+              }"
+            >
+              <q-img v-bind:src="item.thumbUrl" width="190px" height="190px" />
+            </router-link>
+            <!-- <a target="_blank" :href="`http://localhost:8086/#/item/${item.id}`"> -->
+            <!-- </a> -->
           </div>
         </q-item-section>
+        <q-item-section class="columne justify-between">
+          <q-item-label lines="1" class="text-h6"> {{ item.title }}</q-item-label>
+          <q-item-label lines="1" class="text-h6 text-accent"> {{ item.priceText }}</q-item-label>
+          <q-item-label lines="2" caption>
+            <span class="text-weight-bold">{{ item.emphsis }}</span
+            >{{ item.detail }}</q-item-label
+          >
+          <q-item-label />
+          <q-item-label />
+          <q-item-label />
+
+          <q-item-label>
+            <q-btn flat round color="accent" :icon="thumbUpIcon" @click="thumbUpClick" />
+            <q-btn flat round color="accent" :icon="thumbDownIcon" @click="thumbDownClick" />
+
+            <q-icon name="o_thumb_up" color="accent" />
+            <q-icon name="turned_in_not" class="text-accent" />
+            <!-- <q-icon :name="matTurnedInNot" class="text-accent" style="font-size: 32px" /> -->
+          </q-item-label>
+        </q-item-section>
       </q-item>
+      <q-separator spaced />
+
       <!-- <q-separator /> -->
     </q-list>
 
@@ -52,7 +96,9 @@
       <q-pagination
         v-model="current"
         color="dark"
-        :max="5"
+        :max="max"
+        :max-pages="6"
+        :boundary-numbers="false"
         :direction-links="true"
         @input="pageNavigate"
       >
@@ -63,6 +109,7 @@
 
 <script>
 import 'src/config';
+import { matTurnedInNot } from '@quasar/extras/material-icons';
 
 console.log('1<<<<<');
 console.log(global);
@@ -74,6 +121,9 @@ export default {
     return {
       listData: [],
       current: 1,
+      max: 0,
+      thumbUpIcon: 'o_thumb_up',
+      thumbDownIcon: 'o_thumb_down',
     };
   },
   mounted() {
@@ -86,22 +136,26 @@ export default {
   },
   methods: {
     getItemList() {
-      this.$axios
-        .post(`${global.config.domain}/tbk/goods/list`, { page: this.current })
-        .then((res) => {
-          console.log(res.data.data);
+      this.$axios.post(`${global.config.domain}/goods/list`, { page: this.current }).then((res) => {
+        console.log(res.data.data);
 
-          this.listData = res.data.data;
-        });
+        this.listData = res.data.data.records;
+        this.max = res.data.data.total / res.data.data.size + 1;
+      });
     },
     pageNavigate() {
-      this.$axios
-        .post(`${global.config.domain}/tbk/goods/list`, { page: this.current })
-        .then((res) => {
-          console.log(res.data.data);
+      this.$axios.post(`${global.config.domain}/goods/list`, { page: this.current }).then((res) => {
+        console.log(res.data.data.records);
 
-          this.listData = res.data.data;
-        });
+        this.listData = res.data.data.records;
+        this.max = res.data.data.total / res.data.data.size + 1;
+      });
+    },
+    thumbUpClick() {
+      this.thumbUpIcon = 'thumb_up';
+    },
+    thumbDownClick() {
+      this.thumbDownIcon = 'thumb_down';
     },
   },
 };
