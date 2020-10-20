@@ -1,34 +1,39 @@
 <template>
-  <q-layout view="lHr lpR lFr" class="bg-primary">
-    <q-header elevated class="bg-primary text-grey-8 q-py-xs" height-hint="58">
-      <q-toolbar class="q-py-md">
+  <q-layout view="hHh lpR fFf" class="bg-secondary">
+    <q-header bordered class="bg-secondary text-grey-8" height-hint="58">
+      <q-toolbar inset class="q-py-md YL__toobar">
         <q-icon :name="fabYoutube" color="red" size="28px" />
         <q-toolbar-title shrink class="text-weight-bold"> 过日子 </q-toolbar-title>
 
         <q-space />
 
-        <div class="YL__toolbar-input-container row no-wrap">
-          <q-input
-            dense
-            outlined
-            square
-            v-model="search"
-            placeholder="Search"
-            class="bg-white col"
-          />
-          <q-btn
+        <!-- <div class="bg-white YL__toolbar-input-container"> -->
+        <q-input
+          dense
+          outlined
+          square
+          v-model="search"
+          placeholder="苹果手机"
+          type="search"
+          class="bg-white YL__toolbar-input-container"
+        >
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+          <!-- <q-btn
             class="YL__toolbar-input-btn"
             color="grey-3"
             text-color="grey-8"
             icon="search"
             unelevated
-          />
-        </div>
+          /> -->
+        </q-input>
+        <!-- </div> -->
 
         <q-space />
 
-        <div class="q-gutter-sm row items-center no-wrap">
-          <q-btn round dense flat color="grey-8" icon="video_call" v-if="$q.screen.gt.sm">
+        <div class="q-gutter-sm row no-wrap">
+          <!-- <q-btn round dense flat color="grey-8" icon="smiling-face-outline" v-if="$q.screen.gt.sm">
             <q-tooltip>Create a video or post</q-tooltip>
           </q-btn>
           <q-btn round dense flat color="grey-8" icon="apps" v-if="$q.screen.gt.sm">
@@ -40,13 +45,15 @@
           <q-btn round dense flat color="grey-8" icon="notifications">
             <q-badge color="red" text-color="white" floating> 2 </q-badge>
             <q-tooltip>Notifications</q-tooltip>
-          </q-btn>
-          <q-btn round flat>
+          </q-btn> -->
+          <!-- <q-btn round flat>
             <q-avatar size="26px">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
             </q-avatar>
             <q-tooltip>Account</q-tooltip>
-          </q-btn>
+          </q-btn> -->
+          <q-btn flat dense outline label="登陆" />
+          <q-btn flat dense outline label="注册" />
         </div>
       </q-toolbar>
     </q-header>
@@ -74,7 +81,7 @@
     </div> -->
 
     <q-footer reveal bordered class="bg-white text-grey-8">
-      <q-toolbar>
+      <q-toolbar class="YL__toobar">
         <q-toolbar-title> Title </q-toolbar-title>
       </q-toolbar>
     </q-footer>
@@ -99,9 +106,13 @@ export default {
 
 <style lang="sass">
 .YL
+  &__toobar
+    padding-left: 150px
+    padding-right: 150px
   &__toolbar-input-container
     min-width: 100px
-    width: 55%
+    width: 30%
+    border: 2px solid #f44336
   &__toolbar-input-btn
     border-radius: 0
     border-style: solid
@@ -117,5 +128,5 @@ export default {
     &:hover
       color: #000
   &__content-inner
-    max-width: 1080px
+    margin-left: 150px
 </style>

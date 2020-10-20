@@ -1,9 +1,9 @@
 <template>
   <q-layout>
-    <q-tabs class="bg-primary text-dark border" align="left">
-      <q-route-tab to="/main" label="首页" />
-      <q-route-tab to="/cheap" label="白菜" />
-      <q-route-tab to="/rank" label="排行榜" />
+    <q-tabs class="bg-secondary text-dark border" v-model="selectedTab" align="left">
+      <q-route-tab to="/" label="首页" name="main" />
+      <q-route-tab to="/cheap" label="白菜" name="cheap" />
+      <q-route-tab to="/rank" label="排行榜" name="rank" />
     </q-tabs>
     <q-page-container>
       <router-view></router-view>
@@ -70,8 +70,12 @@ export default {
 
   data() {
     return {
-      leftDrawer: true,
+      selectedTab: 'main',
     };
+  },
+
+  mounted() {
+    this.selectedTab = 'main';
   },
 };
 </script>

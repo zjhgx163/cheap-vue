@@ -6,7 +6,11 @@ const routes = [
       {
         path: '',
         component: () => import('layouts/IndexLayout.vue'),
-        children: [{ path: 'main', component: () => import('pages/Index.vue') }],
+        children: [
+          { path: '', component: () => import('pages/Index.vue') },
+          { path: 'main', component: () => import('pages/Index.vue') },
+          { path: 'cheap', component: () => import('pages/Index.vue') },
+        ],
       },
       {
         path: '/item/:id',
