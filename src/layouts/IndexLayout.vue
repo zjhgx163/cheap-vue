@@ -1,6 +1,6 @@
 <template>
   <q-layout>
-    <q-tabs class="bg-secondary text-dark border" v-model="selectedTab" align="left">
+    <q-tabs class="bg-secondary text-dark border q-my-xs" v-model="selectedTab" align="left">
       <q-route-tab to="/" label="首页" name="main" />
       <q-route-tab to="/cheap" label="白菜" name="cheap" />
       <q-route-tab to="/rank" label="排行榜" name="rank" />
@@ -8,7 +8,7 @@
     <q-page-container>
       <router-view></router-view>
     </q-page-container>
-    <q-drawer side="right" show-if-above desktop-only>
+    <q-drawer side="right" show-if-above desktop-only elevated content-class="q-my-sm">
       <q-scroll-area
         style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
       >

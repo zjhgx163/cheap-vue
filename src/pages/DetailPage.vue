@@ -1,17 +1,31 @@
 <template>
-  <q-page padding>
+  <q-page>
     <div class="row">
       <div class="col-1 column" style="height: 1050px">
         <div class="col-4"></div>
-        <div class="col">
-          <q-fab color="accent" glossy direction="down" padding="xs" v-model="fab" hide-icon>
-            <q-fab-action color="amber" text-color="black" icon="mail" />
-            <q-fab-action color="amber" text-color="black" icon="alarm" />
-          </q-fab>
+        <div class="column items-center bg-secondary" style="width: 40px">
+          <div class="col-auto">
+            <q-btn
+              size="11px"
+              class="bg-secondary"
+              color="grey"
+              flat
+              round
+              :icon="turnInOrNot"
+              @click="turnInOrNotClick"
+            >
+            </q-btn>
+          </div>
+          <div class="col-auto"><q-badge text-color="grey">0</q-badge></div>
+          <div class="col-auto">
+            <q-btn size="11px" color="grey" flat round :icon="comment" @click="commentClick" />
+          </div>
+          <div class="col-auto"><q-badge text-color="grey">0</q-badge></div>
         </div>
+
         <div class="col-4" />
       </div>
-      <div class="col column">
+      <div class="col column bg-secondary">
         <q-breadcrumbs separator="---" class="text-orange col-1" active-color="secondary">
           <q-breadcrumbs-el icon="home" />
           <q-breadcrumbs-el label="Components" icon="widgets" />
@@ -61,12 +75,15 @@
 </template>
 
 <script>
+import 'src/config';
+
 export default {
   name: 'DetailPage',
   data() {
     return {
       detail: {},
-      fab: true,
+      turnInOrNot: 'turned_in_not',
+      comment: 'comment',
     };
   },
   props: ['id'],
@@ -81,6 +98,8 @@ export default {
         this.detail = res.data.data;
       });
     },
+    turnInOrNotClick() {},
+    commentClick() {},
   },
 };
 </script>

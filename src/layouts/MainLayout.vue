@@ -57,16 +57,16 @@
         </div>
       </q-toolbar>
     </q-header>
-    <q-drawer show-if-above :width="150" :breakpoint="700" content-class="bg-primary text-white">
+    <q-drawer show-if-above :width="300" :breakpoint="700" content-class="bg-primary text-white">
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="bg-primary">
       <router-view />
     </q-page-container>
 
     <q-drawer
       side="right"
-      :width="150"
+      :width="300"
       show-if-above
       desktop-only
       content-class="bg-primary text-white"
@@ -107,8 +107,8 @@ export default {
 <style lang="sass">
 .YL
   &__toobar
-    padding-left: 150px
-    padding-right: 150px
+    padding-left: 300px
+    padding-right: 300px
   &__toolbar-input-container
     min-width: 100px
     width: 30%
