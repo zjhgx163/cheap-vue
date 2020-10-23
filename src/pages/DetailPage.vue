@@ -1,56 +1,65 @@
 <template>
   <q-page>
     <div class="row">
-      <div class="col-1 column" style="height: 1050px">
-        <div class="col-4"></div>
-        <div class="column items-center bg-secondary" style="width: 40px">
-          <div class="col-auto">
-            <q-btn
-              size="11px"
-              class="bg-secondary"
-              color="grey"
-              flat
-              round
-              :icon="turnInOrNot"
-              @click="turnInOrNotClick"
-            >
-            </q-btn>
+      <!--  -->
+      <div class="col-9 row">
+        <div class="col-1 column items-center" style="height: 1050px">
+          <div class="col-4"></div>
+          <div class="column items-center bg-secondary" style="width: 40px">
+            <div class="col-auto">
+              <q-btn
+                size="11px"
+                class="bg-secondary"
+                color="grey"
+                flat
+                round
+                :icon="turnInOrNot"
+                @click="turnInOrNotClick"
+              >
+              </q-btn>
+            </div>
+            <div class="col-auto"><q-badge text-color="grey">0</q-badge></div>
+            <div class="col-auto">
+              <q-btn size="11px" color="grey" flat round :icon="comment" @click="commentClick" />
+            </div>
+            <div class="col-auto"><q-badge text-color="grey">0</q-badge></div>
           </div>
-          <div class="col-auto"><q-badge text-color="grey">0</q-badge></div>
-          <div class="col-auto">
-            <q-btn size="11px" color="grey" flat round :icon="comment" @click="commentClick" />
-          </div>
-          <div class="col-auto"><q-badge text-color="grey">0</q-badge></div>
         </div>
+        <div class="col column">
+          <q-breadcrumbs active-color="black" separator="---" class="text-black col-auto q-py-md">
+            <template v-slot:separator>
+              <q-icon size="1.5em" name="chevron_right" color="dark" />
+            </template>
+            <q-breadcrumbs-el icon="home" />
+            <q-breadcrumbs-el label="Components" icon="widgets" />
+            <q-breadcrumbs-el label="详情" icon="navigation" />
+          </q-breadcrumbs>
+          <div class="col q-pa-lg bg-secondary">
+            <div class="row col-3">
+              <div class="col-auto">
+                <q-img
+                  src="~assets/34ee33aae94f7a8a8c8c6314a735c65e2cab6a4f.jpg"
+                  width="270px"
+                  height="270px"
+                />
+              </div>
+              <div class="column col q-pa-sm">
+                <div class="col-auto text-h6">{{ detail.title }}</div>
+                <div class="col-2 text-accent text-h6 text-weight-bold">{{ detail.priceText }}</div>
+                <div class="col-2">{{ detail.label }}</div>
+                <div class="col"><q-btn color="black" label="去购买" /></div>
+              </div>
+            </div>
+            <div class="col q-mt-sm">
+              {{ detail.detail }}
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <div class="col-4" />
+      <div class="col-3">
+        <HotList />
       </div>
-      <div class="col column bg-secondary">
-        <q-breadcrumbs separator="---" class="text-orange col-1" active-color="secondary">
-          <q-breadcrumbs-el icon="home" />
-          <q-breadcrumbs-el label="Components" icon="widgets" />
-          <q-breadcrumbs-el label="Breadcrumbs" icon="navigation" />
-        </q-breadcrumbs>
-        <div class="row col-3">
-          <div class="col-auto">
-            <q-img
-              src="~assets/34ee33aae94f7a8a8c8c6314a735c65e2cab6a4f.jpg"
-              width="270px"
-              height="270px"
-            />
-          </div>
-          <div class="column col q-pa-sm">
-            <div class="col-auto text-h6">{{ detail.title }}</div>
-            <div class="col-2 text-accent text-h6 text-weight-bold">{{ detail.priceText }}</div>
-            <div class="col-2">{{ detail.label }}</div>
-            <div class="col"><q-btn color="black" label="去购买" /></div>
-          </div>
-        </div>
-        <div class="col q-mt-sm">
-          {{ detail.detail }}
-        </div>
-      </div>
-      <div class="col-3 bg-yellow column"></div>
     </div>
     <!-- <div class="bg-yellow">
       <div class="row items-center justify-center">
@@ -76,6 +85,7 @@
 
 <script>
 import 'src/config';
+import HotList from '../components/HotList.vue';
 
 export default {
   name: 'DetailPage',
@@ -87,6 +97,10 @@ export default {
     };
   },
   props: ['id'],
+
+  components: {
+    HotList,
+  },
   mounted() {
     this.getItemDetail(this.id);
   },

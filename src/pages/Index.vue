@@ -61,7 +61,7 @@
                 params: { id: item.id },
               }"
             >
-              <img v-bind:src="item.thumbUrl" class="YL__img" />
+              <img v-bind:src="item.thumbUrl" class="YL__index_img" />
             </router-link>
             <!-- <a target="_blank" :href="`http://localhost:8086/#/item/${item.id}`"> -->
             <!-- </a> -->
@@ -153,9 +153,9 @@
   </div>
 </template>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .YL
-  &__img
+  &__index_img
     @media(max-width: $breakpoint-xs-max)
       width: 80px
       height: 80px

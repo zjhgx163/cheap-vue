@@ -5,49 +5,44 @@
       <q-route-tab to="/cheap" label="白菜" name="cheap" />
       <q-route-tab to="/rank" label="排行榜" name="rank" />
     </q-tabs>
+
     <q-page-container>
       <router-view></router-view>
     </q-page-container>
-    <q-drawer side="right" show-if-above desktop-only elevated content-class="q-my-sm">
-      <q-scroll-area
+
+    <q-drawer side="right" show-if-above content-class="column items-center bg-primary">
+      <!-- <q-scroll-area
         style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
-      >
-        <q-list padding>
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="inbox" />
+      > -->
+      <HotList> </HotList>
+      <!-- <q-list padding class="bg-secondary">
+          <q-item-label header>热门推荐</q-item-label>
+          <q-item v-for="item in hotList" v-bind:key="item.id" class="bg-secondary">
+            <q-item-section side>
+              <div>
+                <router-link
+                  :to="{
+                    path: 'item',
+                    name: 'detail',
+                    params: { id: item.id },
+                  }"
+                >
+                  <img v-bind:src="item.thumbUrl" class="YL__hot_img" />
+                </router-link>
+              </div>
             </q-item-section>
 
-            <q-item-section> Inbox </q-item-section>
-          </q-item>
-
-          <q-item active clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="star" />
+            <q-item-section class="column bg-secondary">
+              <q-item-label lines="2" caption> {{ item.title }}</q-item-label>
             </q-item-section>
-
-            <q-item-section> Star </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="send" />
-            </q-item-section>
-
-            <q-item-section> Send </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="drafts" />
-            </q-item-section>
-
-            <q-item-section> Drafts </q-item-section>
           </q-item>
         </q-list>
-      </q-scroll-area>
+      </div> -->
 
-      <q-img
+      <div class="col"></div>
+      <!-- </q-scroll-area> -->
+
+      <!-- <q-img
         class="absolute-top"
         src="https://cdn.quasar.dev/img/material.png"
         style="height: 150px"
@@ -59,12 +54,15 @@
           <div class="text-weight-bold">Razvan Stoenescu</div>
           <div>@rstoenescu</div>
         </div>
-      </q-img>
+      </q-img> -->
     </q-drawer>
   </q-layout>
 </template>
 
 <script>
+import 'src/config';
+import HotList from '../components/HotList.vue';
+
 export default {
   // name: 'LayoutName',
 
@@ -72,6 +70,10 @@ export default {
     return {
       selectedTab: 'main',
     };
+  },
+
+  components: {
+    HotList,
   },
 
   mounted() {
