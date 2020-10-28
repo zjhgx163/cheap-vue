@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-secondary">
-    <q-header bordered class="bg-secondary text-grey-8" height-hint="58">
-      <q-toolbar inset class="q-py-md YL__toobar">
+    <q-header bordered class="bg-secondary text-grey-8">
+      <q-toolbar class="q-py-md YL__toobar">
         <q-icon :name="fabYoutube" color="red" size="28px" />
         <q-toolbar-title shrink class="text-weight-bold"> 过日子 </q-toolbar-title>
 
@@ -64,13 +64,7 @@
       <router-view />
     </q-page-container>
 
-    <q-drawer
-      side="right"
-      :width="300"
-      show-if-above
-      desktop-only
-      content-class="bg-primary text-white"
-    >
+    <q-drawer side="right" :width="300" show-if-above content-class="bg-primary text-white">
     </q-drawer>
 
     <!-- <div class="row justify-center">
@@ -90,6 +84,8 @@
 
 <script>
 import { fabYoutube } from '@quasar/extras/fontawesome-v5';
+import { Platform } from 'quasar';
+
 export default {
   name: 'MyLayout',
   data() {
@@ -107,8 +103,9 @@ export default {
 <style lang="sass">
 .YL
   &__toobar
-    padding-left: 300px
-    padding-right: 300px
+    @media(min-width: $breakpoint-xs-max)
+      padding-left: 300px
+      padding-right: 300px
   &__toolbar-input-container
     min-width: 100px
     width: 30%

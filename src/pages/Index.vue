@@ -63,72 +63,70 @@
             >
               <img v-bind:src="item.thumbUrl" class="YL__index_img" />
             </router-link>
-            <!-- <a target="_blank" :href="`http://localhost:8086/#/item/${item.id}`"> -->
-            <!-- </a> -->
           </div>
         </q-item-section>
         <q-item-section class="column justify-between">
-          <q-item-label lines="1" class="text-h6 col-2"> {{ item.title }}</q-item-label>
-          <q-item-label lines="1" class="text-h6 text-accent col-2">
+          <q-item-label
+            :lines="lines"
+            v-bind:class="[textSize, textColResponsive, fontFamily, lineHeight]"
+          >
+            {{ item.title }}</q-item-label
+          >
+          <q-item-label lines="1" v-bind:class="[textSize, textCol2, textAccent, fontFamily]">
             {{ item.priceText }}</q-item-label
           >
-          <q-item-label lines="2" class="col-auto">
+          <q-item-label lines="2" class="col-auto gt-md YL__line_height">
             <span class="text-weight-bold">{{ item.emphsis }}</span
-            >{{ item.detail }}</q-item-label
-          >
-          <q-item-label class="col" />
+            >{{ item.detailBrief }}
+            <router-link
+              :to="{
+                path: 'item',
+                name: 'detail',
+                params: { id: item.id },
+              }"
+              >...阅读全文
+            </router-link>
+          </q-item-label>
+          <q-item-label lines="1" class="col-2 row items-center" caption
+            >{{ item.mall }}
+          </q-item-label>
 
-          <q-item-label class="col-2">
-            <div class="row justify-between">
-              <div class="col q-gutter-md">
-                <q-btn
-                  size="11px"
-                  color="grey"
-                  flat
-                  round
-                  :icon="thumbUpIcon"
-                  @click="thumbUpClick"
-                >
-                  <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
-                </q-btn>
-                <q-btn
-                  size="11px"
-                  color="grey"
-                  flat
-                  round
-                  :icon="thumbDownIcon"
-                  @click="thumbDownClick"
-                >
-                  <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
-                </q-btn>
-                <q-btn
-                  size="11px"
-                  color="grey"
-                  flat
-                  round
-                  :icon="turnInOrNot"
-                  @click="turnInOrNotClick"
-                >
-                  <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
-                </q-btn>
-                <q-btn size="11px" color="grey" flat round :icon="comment" @click="commentClick">
-                  <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
-                </q-btn>
-              </div>
-              <div class="col-auto justify-end row">
-                <q-btn color="accent" size="12px" unelevated label="去购买"> </q-btn>
-
-                <!-- 手机适配 -->
-                <!-- <div v-if="$q.platform.is.mobile">
-                  <q-btn color="accent" size="10px" unelevated round label="去购买"> </q-btn>
-                </div>
-                <div v-else></div> -->
-              </div>
+          <q-item-label class="col row justify-between items-center">
+            <div class="col q-gutter-md">
+              <q-btn size="11px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
+                <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
+              </q-btn>
+              <q-btn
+                size="11px"
+                color="grey"
+                flat
+                round
+                :icon="thumbDownIcon"
+                @click="thumbDownClick"
+              >
+                <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
+              </q-btn>
+              <q-btn
+                size="11px"
+                color="grey"
+                flat
+                round
+                :icon="turnInOrNot"
+                @click="turnInOrNotClick"
+              >
+                <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
+              </q-btn>
+              <q-btn size="11px" color="grey" flat round :icon="comment" @click="commentClick">
+                <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
+              </q-btn>
             </div>
-
-            <!-- <q-icon name="o_thumb_up" color="accent" />
-            <q-icon name="turned_in_not" class="text-accent" /> -->
-            <!-- <q-icon :name="matTurnedInNot" class="text-accent" style="font-size: 32px" /> -->
+            <div class="col-auto justify-end row">
+              <q-btn color="accent" size="13px" unelevated>
+                <a target="_blank" class="text-white text-weight-bold" :href="item.actualBuyLink">
+                  去购买</a
+                >
+              </q-btn>
+            </div>
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -157,17 +155,27 @@
 .YL
   &__index_img
     @media(max-width: $breakpoint-xs-max)
-      width: 80px
-      height: 80px
+      width: 110px
+      height: 110px
     @media(min-width: $breakpoint-xs-max)
       width: 180px
       height: 180px
+  &__font
+    font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif;
+  &__line_height
+    line-height: 1.6em !important
+
+a
+  color: #25678c;
+  cursor: pointer;
+a, a:hover
+    text-decoration: none;
 </style>
 
 <script>
 import 'src/config';
 import { matTurnedInNot } from '@quasar/extras/material-icons';
-import { Platform } from 'quasar';
+import { Screen } from 'quasar';
 
 console.log('1<<<<<');
 console.log(global);
@@ -184,7 +192,25 @@ export default {
       thumbDownIcon: 'thumb_down',
       turnInOrNot: 'turned_in_not',
       comment: 'comment',
+      isBigScreen: Screen.gt.sm ? true : false,
+      isNormal: true,
+      fontFamily: 'YL__font',
+      lineHeight: 'YL__line_height',
+      textAccent: 'text-accent',
+      textCol2: 'col-2',
     };
+  },
+  computed: {
+    textSize: function () {
+      return this.isBigScreen ? 'text-h6' : 'text-subtitle2';
+    },
+
+    textColResponsive: function () {
+      return this.isBigScreen ? 'col-2' : 'col-5';
+    },
+    lines: function () {
+      return Screen.gt.sm ? 1 : 2;
+    },
   },
   mounted() {
     this.getItemList();
@@ -198,6 +224,7 @@ export default {
     getItemList() {
       this.$axios.post(`${global.config.domain}/goods/list`, { page: this.current }).then((res) => {
         console.log(res.data.data);
+        console.log(this.isBigScreen);
 
         this.listData = res.data.data.records;
         this.max = res.data.data.total / res.data.data.size + 1;
@@ -206,7 +233,6 @@ export default {
     pageNavigate() {
       this.$axios.post(`${global.config.domain}/goods/list`, { page: this.current }).then((res) => {
         console.log(res.data.data.records);
-
         this.listData = res.data.data.records;
         this.max = res.data.data.total / res.data.data.size + 1;
       });
