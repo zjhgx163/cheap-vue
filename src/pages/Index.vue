@@ -75,7 +75,7 @@
           <q-item-label lines="1" v-bind:class="[textSize, textCol2, textAccent, fontFamily]">
             {{ item.priceText }}</q-item-label
           >
-          <q-item-label lines="2" class="col-auto gt-md YL__line_height">
+          <q-item-label lines="2" class="col-auto gt-sm YL__list_line_height YL__list_font_size">
             <span class="text-weight-bold">{{ item.emphsis }}</span
             >{{ item.detailBrief }}
             <router-link
@@ -141,7 +141,7 @@
         size="12px"
         color="dark"
         :max="max"
-        :max-pages="6"
+        :max-pages="5"
         :boundary-numbers="false"
         :direction-links="true"
         @input="pageNavigate"
@@ -160,16 +160,6 @@
     @media(min-width: $breakpoint-xs-max)
       width: 180px
       height: 180px
-  &__font
-    font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif;
-  &__line_height
-    line-height: 1.6em !important
-
-a
-  color: #25678c;
-  cursor: pointer;
-a, a:hover
-    text-decoration: none;
 </style>
 
 <script>
@@ -194,15 +184,15 @@ export default {
       comment: 'comment',
       isBigScreen: Screen.gt.sm ? true : false,
       isNormal: true,
-      fontFamily: 'YL__font',
-      lineHeight: 'YL__line_height',
+      fontFamily: 'YL__title_font_family',
+      lineHeight: 'YL__list_line_height',
       textAccent: 'text-accent',
       textCol2: 'col-2',
     };
   },
   computed: {
     textSize: function () {
-      return this.isBigScreen ? 'text-h6' : 'text-subtitle2';
+      return this.isBigScreen ? 'text-h7' : 'text-subtitle2';
     },
 
     textColResponsive: function () {

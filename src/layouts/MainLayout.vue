@@ -110,13 +110,6 @@ export default {
     min-width: 100px
     width: 30%
     border: 2px solid #f44336
-  &__toolbar-input-btn
-    border-radius: 0
-    border-style: solid
-    border-width: 1px 1px 1px 0
-    border-color: rgba(0,0,0,.24)
-    max-width: 60px
-    width: 100%
   &__drawer-footer-link
     color: inherit
     text-decoration: none
@@ -124,6 +117,16 @@ export default {
     font-size: .75rem
     &:hover
       color: #000
-  &__content-inner
-    margin-left: 150px
+  &__title_font_family
+    font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif;
+  &__list_line_height
+    line-height: 1.6em !important
+  &__list_font_size
+    font-size: 14px
+
+a
+  color: #25678c;
+  cursor: pointer;
+a, a:hover
+    text-decoration: none;
 </style>
