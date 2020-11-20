@@ -10,12 +10,13 @@
         <!-- <div class="bg-white YL__toolbar-input-container"> -->
         <q-input
           dense
-          outlined
+          standout="bg-teal text-white"
+          bg-color="white"
           square
           v-model="search"
           placeholder="苹果手机"
           type="search"
-          class="bg-white YL__toolbar-input-container"
+          class="YL__toolbar-input-container"
         >
           <template v-slot:append>
             <q-icon name="search" />
@@ -74,10 +75,14 @@
       </div>
     </div> -->
 
-    <q-footer reveal bordered class="bg-white text-grey-8">
-      <q-toolbar class="YL__toobar">
-        <q-toolbar-title> Title </q-toolbar-title>
-      </q-toolbar>
+    <q-footer reveal bordered class="bg-dark text-grey-8 gt-sm">
+      <div class="YL__toobar YL__footer row justify-evenly">
+        <div class="col-4">
+          联系我们:
+          <div>email: ykhgx@sohu.com</div>
+        </div>
+        <div class="col">Copyright © 2020 Hjdang.com All rights reserved.</div>
+      </div>
     </q-footer>
   </q-layout>
 </template>
@@ -106,15 +111,16 @@ export default {
     @media(min-width: $breakpoint-xs-max)
       padding-left: 300px
       padding-right: 300px
+      font-size: 14px
   &__toolbar-input-container
     min-width: 100px
     width: 30%
     border: 2px solid #f44336
-  &__drawer-footer-link
+  &__footer
     color: inherit
     text-decoration: none
     font-weight: 500
-    font-size: .75rem
+    font-size: .80rem
     &:hover
       color: #000
   &__title_font_family
@@ -123,10 +129,4 @@ export default {
     line-height: 1.6em !important
   &__list_font_size
     font-size: 14px
-
-a
-  color: #25678c;
-  cursor: pointer;
-a, a:hover
-    text-decoration: none;
 </style>

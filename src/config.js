@@ -8,7 +8,7 @@ const imageDomain = '';
 let isProEnv = false;
 const fullCurrentDomain = window.location.href;
 
-domain = 'http://192.168.0.128:8238';
+domain = 'http://localhost:8238';
 
 global.config = {
   version: 'v2.0', // 当前版本号

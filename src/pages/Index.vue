@@ -94,7 +94,9 @@
           <q-item-label class="col row justify-between items-center">
             <div class="col q-gutter-md">
               <q-btn size="11px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
-                <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
+                <q-badge color="secondary" align="middle" text-color="grey">{{
+                  item.zhiCount
+                }}</q-badge>
               </q-btn>
               <q-btn
                 size="11px"
@@ -104,7 +106,9 @@
                 :icon="thumbDownIcon"
                 @click="thumbDownClick"
               >
-                <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
+                <q-badge color="secondary" align="middle" text-color="grey">{{
+                  item.buzhiCount
+                }}</q-badge>
               </q-btn>
               <q-btn
                 size="11px"
@@ -114,14 +118,18 @@
                 :icon="turnInOrNot"
                 @click="turnInOrNotClick"
               >
-                <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
+                <q-badge color="secondary" align="middle" text-color="grey">{{
+                  item.starCount
+                }}</q-badge>
               </q-btn>
               <q-btn size="11px" color="grey" flat round :icon="comment" @click="commentClick">
-                <q-badge color="secondary" align="middle" text-color="grey">0</q-badge>
+                <q-badge color="secondary" align="middle" text-color="grey">{{
+                  item.commentsCount
+                }}</q-badge>
               </q-btn>
             </div>
             <div class="col-auto justify-end row">
-              <q-btn color="accent" size="13px" unelevated>
+              <q-btn color="accent" size="13px" unelevated @click="buyClick">
                 <a target="_blank" class="text-white text-weight-bold" :href="item.actualBuyLink">
                   去购买</a
                 >
@@ -212,20 +220,24 @@ export default {
   },
   methods: {
     getItemList() {
-      this.$axios.post(`${global.config.domain}/goods/list`, { page: this.current }).then((res) => {
-        console.log(res.data.data);
-        console.log(this.isBigScreen);
+      this.$axios
+        .post(`${global.config.domain}/goods/list`, { page: this.current, path: this.$route.path })
+        .then((res) => {
+          console.log(res.data.data);
+          console.log(this.isBigScreen);
 
-        this.listData = res.data.data.records;
-        this.max = res.data.data.total / res.data.data.size + 1;
-      });
+          this.listData = res.data.data.records;
+          this.max = res.data.data.total / res.data.data.size + 1;
+        });
     },
     pageNavigate() {
-      this.$axios.post(`${global.config.domain}/goods/list`, { page: this.current }).then((res) => {
-        console.log(res.data.data.records);
-        this.listData = res.data.data.records;
-        this.max = res.data.data.total / res.data.data.size + 1;
-      });
+      this.$axios
+        .post(`${global.config.domain}/goods/list`, { page: this.current, path: this.$route.path })
+        .then((res) => {
+          console.log(res.data.data.records);
+          this.listData = res.data.data.records;
+          this.max = res.data.data.total / res.data.data.size + 1;
+        });
     },
     thumbUpClick() {
       this.thumbUpIcon = 'thumb_up';
@@ -235,6 +247,13 @@ export default {
     },
     turnInOrNotClick() {},
     commentClick() {},
+    buyClick() {
+      this.$axios
+        .post(`${global.config.domain}/user/event`, { type: '进入推广链接' })
+        .then((res) => {
+          console.log(res.data.data);
+        });
+    },
   },
 };
 </script>

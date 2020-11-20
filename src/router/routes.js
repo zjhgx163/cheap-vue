@@ -8,7 +8,7 @@ const routes = [
         component: () => import('layouts/IndexLayout.vue'),
         children: [
           { path: '', component: () => import('pages/Index.vue') },
-          { path: 'main', component: () => import('pages/Index.vue') },
+          { path: 'rank', component: () => import('pages/Index.vue') },
           { path: 'cheap', component: () => import('pages/Index.vue') },
         ],
       },

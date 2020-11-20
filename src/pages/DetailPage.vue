@@ -2,13 +2,18 @@
   <q-page>
     <!-- 面包栏 -->
     <div class="column">
-      <q-breadcrumbs active-color="black" separator="---" class="text-black col-auto q-py-md">
+      <q-breadcrumbs
+        active-color="black"
+        separator="---"
+        class="text-grey text-subtitle2 col-auto q-py-md"
+      >
         <template v-slot:separator>
-          <q-icon size="1.5em" name="chevron_right" color="dark" />
+          <q-icon size="1.5em" name="chevron_right" color="grey" />
         </template>
-        <q-breadcrumbs-el icon="home" />
+        <q-breadcrumbs-el v-for="category in categoryInfo" :label="category" :key="category" />
+        <!-- <q-breadcrumbs-el icon="home" />
         <q-breadcrumbs-el label="Components" icon="widgets" />
-        <q-breadcrumbs-el label="详情" icon="navigation" />
+        <q-breadcrumbs-el label="详情" icon="navigation" /> -->
       </q-breadcrumbs>
     </div>
     <div class="row">
@@ -65,8 +70,8 @@
               </div>
             </div>
             <!-- 优惠券 -->
-            <div class="text-weight-bold">
-              <span>优惠券领取</span>
+            <div v-if="couponInfo.length" class="text-weight-bold">
+              <span>优惠领取</span>
             </div>
             <div
               class="row col-auto q-mt-md"
@@ -134,6 +139,7 @@ export default {
       detailParts: [],
       bigImages: [],
       couponInfo: [],
+      categoryInfo: [],
       turnInOrNot: 'turned_in_not',
       comment: 'comment',
     };
@@ -157,7 +163,7 @@ export default {
         if (this.detail.couponInfo) {
           this.couponInfo = JSON.parse(this.detail.couponInfo);
         }
-
+        this.categoryInfo = JSON.parse(this.detail.categoryText);
         console.log(this.detail);
       });
     },

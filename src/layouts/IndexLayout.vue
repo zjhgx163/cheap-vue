@@ -1,19 +1,21 @@
 <template>
   <q-layout>
-    <q-tabs class="bg-secondary text-dark border q-my-xs" v-model="selectedTab" align="left">
+    <q-tabs
+      class="bg-secondary border q-my-xs"
+      v-model="selectedTab"
+      style="font-size: 16px"
+      align="left"
+    >
       <q-route-tab to="/" label="首页" name="main" />
       <q-route-tab to="/cheap" label="白菜" name="cheap" />
       <q-route-tab to="/rank" label="排行榜" name="rank" />
     </q-tabs>
 
     <q-page-container>
-      <router-view></router-view>
+      <router-view :key="$route.path"></router-view>
     </q-page-container>
 
     <q-drawer side="right" show-if-above content-class="column items-center bg-primary">
-      <!-- <q-scroll-area
-        style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
-      > -->
       <HotList> </HotList>
       <!-- <q-list padding class="bg-secondary">
           <q-item-label header>热门推荐</q-item-label>
@@ -40,24 +42,14 @@
       </div> -->
 
       <div class="col"></div>
-      <!-- </q-scroll-area> -->
-
-      <!-- <q-img
-        class="absolute-top"
-        src="https://cdn.quasar.dev/img/material.png"
-        style="height: 150px"
-      >
-        <div class="absolute-bottom bg-transparent">
-          <q-avatar size="56px" class="q-mb-sm">
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-          <div class="text-weight-bold">Razvan Stoenescu</div>
-          <div>@rstoenescu</div>
-        </div>
-      </q-img> -->
     </q-drawer>
   </q-layout>
 </template>
+
+<style lang="sass">
+.q-tab__label
+   font-size: 1.0em
+</style>
 
 <script>
 import 'src/config';
