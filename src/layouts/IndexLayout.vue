@@ -67,6 +67,11 @@ export default {
   components: {
     HotList,
   },
+  beforeCreate() {
+    this.$q.loading.show({
+      delay: 400, // ms
+    });
+  },
 
   mounted() {
     this.selectedTab = 'main';

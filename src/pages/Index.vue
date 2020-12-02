@@ -122,15 +122,27 @@
                   item.starCount
                 }}</q-badge>
               </q-btn>
-              <q-btn size="11px" color="grey" flat round :icon="comment" @click="commentClick">
+              <q-btn
+                size="11px"
+                color="grey"
+                class="gt-sm"
+                flat
+                round
+                :icon="comment"
+                @click="commentClick"
+              >
                 <q-badge color="secondary" align="middle" text-color="grey">{{
                   item.commentsCount
                 }}</q-badge>
               </q-btn>
             </div>
             <div class="col-auto justify-end row">
-              <q-btn color="accent" size="13px" unelevated @click="buyClick">
-                <a target="_blank" class="text-white text-weight-bold" :href="item.actualBuyLink">
+              <q-btn color="accent" :size="buyButtonSize" unelevated @click="buyClick">
+                <a
+                  target="_blank"
+                  class="text-white text-weight-bold"
+                  :href="`${host}/goods/go/${item.urlCode}`"
+                >
                   去购买</a
                 >
               </q-btn>
@@ -146,10 +158,10 @@
     <div class="q-my-xs q-pa-lg flex flex-center bg-secondary">
       <q-pagination
         v-model="current"
-        size="12px"
+        :size="paginationSize"
         color="dark"
         :max="max"
-        :max-pages="5"
+        :max-pages="4"
         :boundary-numbers="false"
         :direction-links="true"
         @input="pageNavigate"
@@ -171,13 +183,12 @@
 </style>
 
 <script>
-import 'src/config';
 import { matTurnedInNot } from '@quasar/extras/material-icons';
 import { Screen } from 'quasar';
 
-console.log('1<<<<<');
-console.log(global);
-console.log('1>>>>>');
+// console.log('1<<<<<');
+// console.log(global);
+// console.log('1>>>>>');
 
 export default {
   name: 'PageIndex',
@@ -196,6 +207,7 @@ export default {
       lineHeight: 'YL__list_line_height',
       textAccent: 'text-accent',
       textCol2: 'col-2',
+      paginationSize: Screen.gt.sm ? '12px' : '11px',
     };
   },
   computed: {
@@ -208,6 +220,12 @@ export default {
     },
     lines: function () {
       return Screen.gt.sm ? 1 : 2;
+    },
+    buyButtonSize: function () {
+      return this.isBigScreen ? '13px' : '10px';
+    },
+    host: function () {
+      return global.config.domain;
     },
   },
   mounted() {
@@ -223,11 +241,12 @@ export default {
       this.$axios
         .post(`${global.config.domain}/goods/list`, { page: this.current, path: this.$route.path })
         .then((res) => {
-          console.log(res.data.data);
-          console.log(this.isBigScreen);
+          // console.log(res.data.data);
+          // console.log(this.isBigScreen);
 
           this.listData = res.data.data.records;
           this.max = res.data.data.total / res.data.data.size + 1;
+          this.$q.loading.hide();
         });
     },
     pageNavigate() {

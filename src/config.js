@@ -1,5 +1,5 @@
 const domainDev = 'localhost'; // 测试环境
-const domainPro = 'store.rockysaas.com'; // 生产环境
+const domainPro = 'hjdang.com'; // 生产环境
 
 let mobileSite = '';
 let domain = '';
@@ -9,6 +9,20 @@ let isProEnv = false;
 const fullCurrentDomain = window.location.href;
 
 domain = 'http://localhost:8238';
+
+if (fullCurrentDomain.indexOf(domainDev) > -1) {
+  // 测试环境
+  domain = 'http://localhost:8238';
+} else if (fullCurrentDomain.indexOf(domainPro) > -1) {
+  // 生产环境
+  domain = 'http://web.hjdang.com';
+} else {
+  // 本地调试
+  // domain = 'http://10.0.41.110:7979';
+  // websocketHost = 'http://10.0.41.110:7979/websocket';
+
+  domain = 'http://localhost:8238';
+}
 
 global.config = {
   version: 'v2.0', // 当前版本号

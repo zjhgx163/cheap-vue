@@ -2,7 +2,7 @@
   "name": "cheap-quasar",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "productName": "好价党",
   "author": "gaoxianghu <zjhgx163@gmail.com>",
   "private": true,
   "scripts": {

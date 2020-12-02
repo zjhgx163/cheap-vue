@@ -53,8 +53,8 @@
             </q-avatar>
             <q-tooltip>Account</q-tooltip>
           </q-btn> -->
-          <q-btn flat dense outline label="登陆" />
-          <q-btn flat dense outline label="注册" />
+          <!-- <q-btn flat dense outline label="登陆" />
+          <q-btn flat dense outline label="注册" /> -->
         </div>
       </q-toolbar>
     </q-header>
@@ -75,7 +75,7 @@
       </div>
     </div> -->
 
-    <q-footer reveal bordered class="bg-dark text-grey-8 gt-sm">
+    <q-footer reveal bordered class="bg-dark text-grey-8">
       <div class="YL__toobar YL__footer row justify-evenly">
         <div class="col-4">
           联系我们:

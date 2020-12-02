@@ -44,9 +44,9 @@
         <div class="col column">
           <div class="col q-pa-lg bg-secondary">
             <!-- 介绍 -->
-            <div class="row col-3 q-gutter-md justify-center">
+            <div class="row col q-gutter-md justify-center">
               <!-- 主图 -->
-              <div class="col-md-auto col-sm-12">
+              <div class="col-auto">
                 <q-img :src="detail.mainImageUrl" width="250px" height="250px" />
               </div>
               <!-- 主图旁边介绍，响应式 -->
@@ -55,9 +55,9 @@
                 <div class="col-2 text-accent text-h6 text-weight-bold YL__title_font_family">
                   {{ detail.priceText }}
                 </div>
-                <div class="col-2"></div>
+                <div class="col-1"></div>
                 <div class="col">
-                  <q-btn color="accent" size="13px" unelevated>
+                  <q-btn color="accent" :size="buttonSize" unelevated>
                     <a
                       target="_blank"
                       class="text-white text-weight-bold"
@@ -69,52 +69,58 @@
                 </div>
               </div>
             </div>
-            <!-- 优惠券 -->
-            <div v-if="couponInfo.length" class="text-weight-bold">
-              <span>优惠领取</span>
-            </div>
-            <div
-              class="row col-auto q-mt-md"
-              v-for="coupon in couponInfo"
-              :key="coupon.coupon_link"
-            >
-              <q-btn color="accent" size="13px" unelevated>
-                <a
-                  target="_blank"
-                  class="text-white text-weight-bold"
-                  :href="coupon.actual_coupon_link"
-                >
-                  {{ coupon.coupon_info }}</a
-                >
-              </q-btn>
-            </div>
-            <!-- 详情 -->
-            <div class="col-auto q-mt-lg column col-sm-12">
-              <div class="text-weight-bold">
-                <span>{{ detail.emphsis }}</span>
-              </div>
-              <div v-html="part" v-for="part in detailParts" :key="part">
-                <!-- {{ part }} -->
-              </div>
-            </div>
-            <!-- 大图 -->
-            <div class="col column items-center">
-              <q-img
-                v-for="bigImage in bigImages"
-                :key="bigImage"
-                :src="bigImage"
-                width="60%"
-                height="60%"
-              >
-              </q-img>
 
-              <q-img
-                v-if="bigImages.length == 0"
-                :src="detail.mainImageUrl"
-                width="60%"
-                height="60%"
-              >
-              </q-img>
+            <!-- 详情 -->
+            <div class="column col-auto">
+              <div class="col-auto column">
+                <!-- 优惠券 -->
+                <div v-if="couponInfo.length" class="col column text-weight-bold">
+                  <div class="col-auto">
+                    <span>优惠领取</span>
+                  </div>
+                  <div
+                    class="row col q-mt-md"
+                    v-for="coupon in couponInfo"
+                    :key="coupon.coupon_link"
+                  >
+                    <q-btn color="accent" :size="buttonSize" unelevated style="width: 230px">
+                      <a
+                        target="_blank"
+                        class="text-white text-weight-bold"
+                        :href="coupon.actual_coupon_link"
+                      >
+                        {{ coupon.coupon_info }}</a
+                      >
+                    </q-btn>
+                  </div>
+                </div>
+                <!-- 详细文字 -->
+                <div class="col-auto q-mt-lg">
+                  <span class="text-weight-bold col"> {{ detail.emphsis }}</span>
+                  <div class="col-auto" v-html="part" v-for="part in detailParts" :key="part"></div>
+                </div>
+              </div>
+              <!-- 大图 -->
+              <div class="col">
+                <div class="column items-center">
+                  <q-img
+                    v-for="bigImage in bigImages"
+                    :key="bigImage"
+                    :src="bigImage"
+                    width="60%"
+                    height="60%"
+                  >
+                  </q-img>
+                </div>
+
+                <!-- <q-img
+                  v-if="bigImages.length == 0"
+                  :src="detail.mainImageUrl"
+                  width="60%"
+                  height="60%"
+                >
+                </q-img> -->
+              </div>
             </div>
           </div>
         </div>
@@ -130,6 +136,7 @@
 <script>
 import 'src/config';
 import HotList from '../components/HotList.vue';
+import { Screen } from 'quasar';
 
 export default {
   name: 'DetailPage',
@@ -142,6 +149,7 @@ export default {
       categoryInfo: [],
       turnInOrNot: 'turned_in_not',
       comment: 'comment',
+      buttonSize: Screen.gt.sm ? '13px' : '10px',
     };
   },
   props: ['id'],
@@ -150,6 +158,9 @@ export default {
     HotList,
   },
   mounted() {
+    this.$q.loading.show({
+      delay: 400, // ms
+    });
     this.getItemDetail(this.id);
   },
   methods: {
@@ -164,7 +175,7 @@ export default {
           this.couponInfo = JSON.parse(this.detail.couponInfo);
         }
         this.categoryInfo = JSON.parse(this.detail.categoryText);
-        console.log(this.detail);
+        this.$q.loading.hide();
       });
     },
     turnInOrNotClick() {},
