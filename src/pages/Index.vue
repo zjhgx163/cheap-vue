@@ -1,44 +1,7 @@
 <template>
   <div class="bg-primary">
     <q-list v-for="item in listData" v-bind:key="item.id" class="bg-secondary">
-      <!-- 
-      <q-item clickable v-ripple>
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section>Image avatar</q-item-section>
-      </q-item>
-
-      <q-item clickable v-ripple>
-        <q-item-section avatar>
-          <q-avatar square>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section>Image square avatar</q-item-section>
-      </q-item>
-
-      <q-item clickable v-ripple>
-        <q-item-section avatar>
-          <q-avatar rounded>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section>Image rounded avatar</q-item-section>
-      </q-item> -->
-
-      <!-- <q-item clickable v-ripple>
-        <q-item-section avatar>
-          <q-avatar rounded>
-            <img src="https://cdn.quasar.dev/img/mountains.jpg" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section>List item</q-item-section>
-      </q-item> -->
-
-      <q-item v-ripple class="q-py-md">
+      <q-item v-ripple class="q-py-md" :clickable="clickable" @click="itemClick(item.id)">
         <q-item-section side>
           <div>
             <!-- 这里用router-link代替a -->
@@ -75,6 +38,7 @@
           <q-item-label lines="1" v-bind:class="[textSize, textCol2, textAccent, fontFamily]">
             {{ item.priceText }}</q-item-label
           >
+
           <q-item-label lines="2" class="col-auto gt-sm YL__list_line_height YL__list_font_size">
             <span class="text-weight-bold">{{ item.emphsis }}</span
             >{{ item.detailBrief }}
@@ -87,8 +51,17 @@
               >...阅读全文
             </router-link>
           </q-item-label>
-          <q-item-label lines="1" class="col-2 row items-center" caption
-            >{{ item.mall }}
+          <q-item-label lines="1" class="col-2 row items-center justify-even" caption>
+            <div class="col-3">{{ item.mall }}</div>
+            <!-- <router-link
+              :to="{
+                path: 'item',
+                name: 'detail',
+                params: { id: item.id },
+              }"
+            >
+              查看详情
+            </router-link> -->
           </q-item-label>
 
           <q-item-label class="col row justify-between items-center">
@@ -208,6 +181,7 @@ export default {
       textAccent: 'text-accent',
       textCol2: 'col-2',
       paginationSize: Screen.gt.sm ? '12px' : '11px',
+      // to: false,
     };
   },
   computed: {
@@ -226,6 +200,9 @@ export default {
     },
     host: function () {
       return global.config.domain;
+    },
+    clickable: function () {
+      return this.isBigScreen ? false : true;
     },
   },
   mounted() {
@@ -266,6 +243,10 @@ export default {
     },
     turnInOrNotClick() {},
     commentClick() {},
+    itemClick(id) {
+      this.$router.push({ path: 'item', name: 'detail', params: { id: id } });
+      // window.location.href = `${global.config.domain}/goods/detail?id=` + id;
+    },
     buyClick() {
       this.$axios
         .post(`${global.config.domain}/user/event`, { type: '进入推广链接' })

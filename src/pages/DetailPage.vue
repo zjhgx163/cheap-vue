@@ -50,18 +50,20 @@
                 <q-img :src="detail.mainImageUrl" width="250px" height="250px" />
               </div>
               <!-- 主图旁边介绍，响应式 -->
-              <div class="column col-md q-pa-sm col-sm-12">
-                <div class="col-auto text-h6">{{ detail.title }}</div>
-                <div class="col-2 text-accent text-h6 text-weight-bold YL__title_font_family">
+              <div class="column col-md q-pa-sm col-sm-12 justify-between">
+                <div class="col-md-auto col-sm-auto text-h6">{{ detail.title }}</div>
+                <div
+                  class="col-md-2 col-sm-2 text-accent text-h6 text-weight-bold YL__title_font_family"
+                >
                   {{ detail.priceText }}
                 </div>
-                <div class="col-1"></div>
-                <div class="col">
+                <div class="col-md-1 col-sm-2"></div>
+                <div class="col-md col-sm">
                   <q-btn color="accent" :size="buttonSize" unelevated>
                     <a
                       target="_blank"
                       class="text-white text-weight-bold"
-                      :href="detail.actualBuyLink"
+                      :href="`${host}/goods/go/${detail.urlCode}`"
                     >
                       去购买</a
                     >
@@ -102,7 +104,7 @@
               </div>
               <!-- 大图 -->
               <div class="col">
-                <div class="column items-center">
+                <div class="column items-center q-pb-lg">
                   <q-img
                     v-for="bigImage in bigImages"
                     :key="bigImage"
@@ -150,6 +152,7 @@ export default {
       turnInOrNot: 'turned_in_not',
       comment: 'comment',
       buttonSize: Screen.gt.sm ? '13px' : '10px',
+      host: global.config.domain,
     };
   },
   props: ['id'],

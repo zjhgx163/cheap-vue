@@ -76,7 +76,7 @@
     </div> -->
 
     <q-footer reveal bordered class="bg-dark text-grey-8">
-      <div class="YL__toobar YL__footer row justify-evenly">
+      <div class="YL__toobar YL__footer row justify-evenly gt-sm">
         <div class="col-4">
           联系我们:
           <div>email: ykhgx@sohu.com</div>
