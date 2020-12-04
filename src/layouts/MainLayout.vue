@@ -2,8 +2,8 @@
   <q-layout view="hHh lpR fFf" class="bg-secondary">
     <q-header bordered class="bg-secondary text-grey-8">
       <q-toolbar class="q-py-md YL__toobar">
-        <q-icon :name="fabYoutube" color="red" size="28px" />
-        <q-toolbar-title shrink class="text-weight-bold"> 过日子 </q-toolbar-title>
+        <q-img src="hjd.png" spinner-color="white" width="100px" />
+        <!-- <q-toolbar-title shrink class="text-weight-bold"> 好价党 </q-toolbar-title> -->
 
         <q-space />
 
@@ -113,7 +113,7 @@ export default {
       padding-right: 300px
       font-size: 14px
   &__toolbar-input-container
-    min-width: 100px
+    min-width: 200px
     width: 30%
     border: 2px solid #f44336
   &__footer

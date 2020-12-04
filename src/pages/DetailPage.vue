@@ -5,7 +5,7 @@
       <q-breadcrumbs
         active-color="black"
         separator="---"
-        class="text-grey text-subtitle2 col-auto q-py-md"
+        class="text-grey text-subtitle2 col-auto q-pa-md"
       >
         <template v-slot:separator>
           <q-icon size="1.5em" name="chevron_right" color="grey" />
