@@ -40,7 +40,7 @@
           >
 
           <q-item-label lines="2" class="col-auto gt-sm YL__list_line_height YL__list_font_size">
-            <span class="text-weight-bold">{{ item.emphsis }}</span
+            <span v-if="item.emphsis != 'null'" class="text-weight-bold">{{ item.emphsis }}</span
             >{{ item.detailBrief }}
             <router-link
               :to="{
@@ -65,7 +65,7 @@
           </q-item-label>
 
           <q-item-label class="col row justify-between items-center">
-            <div class="col q-gutter-md">
+            <div class="col" v-bind:class="iconGutter">
               <q-btn size="11px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
                 <q-badge color="secondary" align="middle" text-color="grey">{{
                   item.zhiCount
@@ -203,6 +203,9 @@ export default {
     },
     clickable: function () {
       return this.isBigScreen ? false : true;
+    },
+    iconGutter: function () {
+      return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-sm';
     },
   },
   mounted() {

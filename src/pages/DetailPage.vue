@@ -98,7 +98,9 @@
                 </div>
                 <!-- 详细文字 -->
                 <div class="col-auto q-mt-lg">
-                  <span class="text-weight-bold col"> {{ detail.emphsis }}</span>
+                  <span class="text-weight-bold col" v-if="detail.emphsis != 'null'">
+                    {{ detail.emphsis }}</span
+                  >
                   <div class="col-auto" v-html="part" v-for="part in detailParts" :key="part"></div>
                 </div>
               </div>
