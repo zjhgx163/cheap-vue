@@ -53,6 +53,7 @@
           </q-item-label>
           <q-item-label lines="1" class="col-2 row items-center justify-even" caption>
             <div class="col-3">{{ item.mall }}</div>
+            <!-- | {{ item.createdTime }} -->
             <!-- <router-link
               :to="{
                 path: 'item',
@@ -134,7 +135,7 @@
         :size="paginationSize"
         color="dark"
         :max="max"
-        :max-pages="4"
+        :max-pages="maxPage"
         :boundary-numbers="false"
         :direction-links="true"
         @input="pageNavigate"
@@ -180,7 +181,8 @@ export default {
       lineHeight: 'YL__list_line_height',
       textAccent: 'text-accent',
       textCol2: 'col-2',
-      paginationSize: Screen.gt.sm ? '12px' : '11px',
+      paginationSize: Screen.gt.sm ? '12px' : '10px',
+      maxPage: Screen.gt.sm ? '6' : '4',
       // to: false,
     };
   },

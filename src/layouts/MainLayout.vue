@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf" class="bg-secondary">
     <q-header bordered class="bg-secondary text-grey-8">
       <q-toolbar class="q-py-md YL__toobar">
-        <q-img src="hjd.png" spinner-color="white" width="100px" />
+        <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
         <!-- <q-toolbar-title shrink class="text-weight-bold"> 好价党 </q-toolbar-title> -->
 
         <q-space />
@@ -79,7 +79,7 @@
       <div class="YL__toobar YL__footer row justify-evenly gt-sm">
         <div class="col-4">
           联系我们:
-          <div>email: ykhgx@sohu.com</div>
+          <div>email: 82955503@qq.com</div>
         </div>
         <div class="col">Copyright © 2020 Hjdang.com All rights reserved.</div>
       </div>
@@ -90,6 +90,7 @@
 <script>
 import { fabYoutube } from '@quasar/extras/fontawesome-v5';
 import { Platform } from 'quasar';
+import { Screen } from 'quasar';
 
 export default {
   name: 'MyLayout',
@@ -97,6 +98,7 @@ export default {
     return {
       search: '',
       drawer: false,
+      logoWidth: Screen.gt.sm ? '160px' : '110px',
     };
   },
   created() {

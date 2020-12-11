@@ -15,7 +15,7 @@ if (fullCurrentDomain.indexOf(domainDev) > -1) {
   domain = 'http://localhost:8238';
 } else if (fullCurrentDomain.indexOf(domainPro) > -1) {
   // 生产环境
-  domain = 'http://web.hjdang.com';
+  domain = 'https://web.hjdang.com';
 } else {
   // 本地调试
   // domain = 'http://10.0.41.110:7979';
