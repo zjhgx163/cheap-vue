@@ -10,8 +10,24 @@ const routes = [
           { path: '', component: () => import('pages/Index.vue') },
           { path: 'rank', component: () => import('pages/Index.vue') },
           { path: 'cheap', component: () => import('pages/Index.vue') },
+          {
+            path: 'search',
+            name: 'search',
+            component: () => import('pages/Index.vue'),
+            props: (route) => ({ query: route.query.q }),
+          },
         ],
       },
+      // {
+      // path: '/search',
+      // name: 'search',
+      // component: () => import('layouts/IndexLayout.vue'),
+      // children: [
+      //   { path: '', component: () => import('pages/Index.vue') },
+      //   { path: 'rank', component: () => import('pages/Index.vue') },
+      //   { path: 'cheap', component: () => import('pages/Index.vue') },
+      // ],
+      // },
       {
         path: '/item/:id',
         name: 'detail',
@@ -30,6 +46,17 @@ const routes = [
 
   // Always leave this as last one,
   // but you can also remove it
+  // {
+  //   path: '/search',
+  //   name: 'search',
+  //   component: () => import('layouts/IndexLayout.vue'),
+  //   props: (route) => ({ query: route.query.q }),
+  //   children: [
+  //     { path: '', component: () => import('pages/Index.vue') },
+  //     { path: 'rank', component: () => import('pages/Index.vue') },
+  //     { path: 'cheap', component: () => import('pages/Index.vue') },
+  //   ],
+  // },
   {
     path: '*',
     component: () => import('pages/Error404.vue'),

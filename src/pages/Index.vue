@@ -182,10 +182,11 @@ export default {
       textAccent: 'text-accent',
       textCol2: 'col-2',
       paginationSize: Screen.gt.sm ? '12px' : '10px',
-      maxPage: Screen.gt.sm ? '6' : '4',
+      maxPage: Screen.gt.sm ? 6 : 4,
       // to: false,
     };
   },
+  props: ['query'],
   computed: {
     textSize: function () {
       return this.isBigScreen ? 'text-h7' : 'text-subtitle2';
@@ -210,6 +211,11 @@ export default {
       return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-sm';
     },
   },
+  watch: {
+    $route(to, from) {
+      this.getItemList();
+    },
+  },
   mounted() {
     this.getItemList();
 
@@ -220,8 +226,13 @@ export default {
   },
   methods: {
     getItemList() {
+      console.log('$$$$$$' + this.query);
       this.$axios
-        .post(`${global.config.domain}/goods/list`, { page: this.current, path: this.$route.path })
+        .post(`${global.config.domain}/goods/list`, {
+          page: this.current,
+          path: this.$route.path,
+          query: this.$route.query.q,
+        })
         .then((res) => {
           // console.log(res.data.data);
           // console.log(this.isBigScreen);
@@ -233,7 +244,11 @@ export default {
     },
     pageNavigate() {
       this.$axios
-        .post(`${global.config.domain}/goods/list`, { page: this.current, path: this.$route.path })
+        .post(`${global.config.domain}/goods/list`, {
+          page: this.current,
+          path: this.$route.path,
+          query: this.$route.query.q,
+        })
         .then((res) => {
           console.log(res.data.data.records);
           this.listData = res.data.data.records;

@@ -2,7 +2,10 @@
   <q-layout view="hHh lpR fFf" class="bg-secondary">
     <q-header bordered class="bg-secondary text-grey-8">
       <q-toolbar class="q-py-md YL__toobar">
-        <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
+        <router-link :to="{ path: '/' }">
+          <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
+        </router-link>
+
         <!-- <q-toolbar-title shrink class="text-weight-bold"> 好价党 </q-toolbar-title> -->
 
         <q-space />
@@ -10,16 +13,16 @@
         <!-- <div class="bg-white YL__toolbar-input-container"> -->
         <q-input
           dense
-          standout="bg-teal text-white"
+          standout="text-white"
           bg-color="white"
           square
-          v-model="search"
+          v-model="searchKey"
           placeholder="苹果手机"
           type="search"
           class="YL__toolbar-input-container"
         >
           <template v-slot:append>
-            <q-icon name="search" />
+            <q-btn name="search" icon="search" unelevated @click="search" />
           </template>
           <!-- <q-btn
             class="YL__toolbar-input-btn"
@@ -91,18 +94,29 @@
 import { fabYoutube } from '@quasar/extras/fontawesome-v5';
 import { Platform } from 'quasar';
 import { Screen } from 'quasar';
+import 'src/config';
 
 export default {
-  name: 'MyLayout',
+  name: 'MainLayout',
   data() {
     return {
-      search: '',
+      searchKey: '',
       drawer: false,
       logoWidth: Screen.gt.sm ? '160px' : '110px',
+      host: global.config.domain,
     };
   },
   created() {
     this.fabYoutube = fabYoutube;
+  },
+  methods: {
+    search() {
+      this.$router
+        .push({ path: 'search', name: 'search', query: { q: this.searchKey } })
+        .catch((err) => {
+          err;
+        });
+    },
   },
 };
 </script>
