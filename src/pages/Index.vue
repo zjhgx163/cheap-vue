@@ -18,6 +18,7 @@
             </router-link> -->
 
             <router-link
+              target="_blank"
               :to="{
                 path: 'item',
                 name: 'detail',
@@ -52,8 +53,8 @@
             </router-link>
           </q-item-label>
           <q-item-label lines="1" class="col-2 row items-center justify-even" caption>
-            <div class="col-3">{{ item.mall }}</div>
-            <!-- | {{ item.createdTime }} -->
+            <div class="col-3">{{ item.mall }} | {{ item.dateStr }}</div>
+
             <!-- <router-link
               :to="{
                 path: 'item',
@@ -116,6 +117,7 @@
                   target="_blank"
                   class="text-white text-weight-bold"
                   :href="`${host}/goods/go/${item.urlCode}`"
+                  @click.stop
                 >
                   去购买</a
                 >
@@ -181,7 +183,7 @@ export default {
       lineHeight: 'YL__list_line_height',
       textAccent: 'text-accent',
       textCol2: 'col-2',
-      paginationSize: Screen.gt.sm ? '12px' : '10px',
+      paginationSize: Screen.gt.sm ? '12px' : '9px',
       maxPage: Screen.gt.sm ? 6 : 4,
       // to: false,
     };

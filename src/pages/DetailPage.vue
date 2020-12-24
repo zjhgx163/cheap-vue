@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-1 col-sm-2"></div>
                 <div class="col-md col-sm">
-                  <q-btn color="accent" :size="buttonSize" unelevated>
+                  <q-btn color="accent" :size="buttonSize" unelevated @click="buyClick">
                     <a
                       target="_blank"
                       class="text-white text-weight-bold"
@@ -85,11 +85,12 @@
                     v-for="coupon in couponInfo"
                     :key="coupon.coupon_link"
                   >
-                    <q-btn color="accent" :size="buttonSize" unelevated style="width: 230px">
+                    <q-btn color="accent" :size="buttonSize" unelevated>
                       <a
                         target="_blank"
                         class="text-white text-weight-bold"
                         :href="coupon.actual_coupon_link"
+                        style="width: 230px"
                       >
                         {{ coupon.coupon_info }}</a
                       >
@@ -185,6 +186,13 @@ export default {
     },
     turnInOrNotClick() {},
     commentClick() {},
+    buyClick() {
+      this.$axios
+        .post(`${global.config.domain}/user/event`, { type: '进入推广链接' })
+        .then((res) => {
+          console.log(res.data.data);
+        });
+    },
   },
 };
 </script>
