@@ -41,7 +41,7 @@
         </q-list>
       </div> -->
 
-      <div class="col"></div>
+      <!-- <div class="col"></div> -->
     </q-drawer>
   </q-layout>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4 bg-primary q-px-sm">
+  <div class="bg-primary q-px-sm">
     <q-list padding class="bg-secondary">
       <q-item-label header>热门推荐</q-item-label>
       <q-item v-for="item in hotList" v-bind:key="item.id" class="bg-secondary">

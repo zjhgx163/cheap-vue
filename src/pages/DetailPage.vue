@@ -19,7 +19,7 @@
     <div class="row">
       <!-- 详情页 -->
       <div class="col row">
-        <div class="col-1 column items-center gt-sm" style="height: 1650px">
+        <div class="col-1 column items-center gt-sm">
           <div class="col-4"></div>
           <div class="column items-center bg-secondary" style="width: 40px">
             <div class="col-auto">
@@ -73,7 +73,7 @@
             </div>
 
             <!-- 详情 -->
-            <div class="column col-auto">
+            <div class="column col-auto no-wrap">
               <div class="col-auto column">
                 <!-- 优惠券 -->
                 <div v-if="couponInfo.length" class="col column text-weight-bold">
@@ -118,13 +118,13 @@
                   </q-img>
                 </div>
 
-                <!-- <q-img
+                <q-img
                   v-if="bigImages.length == 0"
                   :src="detail.mainImageUrl"
                   width="60%"
                   height="60%"
                 >
-                </q-img> -->
+                </q-img>
               </div>
             </div>
           </div>
