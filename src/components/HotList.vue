@@ -1,6 +1,6 @@
 <template>
   <div class="bg-primary q-px-sm">
-    <q-list padding class="bg-secondary">
+    <q-list padding class="bg-secondary" style="max-width: 300px">
       <q-item-label header>热门推荐</q-item-label>
       <q-item v-for="item in hotList" v-bind:key="item.id" class="bg-secondary">
         <q-item-section side>
@@ -17,7 +17,7 @@
           </div>
         </q-item-section>
 
-        <q-item-section class="column bg-secondary">
+        <q-item-section class="column bg-secondary no-wrap">
           <q-item-label lines="2" caption> {{ item.title }}</q-item-label>
         </q-item-section>
       </q-item>
