@@ -231,13 +231,14 @@ export default {
     // };
   },
   methods: {
-    getItemList() {
+    getItemList(sort) {
       console.log('$$$$$$' + this.query);
       this.$axios
         .post(`${global.config.domain}/goods/list`, {
           page: this.current,
           path: this.$route.path,
           query: this.$route.query.q,
+          sort: sort,
         })
         .then((res) => {
           // console.log(res.data.data);
