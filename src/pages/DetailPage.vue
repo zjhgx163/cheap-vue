@@ -163,6 +163,7 @@ export default {
   components: {
     HotList,
   },
+
   mounted() {
     this.$q.loading.show({
       delay: 400, // ms

@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-primary">
+  <q-page class="bg-primary">
+    <q-separator />
+
     <q-list v-for="item in listData" v-bind:key="item.id" class="bg-secondary">
       <q-item v-ripple class="q-py-md" :clickable="clickable" @click="itemClick(item.id)">
         <q-item-section side>
@@ -22,6 +24,7 @@
               :to="{
                 path: 'item',
                 name: 'detail',
+
                 params: { id: item.id },
               }"
             >
@@ -144,7 +147,7 @@
       >
       </q-pagination>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <style lang="sass">
@@ -219,6 +222,7 @@ export default {
     },
   },
   mounted() {
+    this.selectedTab = 'main';
     this.getItemList();
 
     // this.windowWidth = window.innerWidth;

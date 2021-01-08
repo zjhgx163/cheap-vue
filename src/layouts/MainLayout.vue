@@ -67,15 +67,16 @@
     <q-page-container class="bg-primary">
       <router-view />
     </q-page-container>
-
+    <!-- 
     <q-drawer
       side="right"
-      :width="300"
+      :width="600"
       :breakpoint="700"
       show-if-above
       content-class="bg-primary text-white"
     >
-    </q-drawer>
+      <HotList> </HotList>
+    </q-drawer> -->
 
     <!-- <div class="row justify-center">
       <div class="col-8"></div>
@@ -104,6 +105,7 @@ import 'src/config';
 
 export default {
   name: 'MainLayout',
+
   data() {
     return {
       searchKey: '',
