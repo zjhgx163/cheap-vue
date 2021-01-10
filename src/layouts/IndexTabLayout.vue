@@ -1,13 +1,7 @@
 <template>
   <q-layout>
     <q-toolbar class="bg-secondary justify-between">
-      <q-tabs
-        v-model="selectedTab"
-        style="font-size: 16px"
-        align="left"
-        active-color="accent"
-        indicator-color="accent"
-      >
+      <q-tabs v-model="selectedTab" align="left" active-color="accent" indicator-color="accent">
         <q-route-tab to="/" label="首页" name="main" />
         <q-route-tab to="/cheap" label="白菜" name="cheap" />
         <q-route-tab to="/rank" label="排行榜" name="rank" />

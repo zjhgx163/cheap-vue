@@ -4,7 +4,7 @@
       <router-view></router-view>
     </q-page-container>
 
-    <q-drawer side="right" :width="600" :breakpoint="700" show-if-above>
+    <q-drawer side="right" :width="600" :breakpoint="700" show-if-above content-class="bg-primary">
       <HotList> </HotList>
     </q-drawer>
 
@@ -36,6 +36,10 @@
 
 <style lang="sass">
 .q-tab__label
+  @media(max-width: $breakpoint-xs-max)
+   font-size: 0.9em
+   font-weight: 600
+  @media(min-width: $breakpoint-xs-max)
    font-size: 1.0em
    font-weight: 700
 </style>
