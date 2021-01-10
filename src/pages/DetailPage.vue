@@ -59,7 +59,12 @@
                 </div>
                 <div class="col-md-1 col-sm-2"></div>
                 <div class="col-md col-sm">
-                  <q-btn color="accent" :size="buttonSize" unelevated @click="buyClick">
+                  <q-btn
+                    color="accent"
+                    :size="buttonSize"
+                    unelevated
+                    @click="buyClick(detail.goodsInfoUrl)"
+                  >
                     <a
                       target="_blank"
                       class="text-white text-weight-bold"
@@ -116,15 +121,15 @@
                     height="60%"
                   >
                   </q-img>
-                </div>
 
-                <q-img
-                  v-if="bigImages.length == 0"
-                  :src="detail.mainImageUrl"
-                  width="60%"
-                  height="60%"
-                >
-                </q-img>
+                  <q-img
+                    v-if="bigImages.length == 0"
+                    :src="detail.mainImageUrl"
+                    width="60%"
+                    height="60%"
+                  >
+                  </q-img>
+                </div>
               </div>
             </div>
           </div>
@@ -174,6 +179,10 @@ export default {
     getItemDetail(id) {
       this.$axios.post(`${global.config.domain}/goods/detail`, { id: id }).then((res) => {
         this.detail = res.data.data;
+        if (this.detail == null) {
+          this.$router.push({ path: '/error' });
+          this.$q.loading.hide();
+        }
         this.detailParts = JSON.parse(this.detail.detail);
         if (this.detail.bigImageUrls) {
           this.bigImages = JSON.parse(this.detail.bigImageUrls);
@@ -187,9 +196,9 @@ export default {
     },
     turnInOrNotClick() {},
     commentClick() {},
-    buyClick() {
+    buyClick(url) {
       this.$axios
-        .post(`${global.config.domain}/user/event`, { type: '进入推广链接' })
+        .post(`${global.config.domain}/user/event`, { type: '进入推广链接', remark: url })
         .then((res) => {
           console.log(res.data.data);
         });

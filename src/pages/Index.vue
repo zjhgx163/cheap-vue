@@ -115,12 +115,17 @@
               </q-btn>
             </div>
             <div class="col-auto justify-end row">
-              <q-btn color="accent" :size="buyButtonSize" unelevated @click="buyClick">
+              <q-btn
+                color="accent"
+                :size="buyButtonSize"
+                unelevated
+                @click="buyClick(item.goodsInfoUrl)"
+                @click.stop
+              >
                 <a
                   target="_blank"
                   class="text-white text-weight-bold"
                   :href="`${host}/goods/go/${item.urlCode}`"
-                  @click.stop
                 >
                   去购买</a
                 >
@@ -283,9 +288,9 @@ export default {
 
       // window.location.href = `${global.config.domain}/goods/detail?id=` + id;
     },
-    buyClick() {
+    buyClick(url) {
       this.$axios
-        .post(`${global.config.domain}/user/event`, { type: '进入推广链接' })
+        .post(`${global.config.domain}/user/event`, { type: '进入推广链接', remark: url })
         .then((res) => {
           console.log(res.data.data);
         });
