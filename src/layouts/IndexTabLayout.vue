@@ -24,7 +24,7 @@
       </q-btn-dropdown>
     </q-toolbar>
     <q-page-container>
-      <router-view :key="$route.path" ref="goods-list"></router-view>
+      <router-view :key="$route.path" ref="goods-list" :sort="sortIndex"></router-view>
     </q-page-container>
   </q-layout>
 </template>
@@ -35,6 +35,7 @@ export default {
     return {
       selectedTab: 'main',
       sort: '推荐排序',
+      sortIndex: 1,
     };
   },
 
@@ -45,7 +46,9 @@ export default {
   methods: {
     onItemClick(event) {
       this.sort = event.currentTarget.getAttribute('tabindex') == 2 ? '时间排序' : '推荐排序';
-      this.$refs['goods-list'].getItemList(event.currentTarget.getAttribute('tabindex'));
+      this.sortIndex = event.currentTarget.getAttribute('tabindex');
+      // 用$refs是非reactive,sortIndex变了但：sort="sortIndex"这里不会改变getItemList里的参数sort的值，所以只能加一个参数this.sortIndex传过去
+      this.$refs['goods-list'].getItemList(this.sortIndex);
     },
   },
 };

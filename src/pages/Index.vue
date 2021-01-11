@@ -196,7 +196,7 @@ export default {
       // to: false,
     };
   },
-  props: ['query'],
+  props: ['query', 'sort'],
   computed: {
     textSize: function () {
       return this.isBigScreen ? 'text-h7' : 'text-subtitle2';
@@ -236,14 +236,14 @@ export default {
     // };
   },
   methods: {
-    getItemList(sort) {
+    getItemList(sortIndex) {
       console.log('$$$$$$' + this.query);
       this.$axios
         .post(`${global.config.domain}/goods/list`, {
           page: this.current,
           path: this.$route.path,
           query: this.$route.query.q,
-          sort: sort,
+          sort: sortIndex != null ? sortIndex : this.sort,
         })
         .then((res) => {
           // console.log(res.data.data);
@@ -260,6 +260,7 @@ export default {
           page: this.current,
           path: this.$route.path,
           query: this.$route.query.q,
+          sort: this.sort,
         })
         .then((res) => {
           console.log(res.data.data.records);
