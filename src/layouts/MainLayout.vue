@@ -91,7 +91,10 @@
           联系我们:
           <div>email: 82955503@qq.com</div>
         </div>
-        <div class="col">Copyright © 2020 Hjdang.com All rights reserved.</div>
+        <div class="col">
+          <div>Copyright © 2020 Hjdang.com All rights reserved.</div>
+          <div>浙ICP备2020040769号-1</div>
+        </div>
       </div>
     </q-footer>
   </q-layout>
