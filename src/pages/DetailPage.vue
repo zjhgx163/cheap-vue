@@ -50,7 +50,7 @@
                 <q-img :src="detail.mainImageUrl" width="250px" height="250px" />
               </div>
               <!-- 主图旁边介绍，响应式 -->
-              <div class="column col-md q-pa-sm col-sm-12 justify-between">
+              <div class="column col-md q-pa-xs col-sm-12 justify-between">
                 <div class="col-md-auto col-sm-auto text-h6">{{ detail.title }}</div>
                 <div
                   class="col-md-2 col-sm-2 text-accent text-h6 text-weight-bold YL__title_font_family"
@@ -78,7 +78,7 @@
             </div>
 
             <!-- 详情 -->
-            <div class="column col-auto no-wrap">
+            <div class="column col-auto no-wrap q-pa-xs">
               <div class="col-auto column">
                 <!-- 优惠券 -->
                 <div v-if="couponInfo.length" class="col column text-weight-bold">
@@ -90,15 +90,39 @@
                     v-for="coupon in couponInfo"
                     :key="coupon.coupon_link"
                   >
-                    <q-btn color="accent" :size="buttonSize" unelevated>
-                      <a
+                    <q-btn
+                      color="white"
+                      text-color="accent"
+                      :size="buttonSize"
+                      unelevated
+                      outline
+                      align="left"
+                      type="a"
+                      :href="coupon.actual_coupon_link"
+                      target="_blank"
+                      style="width: 14em"
+                    >
+                      {{ coupon.coupon_info }}
+                      <!-- <a
                         target="_blank"
                         class="text-white text-weight-bold"
                         :href="coupon.actual_coupon_link"
                         style="width: 230px"
                       >
                         {{ coupon.coupon_info }}</a
-                      >
+                      > -->
+                    </q-btn>
+                    <q-btn
+                      color="accent"
+                      text-color="white"
+                      :size="buttonSize"
+                      unelevated
+                      type="a"
+                      :href="coupon.actual_coupon_link"
+                      target="_blank"
+                      class="text-weight-bold"
+                    >
+                      领取
                     </q-btn>
                   </div>
                 </div>
