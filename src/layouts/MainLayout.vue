@@ -93,7 +93,7 @@
         </div>
         <div class="col">
           <div>Copyright © 2020 Hjdang.com All rights reserved.</div>
-          <div><a src="https://beian.miit.gov.cn">浙ICP备2020040769号-1</a></div>
+          <div><a target="_blank" href="https://beian.miit.gov.cn">浙ICP备2020040769号-1</a></div>
         </div>
       </div>
     </q-footer>
