@@ -282,7 +282,7 @@ export default {
     itemClick(id) {
       // this.$router.push({ path: 'item', name: 'detail', params: { id: id } });
       const { href } = this.$router.resolve({
-        path: 'item',
+        path: 'item/detail',
         name: 'detail',
         params: {
           id: id,
