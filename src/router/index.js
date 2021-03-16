@@ -27,5 +27,12 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE,
   });
 
+  // Router.beforeEach((to, from, next) => {
+  //   console.info('to =' + to.fullPath);
+  //   console.info('from =' + from.fullPath);
+
+  //   next();
+  // });
+
   return Router;
 }

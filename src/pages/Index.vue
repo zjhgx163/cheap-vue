@@ -36,6 +36,7 @@
           <q-item-label
             :lines="lines"
             v-bind:class="[textSize, textColResponsive, fontFamily, lineHeight]"
+            class="text-grey-9"
           >
             {{ item.title }}</q-item-label
           >
@@ -43,8 +44,10 @@
             {{ item.priceText }}</q-item-label
           >
 
-          <q-item-label lines="2" class="col-auto gt-sm YL__list_line_height YL__list_font_size">
-            <span v-if="item.emphsis != 'null'" class="text-weight-bold">{{ item.emphsis }}</span
+          <q-item-label lines="2" class="gt-sm YL__list_line_height YL__list_font_size text-grey-9">
+            <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
+              item.emphsis
+            }}</span
             >{{ item.detailBrief }}
             <router-link
               :to="{

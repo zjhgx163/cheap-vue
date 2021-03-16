@@ -93,7 +93,16 @@
         </div>
         <div class="col">
           <div>Copyright © 2020 Hjdang.com All rights reserved.</div>
-          <div><a target="_blank" href="https://beian.miit.gov.cn">浙ICP备2020040769号-1</a></div>
+          <div class="row gt-sm q-gutter-md">
+            <a target="_blank" href="https://beian.miit.gov.cn">浙ICP备2020040769号-1</a>
+            <a
+              target="_blank"
+              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
+              ><img src="备案图标.png" style="width: 12px; height: 12px" />
+
+              浙公网安备 33012702000426号
+            </a>
+          </div>
         </div>
       </div>
     </q-footer>
@@ -120,6 +129,13 @@ export default {
   created() {
     this.fabYoutube = fabYoutube;
   },
+
+  // watch: {
+  //   $route(to, from) {
+  //     console.log('to = ' + to);
+  //     console.log('from = ' + from);
+  //   },
+  // },
   methods: {
     search() {
       this.$router

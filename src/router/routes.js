@@ -35,14 +35,23 @@ const routes = [
       // ],
       // },
       {
-        path: '/item/:id',
-        name: 'detail',
+        path: 'item',
         component: () => import('layouts/DetailLayout.vue'),
+        // props: true,
+        beforeEnter: (to, from, next) => {
+          console.info('##before enter DetailLayout, to=' + to.fullPath);
+          next();
+        },
         children: [
           {
-            path: '',
+            name: 'detail',
+            path: 'detail/:id',
             component: () => import('pages/DetailPage.vue'),
             props: true,
+            // beforeEnter: (to, from, next) => {
+            //   console.info('%%before enter DetailPage, to=' + to.fullPath);
+            //   next();
+            // },
           },
         ],
         // 在router之间传递参数用下面配置
@@ -50,6 +59,7 @@ const routes = [
       },
     ],
   },
+
   // {
   //   path: '/main',
   //   component: () => import('pages/Index.vue'),

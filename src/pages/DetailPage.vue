@@ -51,7 +51,9 @@
               </div>
               <!-- 主图旁边介绍，响应式 -->
               <div class="column col-md q-pa-xs col-sm-12 justify-between">
-                <div class="col-md-auto col-sm-auto text-h6">{{ detail.title }}</div>
+                <div class="col-md-auto col-sm-auto text-h6 text-dark text-weight-medium">
+                  {{ detail.title }}
+                </div>
                 <div
                   class="col-md-2 col-sm-2 text-accent text-h6 text-weight-bold YL__title_font_family"
                 >
@@ -128,10 +130,15 @@
                 </div>
                 <!-- 详细文字 -->
                 <div class="col-auto q-mt-lg">
-                  <span class="text-weight-bold col" v-if="detail.emphsis != 'null'">
+                  <span class="text-weight-bold text-grey-9 col" v-if="detail.emphsis != 'null'">
                     {{ detail.emphsis }}</span
                   >
-                  <div class="col-auto" v-html="part" v-for="part in detailParts" :key="part"></div>
+                  <div
+                    class="col-auto text-grey-9"
+                    v-html="part"
+                    v-for="part in detailParts"
+                    :key="part"
+                  ></div>
                 </div>
               </div>
               <!-- 大图 -->
