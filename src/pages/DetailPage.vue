@@ -68,6 +68,7 @@
                     @click="buyClick(detail.goodsInfoUrl)"
                   >
                     <a
+                      target="_blank"
                       class="text-white text-weight-bold"
                       :href="`${host}/goods/go/${detail.urlCode}`"
                     >
@@ -95,6 +96,7 @@
                       color="white"
                       text-color="accent"
                       :size="buttonSize"
+                      target="_blank"
                       unelevated
                       outline
                       align="left"
@@ -113,6 +115,7 @@
                       > -->
                     </q-btn>
                     <q-btn
+                      target="_blank"
                       color="accent"
                       text-color="white"
                       :size="buttonSize"

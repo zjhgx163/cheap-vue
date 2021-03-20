@@ -125,7 +125,11 @@
                 @click="buyClick(item.goodsInfoUrl)"
                 @click.stop
               >
-                <a class="text-white text-weight-bold" :href="`${host}/goods/go/${item.urlCode}`">
+                <a
+                  target="_blank"
+                  class="text-white text-weight-bold"
+                  :href="`${host}/goods/go/${item.urlCode}`"
+                >
                   去购买</a
                 >
               </q-btn>
