@@ -224,13 +224,19 @@ export default {
       return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-sm';
     },
   },
-  watch: {
-    $route(to, from) {
-      this.getItemList();
-    },
+  // watch: {
+  //   $route(to, from) {
+  //     this.getItemList();
+  //   },
+  // },
+
+  created() {
+    console.log('Index created');
   },
+
   mounted() {
-    this.selectedTab = 'main';
+    console.log('Index mounted');
+    // this.selectedTab = 'main';
     this.getItemList();
 
     // this.windowWidth = window.innerWidth;
@@ -240,7 +246,8 @@ export default {
   },
   methods: {
     getItemList(sortIndex) {
-      console.log('$$$$$$' + this.query);
+      // console.log('$$$$$$' + this.query);
+
       this.$axios
         .post(`${global.config.domain}/goods/list`, {
           page: this.current,

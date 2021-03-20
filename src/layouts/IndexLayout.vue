@@ -59,5 +59,12 @@ export default {
       delay: 400, // ms
     });
   },
+  created() {
+    console.log('IndexLayout created');
+  },
+
+  mounted() {
+    console.log('IndexLayout mounted');
+  },
 };
 </script>

@@ -22,7 +22,7 @@ if (fullCurrentDomain.indexOf(domainDev) > -1) {
   // domain = 'http://10.0.41.110:7979';
   // websocketHost = 'http://10.0.41.110:7979/websocket';
 
-  domain = 'http://192.168.0.120:8238';
+  domain = 'http://192.168.1.10:8238';
 }
 
 global.config = {

@@ -30,7 +30,9 @@
       </q-btn-dropdown>
     </q-toolbar>
     <q-page-container>
-      <router-view :key="$route.path" ref="goods-list" :sort="sortIndex"></router-view>
+      <keep-alive>
+        <router-view :key="$route.path" ref="goods-list" :sort="sortIndex"></router-view>
+      </keep-alive>
     </q-page-container>
   </q-layout>
 </template>
@@ -45,7 +47,12 @@ export default {
     };
   },
 
+  created() {
+    console.log('IndexTabLayout created');
+  },
+
   mounted() {
+    console.log('IndexTabLayout mounted');
     this.selectedTab = 'main';
   },
 

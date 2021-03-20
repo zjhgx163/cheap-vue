@@ -65,7 +65,9 @@
     </q-drawer>
 
     <q-page-container class="bg-primary">
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </q-page-container>
     <!-- 
     <q-drawer
@@ -127,7 +129,12 @@ export default {
     };
   },
   created() {
+    console.log('MainLayout created');
     this.fabYoutube = fabYoutube;
+  },
+
+  mounted() {
+    console.log('MainLayout mounted');
   },
 
   // watch: {

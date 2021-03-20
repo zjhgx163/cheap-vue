@@ -18,5 +18,13 @@
 <script>
 export default {
   name: 'DetailLayout',
+
+  created() {
+    console.log('DetailLayout created');
+  },
+
+  mounted() {
+    console.log('DetailLayout mounted');
+  },
 };
 </script>
