@@ -65,7 +65,7 @@
     </q-drawer>
 
     <q-page-container class="bg-primary">
-      <keep-alive>
+      <keep-alive exclude="DetailLayout">
         <router-view />
       </keep-alive>
     </q-page-container>

@@ -287,15 +287,15 @@ export default {
     turnInOrNotClick() {},
     commentClick() {},
     itemClick(id) {
-      // this.$router.push({ path: 'item', name: 'detail', params: { id: id } });
-      const { href } = this.$router.resolve({
-        path: 'item/detail',
-        name: 'detail',
-        params: {
-          id: id,
-        },
-      });
-      window.open(href, '_blank');
+      this.$router.push({ path: 'item', name: 'detail', params: { id: id } });
+      // const { href } = this.$router.resolve({
+      //   path: 'item/detail',
+      //   name: 'detail',
+      //   params: {
+      //     id: id,
+      //   },
+      // });
+      // window.open(href, '_blank');
 
       // window.location.href = `${global.config.domain}/goods/detail?id=` + id;
     },
