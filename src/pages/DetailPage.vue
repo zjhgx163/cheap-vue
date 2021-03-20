@@ -68,7 +68,6 @@
                     @click="buyClick(detail.goodsInfoUrl)"
                   >
                     <a
-                      target="_blank"
                       class="text-white text-weight-bold"
                       :href="`${host}/goods/go/${detail.urlCode}`"
                     >
@@ -101,7 +100,6 @@
                       align="left"
                       type="a"
                       :href="coupon.actual_coupon_link"
-                      target="_blank"
                       style="width: 14em"
                     >
                       {{ coupon.coupon_info }}
@@ -121,7 +119,6 @@
                       unelevated
                       type="a"
                       :href="coupon.actual_coupon_link"
-                      target="_blank"
                       class="text-weight-bold"
                     >
                       领取
