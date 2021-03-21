@@ -230,6 +230,18 @@ export default {
   //   },
   // },
 
+  // beforeRouteEnter(to, from, next) {
+  //   if (from.name == 'search' && to.name == 'search') {
+  //     console.log('dsd');
+  //     this.getItemList();
+  //     next();
+  //   } else {
+  //     log.info('ffff');
+
+  //     next();
+  //   }
+  // },
+
   created() {
     console.log('Index created');
   },

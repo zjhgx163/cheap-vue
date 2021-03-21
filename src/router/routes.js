@@ -11,9 +11,18 @@ const routes = [
             path: '',
             component: () => import('layouts/IndexTabLayout.vue'),
             children: [
-              { path: '', component: () => import('pages/Index.vue') },
-              { path: 'rank', component: () => import('pages/Index.vue') },
-              { path: 'cheap', component: () => import('pages/Index.vue') },
+              {
+                path: '',
+                component: () => import('pages/Index.vue'),
+              },
+              {
+                path: 'rank',
+                component: () => import('pages/Index.vue'),
+              },
+              {
+                path: 'cheap',
+                component: () => import('pages/Index.vue'),
+              },
               {
                 path: 'search',
                 name: 'search',
