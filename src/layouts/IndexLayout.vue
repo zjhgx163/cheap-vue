@@ -54,11 +54,6 @@ export default {
     HotList,
   },
 
-  beforeCreate() {
-    this.$q.loading.show({
-      delay: 400, // ms
-    });
-  },
   created() {
     console.log('IndexLayout created');
   },

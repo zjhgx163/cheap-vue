@@ -32,19 +32,22 @@
             </router-link>
           </div>
         </q-item-section>
-        <q-item-section class="column justify-between">
+        <q-item-section class="column justify-between q-pb-sm">
           <q-item-label
             :lines="lines"
-            v-bind:class="[textSize, textColResponsive, fontFamily, lineHeight]"
+            v-bind:class="[textSize, textColTitle, fontFamily, lineHeight]"
             class="text-grey-9"
           >
             {{ item.title }}</q-item-label
           >
-          <q-item-label lines="1" v-bind:class="[textSize, textCol2, textAccent, fontFamily]">
-            {{ item.priceText }}</q-item-label
-          >
+          <q-item-label lines="1" v-bind:class="[textSize, textColPrice, textAccent, fontFamily]">
+            {{ item.priceText }}
+          </q-item-label>
 
-          <q-item-label lines="2" class="gt-sm YL__list_line_height YL__list_font_size text-grey-9">
+          <q-item-label
+            lines="2"
+            class="col-4 gt-sm YL__list_line_height YL__list_font_size text-grey-9"
+          >
             <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
               item.emphsis
             }}</span
@@ -58,8 +61,8 @@
               >...阅读全文
             </router-link>
           </q-item-label>
-          <q-item-label lines="1" class="col-2 row items-center justify-even" caption>
-            <div class="col-3">{{ item.mall }} | {{ item.dateStr }}</div>
+          <q-item-label lines="1" class="col-auto row items-center justify-evena" caption>
+            <div>{{ item.mall }} | {{ item.dateStr }}</div>
 
             <!-- <router-link
               :to="{
@@ -72,8 +75,8 @@
             </router-link> -->
           </q-item-label>
 
-          <q-item-label class="col row justify-between items-center">
-            <div class="col" v-bind:class="iconGutter">
+          <q-item-label class="col row justify-between items-center gt-sm">
+            <div class="col-auto" v-bind:class="iconGutter">
               <q-btn size="11px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
                 <q-badge color="secondary" align="middle" text-color="grey">{{
                   item.zhiCount
@@ -103,21 +106,13 @@
                   item.starCount
                 }}</q-badge>
               </q-btn>
-              <q-btn
-                size="11px"
-                color="grey"
-                class="gt-sm"
-                flat
-                round
-                :icon="comment"
-                @click="commentClick"
-              >
+              <q-btn size="11px" color="grey" flat round :icon="comment" @click="commentClick">
                 <q-badge color="secondary" align="middle" text-color="grey">{{
                   item.commentsCount
                 }}</q-badge>
               </q-btn>
             </div>
-            <div class="col-auto justify-end row">
+            <div class="col justify-end row">
               <q-btn
                 color="accent"
                 :size="buyButtonSize"
@@ -193,7 +188,6 @@ export default {
       fontFamily: 'YL__title_font_family',
       lineHeight: 'YL__list_line_height',
       textAccent: 'text-accent',
-      textCol2: 'col-2',
       paginationSize: Screen.gt.sm ? '12px' : '9px',
       maxPage: Screen.gt.sm ? 6 : 4,
       // to: false,
@@ -205,11 +199,15 @@ export default {
       return this.isBigScreen ? 'text-h7' : 'text-subtitle2';
     },
 
-    textColResponsive: function () {
-      return this.isBigScreen ? 'col-2' : 'col-5';
+    textColTitle: function () {
+      return this.isBigScreen ? 'col-2' : 'col-7';
+    },
+
+    textColPrice: function () {
+      return this.isBigScreen ? 'col-2' : 'col-2';
     },
     lines: function () {
-      return Screen.gt.sm ? 1 : 2;
+      return Screen.gt.sm ? 1 : 3;
     },
     buyButtonSize: function () {
       return this.isBigScreen ? '13px' : '10px';
@@ -241,6 +239,11 @@ export default {
   //     next();
   //   }
   // },
+  // beforeCreate() {
+  //   this.$q.loading.show({
+  //     delay: 400, // ms
+  //   });
+  // },
 
   created() {
     console.log('Index created');
@@ -259,7 +262,9 @@ export default {
   methods: {
     getItemList(sortIndex) {
       // console.log('$$$$$$' + this.query);
-
+      this.$q.loading.show({
+        delay: 400, // ms
+      });
       this.$axios
         .post(`${global.config.domain}/goods/list`, {
           page: this.current,
