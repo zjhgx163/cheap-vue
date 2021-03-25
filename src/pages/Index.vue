@@ -67,9 +67,9 @@
             </router-link>
           </q-item-label>
           <q-item-label lines="1" class="col-auto row items-center justify-between" caption>
-            <div class="col-7">{{ item.mall }} | {{ item.dateStr }}</div>
+            <div class="col-8">{{ item.mall }} | {{ item.dateStr }}</div>
 
-            <div class="col-5 lt-sm" v-bind:class="iconGutter">
+            <div class="col-4 lt-sm" v-bind:class="iconGutter">
               <q-btn size="7px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
                 <q-badge color="secondary" align="middle" text-color="grey">{{
                   item.zhiCount
@@ -237,7 +237,7 @@ export default {
       return this.isBigScreen ? false : true;
     },
     iconGutter: function () {
-      return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-xs';
+      return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-none';
     },
   },
   // watch: {
