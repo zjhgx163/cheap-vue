@@ -3,7 +3,12 @@
     <q-separator />
 
     <q-list v-for="item in listData" v-bind:key="item.id" class="bg-secondary">
-      <q-item v-ripple class="q-py-md" :clickable="clickable" @click="itemClick(item.id)">
+      <q-item
+        v-ripple
+        v-bind:class="[itemPadding]"
+        :clickable="clickable"
+        @click="itemClick(item.id)"
+      >
         <q-item-section side>
           <div>
             <!-- 这里用router-link代替a -->
@@ -32,7 +37,7 @@
             </router-link>
           </div>
         </q-item-section>
-        <q-item-section class="column justify-between q-pb-sm">
+        <q-item-section class="column justify-between q-pb-xs">
           <q-item-label
             :lines="lines"
             v-bind:class="[textSize, textColTitle, fontFamily, lineHeight]"
@@ -61,29 +66,39 @@
               >...阅读全文
             </router-link>
           </q-item-label>
-          <q-item-label lines="1" class="col-auto row items-center justify-evena" caption>
-            <div>{{ item.mall }} | {{ item.dateStr }}</div>
+          <q-item-label lines="1" class="col-auto row items-center justify-between" caption>
+            <div class="col-7">{{ item.mall }} | {{ item.dateStr }}</div>
 
-            <!-- <router-link
-              :to="{
-                path: 'item',
-                name: 'detail',
-                params: { id: item.id },
-              }"
-            >
-              查看详情
-            </router-link> -->
-          </q-item-label>
-
-          <q-item-label class="col row justify-between items-center gt-sm">
-            <div class="col-auto" v-bind:class="iconGutter">
-              <q-btn size="11px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
+            <div class="col-5 lt-sm" v-bind:class="iconGutter">
+              <q-btn size="7px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
                 <q-badge color="secondary" align="middle" text-color="grey">{{
                   item.zhiCount
                 }}</q-badge>
               </q-btn>
               <q-btn
-                size="11px"
+                size="7px"
+                color="grey"
+                flat
+                round
+                :icon="thumbDownIcon"
+                @click="thumbDownClick"
+              >
+                <q-badge color="secondary" align="middle" text-color="grey">{{
+                  item.buzhiCount
+                }}</q-badge>
+              </q-btn>
+            </div>
+          </q-item-label>
+
+          <q-item-label class="col row justify-between items-center gt-sm">
+            <div class="col-auto" v-bind:class="iconGutter">
+              <q-btn size="9px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
+                <q-badge color="secondary" align="middle" text-color="grey">{{
+                  item.zhiCount
+                }}</q-badge>
+              </q-btn>
+              <q-btn
+                size="9px"
                 color="grey"
                 flat
                 round
@@ -95,7 +110,7 @@
                 }}</q-badge>
               </q-btn>
               <q-btn
-                size="11px"
+                size="9px"
                 color="grey"
                 flat
                 round
@@ -106,13 +121,13 @@
                   item.starCount
                 }}</q-badge>
               </q-btn>
-              <q-btn size="11px" color="grey" flat round :icon="comment" @click="commentClick">
+              <q-btn size="9px" color="grey" flat round :icon="comment" @click="commentClick">
                 <q-badge color="secondary" align="middle" text-color="grey">{{
                   item.commentsCount
                 }}</q-badge>
               </q-btn>
             </div>
-            <div class="col justify-end row">
+            <div class="col justify-end row gt-sm">
               <q-btn
                 color="accent"
                 :size="buyButtonSize"
@@ -195,12 +210,15 @@ export default {
   },
   props: ['query', 'sort'],
   computed: {
+    itemPadding: function () {
+      return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
+    },
     textSize: function () {
       return this.isBigScreen ? 'text-h7' : 'text-subtitle2';
     },
 
     textColTitle: function () {
-      return this.isBigScreen ? 'col-2' : 'col-7';
+      return this.isBigScreen ? 'col-2' : 'col-6';
     },
 
     textColPrice: function () {
@@ -210,7 +228,7 @@ export default {
       return Screen.gt.sm ? 1 : 3;
     },
     buyButtonSize: function () {
-      return this.isBigScreen ? '13px' : '10px';
+      return this.isBigScreen ? '11px' : '8px';
     },
     host: function () {
       return global.config.domain;
@@ -219,7 +237,7 @@ export default {
       return this.isBigScreen ? false : true;
     },
     iconGutter: function () {
-      return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-sm';
+      return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-xs';
     },
   },
   // watch: {
