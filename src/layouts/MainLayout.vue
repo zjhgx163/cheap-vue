@@ -117,7 +117,6 @@
 
 <script>
 import { fabYoutube } from '@quasar/extras/fontawesome-v5';
-import { Platform } from 'quasar';
 import { Screen } from 'quasar';
 import 'src/config';
 
