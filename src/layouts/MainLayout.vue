@@ -169,6 +169,11 @@ export default {
           err;
         });
     },
+
+    // searchShowChange(data) {
+    //   this.isSearchHidden = data;
+    //   this.isCouponHidden = data;
+    // },
   },
 };
 </script>
