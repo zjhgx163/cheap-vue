@@ -48,7 +48,7 @@
 import HotList from '../components/HotList.vue';
 
 export default {
-  // name: 'LayoutName',
+  name: 'IndexLayout',
 
   components: {
     HotList,
@@ -59,6 +59,8 @@ export default {
   },
 
   mounted() {
+    // this.$emit('searchHidden', false);
+
     console.log('IndexLayout mounted');
   },
 };

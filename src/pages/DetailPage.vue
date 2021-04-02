@@ -201,6 +201,7 @@ export default {
   },
 
   mounted() {
+    console.log('DetailPage mounted');
     this.$q.loading.show({
       delay: 400, // ms
     });

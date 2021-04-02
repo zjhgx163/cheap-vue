@@ -19,7 +19,7 @@
         </q-item-section>
 
         <q-item-section class="column bg-secondary no-wrap">
-          <q-item-label lines="2" caption> {{ item.title }}</q-item-label>
+          <q-item-label :lines="2" caption> {{ item.title }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>

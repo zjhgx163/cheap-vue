@@ -25,7 +25,6 @@
             </router-link> -->
 
             <router-link
-              target="_blank"
               :to="{
                 path: 'item',
                 name: 'detail',
@@ -45,12 +44,12 @@
           >
             {{ item.title }}</q-item-label
           >
-          <q-item-label lines="1" v-bind:class="[textSize, textColPrice, textAccent, fontFamily]">
+          <q-item-label :lines="1" v-bind:class="[textSize, textColPrice, textAccent, fontFamily]">
             {{ item.priceText }}
           </q-item-label>
 
           <q-item-label
-            lines="2"
+            :lines="2"
             class="col-4 gt-sm YL__list_line_height YL__list_font_size text-grey-9"
           >
             <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
@@ -66,7 +65,7 @@
               >...阅读全文
             </router-link>
           </q-item-label>
-          <q-item-label lines="1" class="col-auto row items-center justify-between" caption>
+          <q-item-label :lines="1" class="col-auto row items-center justify-between" caption>
             <div class="col-8">{{ item.mall }} | {{ item.dateStr }}</div>
 
             <div class="col-4 lt-sm" v-bind:class="iconGutter">

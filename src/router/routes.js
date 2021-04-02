@@ -66,6 +66,17 @@ const routes = [
         // 在router之间传递参数用下面配置
         // props: (route) => ({ title: route.query.title, detail: route.query.detail }),
       },
+      {
+        path: 'coupon',
+        component: () => import('layouts/CouponLayout.vue'),
+        children: [
+          {
+            path: '',
+            component: () => import('pages/Coupon.vue'),
+          },
+          { path: ':tabId', component: () => import('pages/Coupon.vue') },
+        ],
+      },
     ],
   },
 
@@ -88,6 +99,7 @@ const routes = [
   //     { path: 'cheap', component: () => import('pages/Index.vue') },
   //   ],
   // },
+
   {
     path: '*',
     component: () => import('pages/Error404.vue'),
