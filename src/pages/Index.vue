@@ -36,15 +36,15 @@
             </router-link>
           </div>
         </q-item-section>
-        <q-item-section class="column justify-between q-pb-xs">
+        <q-item-section class="q-pb-xs">
           <q-item-label
             :lines="lines"
-            v-bind:class="[textSize, textColTitle, fontFamily, lineHeight]"
+            v-bind:class="[textSize, colTitle, fontFamily, lineHeight]"
             class="text-grey-9"
           >
             {{ item.title }}</q-item-label
           >
-          <q-item-label :lines="1" v-bind:class="[textSize, textColPrice, textAccent, fontFamily]">
+          <q-item-label :lines="1" v-bind:class="[textSize, colPrice, textAccent, fontFamily]">
             {{ item.priceText }}
           </q-item-label>
 
@@ -65,7 +65,12 @@
               >...阅读全文
             </router-link>
           </q-item-label>
-          <q-item-label :lines="1" class="col-auto row items-center justify-between" caption>
+          <q-item-label
+            :lines="1"
+            v-bind:class="[colMall]"
+            class="row items-center justify-between"
+            caption
+          >
             <div class="col-8">{{ item.mall }} | {{ item.dateStr }}</div>
 
             <div class="col-4 lt-sm" v-bind:class="iconGutter">
@@ -126,7 +131,7 @@
                 }}</q-badge>
               </q-btn>
             </div>
-            <div class="col justify-end row gt-sm">
+            <div class="col justify-end row">
               <q-btn
                 color="accent"
                 :size="buyButtonSize"
@@ -216,15 +221,18 @@ export default {
       return this.isBigScreen ? 'text-h7' : 'text-subtitle2';
     },
 
-    textColTitle: function () {
-      return this.isBigScreen ? 'col-2' : 'col-6';
+    colTitle: function () {
+      return this.isBigScreen ? 'col-2' : 'col-7';
     },
 
-    textColPrice: function () {
+    colPrice: function () {
       return this.isBigScreen ? 'col-2' : 'col-2';
     },
+    colMall: function () {
+      return this.isBigScreen ? 'col-auto' : 'col';
+    },
     lines: function () {
-      return Screen.gt.sm ? 1 : 2;
+      return Screen.gt.sm ? 1 : 3;
     },
     buyButtonSize: function () {
       return this.isBigScreen ? '11px' : '8px';
