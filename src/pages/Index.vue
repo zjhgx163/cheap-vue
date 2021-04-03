@@ -224,7 +224,7 @@ export default {
       return this.isBigScreen ? 'col-2' : 'col-2';
     },
     lines: function () {
-      return Screen.gt.sm ? 1 : 3;
+      return Screen.gt.sm ? 1 : 2;
     },
     buyButtonSize: function () {
       return this.isBigScreen ? '11px' : '8px';
