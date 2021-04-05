@@ -24,7 +24,9 @@
         v-for="item in couponList"
         v-bind:key="item.activityId"
         v-ripple
+        clickable
         class="row justify-center"
+        @click="couponEvent(item.title)"
       >
         <a
           target="_blank"
@@ -78,6 +80,13 @@ export default {
           this.couponList = res.data.list;
           this.tabs = res.data.tabs;
           this.selectedTab = '0';
+        });
+    },
+    couponEvent(url) {
+      this.$axios
+        .post(`${global.config.domain}/user/event`, { type: '外卖券', remark: url })
+        .then((res) => {
+          console.log(res.data.data);
         });
     },
   },

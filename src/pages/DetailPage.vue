@@ -103,6 +103,7 @@
                       type="a"
                       :href="coupon.actual_coupon_link"
                       style="width: 14em"
+                      @click="takeCouponClick(detail.goodsInfoUrl)"
                     >
                       {{ coupon.coupon_info }}
                       <!-- <a
@@ -123,6 +124,7 @@
                       type="a"
                       :href="coupon.actual_coupon_link"
                       class="text-weight-bold"
+                      @click="takeCouponClick(detail.goodsInfoUrl)"
                     >
                       领取
                     </q-btn>
@@ -231,6 +233,13 @@ export default {
     buyClick(url) {
       this.$axios
         .post(`${global.config.domain}/user/event`, { type: '进入推广链接', remark: url })
+        .then((res) => {
+          console.log(res.data.data);
+        });
+    },
+    takeCouponClick(url) {
+      this.$axios
+        .post(`${global.config.domain}/user/event`, { type: '商品领券', remark: url })
         .then((res) => {
           console.log(res.data.data);
         });
