@@ -29,9 +29,22 @@
         @click="couponEvent(item.title)"
       >
         <a
+          v-if="item.platform === 'ele'"
           target="_blank"
           class="row justify-center items-center bg-secondary q-pa-xs"
           :href="`${host}/coupon/go/${item.activityId}`"
+        >
+          <img
+            v-bind:src="item.image"
+            class="justify-center items-center"
+            style="width: 95%; height: 95%"
+          />
+        </a>
+        <a
+          v-else
+          target="_blank"
+          class="row justify-center items-center bg-secondary q-pa-xs"
+          :href="item.url"
         >
           <img
             v-bind:src="item.image"
