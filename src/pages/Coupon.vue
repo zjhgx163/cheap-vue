@@ -86,7 +86,9 @@ export default {
   methods: {
     getCouponList() {
       this.$axios
-        .post(`${global.config.domain}/coupon/h5/list`, { tabId: this.$route.params.tabId })
+        .post(`${global.config.domain}/coupon/h5/list`, {
+          tabId: this.$route.params.tabId == undefined ? '0' : this.$route.params.tabId,
+        })
         .then((res) => {
           console.log(res.data);
 
