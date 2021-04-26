@@ -1,5 +1,17 @@
 <template>
   <q-page>
+    <q-tooltip
+      anchor="bottom middle"
+      self="top middle"
+      target="#intro"
+      :offset="[10, 40]"
+      max-height="8rem"
+      max-width="9rem"
+      v-model="showing"
+      no-parent-event
+      >{{ alertText }}
+    </q-tooltip>
+
     <!-- 面包栏 -->
     <div class="column">
       <q-breadcrumbs
@@ -51,7 +63,10 @@
               </div>
               <!-- 主图旁边介绍，响应式 -->
               <div class="column col-md q-pa-xs col-sm-12 justify-between">
-                <div class="col-md-auto col-sm-auto text-h6 text-dark text-weight-medium">
+                <div
+                  id="intro"
+                  class="col-md-auto col-sm-auto text-h6 text-dark text-weight-medium"
+                >
                   {{ detail.title }}
                 </div>
                 <div
@@ -62,18 +77,30 @@
                 <div class="col-md-1 col-sm-2"></div>
                 <div class="col-md col-sm">
                   <q-btn
+                    v-if="isTaoPwd == false"
+                    class="text-weight-bold"
+                    target="_blank"
                     color="accent"
+                    text-color="white"
+                    :size="buttonSize"
+                    type="a"
+                    :href="`${host}/goods/go/${detail.urlCode}`"
+                    unelevated
+                    @click="buyClick(detail.urlCode, detail.goodsInfoUrl)"
+                  >
+                    去购买
+                  </q-btn>
+                  <q-btn
+                    v-if="isTaoPwd == true"
+                    class="text-weight-bold"
+                    target="_blank"
+                    color="accent"
+                    text-color="white"
                     :size="buttonSize"
                     unelevated
-                    @click="buyClick(detail.goodsInfoUrl)"
+                    @touchstart="buyClick(detail.urlCode, detail.goodsInfoUrl)"
                   >
-                    <a
-                      target="_blank"
-                      class="text-white text-weight-bold"
-                      :href="`${host}/goods/go/${detail.urlCode}`"
-                    >
-                      去购买</a
-                    >
+                    复制淘口令
                   </q-btn>
                 </div>
               </div>
@@ -92,6 +119,8 @@
                     v-for="coupon in couponInfo"
                     :key="coupon.coupon_link"
                   >
+                    <!-- :href="`${host}/goods/coupon-url/${detail.urlCode}?path=${coupon.actual_coupon_link}`" -->
+
                     <q-btn
                       color="white"
                       text-color="accent"
@@ -194,6 +223,10 @@ export default {
       comment: 'comment',
       buttonSize: Screen.gt.sm ? '13px' : '10px',
       host: global.config.domain,
+      isTaoPwd: false,
+      showing: false,
+      taobaoPwd: '',
+      alertText: '淘口令已复制\n请打开手淘',
     };
   },
   props: ['id'],
@@ -213,6 +246,7 @@ export default {
     getItemDetail(id) {
       this.$axios.post(`${global.config.domain}/goods/detail`, { id: id }).then((res) => {
         this.detail = res.data.data;
+        console.log(this.detail);
         if (this.detail == null) {
           this.$router.push({ path: '/error' });
           this.$q.loading.hide();
@@ -225,24 +259,71 @@ export default {
           this.couponInfo = JSON.parse(this.detail.couponInfo);
         }
         this.categoryInfo = JSON.parse(this.detail.categoryText);
+
+        if (this.isTaobaoPwd()) {
+          this.isTaoPwd = true;
+        }
         this.$q.loading.hide();
       });
     },
     turnInOrNotClick() {},
     commentClick() {},
-    buyClick(url) {
+    buyClick(code, url) {
       this.$axios
         .post(`${global.config.domain}/user/event`, { type: '进入推广链接', remark: url })
         .then((res) => {
           console.log(res.data.data);
         });
+      if (this.isTaoPwd) {
+        this.$q.loading.show({
+          delay: 400, // ms
+        });
+        this.$axios.get(`${this.host}/goods/go/${code}`).then((res) => {
+          console.log('res = ' + res.data);
+          this.taobaoPwd = res.data;
+          console.log('taobaoPwd = ' + res.data);
+          let that = this;
+          this.$copyText(this.taobaoPwd).then(
+            function (e) {
+              console.log(e);
+
+              that.showing = true;
+            },
+            function (e) {
+              alert('Can not copy');
+              console.log(e);
+            },
+          );
+          this.$q.loading.hide();
+
+          let t = setTimeout(() => {
+            this.showing = false;
+          }, 1500);
+
+          // clearTimeout(t);
+        });
+      }
     },
+
     takeCouponClick(url) {
       this.$axios
         .post(`${global.config.domain}/user/event`, { type: '商品领券', remark: url })
         .then((res) => {
           console.log(res.data.data);
         });
+    },
+
+    isTaobaoPwd() {
+      var ua = window.navigator.userAgent.toLowerCase();
+      console.log(ua);
+      if (
+        // ua.match(/MicroMessenger/i) == 'micromessenger' &&
+        /(淘宝|天猫|聚划算)\W*/g.test(this.detail.mall)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };
