@@ -98,7 +98,7 @@
                     text-color="white"
                     :size="buttonSize"
                     unelevated
-                    @touchstart="buyClick(detail.urlCode, detail.goodsInfoUrl)"
+                    @click="buyClick(detail.urlCode, detail.goodsInfoUrl)"
                   >
                     复制淘口令
                   </q-btn>
@@ -275,9 +275,9 @@ export default {
           console.log(res.data.data);
         });
       if (this.isTaoPwd) {
-        // this.$q.loading.show({
-        //   delay: 10, // ms
-        // });
+        this.$q.loading.show({
+          delay: 100, // ms
+        });
         this.$axios.get(`${this.host}/goods/go/${code}`).then((res) => {
           console.log('res = ' + res.data);
           this.taobaoPwd = res.data;
@@ -294,7 +294,7 @@ export default {
               console.log(e);
             },
           );
-          // this.$q.loading.hide();
+          this.$q.loading.hide();
 
           let t = setTimeout(() => {
             this.showing = false;
@@ -317,7 +317,7 @@ export default {
       var ua = window.navigator.userAgent.toLowerCase();
       console.log(ua);
       if (
-        // ua.match(/MicroMessenger/i) == 'micromessenger' &&
+        ua.match(/MicroMessenger/i) == 'micromessenger' &&
         /(淘宝|天猫|聚划算)\W*/g.test(this.detail.mall)
       ) {
         return true;
