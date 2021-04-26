@@ -275,9 +275,9 @@ export default {
           console.log(res.data.data);
         });
       if (this.isTaoPwd) {
-        this.$q.loading.show({
-          delay: 400, // ms
-        });
+        // this.$q.loading.show({
+        //   delay: 10, // ms
+        // });
         this.$axios.get(`${this.host}/goods/go/${code}`).then((res) => {
           console.log('res = ' + res.data);
           this.taobaoPwd = res.data;
@@ -294,7 +294,7 @@ export default {
               console.log(e);
             },
           );
-          this.$q.loading.hide();
+          // this.$q.loading.hide();
 
           let t = setTimeout(() => {
             this.showing = false;
