@@ -92,7 +92,7 @@
                   </q-btn>
                   <q-btn
                     v-if="isTaoPwd == true"
-                    class="text-weight-bold"
+                    class="text-weight-bold needsclick"
                     target="_blank"
                     color="accent"
                     text-color="white"
