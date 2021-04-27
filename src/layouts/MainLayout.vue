@@ -119,7 +119,7 @@
 import { fabYoutube } from '@quasar/extras/fontawesome-v5';
 import { Screen } from 'quasar';
 import 'src/config';
-import FastClick from 'fastclick';
+// import FastClick from 'fastclick';
 
 export default {
   name: 'MainLayout',
@@ -142,7 +142,7 @@ export default {
 
   mounted() {
     //解决iphone移动端的延迟
-    FastClick.attach(document.body);
+    // FastClick.attach(document.body);
     console.log('MainLayout mounted');
   },
 
