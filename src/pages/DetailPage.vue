@@ -92,13 +92,13 @@
                   </q-btn>
                   <q-btn
                     v-if="isTaoPwd == true"
-                    class="text-weight-bold needsclick"
+                    class="text-weight-bold"
                     target="_blank"
                     color="accent"
                     text-color="white"
                     :size="buttonSize"
                     unelevated
-                    @click="buyClick(detail.urlCode, detail.goodsInfoUrl)"
+                    @touchend="buyClick(detail.urlCode, detail.goodsInfoUrl)"
                   >
                     复制淘口令
                   </q-btn>
