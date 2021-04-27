@@ -98,7 +98,7 @@
                     text-color="white"
                     :size="buttonSize"
                     unelevated
-                    @touchend="buyClick(detail.urlCode, detail.goodsInfoUrl)"
+                    @click="buyClick(detail.urlCode, detail.goodsInfoUrl)"
                   >
                     复制淘口令
                   </q-btn>
@@ -260,8 +260,9 @@ export default {
         }
         this.categoryInfo = JSON.parse(this.detail.categoryText);
 
-        if (this.isTaobaoPwd()) {
+        if (this.isTaobaoPwd() && this.detail.taobaoPwd != '') {
           this.isTaoPwd = true;
+          this.taobaoPwd = this.detail.taobaoPwd;
         }
         this.$q.loading.hide();
       });
@@ -269,41 +270,60 @@ export default {
     turnInOrNotClick() {},
     commentClick() {},
     buyClick(code, url) {
+      // this.$q.loading.show({
+      //   delay: 100, // ms
+      // });
       this.$axios
         .post(`${global.config.domain}/user/event`, { type: '进入推广链接', remark: url })
         .then((res) => {
           console.log(res.data.data);
         });
       if (this.isTaoPwd) {
-        this.$q.loading.show({
-          delay: 100, // ms
-        });
-        this.$axios.get(`${this.host}/goods/go/${code}`).then((res) => {
-          console.log('res = ' + res.data);
-          this.taobaoPwd = res.data;
-          console.log('taobaoPwd = ' + res.data);
-          let that = this;
-          this.$copyText(this.taobaoPwd).then(
-            function (e) {
-              console.log(e);
+        let that = this;
+        this.$copyText(this.taobaoPwd).then(
+          function (e) {
+            console.log(e);
 
-              that.showing = true;
-            },
-            function (e) {
-              alert('Can not copy');
-              console.log(e);
-            },
-          );
-          this.$q.loading.hide();
+            that.showing = true;
+            // this.$q.loading.hide();
+            let t = setTimeout(() => {
+              that.showing = false;
+            }, 1500);
+          },
+          function (e) {
+            alert('Can not copy');
+            console.log(e);
+            // this.$q.loading.hide();
+          },
+        );
+        // this.$axios.get(`${this.host}/goods/go/${code}`).then((res) => {
+        //   console.log('res = ' + res.data);
+        //   this.taobaoPwd = res.data;
+        //   console.log('taobaoPwd = ' + res.data);
+        //   this.$q.loading.show({
+        //     delay: 200, // ms
+        //   });
 
-          let t = setTimeout(() => {
-            this.showing = false;
-          }, 1500);
+        //   hidethis.$q.loading.();
 
-          // clearTimeout(t);
-        });
+        //   let t = setTimeout(() => {
+        //     this.showing = false;
+        //   }, 1500);
+
+        //   // clearTimeout(t);
+        // });
       }
     },
+
+    // onCopy: function (e) {
+    //   this.showing = true;
+    //   let t = setTimeout(() => {
+    //     this.showing = false;
+    //   }, 1500);
+    // },
+    // onError: function (e) {
+    //   alert('Failed to copy texts');
+    // },
 
     takeCouponClick(url) {
       this.$axios

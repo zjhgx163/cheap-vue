@@ -142,7 +142,7 @@ export default {
 
   mounted() {
     //解决iphone移动端的延迟
-    // FastClick.attach(document.body);
+    FastClick.attach(document.body);
     console.log('MainLayout mounted');
   },
 
