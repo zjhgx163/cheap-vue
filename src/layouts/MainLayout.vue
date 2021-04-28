@@ -119,7 +119,7 @@
 import { fabYoutube } from '@quasar/extras/fontawesome-v5';
 import { Screen } from 'quasar';
 import 'src/config';
-// import FastClick from 'fastclick';
+import FastClick from 'fastclick';
 
 export default {
   name: 'MainLayout',
