@@ -56,9 +56,9 @@
         <div class="col column">
           <div class="col q-pa-lg bg-secondary">
             <!-- 介绍 -->
-            <div class="row col q-gutter-md justify-center">
+            <div class="row col q-gutter-md">
               <!-- 主图 -->
-              <div class="col-auto">
+              <div class="row col-auto justify-center" v-bind:class="[imagefullwidth]">
                 <q-img :src="detail.mainImageUrl" width="250px" height="250px" />
               </div>
               <!-- 主图旁边介绍，响应式 -->
@@ -228,6 +228,13 @@ export default {
       taobaoPwd: '',
       alertText: '淘口令已复制\n请打开手淘',
     };
+  },
+  computed: {
+    imagefullwidth: function () {
+      return {
+        'full-width': Screen.gt.sm ? false : true,
+      };
+    },
   },
   props: ['id'],
 
