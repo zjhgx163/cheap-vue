@@ -52,7 +52,7 @@
             {{ item.priceText }}
           </q-item-label>
           <q-item-label :lines="1">
-            <span style="text-align: left">
+            <span v-if="item.label != ''" style="text-align: left">
               <li
                 v-for="a in transferLabel(item.label)"
                 v-bind:key="a"
@@ -62,6 +62,7 @@
                 {{ a }}
               </li>
             </span>
+            <span v-else> &nbsp; &nbsp; &nbsp;</span>
           </q-item-label>
 
           <q-item-label
@@ -372,8 +373,12 @@ export default {
         });
     },
     transferLabel(label) {
-      let labelsArray = JSON.parse(label);
-      return labelsArray;
+      if (label != '') {
+        let labelsArray = JSON.parse(label);
+        return labelsArray;
+      } else {
+        return '';
+      }
     },
   },
 };
