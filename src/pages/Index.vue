@@ -40,7 +40,7 @@
           <q-item-label
             :lines="lines"
             v-bind:class="[textSize, fontFamily, lineHeight]"
-            class="text-grey-9 q-pb-xs"
+            class="text-grey-9"
           >
             {{ item.title }}</q-item-label
           >
@@ -86,16 +86,16 @@
             :lines="1"
             class="row items-center justify-between YL__title_font_family YL__mall"
           >
-            <div class="col-8">{{ item.mall }} | {{ item.dateStr }}</div>
+            <div class="col-7">{{ item.mall }} | {{ item.dateStr }}</div>
 
-            <div class="col-4 lt-sm" v-bind:class="iconGutter">
-              <q-btn size="6px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
+            <div class="col-5 lt-sm" v-bind:class="iconGutter">
+              <q-btn size="7px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
                 <q-badge color="secondary" align="middle" text-color="grey" class="YL__badgeSize">{{
                   item.zhiCount
                 }}</q-badge>
               </q-btn>
               <q-btn
-                size="6px"
+                size="7px"
                 color="grey"
                 flat
                 round
@@ -209,12 +209,14 @@
     letter-spacing: 0.03333em
     list-type: none
     -webkit-font-smoothing: antialiased
+    line-height: 1.2em
   &__mall
     color: rgba(0, 0, 0, 0.54)
-    font-size: 0.65em
+    font-size: 0.7em
+    line-height: 1.2em
 
   &__badgeSize
-     font-size: 10px
+     font-size: 11px
 </style>
 
 <script>
