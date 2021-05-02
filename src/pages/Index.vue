@@ -39,18 +39,34 @@
         <q-item-section class="q-pb-xs">
           <q-item-label
             :lines="lines"
-            v-bind:class="[textSize, colTitle, fontFamily, lineHeight]"
-            class="text-grey-9"
+            v-bind:class="[textSize, fontFamily, lineHeight]"
+            class="text-grey-9 q-pb-xs"
           >
             {{ item.title }}</q-item-label
           >
-          <q-item-label :lines="1" v-bind:class="[textSize, colPrice, textAccent, fontFamily]">
+          <q-item-label
+            :lines="1"
+            v-bind:class="[textSize, textAccent, fontFamily]"
+            class="q-pb-xs"
+          >
             {{ item.priceText }}
+          </q-item-label>
+          <q-item-label :lines="1">
+            <span style="text-align: left">
+              <li
+                v-for="a in transferLabel(item.label)"
+                v-bind:key="a"
+                style="text-align: left"
+                class="YL__label YL__title_font_family"
+              >
+                {{ a }}
+              </li>
+            </span>
           </q-item-label>
 
           <q-item-label
             :lines="2"
-            class="col-4 gt-sm YL__list_line_height YL__list_font_size text-grey-9"
+            class="gt-sm YL__list_line_height q-pb-xs YL__list_font_size text-grey-9 YL__title_font_family"
           >
             <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
               item.emphsis
@@ -67,34 +83,35 @@
           </q-item-label>
           <q-item-label
             :lines="1"
-            v-bind:class="[colMall]"
-            class="row items-center justify-between"
-            caption
+            class="row items-center justify-between YL__title_font_family YL__mall"
           >
             <div class="col-8">{{ item.mall }} | {{ item.dateStr }}</div>
 
             <div class="col-4 lt-sm" v-bind:class="iconGutter">
-              <q-btn size="7px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
-                <q-badge color="secondary" align="middle" text-color="grey">{{
+              <q-btn size="6px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
+                <q-badge color="secondary" align="middle" text-color="grey" class="YL__badgeSize">{{
                   item.zhiCount
                 }}</q-badge>
               </q-btn>
               <q-btn
-                size="7px"
+                size="6px"
                 color="grey"
                 flat
                 round
                 :icon="thumbDownIcon"
                 @click="thumbDownClick"
               >
-                <q-badge color="secondary" align="middle" text-color="grey">{{
+                <q-badge color="secondary" align="middle" text-color="grey" class="YL__badgeSize">{{
                   item.buzhiCount
                 }}</q-badge>
               </q-btn>
             </div>
           </q-item-label>
 
-          <q-item-label class="col row justify-between items-center gt-sm">
+          <q-item-label
+            :lines="1"
+            class="row justify-between items-center YL__title_font_family gt-sm"
+          >
             <div class="col-auto" v-bind:class="iconGutter">
               <q-btn size="9px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
                 <q-badge color="secondary" align="middle" text-color="grey">{{
@@ -181,6 +198,22 @@
     @media(min-width: $breakpoint-xs-max)
       width: 180px
       height: 180px
+  &__label
+    color: rgba(0, 0, 0, 0.54)
+    font-size: 0.7em
+    background: #f5f5f5
+    display: inline-block
+    margin-right: 7px;
+    text-align: center;
+    letter-spacing: 0.03333em
+    list-type: none
+    -webkit-font-smoothing: antialiased
+  &__mall
+    color: rgba(0, 0, 0, 0.54)
+    font-size: 0.65em
+
+  &__badgeSize
+     font-size: 10px
 </style>
 
 <script>
@@ -221,18 +254,8 @@ export default {
       return this.isBigScreen ? 'text-h7' : 'text-subtitle2';
     },
 
-    colTitle: function () {
-      return this.isBigScreen ? 'col-2' : 'col-7';
-    },
-
-    colPrice: function () {
-      return this.isBigScreen ? 'col-2' : 'col-2';
-    },
-    colMall: function () {
-      return this.isBigScreen ? 'col-auto' : 'col';
-    },
     lines: function () {
-      return Screen.gt.sm ? 1 : 3;
+      return Screen.gt.sm ? 1 : 2;
     },
     buyButtonSize: function () {
       return this.isBigScreen ? '11px' : '8px';
@@ -347,6 +370,10 @@ export default {
         .then((res) => {
           console.log(res.data.data);
         });
+    },
+    transferLabel(label) {
+      let labelsArray = JSON.parse(label);
+      return labelsArray;
     },
   },
 };
