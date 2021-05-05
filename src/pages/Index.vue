@@ -222,6 +222,7 @@
 <script>
 import { matTurnedInNot } from '@quasar/extras/material-icons';
 import { Screen } from 'quasar';
+import FastClick from 'fastclick';
 
 // console.log('1<<<<<');
 // console.log(global);
@@ -301,6 +302,8 @@ export default {
   },
 
   mounted() {
+    //解决iphone移动端的延迟
+    FastClick.attach(document.body);
     console.log('Index mounted');
     // this.selectedTab = 'main';
     this.getItemList();

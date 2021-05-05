@@ -61,6 +61,7 @@
 
 <script>
 import 'src/config';
+import FastClick from 'fastclick';
 
 export default {
   name: 'Coupon',
@@ -75,8 +76,11 @@ export default {
   },
 
   mounted() {
-    console.log('Coupon mounted');
+    //解决iphone移动端的延迟
+    FastClick.attach(document.body);
     this.getCouponList();
+
+    console.log('Coupon mounted');
   },
 
   created() {

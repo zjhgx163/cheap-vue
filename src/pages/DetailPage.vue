@@ -209,6 +209,7 @@
 import 'src/config';
 import HotList from '../components/HotList.vue';
 import { Screen } from 'quasar';
+import FastClick from 'fastclick';
 
 export default {
   name: 'DetailPage',
@@ -243,6 +244,8 @@ export default {
   },
 
   mounted() {
+    //解决iphone移动端的延迟
+    FastClick.attach(document.body);
     console.log('DetailPage mounted');
     this.$q.loading.show({
       delay: 400, // ms
