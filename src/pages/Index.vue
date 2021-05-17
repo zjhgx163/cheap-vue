@@ -7,7 +7,7 @@
         v-ripple
         v-bind:class="[itemPadding]"
         :clickable="clickable"
-        @click="itemClick(item.id)"
+        @click="itemClick(item.urlCode)"
       >
         <q-item-section side>
           <div>
@@ -29,7 +29,7 @@
                 path: 'item',
                 name: 'detail',
 
-                params: { id: item.id },
+                params: { code: item.urlCode },
               }"
             >
               <img v-bind:src="item.thumbUrl" class="YL__index_img" />
@@ -77,7 +77,7 @@
               :to="{
                 path: 'item',
                 name: 'detail',
-                params: { id: item.id },
+                params: { code: item.urlCode },
               }"
               >...阅读全文
             </router-link>
@@ -357,8 +357,8 @@ export default {
     },
     turnInOrNotClick() {},
     commentClick() {},
-    itemClick(id) {
-      this.$router.push({ path: 'item', name: 'detail', params: { id: id } });
+    itemClick(urlCode) {
+      this.$router.push({ path: 'item', name: 'detail', params: { code: urlCode } });
       // const { href } = this.$router.resolve({
       //   path: 'item/detail',
       //   name: 'detail',

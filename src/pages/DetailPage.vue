@@ -237,7 +237,7 @@ export default {
       };
     },
   },
-  props: ['id'],
+  props: ['code'],
 
   components: {
     HotList,
@@ -250,11 +250,11 @@ export default {
     this.$q.loading.show({
       delay: 400, // ms
     });
-    this.getItemDetail(this.id);
+    this.getItemDetail(this.code);
   },
   methods: {
-    getItemDetail(id) {
-      this.$axios.post(`${global.config.domain}/goods/detail`, { id: id }).then((res) => {
+    getItemDetail(code) {
+      this.$axios.post(`${global.config.domain}/goods/detail`, { code: code }).then((res) => {
         this.detail = res.data.data;
         console.log(this.detail);
         if (this.detail == null) {
