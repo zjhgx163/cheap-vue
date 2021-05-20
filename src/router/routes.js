@@ -54,7 +54,7 @@ const routes = [
         children: [
           {
             name: 'detail',
-            path: 'detail/:id',
+            path: 'detail/:code',
             component: () => import('pages/DetailPage.vue'),
             props: true,
             // beforeEnter: (to, from, next) => {
