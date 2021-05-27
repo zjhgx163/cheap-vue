@@ -123,6 +123,7 @@
                     <!-- :href="coupon.actual_coupon_link" -->
 
                     <q-btn
+                      v-if="isTaoPwd == false"
                       color="white"
                       text-color="accent"
                       :size="buttonSize"
@@ -146,6 +147,7 @@
                       > -->
                     </q-btn>
                     <q-btn
+                      v-if="isTaoPwd == false"
                       target="_blank"
                       color="accent"
                       text-color="white"
@@ -155,6 +157,42 @@
                       :href="`${host}/goods/coupon-url/${detail.urlCode}?index=${coupon.index}`"
                       class="text-weight-bold"
                       @click="takeCouponClick(detail.goodsInfoUrl)"
+                    >
+                      领取
+                    </q-btn>
+                    <q-btn
+                      v-if="isTaoPwd == true"
+                      color="white"
+                      text-color="accent"
+                      :size="buttonSize"
+                      target="_blank"
+                      unelevated
+                      outline
+                      align="left"
+                      type="a"
+                      style="width: 14em"
+                      @click="takeCouponClick(detail.goodsInfoUrl, coupon.taobaoPwd)"
+                    >
+                      {{ coupon.coupon_info }}
+                      <!-- <a
+                        target="_blank"
+                        class="text-white text-weight-bold"
+                        :href="coupon.actual_coupon_link"
+                        style="width: 230px"
+                      >
+                        {{ coupon.coupon_info }}</a
+                      > -->
+                    </q-btn>
+                    <q-btn
+                      v-if="isTaoPwd == true"
+                      target="_blank"
+                      color="accent"
+                      text-color="white"
+                      :size="buttonSize"
+                      unelevated
+                      type="a"
+                      class="text-weight-bold"
+                      @click="takeCouponClick(detail.goodsInfoUrl, coupon.taobaoPwd)"
                     >
                       领取
                     </q-btn>
@@ -336,12 +374,32 @@ export default {
     //   alert('Failed to copy texts');
     // },
 
-    takeCouponClick(url) {
+    takeCouponClick(url, tbPwd) {
       this.$axios
         .post(`${global.config.domain}/user/event`, { type: '商品领券', remark: url })
         .then((res) => {
           console.log(res.data.data);
         });
+
+      if (this.isTaoPwd) {
+        let that = this;
+        this.$copyText(tbPwd).then(
+          function (e) {
+            console.log(e);
+
+            that.showing = true;
+            // this.$q.loading.hide();
+            let t = setTimeout(() => {
+              that.showing = false;
+            }, 1500);
+          },
+          function (e) {
+            alert('Can not copy coupon taobaopwd');
+            console.log(e);
+            // this.$q.loading.hide();
+          },
+        );
+      }
     },
 
     isTaobaoPwd() {
