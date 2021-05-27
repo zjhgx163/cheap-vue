@@ -120,6 +120,7 @@
                     :key="coupon.coupon_link"
                   >
                     <!-- :href="`${host}/goods/coupon-url/${detail.urlCode}?path=${coupon.actual_coupon_link}`" -->
+                    <!-- :href="coupon.actual_coupon_link" -->
 
                     <q-btn
                       color="white"
@@ -130,7 +131,7 @@
                       outline
                       align="left"
                       type="a"
-                      :href="coupon.actual_coupon_link"
+                      :href="`${host}/goods/coupon-url/${detail.urlCode}?index=${coupon.index}`"
                       style="width: 14em"
                       @click="takeCouponClick(detail.goodsInfoUrl)"
                     >
@@ -151,7 +152,7 @@
                       :size="buttonSize"
                       unelevated
                       type="a"
-                      :href="coupon.actual_coupon_link"
+                      :href="`${host}/goods/coupon-url/${detail.urlCode}?index=${coupon.index}`"
                       class="text-weight-bold"
                       @click="takeCouponClick(detail.goodsInfoUrl)"
                     >
