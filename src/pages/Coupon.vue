@@ -1,6 +1,5 @@
 <template>
   <q-page class="bg-primary">
-    <q-separator />
     <q-tabs
       align="center"
       active-color="accent"
