@@ -1,6 +1,6 @@
 <template>
   <q-layout>
-    <q-toolbar class="bg-secondary justify-between">
+    <q-toolbar class="bg-secondary justify-between q-mb-sm">
       <q-tabs
         v-model="selectedTab"
         align="left"
@@ -29,6 +29,7 @@
         </q-list>
       </q-btn-dropdown>
     </q-toolbar>
+
     <!-- <q-page-container> -->
     <!-- <keep-alive>
         <router-view
@@ -49,11 +50,13 @@
     <keep-alive>
       <router-view :key="$route.fullPath" ref="goods-list" :sort="sortIndex"> </router-view>
     </keep-alive>
+
     <!-- </q-page-container> -->
   </q-layout>
 </template>
 
 <script>
+// import HotList from '../components/HotList.vue';
 export default {
   data() {
     return {
@@ -80,5 +83,9 @@ export default {
       this.$refs['goods-list'].getItemList(this.sortIndex);
     },
   },
+
+  // components: {
+  //   HotList,
+  // },
 };
 </script>

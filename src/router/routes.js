@@ -11,11 +11,11 @@ const routes = [
         children: [
           {
             path: '',
-            component: () => import('layouts/IndexTabLayout.vue'),
-            // components: {
-            //   default: () => import('layouts/IndexTabLayout.vue'),
-            //   hot: () => import('components/HotList.vue'),
-            // },
+            // component: () => import('layouts/IndexTabLayout.vue'),
+            components: {
+              default: () => import('layouts/IndexTabLayout.vue'),
+              hot: () => import('components/HotList.vue'),
+            },
             children: [
               {
                 path: '',

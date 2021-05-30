@@ -1,7 +1,5 @@
 <template>
   <q-page class="bg-primary">
-    <q-separator />
-
     <q-list v-for="item in listData" v-bind:key="item.id" class="bg-secondary">
       <q-item
         v-ripple

@@ -1,37 +1,13 @@
 <template>
   <q-layout>
-    <!-- <q-page-container> -->
-    <router-view></router-view>
-    <!-- <router-view name="hot"></router-view> -->
-
-    <!-- </q-page-container> -->
-    <q-drawer side="right" :width="300" :breakpoint="992" show-if-above content-class="bg-primary">
-      <HotList> </HotList>
-    </q-drawer>
-
-    <!-- <q-list padding class="bg-secondary">
-          <q-item-label header>热门推荐</q-item-label>
-          <q-item v-for="item in hotList" v-bind:key="item.id" class="bg-secondary">
-            <q-item-section side>
-              <div>
-                <router-link
-                  :to="{
-                    path: 'item',
-                    name: 'detail',
-                    params: { id: item.id },
-                  }"
-                >
-                  <img v-bind:src="item.thumbUrl" class="YL__hot_img" />
-                </router-link>
-              </div>
-            </q-item-section>
-
-            <q-item-section class="column bg-secondary">
-              <q-item-label lines="2" caption> {{ item.title }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </div> -->
+    <div class="row">
+      <div class="col">
+        <router-view></router-view>
+      </div>
+      <div class="col-3 gt-md">
+        <router-view name="hot"></router-view>
+      </div>
+    </div>
   </q-layout>
 </template>
 
@@ -51,9 +27,9 @@ import HotList from '../components/HotList.vue';
 export default {
   name: 'IndexLayout',
 
-  components: {
-    HotList,
-  },
+  // components: {
+  //   HotList,
+  // },
 
   created() {
     console.log('IndexLayout created');

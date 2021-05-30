@@ -1,7 +1,7 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-secondary">
-    <q-header bordered class="bg-secondary text-grey-8">
-      <q-toolbar class="YL__toobar" v-bind:class="[itemPadding]">
+  <q-layout view="hHh lpR fFf" class="bg-primary">
+    <q-header class="bg-primary text-grey-8">
+      <q-toolbar class="YL__toobar q-mb-sm bg-secondary" v-bind:class="[itemPadding]">
         <div class="row justify-between" style="width: 100%">
           <div class="col-10 col-sm-3 q-pa-xs">
             <router-link :to="{ path: '/' }">
@@ -65,8 +65,7 @@
         </div>
       </q-toolbar>
     </q-header>
-    <q-drawer show-if-above :width="300" :breakpoint="992" content-class="bg-primary text-white">
-    </q-drawer>
+    <q-drawer show-if-above :width="300" content-class="bg-primary text-white"> </q-drawer>
 
     <q-page-container class="bg-primary">
       <keep-alive exclude="DetailLayout">
@@ -74,13 +73,7 @@
       </keep-alive>
     </q-page-container>
 
-    <q-drawer
-      side="right"
-      :width="300"
-      :breakpoint="992"
-      show-if-above
-      content-class="bg-primary text-white"
-    >
+    <q-drawer side="right" :width="300" show-if-above content-class="bg-primary text-white">
     </q-drawer>
 
     <!-- <div class="row justify-center">
