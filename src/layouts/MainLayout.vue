@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf" class="bg-secondary">
     <q-header bordered class="bg-secondary text-grey-8">
       <q-toolbar class="YL__toobar" v-bind:class="[itemPadding]">
-        <div class="row" style="width: 100%">
+        <div class="row justify-between" style="width: 100%">
           <div class="col-10 col-sm-3 q-pa-xs">
             <router-link :to="{ path: '/' }">
               <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
@@ -65,7 +65,7 @@
         </div>
       </q-toolbar>
     </q-header>
-    <q-drawer show-if-above :width="300" :breakpoint="700" content-class="bg-primary text-white">
+    <q-drawer show-if-above :width="300" :breakpoint="992" content-class="bg-primary text-white">
     </q-drawer>
 
     <q-page-container class="bg-primary">
@@ -73,16 +73,15 @@
         <router-view />
       </keep-alive>
     </q-page-container>
-    <!-- 
+
     <q-drawer
       side="right"
-      :width="600"
-      :breakpoint="700"
+      :width="300"
+      :breakpoint="992"
       show-if-above
       content-class="bg-primary text-white"
     >
-      <HotList> </HotList>
-    </q-drawer> -->
+    </q-drawer>
 
     <!-- <div class="row justify-center">
       <div class="col-8"></div>
@@ -180,7 +179,7 @@ export default {
 <style lang="sass">
 .YL
   &__toobar
-    @media(min-width: $breakpoint-xs-max)
+    @media(min-width: $breakpoint-sm-max)
       padding-left: 300px
       padding-right: 300px
       font-size: 14px

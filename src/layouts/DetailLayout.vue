@@ -4,14 +4,14 @@
       <router-view />
     </q-page-container>
 
-    <q-drawer
+    <!-- <q-drawer
       side="right"
       :width="300"
       :breakpoint="700"
       show-if-above
       content-class="bg-primary text-white"
     >
-    </q-drawer>
+    </q-drawer> -->
   </q-layout>
 </template>
 

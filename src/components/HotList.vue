@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary q-px-sm">
+  <div class="bg-primary q-px-sm gt-md">
     <q-list padding class="bg-secondary" style="max-width: 300px">
       <q-item-label header> 热门推荐</q-item-label>
 

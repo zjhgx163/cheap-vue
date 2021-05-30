@@ -1,10 +1,11 @@
 <template>
   <q-layout>
-    <q-page-container>
-      <router-view></router-view>
-    </q-page-container>
+    <!-- <q-page-container> -->
+    <router-view></router-view>
+    <!-- <router-view name="hot"></router-view> -->
 
-    <q-drawer side="right" :width="600" :breakpoint="700" show-if-above content-class="bg-primary">
+    <!-- </q-page-container> -->
+    <q-drawer side="right" :width="300" :breakpoint="992" show-if-above content-class="bg-primary">
       <HotList> </HotList>
     </q-drawer>
 

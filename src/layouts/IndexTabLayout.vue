@@ -29,8 +29,8 @@
         </q-list>
       </q-btn-dropdown>
     </q-toolbar>
-    <q-page-container>
-      <!-- <keep-alive>
+    <!-- <q-page-container> -->
+    <!-- <keep-alive>
         <router-view
           :key="$route.fullPath"
           ref="goods-list"
@@ -46,10 +46,10 @@
         v-if="!$route.meta.keepAlive"
       >
       </router-view> -->
-      <keep-alive>
-        <router-view :key="$route.fullPath" ref="goods-list" :sort="sortIndex"> </router-view>
-      </keep-alive>
-    </q-page-container>
+    <keep-alive>
+      <router-view :key="$route.fullPath" ref="goods-list" :sort="sortIndex"> </router-view>
+    </keep-alive>
+    <!-- </q-page-container> -->
   </q-layout>
 </template>
 

@@ -1,3 +1,5 @@
+// import IndexTabLayout from  'layouts/IndexTabLayout.vue'
+
 const routes = [
   {
     path: '/',
@@ -10,6 +12,10 @@ const routes = [
           {
             path: '',
             component: () => import('layouts/IndexTabLayout.vue'),
+            // components: {
+            //   default: () => import('layouts/IndexTabLayout.vue'),
+            //   hot: () => import('components/HotList.vue'),
+            // },
             children: [
               {
                 path: '',
