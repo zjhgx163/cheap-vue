@@ -308,8 +308,8 @@ export default {
           this.couponInfo = JSON.parse(this.detail.couponInfo);
         }
         this.categoryInfo = JSON.parse(this.detail.categoryText);
-
-        if (this.isTaobaoPwd() && this.detail.taobaoPwd != '') {
+        console.log(this.detail.taobaoPwd);
+        if (this.isTaobaoPwd() && this.detail.taobaoPwd) {
           this.isTaoPwd = true;
           this.taobaoPwd = this.detail.taobaoPwd;
         }
@@ -416,7 +416,7 @@ export default {
     },
 
     isCouponTaobaoPwd(coupon) {
-      return this.isTaobaoPwd() && coupon.taobaoPwd != undefined;
+      return this.isTaobaoPwd() && coupon.taobaoPwd;
     },
   },
 };
