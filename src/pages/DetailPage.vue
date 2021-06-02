@@ -123,7 +123,7 @@
                     <!-- :href="coupon.actual_coupon_link" -->
 
                     <q-btn
-                      v-if="isTaoPwd == false"
+                      v-if="isCouponTaobaoPwd(coupon) == false"
                       color="white"
                       text-color="accent"
                       :size="buttonSize"
@@ -147,7 +147,7 @@
                       > -->
                     </q-btn>
                     <q-btn
-                      v-if="isTaoPwd == false"
+                      v-if="isCouponTaobaoPwd(coupon) == false"
                       target="_blank"
                       color="accent"
                       text-color="white"
@@ -161,7 +161,7 @@
                       领取
                     </q-btn>
                     <q-btn
-                      v-if="isTaoPwd == true"
+                      v-if="isCouponTaobaoPwd(coupon) == true"
                       color="white"
                       text-color="accent"
                       :size="buttonSize"
@@ -184,7 +184,7 @@
                       > -->
                     </q-btn>
                     <q-btn
-                      v-if="isTaoPwd == true"
+                      v-if="isCouponTaobaoPwd(coupon) == true"
                       target="_blank"
                       color="accent"
                       text-color="white"
@@ -194,7 +194,7 @@
                       class="text-weight-bold"
                       @click="takeCouponClick(detail.goodsInfoUrl, coupon.taobaoPwd)"
                     >
-                      领取
+                      复制淘口令
                     </q-btn>
                   </div>
                 </div>
@@ -413,6 +413,10 @@ export default {
       } else {
         return false;
       }
+    },
+
+    isCouponTaobaoPwd(coupon) {
+      return this.isTaobaoPwd() && coupon.taobaoPwd != undefined;
     },
   },
 };
