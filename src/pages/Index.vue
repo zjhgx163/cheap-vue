@@ -198,8 +198,11 @@
       width: 180px
       height: 180px
   &__label
+    @media(max-width: $breakpoint-xs-max)
+      font-size: 0.7em
+    @media(min-width: $breakpoint-xs-max)
+      font-size: 0.85em
     color: rgba(0, 0, 0, 0.54)
-    font-size: 0.7em
     background: #f5f5f5
     display: inline-block
     margin-right: 7px;
@@ -209,8 +212,11 @@
     -webkit-font-smoothing: antialiased
     line-height: 1.2em
   &__mall
+    @media(max-width: $breakpoint-xs-max)
+      font-size: 0.7em
+    @media(min-width: $breakpoint-xs-max)
+      font-size: 0.8em
     color: rgba(0, 0, 0, 0.54)
-    font-size: 0.7em
     line-height: 1.2em
 
   &__badgeSize

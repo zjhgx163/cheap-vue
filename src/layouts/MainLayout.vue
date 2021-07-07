@@ -1,8 +1,8 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-primary">
     <q-header class="bg-primary text-grey-8">
-      <q-toolbar class="YL__toobar q-mb-sm bg-secondary" v-bind:class="[itemPadding]">
-        <div class="row justify-between" style="width: 100%">
+      <q-toolbar class="q-mb-sm bg-secondary" v-bind:class="[itemPadding]">
+        <div class="YL__1200w row justify-between">
           <div class="col-10 col-sm-3 q-pa-xs">
             <router-link :to="{ path: '/' }">
               <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
@@ -20,7 +20,10 @@
           >
             <router-link :to="{ path: '/coupon/0' }"> 领券 </router-link>
           </div>
-          <div class="col-12 col-sm-8 q-px-xs q-pt-xs" v-bind:class="{ hidden: isSearchHidden }">
+          <div
+            class="col-12 col-sm-6 q-px-xs q-pt-xs column justify-center"
+            v-bind:class="{ hidden: isSearchHidden }"
+          >
             <q-input
               dense
               filled
@@ -35,6 +38,14 @@
                 <q-btn name="search" icon="search" unelevated @click="search" />
               </template>
             </q-input>
+          </div>
+          <div class="col-sm-2 gt-sm column items-end justify-center">
+            <div class="row q-gutter-sm gt-xs">
+              <q-avatar size="2.5em">
+                <img src="https://cdn.quasar.dev/img/avatar.png" />
+              </q-avatar>
+              <!-- <div class="column justify-center">zjhgx</div> -->
+            </div>
           </div>
 
           <!-- <q-space /> -->
@@ -65,7 +76,7 @@
         </div>
       </q-toolbar>
     </q-header>
-    <q-drawer show-if-above :width="300" content-class="bg-primary text-white"> </q-drawer>
+    <!-- <q-drawer show-if-above :width="300" content-class="bg-primary text-white"> </q-drawer> -->
 
     <q-page-container class="bg-primary">
       <keep-alive exclude="DetailLayout">
@@ -73,8 +84,8 @@
       </keep-alive>
     </q-page-container>
 
-    <q-drawer side="right" :width="300" show-if-above content-class="bg-primary text-white">
-    </q-drawer>
+    <!-- <q-drawer side="right" :width="300" show-if-above content-class="bg-primary text-white">
+    </q-drawer> -->
 
     <!-- <div class="row justify-center">
       <div class="col-8"></div>
@@ -171,15 +182,17 @@ export default {
 
 <style lang="sass">
 .YL
-  &__toobar
-    @media(min-width: $breakpoint-sm-max)
-      padding-left: 300px
-      padding-right: 300px
+  &__1200w
+    @media(min-width: $breakpoint-sm-min)
+      width: 1200px
+      margin: 0px auto
       font-size: 14px
+    @media(max-width: $breakpoint-xs-max)
+      width: 100%
+
   &__toolbar-input-container
     @media(min-width: $breakpoint-xs-max)
-      min-width: 200px
-      width: 30%
+      width: 60%
       border: 2px solid #f44336
   &__footer
     color: inherit

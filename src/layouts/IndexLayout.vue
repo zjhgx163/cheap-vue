@@ -1,10 +1,10 @@
 <template>
   <q-layout>
-    <div class="row">
+    <div class="row YL__1200w">
       <div class="col">
         <router-view></router-view>
       </div>
-      <div class="col-3 gt-md">
+      <div class="col-3 gt-xs">
         <router-view name="hot"></router-view>
       </div>
     </div>
@@ -22,7 +22,7 @@
 </style>
 
 <script>
-import HotList from '../components/HotList.vue';
+// import HotList from '../components/HotList.vue';
 
 export default {
   name: 'IndexLayout',

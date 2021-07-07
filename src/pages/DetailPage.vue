@@ -261,7 +261,7 @@ export default {
       categoryInfo: [],
       turnInOrNot: 'turned_in_not',
       comment: 'comment',
-      buttonSize: Screen.gt.sm ? '13px' : '10px',
+      buttonSize: Screen.gt.sm ? '13px' : '9px',
       host: global.config.domain,
       isTaoPwd: false,
       showing: false,
