@@ -1,6 +1,6 @@
 <template>
   <div class="column items-center bg-primary">
-    <div class="q-px-sm q-mb-sm q-py-lg YL__750w bg-dark">
+    <div class="q-px-sm q-py-lg YL__750w bg-dark">
       <div class="row q-px-sm items-center q-gutter-x-xs">
         <div class="col-2">
           <q-avatar size="3.5em">
@@ -76,7 +76,7 @@
         </q-item>
       </q-list>
 
-      <q-list class="q-px-sm bg-secondary">
+      <q-list class="q-px-sm q-mb-sm bg-secondary">
         <q-item>
           <q-item-section avatar top class="q-py-sm">
             <q-avatar icon="shopping_bag" color="accent" text-color="white" />
@@ -130,9 +130,9 @@
             <q-icon name="chevron_right" />
           </q-item-section>
         </q-item>
+      </q-list>
 
-        <q-separator />
-
+      <q-list class="q-px-sm bg-secondary">
         <q-item-label header>提现方式</q-item-label>
 
         <q-item>
