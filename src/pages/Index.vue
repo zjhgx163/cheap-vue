@@ -1,6 +1,7 @@
 <template>
   <q-page class="bg-primary">
     <q-list v-for="item in listData" v-bind:key="item.id" class="bg-secondary">
+      <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
       <q-item
         v-ripple
         v-bind:class="[itemPadding]"

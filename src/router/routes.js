@@ -86,11 +86,11 @@ const routes = [
     ],
   },
 
-  // {
-  //   path: '/main',
-  //   component: () => import('pages/Index.vue'),
-  //   // children: [{ path: 'main', component: () => import('pages/Index.vue') }],
-  // },
+  {
+    path: '/user',
+    component: () => import('pages/UserM.vue'),
+    props: (route) => ({ code: route.query.code, state: route.query.state }),
+  },
 
   // Always leave this as last one,
   // but you can also remove it
