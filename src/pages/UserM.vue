@@ -148,6 +148,8 @@
 </template>
 
 <script>
+import 'src/config';
+
 export default {
   data() {
     return {
@@ -161,8 +163,8 @@ export default {
   mounted() {
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
-    console.log('code = ' + this.code);
-    console.log('state = ' + this.state);
+
+    this.wechatLogin(this.code, this.state);
   },
 
   methods: {
@@ -176,9 +178,11 @@ export default {
           state: this.state,
         })
         .then((res) => {
-          console.log(res.data.data);
-          this.avatar = res.data.data.headimgurl;
-          this.user = res.data.data.nickname;
+          console.log(res.data);
+          this.avatar = res.data.headimgurl;
+          this.user = res.data.nickname;
+          this.$q.loading.hide();
+
           // console.log(this.isBigSc = reen);
         });
     },
