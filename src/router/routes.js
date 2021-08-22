@@ -60,9 +60,10 @@ const routes = [
         children: [
           {
             name: 'detail',
-            path: 'detail/:code',
+            path: 'detail/:urlCode',
             component: () => import('pages/DetailPage.vue'),
-            props: true,
+            props: (route) => ({ code: route.query.code, state: route.query.state }),
+
             // beforeEnter: (to, from, next) => {
             //   console.info('%%before enter DetailPage, to=' + to.fullPath);
             //   next();

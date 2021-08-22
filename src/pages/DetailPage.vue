@@ -83,10 +83,8 @@
                     color="accent"
                     text-color="white"
                     :size="buttonSize"
-                    type="a"
-                    :href="`${host}/goods/go/${detail.urlCode}`"
                     unelevated
-                    @click="buyClick(detail.urlCode, detail.goodsInfoUrl)"
+                    @click="buyClick(detail.urlCode)"
                   >
                     去购买
                   </q-btn>
@@ -98,7 +96,7 @@
                     text-color="white"
                     :size="buttonSize"
                     unelevated
-                    @click="buyClick(detail.urlCode, detail.goodsInfoUrl)"
+                    @click="buyClick(detail.urlCode)"
                   >
                     复制淘口令
                   </q-btn>
@@ -114,27 +112,21 @@
                   <div class="col-auto">
                     <span>优惠领取</span>
                   </div>
-                  <div
-                    class="row col q-mt-md"
-                    v-for="coupon in couponInfo"
-                    :key="coupon.coupon_link"
-                  >
+                  <div class="row col q-mt-md" v-for="coupon in couponInfo" :key="coupon.index">
                     <!-- :href="`${host}/goods/coupon-url/${detail.urlCode}?path=${coupon.actual_coupon_link}`" -->
                     <!-- :href="coupon.actual_coupon_link" -->
+                    <!-- :href="`${host}/goods/coupon-url/${detail.urlCode}?index=${coupon.index}`" -->
 
                     <q-btn
                       v-if="isCouponTaobaoPwd(coupon) == false"
                       color="white"
                       text-color="accent"
                       :size="buttonSize"
-                      target="_blank"
                       unelevated
                       outline
                       align="left"
-                      type="a"
-                      :href="`${host}/goods/coupon-url/${detail.urlCode}?index=${coupon.index}`"
                       style="width: 14em"
-                      @click="takeCouponClick(detail.goodsInfoUrl)"
+                      @click="takeCouponClick(detail.urlCode, coupon.index)"
                     >
                       {{ coupon.coupon_info }}
                       <!-- <a
@@ -153,10 +145,8 @@
                       text-color="white"
                       :size="buttonSize"
                       unelevated
-                      type="a"
-                      :href="`${host}/goods/coupon-url/${detail.urlCode}?index=${coupon.index}`"
                       class="text-weight-bold"
-                      @click="takeCouponClick(detail.goodsInfoUrl)"
+                      @click="takeCouponClick(detail.urlCode, coupon.index)"
                     >
                       领取
                     </q-btn>
@@ -165,13 +155,11 @@
                       color="white"
                       text-color="accent"
                       :size="buttonSize"
-                      target="_blank"
                       unelevated
                       outline
                       align="left"
-                      type="a"
                       style="width: 14em"
-                      @click="takeCouponClick(detail.goodsInfoUrl, coupon.taobaoPwd)"
+                      @click="takeCouponClick(detail.urlCode, coupon.index)"
                     >
                       {{ coupon.coupon_info }}
                       <!-- <a
@@ -190,9 +178,8 @@
                       text-color="white"
                       :size="buttonSize"
                       unelevated
-                      type="a"
                       class="text-weight-bold"
-                      @click="takeCouponClick(detail.goodsInfoUrl, coupon.taobaoPwd)"
+                      @click="takeCouponClick(detail.urlCode, coupon.index)"
                     >
                       复制淘口令
                     </q-btn>
@@ -249,6 +236,9 @@ import 'src/config';
 import HotList from '../components/HotList.vue';
 import { Screen } from 'quasar';
 import FastClick from 'fastclick';
+// import clipboard from 'src/clipboard';
+// import Clipboard from 'clipboard';
+import $ from 'jquery';
 
 export default {
   name: 'DetailPage',
@@ -276,7 +266,7 @@ export default {
       };
     },
   },
-  props: ['code'],
+  props: ['code', 'state'], // 微信auth code
 
   components: {
     HotList,
@@ -286,14 +276,17 @@ export default {
     //解决iphone移动端的延迟
     FastClick.attach(document.body);
     console.log('DetailPage mounted');
+
     this.$q.loading.show({
       delay: 400, // ms
     });
-    this.getItemDetail(this.code);
+    this.getItemDetail(this.$route.params.urlCode);
+
+    console.log('urlCode = ' + this.$route.params.urlCode);
   },
   methods: {
-    getItemDetail(code) {
-      this.$axios.post(`${global.config.domain}/goods/detail`, { code: code }).then((res) => {
+    getItemDetail(str) {
+      this.$axios.post(`${global.config.domain}/goods/detail`, { code: str }).then((res) => {
         this.detail = res.data.data;
         console.log(this.detail);
         if (this.detail == null) {
@@ -308,97 +301,170 @@ export default {
           this.couponInfo = JSON.parse(this.detail.couponInfo);
         }
         this.categoryInfo = JSON.parse(this.detail.categoryText);
-        console.log(this.detail.taobaoPwd);
-        if (this.isTaobaoPwd() && this.detail.taobaoPwd) {
+        console.log('taobaoPwd = ' + this.detail.taobaoPwd);
+        if (this.isTaobaoPwd()) {
           this.isTaoPwd = true;
-          this.taobaoPwd = this.detail.taobaoPwd;
+          // this.taobaoPwd = this.detail.taobaoPwd;
+        }
+        if (typeof this.code == 'undefined' || this.code == null || this.code == '') {
+        } else {
+          // code有值说明是微信网页授权的redirect过来的，此时要根据state执行是去购买还是领券的操作
+          if (this.state == 'buy') {
+            //代表购买商品
+            this.buyClick(this.$route.params.urlCode);
+          } else {
+            //领券操作
+            this.takeCouponClick(this.$route.params.urlCode, this.state.slice(6));
+          }
         }
         this.$q.loading.hide();
       });
     },
     turnInOrNotClick() {},
     commentClick() {},
-    buyClick(code, url) {
-      // this.$q.loading.show({
-      //   delay: 100, // ms
-      // });
-      this.$axios
-        .post(`${global.config.domain}/user/event`, { type: '进入推广链接', remark: url })
-        .then((res) => {
-          console.log(res.data.data);
-        });
+    buyClick(code) {
+      this.$q.loading.show({
+        delay: 100, // ms
+      });
+      // this.$axios
+      //   .post(`${global.config.domain}/user/event`, { type: '进入推广链接', remark: url })
+      //   .then((res) => {
+      //     console.log(res.data.data);
+      //   });
       if (this.isTaoPwd) {
+        //淘口令要从后台取
+        // 这里必须用同步的ajax，否则ios的浏览器无法copy成功，this.$copyText不能放在异步方法里面\
+        console.log('code = ' + this.code);
+        $.ajaxSettings.async = false;
         let that = this;
-        this.$copyText(this.taobaoPwd).then(
-          function (e) {
-            console.log(e);
-
-            that.showing = true;
-            // this.$q.loading.hide();
-            let t = setTimeout(() => {
-              that.showing = false;
-            }, 1500);
+        $.ajax({
+          type: 'POST',
+          async: false,
+          data: JSON.stringify({ code: (this.code = undefined ? '' : this.code) }),
+          contentType: 'application/json;charset=UTF-8',
+          url: `${this.host}/goods/go/${code}`,
+          success: function (res) {
+            console.log('res = ' + res);
+            if (/https:\S*/.test(res)) {
+              window.location.href = res;
+            } else if (/redirect:\S*/.test(res)) {
+              //redirect其他页面
+              let redirectPath = res.slice(9);
+              that.$router.push({ path: redirectPath });
+            } else {
+              that.taobaoPwd = res;
+              console.log('taobaoPwd = ' + res);
+            }
+            that.$q.loading.hide();
           },
-          function (e) {
-            alert('Can not copy');
-            console.log(e);
-            // this.$q.loading.hide();
-          },
-        );
-        // this.$axios.get(`${this.host}/goods/go/${code}`).then((res) => {
-        //   console.log('res = ' + res.data);
-        //   this.taobaoPwd = res.data;
-        //   console.log('taobaoPwd = ' + res.data);
-        //   this.$q.loading.show({
-        //     delay: 200, // ms
-        //   });
+        });
 
-        //   hidethis.$q.loading.();
+        if (this.taobaoPwd != '')
+          this.$copyText(this.taobaoPwd).then(
+            function (e) {
+              console.log('this.taobaoPwd = ' + that.taobaoPwd);
 
-        //   let t = setTimeout(() => {
-        //     this.showing = false;
-        //   }, 1500);
-
-        //   // clearTimeout(t);
-        // });
+              that.showing = true;
+              let t = setTimeout(() => {
+                that.showing = false;
+              }, 1500);
+            },
+            function (e) {
+              alert('Can not copy');
+              console.log(e);
+            },
+          );
+      } else {
+        //因为每个用户的链接不同，需要每次从后台取链接
+        console.log('this.code = ' + this.code);
+        let that = this;
+        this.$axios
+          .post(`${this.host}/goods/go/${code}`, {
+            code: this.code,
+          })
+          .then((res) => {
+            console.log(res.data);
+            if (/https:\S*/.test(res.data)) {
+              window.location.href = res.data;
+              // window.open(res.data, '_blank');
+            } else if (/redirect:\S*/.test(res.data)) {
+              //redirect其他页面
+              let redirectPath = res.data.slice(9);
+              that.$router.push({ path: redirectPath });
+            }
+            // window.open(res.data, '_blank');
+            this.$q.loading.hide();
+          });
       }
     },
 
-    // onCopy: function (e) {
-    //   this.showing = true;
-    //   let t = setTimeout(() => {
-    //     this.showing = false;
-    //   }, 1500);
-    // },
-    // onError: function (e) {
-    //   alert('Failed to copy texts');
-    // },
-
-    takeCouponClick(url, tbPwd) {
-      this.$axios
-        .post(`${global.config.domain}/user/event`, { type: '商品领券', remark: url })
-        .then((res) => {
-          console.log(res.data.data);
-        });
+    takeCouponClick(code, index) {
+      // this.$axios
+      //   .post(`${global.config.domain}/user/event`, { type: '商品领券', remark: url })
+      //   .then((res) => {
+      //     console.log(res.data.data);
+      //   });
 
       if (this.isTaoPwd) {
         let that = this;
-        this.$copyText(tbPwd).then(
-          function (e) {
-            console.log(e);
+        $.ajax({
+          type: 'POST',
+          async: false,
+          data: JSON.stringify({ code: (this.code = undefined ? '' : this.code) }),
+          contentType: 'application/json;charset=UTF-8',
+          url: `${this.host}/goods/coupon-url/${code}?index=${index}`,
+          success: function (res) {
+            console.log('res = ' + res);
+            if (/https:\S*/.test(res)) {
+              window.location.href = res;
+            } else if (/redirect:\S*/.test(res)) {
+              //redirect其他页面
+              let redirectPath = res.slice(9);
+              that.$router.push({ path: redirectPath });
+            } else {
+              that.taobaoPwd = res;
+              console.log('coupon taobaoPwd = ' + res);
+            }
+            that.$q.loading.hide();
+          },
+        });
 
-            that.showing = true;
-            // this.$q.loading.hide();
-            let t = setTimeout(() => {
-              that.showing = false;
-            }, 1500);
-          },
-          function (e) {
-            alert('Can not copy coupon taobaopwd');
-            console.log(e);
-            // this.$q.loading.hide();
-          },
-        );
+        if (this.taobaoPwd != '') {
+          this.$copyText(this.taobaoPwd).then(
+            function (e) {
+              console.log('coupon this.taobaoPwd = ' + that.taobaoPwd);
+
+              that.showing = true;
+              let t = setTimeout(() => {
+                that.showing = false;
+              }, 1500);
+            },
+            function (e) {
+              alert('Can not copy');
+              console.log(e);
+            },
+          );
+        }
+      } else {
+        //因为每个用户的链接不同，需要每次从后台取链接
+        console.log('coupon this.code = ' + this.code);
+        let that = this;
+        this.$axios
+          .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {
+            code: this.code,
+          })
+          .then((res) => {
+            console.log(res.data);
+            if (/https:\S*/.test(res.data)) {
+              window.location.href = res.data;
+            } else if (/redirect:\S*/.test(res.data)) {
+              //redirect其他页面
+              let redirectPath = res.data.slice(9);
+              that.$router.push({ path: redirectPath });
+            }
+            // window.open(res.data, '_blank');
+            this.$q.loading.hide();
+          });
       }
     },
 

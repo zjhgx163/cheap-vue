@@ -76,7 +76,7 @@
               :to="{
                 path: 'item',
                 name: 'detail',
-                params: { code: item.urlCode },
+                params: { urlCode: item.urlCode },
               }"
               >...阅读全文
             </router-link>
@@ -153,16 +153,9 @@
                 color="accent"
                 :size="buyButtonSize"
                 unelevated
-                @click="buyClick(item.goodsInfoUrl)"
-                @click.stop
+                @click.stop="buyClick(item.urlCode)"
               >
-                <a
-                  target="_blank"
-                  class="text-white text-weight-bold"
-                  :href="`${host}/goods/go/${item.urlCode}`"
-                >
-                  去购买</a
-                >
+                <a class="text-white text-weight-bold"> 去购买</a>
               </q-btn>
             </div>
           </q-item-label>
@@ -363,7 +356,8 @@ export default {
     turnInOrNotClick() {},
     commentClick() {},
     itemClick(urlCode) {
-      this.$router.push({ path: 'item', name: 'detail', params: { code: urlCode } });
+      console.log('urlCode = ' + urlCode);
+      this.$router.push({ path: 'item', name: 'detail', params: { urlCode: urlCode } });
       // const { href } = this.$router.resolve({
       //   path: 'item/detail',
       //   name: 'detail',
@@ -375,11 +369,26 @@ export default {
 
       // window.location.href = `${global.config.domain}/goods/detail?id=` + id;
     },
-    buyClick(url) {
+    buyClick(code) {
+      this.$q.loading.show({
+        delay: 100, // ms
+      });
+      let that = this;
       this.$axios
-        .post(`${global.config.domain}/user/event`, { type: '进入推广链接', remark: url })
+        .post(`${this.host}/goods/go/${code}`, {
+          code: '',
+        })
         .then((res) => {
-          console.log(res.data.data);
+          console.log(res.data);
+          if (/https:\S*/.test(res.data)) {
+            // window.location.href = res.data;
+            window.open(res.data, '_blank');
+          } else if (/redirect:\S*/.test(res.data)) {
+            //redirect其他页面
+            let redirectPath = res.data.slice(9);
+            that.$router.push({ path: redirectPath });
+          }
+          this.$q.loading.hide();
         });
     },
     transferLabel(label) {
