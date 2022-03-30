@@ -38,7 +38,7 @@
         <q-item-section class="q-pb-xs">
           <q-item-label
             :lines="lines"
-            v-bind:class="[textSize, fontFamily, lineHeight]"
+            v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
             class="text-grey-9"
           >
             {{ item.title }}</q-item-label
@@ -212,7 +212,11 @@
       font-size: 0.8em
     color: rgba(0, 0, 0, 0.54)
     line-height: 1.2em
-
+  &__title_height
+    @media(max-width: $breakpoint-xs-max)
+      height: 3.2em
+    @media(min-width: $breakpoint-xs-max)
+      height: 1.6em
   &__badgeSize
      font-size: 11px
 </style>
@@ -244,6 +248,7 @@ export default {
       textAccent: 'text-accent',
       paginationSize: Screen.gt.sm ? '12px' : '9px',
       maxPage: Screen.gt.sm ? 6 : 4,
+      titleHeight: 'YL__title_height',
       // to: false,
     };
   },
