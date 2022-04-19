@@ -77,7 +77,7 @@
                 <div class="col-md-1 col-sm-2"></div>
                 <div class="col-md col-sm">
                   <q-btn
-                    v-if="isTaoPwd == false"
+                    v-if="isTaoPwd === false"
                     class="text-weight-bold"
                     target="_blank"
                     color="accent"
@@ -89,7 +89,7 @@
                     去购买
                   </q-btn>
                   <q-btn
-                    v-if="isTaoPwd == true"
+                    v-if="isTaoPwd === true"
                     class="text-weight-bold"
                     target="_blank"
                     color="accent"
@@ -118,7 +118,7 @@
                     <!-- :href="`${host}/goods/coupon-url/${detail.urlCode}?index=${coupon.index}`" -->
 
                     <q-btn
-                      v-if="isCouponTaobaoPwd(coupon) == false"
+                      v-if="!isCouponTaobaoPwd(coupon)"
                       color="white"
                       text-color="accent"
                       :size="buttonSize"
@@ -139,7 +139,7 @@
                       > -->
                     </q-btn>
                     <q-btn
-                      v-if="isCouponTaobaoPwd(coupon) == false"
+                      v-if="!isCouponTaobaoPwd(coupon)"
                       target="_blank"
                       color="accent"
                       text-color="white"
@@ -151,7 +151,7 @@
                       领取
                     </q-btn>
                     <q-btn
-                      v-if="isCouponTaobaoPwd(coupon) == true"
+                      v-if="isCouponTaobaoPwd(coupon)"
                       color="white"
                       text-color="accent"
                       :size="buttonSize"
@@ -172,7 +172,7 @@
                       > -->
                     </q-btn>
                     <q-btn
-                      v-if="isCouponTaobaoPwd(coupon) == true"
+                      v-if="isCouponTaobaoPwd(coupon)"
                       target="_blank"
                       color="accent"
                       text-color="white"
@@ -470,7 +470,7 @@ export default {
 
     isTaobaoPwd() {
       var ua = window.navigator.userAgent.toLowerCase();
-      console.log(ua);
+      // console.log(ua);
       if (
         ua.match(/MicroMessenger/i) == 'micromessenger' &&
         /(淘宝|天猫|聚划算)\W*/g.test(this.detail.mall)
@@ -482,7 +482,8 @@ export default {
     },
 
     isCouponTaobaoPwd(coupon) {
-      return this.isTaobaoPwd() && coupon.taobaoPwd;
+      let result = this.isTaobaoPwd() && coupon.taobaoPwd;
+      return result;
     },
   },
 };
