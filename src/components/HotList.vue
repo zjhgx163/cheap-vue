@@ -46,7 +46,7 @@ export default {
   methods: {
     getHotList() {
       this.$axios.post(`${global.config.domain}/goods/list`, { page: 1 }).then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
 
         this.hotList = res.data.data.records;
       });

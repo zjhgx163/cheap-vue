@@ -1,6 +1,6 @@
 <template>
   <q-layout>
-    <q-toolbar class="bg-secondary justify-between q-mb-sm">
+    <q-toolbar class="bg-secondary justify-between">
       <q-tabs
         v-model="selectedTab"
         align="left"

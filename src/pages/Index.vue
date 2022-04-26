@@ -2,25 +2,29 @@
   <q-page class="bg-primary">
     <q-pull-to-refresh @refresh="refresh" no-mouse>
       <q-list
+        separator
+        dense
         id="scroll-target-id"
         v-for="item in listData"
         v-bind:key="item.id"
         class="bg-secondary"
         ref="scrollTargetRef"
       >
-        <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
-        <q-item
-          v-ripple
-          v-bind:class="[itemPadding]"
-          :clickable="clickable"
-          @click="itemClick(item.urlCode)"
-        >
-          <q-item-section side>
-            <div>
-              <!-- 这里用router-link代替a -->
+        <div class="q-pb-sm bg-primary">
+          <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
+          <q-item
+            v-ripple
+            v-bind:class="[itemPadding]"
+            :clickable="clickable"
+            @click="itemClick(item.urlCode)"
+            class="bg-secondary"
+          >
+            <q-item-section side>
+              <div>
+                <!-- 这里用router-link代替a -->
 
-              <!-- <router-link :to="`/item/${item.id}`"> -->
-              <!-- <router-link
+                <!-- <router-link :to="`/item/${item.id}`"> -->
+                <!-- <router-link
               :to="{
                 path: 'item',
                 name: 'detail',
@@ -30,154 +34,167 @@
               <img v-bind:src="item.thumbUrl" />
             </router-link> -->
 
-              <router-link
-                :to="{
-                  path: 'item',
-                  name: 'detail',
+                <router-link
+                  :to="{
+                    path: 'item',
+                    name: 'detail',
 
-                  params: { code: item.urlCode },
-                }"
+                    params: { code: item.urlCode },
+                  }"
+                >
+                  <img v-bind:src="item.thumbUrl" class="YL__index_img" />
+                </router-link>
+              </div>
+            </q-item-section>
+            <q-item-section class="q-pb-xs">
+              <q-item-label
+                :lines="lines"
+                v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
+                class="text-grey-9 text-bold"
               >
-                <img v-bind:src="item.thumbUrl" class="YL__index_img" />
-              </router-link>
-            </div>
-          </q-item-section>
-          <q-item-section class="q-pb-xs">
-            <q-item-label
-              :lines="lines"
-              v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
-              class="text-grey-9"
-            >
-              {{ item.title }}</q-item-label
-            >
-            <q-item-label
-              :lines="1"
-              v-bind:class="[textSize, textAccent, fontFamily]"
-              class="q-pb-xs"
-            >
-              {{ item.priceText }}
-            </q-item-label>
-            <q-item-label :lines="1">
-              <span v-if="item.label != ''" style="text-align: left">
-                <li
-                  v-for="a in transferLabel(item.label)"
-                  v-bind:key="a"
-                  style="text-align: left"
-                  class="YL__label YL__title_font_family"
-                >
-                  {{ a }}
-                </li>
-              </span>
-              <span v-else> &nbsp; &nbsp; &nbsp;</span>
-            </q-item-label>
-
-            <q-item-label
-              :lines="2"
-              class="gt-sm YL__list_line_height q-pb-xs YL__list_font_size text-grey-9 YL__title_font_family"
-            >
-              <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
-                item.emphsis
-              }}</span
-              >{{ item.detailBrief }}
-              <router-link
-                :to="{
-                  path: 'item',
-                  name: 'detail',
-                  params: { urlCode: item.urlCode },
-                }"
-                >...阅读全文
-              </router-link>
-            </q-item-label>
-            <q-item-label
-              :lines="1"
-              class="row items-center justify-between YL__title_font_family YL__mall"
-            >
-              <div class="col-7">{{ item.mall }} | {{ item.dateStr }}</div>
-
-              <div class="col-5 lt-sm" v-bind:class="iconGutter">
-                <q-btn size="7px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
-                  <q-badge
-                    color="secondary"
-                    align="middle"
-                    text-color="grey"
-                    class="YL__badgeSize"
-                    >{{ item.zhiCount }}</q-badge
+                {{ item.title }}</q-item-label
+              >
+              <q-item-label
+                :lines="1"
+                v-bind:class="[textSize, textAccent, fontFamily]"
+                class="q-py-xs"
+              >
+                {{ item.priceText }}
+              </q-item-label>
+              <q-item-label :lines="1">
+                <span v-if="item.label != ''" style="text-align: left">
+                  <li
+                    v-for="a in transferLabel(item.label)"
+                    v-bind:key="a"
+                    style="text-align: left"
+                    class="YL__label q-py-xs"
                   >
-                </q-btn>
-                <q-btn
-                  size="7px"
-                  color="grey"
-                  flat
-                  round
-                  :icon="thumbDownIcon"
-                  @click="thumbDownClick"
-                >
-                  <q-badge
-                    color="secondary"
-                    align="middle"
-                    text-color="grey"
-                    class="YL__badgeSize"
-                    >{{ item.buzhiCount }}</q-badge
+                    {{ a }}
+                  </li>
+                </span>
+                <span v-else> &nbsp; &nbsp; &nbsp;</span>
+              </q-item-label>
+
+              <q-item-label
+                :lines="2"
+                class="gt-sm YL__list_line_height q-pb-xs q-pt-sm YL__list_font_size text-grey-9 YL__content_height"
+              >
+                <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
+                  item.emphsis
+                }}</span
+                >{{ item.detailBrief }}
+                <router-link
+                  :to="{
+                    path: 'item',
+                    name: 'detail',
+                    params: { urlCode: item.urlCode },
+                  }"
+                  >...阅读全文
+                </router-link>
+              </q-item-label>
+              <q-item-label :lines="1" class="row items-center justify-between YL__mall lt-sm">
+                <div class="col-auto">{{ item.mall }} | {{ item.dateStr }}</div>
+
+                <div class="col-4 row" v-bind:class="iconGutter">
+                  <div class="row items-center">
+                    <q-btn
+                      size="7px"
+                      color="grey"
+                      flat
+                      round
+                      :icon="thumbUpIcon"
+                      @click="thumbUpClick"
+                    >
+                    </q-btn>
+                    <div>{{ item.zhiCount }}</div>
+                  </div>
+                  <div class="row items-center">
+                    <q-btn
+                      size="7px"
+                      color="grey"
+                      flat
+                      round
+                      :icon="thumbDownIcon"
+                      @click="thumbDownClick"
+                    >
+                    </q-btn>
+                    <div>{{ item.buzhiCount }}</div>
+                  </div>
+                </div>
+              </q-item-label>
+
+              <q-item-label :lines="1" class="row justify-between items-start gt-sm YL__mall">
+                <div class="col-8 row" v-bind:class="iconGutter">
+                  <div class="row ijustify-between items-center">
+                    <q-btn
+                      size="0.7em"
+                      color="grey"
+                      flat
+                      round
+                      :icon="thumbUpIcon"
+                      @click="thumbUpClick"
+                    >
+                    </q-btn>
+                    <div>{{ item.zhiCount }}</div>
+                  </div>
+                  <div class="row items-center">
+                    <q-btn
+                      size="0.7em"
+                      color="grey"
+                      flat
+                      round
+                      :icon="thumbDownIcon"
+                      @click="thumbDownClick"
+                    >
+                    </q-btn>
+                    <div>{{ item.buzhiCount }}</div>
+                  </div>
+
+                  <div class="row items-center">
+                    <q-btn
+                      size="0.7em"
+                      color="grey"
+                      flat
+                      round
+                      :icon="turnInOrNot"
+                      @click="turnInOrNotClick"
+                    >
+                    </q-btn>
+                    <div>{{ item.starCount }}</div>
+                  </div>
+
+                  <div class="row items-center">
+                    <q-btn
+                      size="0.7em"
+                      color="grey"
+                      flat
+                      round
+                      :icon="comment"
+                      @click="commentClick"
+                    >
+                    </q-btn>
+                    <div>{{ item.commentsCount }}</div>
+                  </div>
+                </div>
+
+                <div class="col-4 justify-end row">
+                  <div class="col"></div>
+                  <div class="col-auto items-center row">{{ item.mall }} | {{ item.dateStr }}</div>
+                  <div class="col-1"></div>
+                  <q-btn
+                    class="col-3"
+                    color="accent"
+                    :size="buyButtonSize"
+                    unelevated
+                    @click.stop="buyClick(item.urlCode)"
                   >
-                </q-btn>
-              </div>
-            </q-item-label>
-
-            <q-item-label
-              :lines="1"
-              class="row justify-between items-center YL__title_font_family gt-sm"
-            >
-              <div class="col-auto" v-bind:class="iconGutter">
-                <q-btn size="9px" color="grey" flat round :icon="thumbUpIcon" @click="thumbUpClick">
-                  <q-badge color="secondary" align="middle" text-color="grey">{{
-                    item.zhiCount
-                  }}</q-badge>
-                </q-btn>
-                <q-btn
-                  size="9px"
-                  color="grey"
-                  flat
-                  round
-                  :icon="thumbDownIcon"
-                  @click="thumbDownClick"
-                >
-                  <q-badge color="secondary" align="middle" text-color="grey">{{
-                    item.buzhiCount
-                  }}</q-badge>
-                </q-btn>
-                <q-btn
-                  size="9px"
-                  color="grey"
-                  flat
-                  round
-                  :icon="turnInOrNot"
-                  @click="turnInOrNotClick"
-                >
-                  <q-badge color="secondary" align="middle" text-color="grey">{{
-                    item.starCount
-                  }}</q-badge>
-                </q-btn>
-                <q-btn size="9px" color="grey" flat round :icon="comment" @click="commentClick">
-                  <q-badge color="secondary" align="middle" text-color="grey">{{
-                    item.commentsCount
-                  }}</q-badge>
-                </q-btn>
-              </div>
-              <div class="col justify-end row">
-                <q-btn
-                  color="accent"
-                  :size="buyButtonSize"
-                  unelevated
-                  @click.stop="buyClick(item.urlCode)"
-                >
-                  <a class="text-white text-weight-bold"> 去购买</a>
-                </q-btn>
-              </div>
-            </q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-separator />
-
+                    <a class="text-white text-weight-bold"> 去购买</a>
+                  </q-btn>
+                </div>
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </div>
         <!-- <q-separator /> -->
       </q-list>
     </q-pull-to-refresh>
@@ -217,13 +234,14 @@
       width: 110px
       height: 110px
     @media(min-width: $breakpoint-xs-max)
-      width: 180px
-      height: 180px
+      width: 170px
+      height: 170px
   &__label
     @media(max-width: $breakpoint-xs-max)
       font-size: 0.7em
+      height: 1.6em
     @media(min-width: $breakpoint-xs-max)
-      font-size: 0.85em
+      font-size: 0.87em
     color: rgba(0, 0, 0, 0.54)
     background: #f5f5f5
     display: inline-block
@@ -236,8 +254,9 @@
   &__mall
     @media(max-width: $breakpoint-xs-max)
       font-size: 0.7em
+      height: 1.3em
     @media(min-width: $breakpoint-xs-max)
-      font-size: 0.8em
+      font-size: 0.9em
     color: rgba(0, 0, 0, 0.54)
     line-height: 1.2em
   &__title_height
@@ -245,18 +264,19 @@
       height: 3.2em
     @media(min-width: $breakpoint-xs-max)
       height: 1.6em
+  &__content_height
+      height: 3.8em
   &__badgeSize
-     font-size: 11px
+    @media(max-width: $breakpoint-xs-max)
+      font-size: 0.7em
+    @media(min-width: $breakpoint-xs-max)
+      font-size: 0.9em
 </style>
 
 <script>
 import { matTurnedInNot } from '@quasar/extras/material-icons';
 import { Screen } from 'quasar';
 import FastClick from 'fastclick';
-
-// console.log('1<<<<<');
-// console.log(global);
-// console.log('1>>>>>');
 
 export default {
   name: 'PageIndex',
@@ -286,7 +306,7 @@ export default {
       return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
     },
     textSize: function () {
-      return this.isBigScreen ? 'text-h7' : 'text-subtitle2';
+      return this.isBigScreen ? 'text-h7' : 'text-subtitle1';
     },
 
     lines: function () {
