@@ -481,7 +481,7 @@ export default {
         })
         .then((res) => {
           console.log(res.data);
-          if (/https:\S*/.test(res.data)) {
+          if (/(http|https):\S*/.test(res.data)) {
             // window.location.href = res.data;
             window.open(res.data, '_blank');
           } else if (/redirect:\S*/.test(res.data)) {
