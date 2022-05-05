@@ -21,11 +21,10 @@
             dense
           >
             <q-item-section side no-wrap>
-              <div>
-                <!-- 这里用router-link代替a -->
+              <!-- 这里用router-link代替a -->
 
-                <!-- <router-link :to="`/item/${item.id}`"> -->
-                <!-- <router-link
+              <!-- <router-link :to="`/item/${item.id}`"> -->
+              <!-- <router-link
               :to="{
                 path: 'item',
                 name: 'detail',
@@ -35,17 +34,16 @@
               <img v-bind:src="item.thumbUrl" />
             </router-link> -->
 
-                <router-link
-                  :to="{
-                    path: 'item',
-                    name: 'detail',
+              <router-link
+                :to="{
+                  path: 'item',
+                  name: 'detail',
 
-                    params: { code: item.urlCode },
-                  }"
-                >
-                  <img v-bind:src="item.thumbUrl" class="YL__index_img" />
-                </router-link>
-              </div>
+                  params: { code: item.urlCode },
+                }"
+              >
+                <img v-bind:src="item.thumbUrl" class="YL__index_img" />
+              </router-link>
             </q-item-section>
             <q-item-section class="q-pb-xs">
               <q-item-label
@@ -96,7 +94,7 @@
               <q-item-label :lines="1" class="row items-center justify-between YL__mall lt-sm">
                 <div class="col-auto">{{ item.mall }} | {{ item.dateStr }}</div>
 
-                <div class="col-4 row" v-bind:class="iconGutter">
+                <div class="col-4 row">
                   <div class="row items-center">
                     <q-btn
                       size="7px"
@@ -124,9 +122,9 @@
                 </div>
               </q-item-label>
 
-              <q-item-label :lines="1" class="row justify-between items-start gt-sm YL__mall">
-                <div class="col-8 row" v-bind:class="iconGutter">
-                  <div class="row ijustify-between items-center">
+              <q-item-label :lines="1" class="row justify-between items-center gt-sm YL__mall">
+                <div class="col-4 row justify-between">
+                  <div class="row items-center">
                     <q-btn
                       size="0.7em"
                       color="grey"
