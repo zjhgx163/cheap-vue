@@ -18,8 +18,9 @@
             :clickable="clickable"
             @click="itemClick(item.urlCode)"
             class="bg-secondary"
+            dense
           >
-            <q-item-section side>
+            <q-item-section side no-wrap>
               <div>
                 <!-- 这里用router-link代替a -->
 

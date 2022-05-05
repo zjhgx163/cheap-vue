@@ -322,7 +322,7 @@ export default {
     },
     turnInOrNotClick() {},
     commentClick() {},
-    buyClick(code) {
+    buyClick(urlCode) {
       this.$q.loading.show({
         delay: 100, // ms
       });
@@ -342,10 +342,10 @@ export default {
           async: false,
           data: JSON.stringify({ code: (this.code = undefined ? '' : this.code) }),
           contentType: 'application/json;charset=UTF-8',
-          url: `${this.host}/goods/go/${code}`,
+          url: `${this.host}/goods/go/${urlCode}`,
           success: function (res) {
             console.log('res = ' + res);
-            if (/https:\S*/.test(res)) {
+            if (/(http|https):\S*/.test(res)) {
               window.location.href = res;
             } else if (/redirect:\S*/.test(res)) {
               //redirect其他页面
@@ -379,12 +379,12 @@ export default {
         console.log('this.code = ' + this.code);
         let that = this;
         this.$axios
-          .post(`${this.host}/goods/go/${code}`, {
+          .post(`${this.host}/goods/go/${urlCode}`, {
             code: this.code,
           })
           .then((res) => {
             console.log(res.data);
-            if (/https:\S*/.test(res.data)) {
+            if (/(http|https):\S*/.test(res.data)) {
               window.location.href = res.data;
               // window.open(res.data, '_blank');
             } else if (/redirect:\S*/.test(res.data)) {
