@@ -56,7 +56,7 @@
               <q-item-label
                 :lines="1"
                 v-bind:class="[textSize, textAccent, fontFamily]"
-                class="q-py-xs"
+                class="q-pt-xs"
               >
                 {{ item.priceText }}
               </q-item-label>
@@ -94,7 +94,7 @@
               <q-item-label :lines="1" class="row items-center justify-between YL__mall lt-sm">
                 <div class="col-auto">{{ item.mall }} | {{ item.dateStr }}</div>
 
-                <div class="col-4 row">
+                <div class="col-5 row">
                   <div class="row items-center">
                     <q-btn
                       size="7px"
