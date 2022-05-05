@@ -204,7 +204,7 @@ export default {
   &__title_font_family
     font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif;
   &__list_line_height
-    line-height: 1.6em !important
+    line-height: 24px !important
   &__list_font_size
     font-size: 14px
   &__coupon_text_effect

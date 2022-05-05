@@ -55,8 +55,7 @@
               >
               <q-item-label
                 :lines="1"
-                v-bind:class="[textSize, textAccent, fontFamily]"
-                class="q-pt-xs"
+                v-bind:class="[textSize, textAccent, fontFamily, pricePading]"
               >
                 {{ item.priceText }}
               </q-item-label>
@@ -76,7 +75,7 @@
 
               <q-item-label
                 :lines="2"
-                class="gt-sm YL__list_line_height q-pb-xs q-pt-sm YL__list_font_size text-grey-9 YL__content_height"
+                class="gt-sm YL__list_line_height q-py-sm YL__list_font_size text-grey-9 YL__content_height"
               >
                 <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
                   item.emphsis
@@ -122,7 +121,10 @@
                 </div>
               </q-item-label>
 
-              <q-item-label :lines="1" class="row justify-between items-center gt-sm YL__mall">
+              <q-item-label
+                :lines="1"
+                class="row justify-between items-center gt-sm YL__mall y-pt-sm"
+              >
                 <div class="col-4 row justify-between">
                   <div class="row items-center">
                     <q-btn
@@ -256,6 +258,7 @@
       height: 1.3em
     @media(min-width: $breakpoint-xs-max)
       font-size: 0.9em
+      height: 2.6em
     color: rgba(0, 0, 0, 0.54)
     line-height: 1.2em
   &__title_height
@@ -296,6 +299,7 @@ export default {
       paginationSize: Screen.gt.sm ? '12px' : '9px',
       maxPage: Screen.gt.sm ? 6 : 4,
       titleHeight: 'YL__title_height',
+      pricePading: Screen.gt.sm ? 'q-pt-xs q-pb-sm' : 'q-pt-xs',
       // to: false,
     };
   },
