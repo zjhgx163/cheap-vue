@@ -266,7 +266,7 @@ export default {
       };
     },
   },
-  props: ['code', 'state'], // 微信auth code
+  props: ['taobaoCode'], // 微信auth code
 
   components: {
     HotList,
@@ -280,7 +280,30 @@ export default {
     this.$q.loading.show({
       delay: 400, // ms
     });
+
     this.getItemDetail(this.$route.params.urlCode);
+    let that = this;
+    if (this.taobaoCode !== '') {
+      setTimeout(() => {
+        {
+          //用户登陆后传过来的淘宝码
+          this.$copyText(that.taobaoCode).then(
+            function (e) {
+              console.log('this.taobaoCode = ' + that.taobaoCode);
+
+              that.showing = true;
+              let t = setTimeout(() => {
+                that.showing = false;
+              }, 1500);
+            },
+            function (e) {
+              alert('Can not copy');
+              console.log(e);
+            },
+          );
+        }
+      }, 1500);
+    }
 
     console.log('urlCode = ' + this.$route.params.urlCode);
   },
@@ -415,7 +438,7 @@ export default {
           url: `${this.host}/goods/coupon-url/${code}?index=${index}`,
           success: function (res) {
             console.log('res = ' + res);
-            if (/https:\S*/.test(res)) {
+            if (/(http|https):\S*/.test(res)) {
               window.location.href = res;
             } else if (/redirect:\S*/.test(res)) {
               //redirect其他页面
@@ -455,7 +478,7 @@ export default {
           })
           .then((res) => {
             console.log(res.data);
-            if (/https:\S*/.test(res.data)) {
+            if (/(http|https):\S*/.test(res.data)) {
               window.location.href = res.data;
             } else if (/redirect:\S*/.test(res.data)) {
               //redirect其他页面

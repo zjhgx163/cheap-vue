@@ -62,7 +62,7 @@ const routes = [
             name: 'detail',
             path: 'detail/:urlCode',
             component: () => import('pages/DetailPage.vue'),
-            props: (route) => ({ code: route.query.code, state: route.query.state }),
+            props: (route) => ({ taobaoCode: route.query.taobao_code }),
 
             // beforeEnter: (to, from, next) => {
             //   console.info('%%before enter DetailPage, to=' + to.fullPath);
@@ -91,6 +91,15 @@ const routes = [
     path: '/user',
     component: () => import('pages/UserM.vue'),
     props: (route) => ({ code: route.query.code, state: route.query.state }),
+  },
+
+  {
+    path: '/auth/:urlCode',
+    component: () => import('pages/Auth.vue'),
+    props: (route) => ({
+      code: route.query.code,
+      state: route.query.state,
+    }),
   },
 
   // Always leave this as last one,
