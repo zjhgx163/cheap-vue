@@ -67,12 +67,12 @@ export default {
           let redirectPath = res.data.slice(9);
           that.$router.push({ path: redirectPath });
         } else {
-          console.log('taobaoPwd = ' + res);
+          console.log('taobaoPwd = ' + res.data);
           that.$router.push({
             path: 'item',
             name: 'detail',
             params: { urlCode: urlCode },
-            query: { taobao_code: res },
+            query: { taobao_code: res.data },
           });
         }
         // window.open(res.data, '_blank');
