@@ -81,48 +81,33 @@ export default {
     },
 
     takeCouponClick(code, index) {
+      //因为每个用户的链接不同，需要每次从后台取链接
+      console.log('coupon this.code = ' + this.code);
       let that = this;
-      $.ajaxSettings.async = false;
-      $.ajax({
-        type: 'POST',
-        async: false,
-        xhrFields: {
-          //携带cookie
-          withCredentials: true,
-        },
-        contentType: 'application/json;charset=UTF-8',
-        url: `${this.host}/goods/coupon-url/${code}?index=${index}`,
-        success: function (res) {
-          console.log('res = ' + res);
-          if (/(http|https):\S*/.test(res)) {
-            window.location.href = res;
-          } else if (/redirect:\S*/.test(res)) {
+      this.$axios
+        .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {
+          code: this.code,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (/(http|https):\S*/.test(res.data)) {
+            window.location.href = res.data;
+          } else if (/redirect:\S*/.test(res.data)) {
             //redirect其他页面
-            let redirectPath = res.slice(9);
+            let redirectPath = res.data.slice(9);
             that.$router.push({ path: redirectPath });
           } else {
-            that.taobaoPwd = res;
-            console.log('coupon taobaoPwd = ' + res);
+            console.log('taobaoPwd = ' + res.data);
+            that.$router.push({
+              path: 'item',
+              name: 'detail',
+              params: { urlCode: urlCode },
+              query: { taobao_code: res.data },
+            });
           }
-        },
-      });
-
-      if (this.taobaoPwd != '') {
-        this.$copyText(this.taobaoPwd).then(
-          function (e) {
-            console.log('coupon this.taobaoPwd = ' + that.taobaoPwd);
-
-            that.showing = true;
-            let t = setTimeout(() => {
-              that.showing = false;
-            }, 1500);
-          },
-          function (e) {
-            alert('Can not copy');
-            console.log(e);
-          },
-        );
-      }
+          // window.open(res.data, '_blank');
+          this.$q.loading.hide();
+        });
     },
   },
 };

@@ -357,13 +357,15 @@ export default {
       if (this.isTaoPwd) {
         //淘口令要从后台取
         // 这里必须用同步的ajax，否则ios的浏览器无法copy成功，this.$copyText不能放在异步方法里面\
-        console.log('code = ' + this.code);
         $.ajaxSettings.async = false;
         let that = this;
         $.ajax({
           type: 'POST',
           async: false,
-          data: JSON.stringify({ code: (this.code = undefined ? '' : this.code) }),
+          xhrFields: {
+            //携带cookie
+            withCredentials: true,
+          },
           contentType: 'application/json;charset=UTF-8',
           url: `${this.host}/goods/go/${urlCode}`,
           success: function (res) {
@@ -399,7 +401,6 @@ export default {
           );
       } else {
         //因为每个用户的链接不同，需要每次从后台取链接
-        console.log('this.code = ' + this.code);
         let that = this;
         this.$axios
           .post(`${this.host}/goods/go/${urlCode}`, {
@@ -433,7 +434,10 @@ export default {
         $.ajax({
           type: 'POST',
           async: false,
-          data: JSON.stringify({ code: (this.code = undefined ? '' : this.code) }),
+          xhrFields: {
+            //携带cookie
+            withCredentials: true,
+          },
           contentType: 'application/json;charset=UTF-8',
           url: `${this.host}/goods/coupon-url/${code}?index=${index}`,
           success: function (res) {
