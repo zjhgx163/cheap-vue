@@ -282,28 +282,29 @@ export default {
     });
 
     this.getItemDetail(this.$route.params.urlCode);
-    let that = this;
+    // let that = this;
     if (this.taobaoCode !== '') {
       setTimeout(() => {
         {
-          //用户登陆后传过来的淘宝码
-          this.$copyText(that.taobaoCode).then(
-            function (e) {
-              console.log('this.taobaoCode = ' + that.taobaoCode);
-
-              that.showing = true;
-              let t = setTimeout(() => {
-                that.showing = false;
-              }, 1500);
-            },
-            function (e) {
-              alert('Can not copy-taobaoCode is ' + that.taobaoCode);
-              console.log(e);
-            },
-          );
         }
-      }, 1500);
+      }, 1000);
     }
+
+    //用户登陆后传过来的淘宝码
+    this.$copyText(this.taobaoCode).then(
+      function (e) {
+        console.log('this.taobaoCode = ' + this.taobaoCode);
+
+        that.showing = true;
+        let t = setTimeout(() => {
+          that.showing = false;
+        }, 1500);
+      },
+      function (e) {
+        alert('淘宝码是 ' + this.taobaoCode);
+        console.log(e);
+      },
+    );
 
     console.log('urlCode = ' + this.$route.params.urlCode);
   },
