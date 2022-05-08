@@ -297,7 +297,7 @@ export default {
               }, 1500);
             },
             function (e) {
-              alert('Can not copy');
+              alert('Can not copy-taobaoCode is ' + that.taobaoCode);
               console.log(e);
             },
           );
