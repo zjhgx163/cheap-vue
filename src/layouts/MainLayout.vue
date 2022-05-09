@@ -163,10 +163,16 @@ export default {
       }
     },
   },
+
+  // beforeRouteUpdate(to, from, next) {
+  //   console.log('beforeRouteUpdate');
+  //   next();
+  // },
   methods: {
     search() {
+      let randomNum = Math.random();
       this.$router
-        .push({ path: 'search', name: 'search', query: { q: this.searchKey } })
+        .push({ path: 'search', name: 'search', query: { q: this.searchKey, x: randomNum } })
         .catch((err) => {
           err;
         });
