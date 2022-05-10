@@ -1,30 +1,41 @@
 <template>
   <q-page class="bg-primary">
-    <q-pull-to-refresh @refresh="refresh" no-mouse>
-      <q-list
-        separator
-        dense
-        id="scroll-target-id"
-        v-for="item in listData"
-        v-bind:key="item.id"
-        class="bg-secondary"
-        ref="scrollTargetRef"
-      >
-        <div class="q-pb-sm bg-primary">
-          <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
-          <q-item
-            v-ripple
-            v-bind:class="[itemPadding]"
-            :clickable="clickable"
-            @click="itemClick(item.urlCode)"
-            class="bg-secondary"
-            dense
-          >
-            <q-item-section side no-wrap>
-              <!-- 这里用router-link代替a -->
+    <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
+      <div class="YL__no_data">
+        <q-img
+          src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/no-data.png"
+          spinner-color="white"
+        >
+        </q-img>
+        <div class="text-subtitle2 text-center text-grey">空空如也~</div>
+      </div>
+    </div>
+    <div v-else>
+      <q-pull-to-refresh @refresh="refresh" no-mouse>
+        <q-list
+          separator
+          dense
+          id="scroll-target-id"
+          v-for="item in listData"
+          v-bind:key="item.id"
+          class="bg-secondary"
+          ref="scrollTargetRef"
+        >
+          <div class="q-pb-sm bg-primary">
+            <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
+            <q-item
+              v-ripple
+              v-bind:class="[itemPadding]"
+              :clickable="clickable"
+              @click="itemClick(item.urlCode)"
+              class="bg-secondary"
+              dense
+            >
+              <q-item-section side no-wrap>
+                <!-- 这里用router-link代替a -->
 
-              <!-- <router-link :to="`/item/${item.id}`"> -->
-              <!-- <router-link
+                <!-- <router-link :to="`/item/${item.id}`"> -->
+                <!-- <router-link
               :to="{
                 path: 'item',
                 name: 'detail',
@@ -34,196 +45,199 @@
               <img v-bind:src="item.thumbUrl" />
             </router-link> -->
 
-              <router-link
-                :to="{
-                  path: 'item',
-                  name: 'detail',
-
-                  params: { code: item.urlCode },
-                }"
-              >
-                <img v-bind:src="item.thumbUrl" class="YL__index_img" />
-              </router-link>
-            </q-item-section>
-            <q-item-section class="q-pb-xs">
-              <q-item-label
-                :lines="lines"
-                v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
-                class="text-grey-9 text-bold"
-              >
-                {{ item.title }}</q-item-label
-              >
-              <q-item-label
-                :lines="1"
-                v-bind:class="[textSize, textAccent, fontFamily, pricePading]"
-              >
-                {{ item.priceText }}
-              </q-item-label>
-              <q-item-label :lines="1">
-                <span v-if="item.label != ''" style="text-align: left">
-                  <li
-                    v-for="a in transferLabel(item.label)"
-                    v-bind:key="a"
-                    style="text-align: left"
-                    class="YL__label q-py-xs"
-                  >
-                    {{ a }}
-                  </li>
-                </span>
-                <span v-else> &nbsp; &nbsp; &nbsp;</span>
-              </q-item-label>
-
-              <q-item-label
-                :lines="2"
-                class="gt-sm YL__list_line_height q-py-sm YL__list_font_size text-grey-9 YL__content_height"
-              >
-                <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
-                  item.emphsis
-                }}</span
-                >{{ item.detailBrief }}
                 <router-link
                   :to="{
                     path: 'item',
                     name: 'detail',
-                    params: { urlCode: item.urlCode },
+
+                    params: { code: item.urlCode },
                   }"
-                  >...阅读全文
+                >
+                  <img v-bind:src="item.thumbUrl" class="YL__index_img" />
                 </router-link>
-              </q-item-label>
-              <q-item-label :lines="1" class="row items-center justify-between YL__mall lt-sm">
-                <div class="col-auto">{{ item.mall }} | {{ item.dateStr }}</div>
+              </q-item-section>
+              <q-item-section class="q-pb-xs">
+                <q-item-label
+                  :lines="lines"
+                  v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
+                  class="text-grey-9 text-bold"
+                >
+                  {{ item.title }}</q-item-label
+                >
+                <q-item-label
+                  :lines="1"
+                  v-bind:class="[textSize, textAccent, fontFamily, pricePading]"
+                >
+                  {{ item.priceText }}
+                </q-item-label>
+                <q-item-label :lines="1">
+                  <span v-if="item.label != ''" style="text-align: left">
+                    <li
+                      v-for="a in transferLabel(item.label)"
+                      v-bind:key="a"
+                      style="text-align: left"
+                      class="YL__label q-py-xs"
+                    >
+                      {{ a }}
+                    </li>
+                  </span>
+                  <span v-else> &nbsp; &nbsp; &nbsp;</span>
+                </q-item-label>
 
-                <div class="col-5 row">
-                  <div class="row items-center">
-                    <q-btn
-                      size="7px"
-                      color="grey"
-                      flat
-                      round
-                      :icon="thumbUpIcon"
-                      @click="thumbUpClick"
-                    >
-                    </q-btn>
-                    <div>{{ item.zhiCount }}</div>
-                  </div>
-                  <div class="row items-center">
-                    <q-btn
-                      size="7px"
-                      color="grey"
-                      flat
-                      round
-                      :icon="thumbDownIcon"
-                      @click="thumbDownClick"
-                    >
-                    </q-btn>
-                    <div>{{ item.buzhiCount }}</div>
-                  </div>
-                </div>
-              </q-item-label>
+                <q-item-label
+                  :lines="2"
+                  class="gt-sm YL__list_line_height q-py-sm YL__list_font_size text-grey-9 YL__content_height"
+                >
+                  <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
+                    item.emphsis
+                  }}</span
+                  >{{ item.detailBrief }}
+                  <router-link
+                    :to="{
+                      path: 'item',
+                      name: 'detail',
+                      params: { urlCode: item.urlCode },
+                    }"
+                    >...阅读全文
+                  </router-link>
+                </q-item-label>
+                <q-item-label :lines="1" class="row items-center justify-between YL__mall lt-sm">
+                  <div class="col-auto">{{ item.mall }} | {{ item.dateStr }}</div>
 
-              <q-item-label
-                :lines="1"
-                class="row justify-between items-center gt-sm YL__mall y-pt-sm"
-              >
-                <div class="col-4 row justify-between">
-                  <div class="row items-center">
-                    <q-btn
-                      size="0.7em"
-                      color="grey"
-                      flat
-                      round
-                      :icon="thumbUpIcon"
-                      @click="thumbUpClick"
-                    >
-                    </q-btn>
-                    <div>{{ item.zhiCount }}</div>
+                  <div class="col-5 row">
+                    <div class="row items-center">
+                      <q-btn
+                        size="7px"
+                        color="grey"
+                        flat
+                        round
+                        :icon="thumbUpIcon"
+                        @click="thumbUpClick"
+                      >
+                      </q-btn>
+                      <div>{{ item.zhiCount }}</div>
+                    </div>
+                    <div class="row items-center">
+                      <q-btn
+                        size="7px"
+                        color="grey"
+                        flat
+                        round
+                        :icon="thumbDownIcon"
+                        @click="thumbDownClick"
+                      >
+                      </q-btn>
+                      <div>{{ item.buzhiCount }}</div>
+                    </div>
                   </div>
-                  <div class="row items-center">
-                    <q-btn
-                      size="0.7em"
-                      color="grey"
-                      flat
-                      round
-                      :icon="thumbDownIcon"
-                      @click="thumbDownClick"
-                    >
-                    </q-btn>
-                    <div>{{ item.buzhiCount }}</div>
+                </q-item-label>
+
+                <q-item-label
+                  :lines="1"
+                  class="row justify-between items-center gt-sm YL__mall y-pt-sm"
+                >
+                  <div class="col-4 row justify-between">
+                    <div class="row items-center">
+                      <q-btn
+                        size="0.7em"
+                        color="grey"
+                        flat
+                        round
+                        :icon="thumbUpIcon"
+                        @click="thumbUpClick"
+                      >
+                      </q-btn>
+                      <div>{{ item.zhiCount }}</div>
+                    </div>
+                    <div class="row items-center">
+                      <q-btn
+                        size="0.7em"
+                        color="grey"
+                        flat
+                        round
+                        :icon="thumbDownIcon"
+                        @click="thumbDownClick"
+                      >
+                      </q-btn>
+                      <div>{{ item.buzhiCount }}</div>
+                    </div>
+
+                    <div class="row items-center">
+                      <q-btn
+                        size="0.7em"
+                        color="grey"
+                        flat
+                        round
+                        :icon="turnInOrNot"
+                        @click="turnInOrNotClick"
+                      >
+                      </q-btn>
+                      <div>{{ item.starCount }}</div>
+                    </div>
+
+                    <div class="row items-center">
+                      <q-btn
+                        size="0.7em"
+                        color="grey"
+                        flat
+                        round
+                        :icon="comment"
+                        @click="commentClick"
+                      >
+                      </q-btn>
+                      <div>{{ item.commentsCount }}</div>
+                    </div>
                   </div>
 
-                  <div class="row items-center">
+                  <div class="col-4 justify-end row">
+                    <div class="col"></div>
+                    <div class="col-auto items-center row">
+                      {{ item.mall }} | {{ item.dateStr }}
+                    </div>
+                    <div class="col-1"></div>
                     <q-btn
-                      size="0.7em"
-                      color="grey"
-                      flat
-                      round
-                      :icon="turnInOrNot"
-                      @click="turnInOrNotClick"
+                      class="col-3"
+                      color="accent"
+                      :size="buyButtonSize"
+                      unelevated
+                      @click.stop="buyClick(item.urlCode)"
                     >
+                      <a class="text-white text-weight-bold"> 去购买</a>
                     </q-btn>
-                    <div>{{ item.starCount }}</div>
                   </div>
-
-                  <div class="row items-center">
-                    <q-btn
-                      size="0.7em"
-                      color="grey"
-                      flat
-                      round
-                      :icon="comment"
-                      @click="commentClick"
-                    >
-                    </q-btn>
-                    <div>{{ item.commentsCount }}</div>
-                  </div>
-                </div>
-
-                <div class="col-4 justify-end row">
-                  <div class="col"></div>
-                  <div class="col-auto items-center row">{{ item.mall }} | {{ item.dateStr }}</div>
-                  <div class="col-1"></div>
-                  <q-btn
-                    class="col-3"
-                    color="accent"
-                    :size="buyButtonSize"
-                    unelevated
-                    @click.stop="buyClick(item.urlCode)"
-                  >
-                    <a class="text-white text-weight-bold"> 去购买</a>
-                  </q-btn>
-                </div>
-              </q-item-label>
-            </q-item-section>
-          </q-item>
-        </div>
-        <!-- <q-separator /> -->
-      </q-list>
-    </q-pull-to-refresh>
-    <q-infinite-scroll
-      @load="onLoad"
-      :offset="100"
-      :initial-index="1"
-      scroll-target="#scroll-target-id"
-      class="lt-sm"
-    >
-      <template v-slot:loading>
-        <div class="row justify-center q-my-md">
-          <q-spinner-dots color="accent" size="40px"></q-spinner-dots>
-        </div>
-      </template>
-    </q-infinite-scroll>
-    <div class="q-my-xs q-pa-lg flex flex-center bg-secondary gt-sm">
-      <q-pagination
-        v-model="current"
-        :size="paginationSize"
-        color="dark"
-        :max="max"
-        :max-pages="maxPage"
-        :boundary-numbers="false"
-        :direction-links="true"
-        @input="pageNavigate"
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </div>
+          <!-- <q-separator /> -->
+        </q-list>
+      </q-pull-to-refresh>
+      <q-infinite-scroll
+        @load="onLoad"
+        :offset="100"
+        :initial-index="1"
+        scroll-target="#scroll-target-id"
+        class="lt-sm"
       >
-      </q-pagination>
+        <template v-slot:loading>
+          <div class="row justify-center q-my-md">
+            <q-spinner-dots color="accent" size="40px"></q-spinner-dots>
+          </div>
+        </template>
+      </q-infinite-scroll>
+      <div class="q-my-xs q-pa-lg flex flex-center bg-secondary gt-sm">
+        <q-pagination
+          v-model="current"
+          :size="paginationSize"
+          color="dark"
+          :max="max"
+          :max-pages="maxPage"
+          :boundary-numbers="false"
+          :direction-links="true"
+          @input="pageNavigate"
+        >
+        </q-pagination>
+      </div>
     </div>
   </q-page>
 </template>
@@ -273,6 +287,13 @@
       font-size: 0.7em
     @media(min-width: $breakpoint-xs-max)
       font-size: 0.9em
+  &__no_data
+    @media(max-width: $breakpoint-xs-max)
+      height: 5em
+      width: 6em
+    @media(min-width: $breakpoint-xs-max)
+      width: 10em
+      width: 12em
 </style>
 
 <script>
