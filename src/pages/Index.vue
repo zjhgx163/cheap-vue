@@ -10,18 +10,10 @@
         <div class="text-subtitle2 text-center text-grey">空空如也~</div>
       </div>
     </div>
-    <div v-else>
+    <div v-else ref="scrollTargetRef" style="overflow: auto; max-height: 3200px">
       <q-pull-to-refresh @refresh="refresh" no-mouse>
-        <q-list
-          separator
-          dense
-          id="scroll-target-id"
-          v-for="item in listData"
-          v-bind:key="item.id"
-          class="bg-secondary"
-          ref="scrollTargetRef"
-        >
-          <div class="q-pb-sm bg-primary">
+        <q-list separator dense class="bg-secondary" id="scroll-target-id">
+          <div v-bind:key="item.id" v-for="item in listData" class="q-pb-sm bg-primary">
             <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
             <q-item
               v-ripple
@@ -214,9 +206,9 @@
       </q-pull-to-refresh>
       <q-infinite-scroll
         @load="onLoad"
-        :offset="100"
+        :offset="500"
         :initial-index="1"
-        scroll-target="#scroll-target-id"
+        :scroll-target="$refs.scrollTargetRef"
         class="lt-sm"
       >
         <template v-slot:loading>
