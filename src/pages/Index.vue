@@ -417,12 +417,15 @@ export default {
           })
           .then((res) => {
             console.log(res.data.data.records);
+            if (res.data.data.records.length < 20) {
+              this.disable = true;
+            }
             //过滤页面上重复的
             const filters = res.data.data.records.filter((item) => {
               let isDupliate = false;
               for (let key in this.listData) {
                 if (this.listData[key].id == item.id) {
-                  console.log('this id is duplicate,' + exist.id);
+                  console.log('this id is duplicate,' + item.id);
                   isDupliate = true;
                   break;
                 }
