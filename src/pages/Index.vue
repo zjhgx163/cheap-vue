@@ -380,6 +380,10 @@ export default {
     //   this.windowWidth = window.innerWidth;
     // };
   },
+  deactivated() {
+    console.log('Index deactivated');
+    this.isListEnd = false;
+  },
   methods: {
     getItemList(sortIndex) {
       // console.log('$$$$$$' + this.query);
