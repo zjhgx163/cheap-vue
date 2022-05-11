@@ -309,6 +309,7 @@ export default {
       maxPage: Screen.gt.sm ? 6 : 4,
       titleHeight: 'YL__title_height',
       pricePading: Screen.gt.sm ? 'q-pt-xs q-pb-sm' : 'q-pt-xs',
+      isListEnd: false,
       // to: false,
     };
   },
@@ -334,7 +335,7 @@ export default {
       return this.isBigScreen ? false : true;
     },
     disable: function () {
-      return this.isBigScreen || this.listData.length < 20 ? true : false;
+      return this.isBigScreen || this.listData.length < 20 || this.isListEnd ? true : false;
     },
     iconGutter: function () {
       return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-none';
@@ -418,7 +419,7 @@ export default {
           .then((res) => {
             console.log(res.data.data.records);
             if (res.data.data.records.length < 20) {
-              this.disable = true;
+              this.isListEnd = true;
             }
             //过滤页面上重复的
             const filters = res.data.data.records.filter((item) => {
