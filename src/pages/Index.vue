@@ -335,7 +335,7 @@ export default {
       return this.isBigScreen ? false : true;
     },
     disable: function () {
-      return this.isBigScreen || this.listData.length < 20 || this.isListEnd ? true : false;
+      return this.isBigScreen || this.isListEnd ? true : false;
     },
     iconGutter: function () {
       return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-none';
@@ -380,8 +380,8 @@ export default {
     //   this.windowWidth = window.innerWidth;
     // };
   },
-  deactivated() {
-    console.log('Index deactivated');
+  activated() {
+    console.log('Index activated');
     this.isListEnd = false;
   },
   methods: {
@@ -402,6 +402,9 @@ export default {
           // console.log(this.isBigScreen);
 
           this.listData = res.data.data.records;
+          if (res.data.data.records.length < 20) {
+            this.isListEnd = true;
+          }
           this.max = res.data.data.total / res.data.data.size + 1;
           this.$q.loading.hide();
         });
