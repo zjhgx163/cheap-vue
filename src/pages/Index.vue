@@ -334,7 +334,7 @@ export default {
       return this.isBigScreen ? false : true;
     },
     disable: function () {
-      return this.isBigScreen ? true : false;
+      return this.isBigScreen || this.listData.length < 20 ? true : false;
     },
     iconGutter: function () {
       return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-none';
@@ -420,8 +420,9 @@ export default {
             //过滤页面上重复的
             const filters = res.data.data.records.filter((item) => {
               let isDupliate = false;
-              for (const exist in this.listData) {
-                if (exist.id == item.id) {
+              for (let key in this.listData) {
+                if (this.listData[key].id == item.id) {
+                  console.log('this id is duplicate,' + exist.id);
                   isDupliate = true;
                   break;
                 }
