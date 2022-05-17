@@ -35,7 +35,6 @@ export default {
           state: this.state,
         })
         .then((res) => {
-          console.log('res.data = ' + res.data);
           if (res.data == null) {
           }
           if (this.state == 'buy') {
@@ -43,17 +42,19 @@ export default {
             this.buyClick(this.$route.params.urlCode);
           } else {
             //领券操作
-            this.takeCouponClick($route.params.urlCode, this.state.slice(6));
+            let coupon_index = this.state.slice(6);
+            console.log('coupon_index = ' + coupon_index);
+            this.takeCouponClick(this.$route.params.urlCode, coupon_index);
           }
-          this.$q.loading.hide();
+          // this.$q.loading.hide();
           // console.log(this.isBigSc = reen);
         });
     },
 
     buyClick(urlCode) {
-      this.$q.loading.show({
-        delay: 100, // ms
-      });
+      // this.$q.loading.show({
+      //   delay: 100, // ms
+      // });
 
       //淘口令要从后台取
       let that = this;
@@ -80,14 +81,15 @@ export default {
       });
     },
 
-    takeCouponClick(code, index) {
+    takeCouponClick(urlCode, index) {
+      // this.$q.loading.show({
+      //   delay: 100, // ms
+      // });
       //因为每个用户的链接不同，需要每次从后台取链接
-      console.log('coupon this.code = ' + this.code);
+      console.log('coupon urlCode = ' + urlCode);
       let that = this;
       this.$axios
-        .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {
-          code: this.code,
-        })
+        .post(`${this.host}/goods/coupon-url/${urlCode}?index=${index}`, {})
         .then((res) => {
           console.log(res.data);
           if (/(http|https):\S*/.test(res.data)) {

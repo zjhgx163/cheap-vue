@@ -36,20 +36,20 @@
         <q-item>
           <q-item-section class="q-py-sm">
             <div class="column items-center">
-              <q-item-label>0.00</q-item-label>
+              <q-item-label>{{ this.userInfo.todayEstimateCommissionAmount }}</q-item-label>
               <q-item-label caption>今日预估</q-item-label>
             </div>
           </q-item-section>
           <q-item-section class="q-py-sm">
             <div class="column items-center">
-              <q-item-label>0.00</q-item-label>
-              <q-item-label caption>今日预估</q-item-label>
+              <q-item-label>{{ this.userInfo.monthEstimateCommissionAmount }}</q-item-label>
+              <q-item-label caption>本月预估</q-item-label>
             </div>
           </q-item-section>
           <q-item-section class="q-py-sm">
             <div class="column items-center">
-              <q-item-label>0.00</q-item-label>
-              <q-item-label caption>待审批</q-item-label>
+              <q-item-label>{{ this.userInfo.accumulativeActualCommissionAmount }}</q-item-label>
+              <q-item-label caption>累计收入</q-item-label>
             </div>
           </q-item-section>
         </q-item>
@@ -57,20 +57,20 @@
         <q-item>
           <q-item-section class="q-py-sm">
             <div class="column items-center">
-              <q-item-label>0.00</q-item-label>
-              <q-item-label caption>今日预估</q-item-label>
+              <q-item-label>{{ this.userInfo.waitEstimateCommissionAmount }}</q-item-label>
+              <q-item-label caption>待结算</q-item-label>
             </div>
           </q-item-section>
           <q-item-section class="q-py-sm">
             <div class="column items-center">
-              <q-item-label>0.00</q-item-label>
-              <q-item-label caption>今日预估</q-item-label>
-            </div>
-          </q-item-section>
-          <q-item-section class="q-py-sm">
-            <div class="column items-center">
-              <q-item-label>0.00</q-item-label>
+              <q-item-label>{{ this.userInfo.waitActualCommissionAmount }}</q-item-label>
               <q-item-label caption>待审批</q-item-label>
+            </div>
+          </q-item-section>
+          <q-item-section class="q-py-sm">
+            <div class="column items-center">
+              <q-item-label>{{ this.userInfo.withdrawedAmount }}</q-item-label>
+              <q-item-label caption>已提现</q-item-label>
             </div>
           </q-item-section>
         </q-item>
@@ -137,9 +137,7 @@
 
         <q-item>
           <q-item-section>
-            <q-item-label caption>
-              Set the content filtering level to restrict apps that can be downloaded
-            </q-item-label>
+            <q-item-label caption> 请上传微信收款码，审批后会尽快打款 </q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -155,6 +153,7 @@ export default {
     return {
       user: '登陆/注册',
       avatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
+      userInfo: {},
     };
   },
 
@@ -181,6 +180,7 @@ export default {
           console.log(res.data);
           this.avatar = res.data.headimgurl;
           this.user = res.data.nickname;
+          this.userInfo = res.data;
           this.$q.loading.hide();
 
           // console.log(this.isBigSc = reen);

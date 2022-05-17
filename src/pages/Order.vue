@@ -1,6 +1,6 @@
 <template>
   <q-page class="bg-primary">
-    <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
+    <div v-if="listData.length === 0" class="column items-center justify-start absolute-full">
       <div class="clo-4 YL__no_data">
         <q-img
           src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/no-data.png"
@@ -27,29 +27,8 @@
                 dense
               >
                 <q-item-section side no-wrap>
-                  <!-- 这里用router-link代替a -->
-
-                  <!-- <router-link :to="`/item/${item.id}`"> -->
-                  <!-- <router-link
-              :to="{
-                path: 'item',
-                name: 'detail',
-                query: { title: `${item.title}`, detail: `${item.detail}` },
-              }"
-            >
-              <img v-bind:src="item.thumbUrl" />
-            </router-link> -->
-
-                  <router-link
-                    :to="{
-                      path: 'item',
-                      name: 'detail',
-
-                      params: { urlCode: item.urlCode },
-                    }"
-                  >
-                    <img v-bind:src="item.thumbUrl" class="YL__index_img" />
-                  </router-link>
+                  <q-item-label>Single line item</q-item-label>
+                  <img v-bind:src="item.thumbUrl" class="YL__index_img" />
                 </q-item-section>
                 <q-item-section class="q-pb-xs">
                   <q-item-label
@@ -214,18 +193,7 @@
           </div>
         </template>
       </q-infinite-scroll>
-      <div class="q-my-xs q-pa-lg flex flex-center bg-secondary gt-sm">
-        <q-pagination
-          v-model="current"
-          :size="paginationSize"
-          color="dark"
-          :max="max"
-          :max-pages="maxPage"
-          :boundary-numbers="false"
-          :direction-links="true"
-          @input="pageNavigate"
-        >
-        </q-pagination>
+
       </div>
     </div>
   </q-page>
@@ -365,16 +333,12 @@ export default {
   //   });
   // },
 
-  created() {
-    console.log('Index created');
-  },
 
   mounted() {
     //解决iphone移动端的延迟
     FastClick.attach(document.body);
-    console.log('Index mounted');
     // this.selectedTab = 'main';
-    this.getItemList();
+    this.getOrderList();
 
     // this.windowWidth = window.innerWidth;
     // window.onresize = () => {
@@ -388,21 +352,15 @@ export default {
     this.isListEnd = false;
   },
   methods: {
-    getItemList(sortIndex) {
-      // console.log('$$$$$$' + this.query);
+    getOrderList(sortIndex) {
       this.$q.loading.show({
         delay: 400, // ms
       });
       this.$axios
-        .post(`${global.config.domain}/goods/list`, {
+        .post(`${global.config.domain}/order/list`, {
           page: this.current,
-          path: this.$route.path,
-          query: this.$route.query.q,
-          sort: sortIndex != null ? sortIndex : this.sort,
         })
         .then((res) => {
-          // console.log(res.data.data);
-          // console.log(this.isBigScreen);
 
           this.listData = res.data.data.records;
           if (res.data.data.records.length < 20) {
@@ -420,11 +378,8 @@ export default {
       setTimeout(() => {
         console.log('index = .....' + index);
         this.$axios
-          .post(`${global.config.domain}/goods/list`, {
+          .post(`${global.config.domain}/order/list`, {
             page: index,
-            path: this.$route.path,
-            query: this.$route.query.q,
-            sort: this.sort,
           })
           .then((res) => {
             console.log(res.data.data.records);
@@ -486,42 +441,8 @@ export default {
     },
     turnInOrNotClick() {},
     commentClick() {},
-    itemClick(urlCode) {
-      console.log('urlCode = ' + urlCode);
-      this.$router.push({ path: 'item', name: 'detail', params: { urlCode: urlCode } });
-      // const { href } = this.$router.resolve({
-      //   path: 'item/detail',
-      //   name: 'detail',
-      //   params: {
-      //     id: id,
-      //   },
-      // });
-      // window.open(href, '_blank');
+ 
 
-      // window.location.href = `${global.config.domain}/goods/detail?id=` + id;
-    },
-    buyClick(code) {
-      this.$q.loading.show({
-        delay: 100, // ms
-      });
-      let that = this;
-      this.$axios
-        .post(`${this.host}/goods/go/${code}`, {
-          code: '',
-        })
-        .then((res) => {
-          console.log(res.data);
-          if (/(http|https):\S*/.test(res.data)) {
-            // window.location.href = res.data;
-            window.open(res.data, '_blank');
-          } else if (/redirect:\S*/.test(res.data)) {
-            //redirect其他页面
-            let redirectPath = res.data.slice(9);
-            that.$router.push({ path: redirectPath });
-          }
-          this.$q.loading.hide();
-        });
-    },
     transferLabel(label) {
       if (label != '' && label != undefined) {
         // console.log('label = ' + label);
