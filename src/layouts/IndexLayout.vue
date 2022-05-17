@@ -2,9 +2,9 @@
   <q-layout>
     <div class="row YL__1200w">
       <div class="col">
-        <router-view></router-view>
+        <router-view ref="goods"></router-view>
       </div>
-      <div class="col-3 gt-xs">
+      <div v-if="$q.screen.gt.sm" class="col-3">
         <router-view name="hot"></router-view>
       </div>
     </div>

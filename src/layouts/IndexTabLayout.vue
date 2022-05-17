@@ -65,7 +65,11 @@ export default {
       sortIndex: 1,
     };
   },
-
+  // computed: {
+  //   isBigScreen: function () {
+  //     return this.$refs['goods-list'].isBigScreen;
+  //   },
+  // },
   created() {
     console.log('IndexTabLayout created');
   },
