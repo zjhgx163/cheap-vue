@@ -297,7 +297,7 @@ export default {
               }, 1500);
             },
             function (e) {
-              alert('淘宝码是 ' + that.taobaoCode);
+              alert('淘宝码是 ' + this.taobaoCode);
               console.log(e);
             },
           );
@@ -401,7 +401,6 @@ export default {
           );
       } else {
         //因为每个用户的链接不同，需要每次从后台取链接
-        let that = this;
         this.$axios
           .post(`${this.host}/goods/go/${urlCode}`, {
             code: this.code,
@@ -414,7 +413,7 @@ export default {
             } else if (/redirect:\S*/.test(res.data)) {
               //redirect其他页面
               let redirectPath = res.data.slice(9);
-              that.$router.push({ path: redirectPath });
+              this.$router.push({ path: redirectPath });
             }
             // window.open(res.data, '_blank');
             this.$q.loading.hide();
@@ -475,7 +474,6 @@ export default {
       } else {
         //因为每个用户的链接不同，需要每次从后台取链接
         console.log('coupon this.code = ' + this.code);
-        let that = this;
         this.$axios
           .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {
             code: this.code,
@@ -487,7 +485,7 @@ export default {
             } else if (/redirect:\S*/.test(res.data)) {
               //redirect其他页面
               let redirectPath = res.data.slice(9);
-              that.$router.push({ path: redirectPath });
+              this.$router.push({ path: redirectPath });
             }
             // window.open(res.data, '_blank');
             this.$q.loading.hide();

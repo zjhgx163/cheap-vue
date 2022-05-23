@@ -504,7 +504,6 @@ export default {
       this.$q.loading.show({
         delay: 100, // ms
       });
-      let that = this;
       this.$axios
         .post(`${this.host}/goods/go/${code}`, {
           code: '',
@@ -517,7 +516,7 @@ export default {
           } else if (/redirect:\S*/.test(res.data)) {
             //redirect其他页面
             let redirectPath = res.data.slice(9);
-            that.$router.push({ path: redirectPath });
+            this.$router.push({ path: redirectPath });
           }
           this.$q.loading.hide();
         });
