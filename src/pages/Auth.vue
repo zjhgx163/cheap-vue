@@ -4,7 +4,6 @@
 
 <script>
 import 'src/config';
-import $ from 'jquery';
 
 export default {
   props: ['code', 'state'],
@@ -29,6 +28,7 @@ export default {
       this.$q.loading.show({
         delay: 400, // ms
       });
+      // let that = this;
       this.$axios
         .post(`${global.config.domain}/wechat/accesstokenlogin`, {
           code: this.code,
@@ -36,15 +36,22 @@ export default {
         })
         .then((res) => {
           if (res.data == null) {
+            console.log('error! res.data is null');
           }
           if (this.state == 'buy') {
             //代表购买商品
             this.buyClick(this.$route.params.urlCode);
-          } else {
+          } else if (this.state.indexOf('coupon') > -1) {
             //领券操作
             let coupon_index = this.state.slice(6);
             console.log('coupon_index = ' + coupon_index);
             this.takeCouponClick(this.$route.params.urlCode, coupon_index);
+          } else {
+            console.log('order list' + this.state);
+            this.$router.push({
+              path: '/my/orderlist',
+              query: { userId: this.$route.params.urlCode, status: this.state },
+            });
           }
           // this.$q.loading.hide();
           // console.log(this.isBigSc = reen);
@@ -57,7 +64,6 @@ export default {
       // });
 
       //淘口令要从后台取
-      let that = this;
       this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
         console.log(res.data);
         if (/(http|https):\S*/.test(res.data)) {
@@ -66,10 +72,10 @@ export default {
         } else if (/redirect:\S*/.test(res.data)) {
           //redirect其他页面
           let redirectPath = res.data.slice(9);
-          that.$router.push({ path: redirectPath });
+          this.$router.push({ path: redirectPath });
         } else {
           console.log('taobaoPwd = ' + res.data);
-          that.$router.push({
+          this.$router.push({
             path: 'item',
             name: 'detail',
             params: { urlCode: urlCode },
@@ -87,7 +93,6 @@ export default {
       // });
       //因为每个用户的链接不同，需要每次从后台取链接
       console.log('coupon urlCode = ' + urlCode);
-      let that = this;
       this.$axios
         .post(`${this.host}/goods/coupon-url/${urlCode}?index=${index}`, {})
         .then((res) => {
@@ -97,7 +102,7 @@ export default {
           } else if (/redirect:\S*/.test(res.data)) {
             //redirect其他页面
             let redirectPath = res.data.slice(9);
-            that.$router.push({ path: redirectPath });
+            this.$router.push({ path: redirectPath });
           } else {
             console.log('taobaoPwd = ' + res.data);
             that.$router.push({

@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="YL__750w">
-      <q-list class="q-px-sm q-mb-sm bg-secondary">
+      <q-list class="q-px-sm q-my-sm bg-secondary">
         <q-item>
           <q-item-section class="q-py-sm">
             <div class="column items-center">
@@ -76,7 +76,7 @@
         </q-item>
       </q-list>
 
-      <q-list class="q-px-sm q-mb-sm bg-secondary">
+      <q-list class="q-px-sm q-mb-sm bg-secondary" dense>
         <q-item>
           <q-item-section avatar top class="q-py-sm">
             <q-avatar icon="shopping_bag" color="accent" text-color="white" />

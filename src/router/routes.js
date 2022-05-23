@@ -94,6 +94,28 @@ const routes = [
   },
 
   {
+    path: '/my/orderlist',
+    component: () => import('pages/Order.vue'),
+    children: [
+      {
+        path: 'all',
+        component: () => import('pages/OrderList.vue'),
+        props: (route) => ({ userId: route.query.userId, status: route.query.status }),
+      },
+      {
+        path: 'unbalanced',
+        component: () => import('pages/OrderList.vue'),
+        props: (route) => ({ userId: route.query.userId, status: route.query.status }),
+      },
+      {
+        path: 'balanced',
+        component: () => import('pages/OrderList.vue'),
+        props: (route) => ({ userId: route.query.userId, status: route.query.status }),
+      },
+    ],
+  },
+
+  {
     path: '/auth/:urlCode',
     component: () => import('pages/Auth.vue'),
     props: (route) => ({
