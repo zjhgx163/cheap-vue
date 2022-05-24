@@ -49,7 +49,7 @@ export default {
           } else {
             console.log('order list' + this.state);
             this.$router.push({
-              path: '/my/orderlist',
+              path: '/my/orderlist/all',
               query: { userId: this.$route.params.urlCode, status: this.state },
             });
           }
