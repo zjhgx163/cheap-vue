@@ -23,21 +23,79 @@
                   <q-item-section side no-wrap>
                     <img v-bind:src="item.itemImg" class="YL__order_img" />
                   </q-item-section>
-                  <q-item-section class="q-pb-xs">
-                    <q-item-label
-                      :lines="1"
-                      v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
-                      class="text-grey-9 text-bold"
-                    >
+                  <q-item-section>
+                    <q-item-label :lines="1" v-bind:class="[textSize, fontFamily, titleHeight]">
                       {{ item.itemTitle }}</q-item-label
                     >
-                    <q-item-label :lines="1" v-bind:class="[textSize, textAccent, fontFamily]"
-                      >订单号：{{ item.platformOrderNo }}</q-item-label
+                    <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]"
+                      ><span class="text-grey-7">订单号：</span
+                      >{{ item.platformOrderNo }}</q-item-label
                     >
-
-                    <q-item-label :lines="1" v-bind:class="[textSize, textAccent, fontFamily]">
-                      {{ item.status }}
+                    <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]" class="row"
+                      ><div class="col-4">
+                        <span class="text-grey-7">商城：</span>{{ getMall(item.platform) }}
+                      </div>
+                      <div class="col">
+                        <span class="text-grey-7">付款时间：</span>{{ item.payTime }}
+                      </div>
                     </q-item-label>
+
+                    <q-item-label :lines="1" v-bind:class="[fontFamily]">
+                      <q-chip
+                        dense
+                        :color="getStatusColor(item.status)"
+                        text-color="white"
+                        size="sm"
+                      >
+                        {{ item.status == 0 ? '未结算' : '已结算' }}
+                      </q-chip>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
+                      <span class="text-grey-7">记佣金额</span></q-item-label
+                    >
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
+                      {{
+                        item.actualCosAmount !== null
+                          ? item.actualCosAmount
+                          : item.estimateCosAmount
+                      }}</q-item-label
+                    >
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
+                      <span class="text-grey-7">预估收入</span></q-item-label
+                    >
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
+                      {{
+                        item.userTotalCommissionAmount === null
+                          ? item.userEstimateCommissionAmount
+                          : item.userTotalCommissionAmount
+                      }}</q-item-label
+                    >
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
+                      <span class="text-grey-7">提成</span></q-item-label
+                    >
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
+                      %{{ item.shareRate }}</q-item-label
+                    >
+                  </q-item-section>
+                  <q-item-section no-wrap>
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
+                      <span class="text-grey-7">描述</span></q-item-label
+                    >
+                    <q-item-label
+                      :lines="1"
+                      v-bind:class="[fontFamily, smalltextSize]"
+                      class="text-purple-5"
+                    >
+                      {{ item.statusRemark }}</q-item-label
+                    >
                   </q-item-section>
                 </q-item>
               </div>
@@ -65,28 +123,24 @@
     @media(min-width: $breakpoint-xs-max)
       width: 170px
       height: 170px
-
-  &__mall
+  &__title_text
     @media(max-width: $breakpoint-xs-max)
-      font-size: 0.7em
-      height: 1.3em
+      font-size: 0.8em
+      height: 1.2em
     @media(min-width: $breakpoint-xs-max)
-      font-size: 0.9em
+      font-size: 1.2em
       height: 2.6em
-    color: rgba(0, 0, 0, 0.54)
     line-height: 1.2em
+  &__small_text
+    font-size: 0.70em
+    height: 1.3em
   &__title_height
     @media(max-width: $breakpoint-xs-max)
-      height: 3.2em
+      height: 1.6em
     @media(min-width: $breakpoint-xs-max)
       height: 1.6em
   &__content_height
       height: 3.8em
-  &__badgeSize
-    @media(max-width: $breakpoint-xs-max)
-      font-size: 0.7em
-    @media(min-width: $breakpoint-xs-max)
-      font-size: 0.9em
   &__no_data
     @media(max-width: $breakpoint-xs-max)
       height: 5em
@@ -112,11 +166,11 @@ export default {
       isBigScreen: Screen.gt.sm ? true : false,
       isNormal: true,
       fontFamily: 'YL__title_font_family',
-      lineHeight: 'YL__list_line_height',
       textAccent: 'text-accent',
       titleHeight: 'YL__title_height',
       isListEnd: false,
-
+      textSize: 'YL__title_text',
+      smalltextSize: 'YL__small_text',
       // to: false,
     };
   },
@@ -125,22 +179,34 @@ export default {
     itemPadding: function () {
       return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
     },
-    textSize: function () {
-      return this.isBigScreen ? 'text-h7' : 'text-subtitle1';
-    },
 
-    lines: function () {
-      return Screen.gt.sm ? 1 : 2;
-    },
-    buyButtonSize: function () {
-      return this.isBigScreen ? '11px' : '8px';
-    },
     host: function () {
       return global.config.domain;
     },
 
     disable: function () {
       return this.isListEnd ? true : false;
+    },
+
+    getStatusColor: function () {
+      return (parameter) => {
+        if (parameter == 0) {
+          return 'blue';
+        } else {
+          return 'green';
+        }
+      };
+    },
+    getMall: function () {
+      return (parameter) => {
+        if (parameter == 1) {
+          return '淘宝';
+        } else if (parameter == 2) {
+          return '京东';
+        } else {
+          return '拼多多';
+        }
+      };
     },
   },
 

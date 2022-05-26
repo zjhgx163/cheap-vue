@@ -126,6 +126,4 @@ export default {
     width: 100%;
     max-width: 750px;
     min-width: 320px;
-  &__user_money
-    line-height: 1.2em !important
 </style>
