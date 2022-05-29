@@ -36,21 +36,11 @@
     </q-page-container>
   </q-layout>
 </template>
-<script>
-// import HotList from '../components/HotList.vue';
-export default {
-  // computed: {
-  //   isBigScreen: function () {
-  //     return this.$refs['goods-list'].isBigScreen;
-  //   },
-  // },
 
+<script>
+export default {
   mounted() {
     console.log('OrderLayout mounted');
   },
-
-  // components: {
-  //   HotList,
-  // },
 };
 </script>

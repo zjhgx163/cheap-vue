@@ -79,7 +79,10 @@
       </q-list>
 
       <q-list class="q-px-sm q-mb-sm bg-secondary" dense>
-        <q-item dense>
+        <q-item
+          dense
+          :to="{ path: '/my/orderlist/all', query: { userId: this.userInfo.id, status: 0 } }"
+        >
           <q-item-section avatar top class="q-py-sm">
             <q-avatar icon="shopping_bag" color="accent" text-color="white" size="2em" />
           </q-item-section>
@@ -87,19 +90,16 @@
             <q-item-label lines="1" class="YL__menu_text">商品订单</q-item-label>
           </q-item-section>
           <q-item-section side>
-            <router-link
-              :to="{
-                path: '/my/orderlist/all',
-                query: { userId: '1520479950736478209', status: 0 },
-              }"
-              ><q-icon name="chevron_right" />
-            </router-link>
+            <q-icon name="chevron_right" />
           </q-item-section>
         </q-item>
 
         <q-separator />
 
-        <q-item dense>
+        <q-item dense disable>
+          <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+            <strong>敬请期待</strong>
+          </q-tooltip>
           <q-item-section avatar top class="q-py-sm">
             <q-avatar icon="delivery_dining" color="accent" text-color="white" size="2em" />
           </q-item-section>
@@ -107,33 +107,24 @@
             <q-item-label lines="1" class="YL__menu_text"> 外卖订单</q-item-label>
           </q-item-section>
           <q-item-section side>
-            <router-link
-              :to="{
-                path: '/my/orderlist/all',
-                query: { userId: 11, status: 0 },
-              }"
-              ><q-icon name="chevron_right" />
-            </router-link>
+            <q-icon name="chevron_right" />
           </q-item-section>
         </q-item>
 
         <q-separator />
 
-        <q-item dense>
+        <q-item dense disable>
+          <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+            <strong>敬请期待</strong>
+          </q-tooltip>
           <q-item-section avatar top class="q-py-sm">
             <q-avatar icon="favorite" color="accent" text-color="white" size="2em" />
           </q-item-section>
           <q-item-section>
-            <q-item-label lines="1" class="YL__menu_text">我的收藏</q-item-label>
+            <q-item-label lines="1" class="YL__menu_text">我的收藏 </q-item-label>
           </q-item-section>
           <q-item-section side>
-            <router-link
-              :to="{
-                path: '/my/orderlist/all',
-                query: { userId: 11, status: 0 },
-              }"
-              ><q-icon name="chevron_right" />
-            </router-link>
+            <q-icon name="chevron_right" />
           </q-item-section>
         </q-item>
 
@@ -147,13 +138,7 @@
             <q-item-label lines="1" class="YL__menu_text">联系客服</q-item-label>
           </q-item-section>
           <q-item-section side>
-            <router-link
-              :to="{
-                path: '/my/orderlist/all',
-                query: { userId: 11, status: 0 },
-              }"
-              ><q-icon name="chevron_right" />
-            </router-link>
+            <q-icon name="chevron_right" />
           </q-item-section>
         </q-item>
       </q-list>
