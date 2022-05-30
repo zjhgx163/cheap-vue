@@ -4,7 +4,7 @@
       anchor="bottom middle"
       self="top middle"
       target="#intro"
-      :offset="[10, 40]"
+      :offset="[10, 10]"
       max-height="8rem"
       max-width="9rem"
       v-model="showing"
@@ -12,8 +12,31 @@
       >{{ alertText }}
     </q-tooltip>
 
+    <q-dialog v-model="isShowCopyTaobaopwd" @hide="copyPwd" persistent>
+      <q-card>
+        <q-card-section class="column q-pt-sm q-pb-none items-center bg-brown-8 text-white">
+          <span class="">{{ this.taobaoPwd }}</span>
+        </q-card-section>
+        <q-card-section class="column q-pa-sm items-center bg-brown-8 text-white">
+          <span class="text-caption">请点击复制，打开手机淘宝</span>
+        </q-card-section>
+
+        <q-card-actions align="center" class="q-pa-xs">
+          <q-btn
+            rounded
+            outline
+            ripple
+            label="复制"
+            class="text-bold"
+            color="accent"
+            v-close-popup
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
     <!-- 面包栏 -->
-    <div class="column">
+    <div class="column gt-sm">
       <q-breadcrumbs
         active-color="black"
         separator="---"
@@ -238,7 +261,7 @@ import { Screen } from 'quasar';
 import FastClick from 'fastclick';
 // import clipboard from 'src/clipboard';
 // import Clipboard from 'clipboard';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 export default {
   name: 'DetailPage',
@@ -257,6 +280,7 @@ export default {
       showing: false,
       taobaoPwd: '',
       alertText: '淘口令已复制\n请打开手淘',
+      isShowCopyTaobaopwd: false,
     };
   },
   computed: {
@@ -282,30 +306,6 @@ export default {
     });
 
     this.getItemDetail(this.$route.params.urlCode);
-    let that = this;
-    if (this.taobaoCode !== '') {
-      setTimeout(() => {
-        {
-          //用户登陆后传过来的淘宝码
-          this.$copyText(this.taobaoCode).then(
-            function (e) {
-              console.log('this.taobaoCode = ' + that.taobaoCode);
-
-              that.showing = true;
-              let t = setTimeout(() => {
-                that.showing = false;
-              }, 1500);
-            },
-            function (e) {
-              alert('淘宝码是 ' + this.taobaoCode);
-              console.log(e);
-            },
-          );
-        }
-      }, 1000);
-    }
-
-    console.log('urlCode = ' + this.$route.params.urlCode);
   },
   methods: {
     getItemDetail(str) {
@@ -329,19 +329,26 @@ export default {
           this.isTaoPwd = true;
           // this.taobaoPwd = this.detail.taobaoPwd;
         }
-        if (typeof this.code == 'undefined' || this.code == null || this.code == '') {
-        } else {
-          // code有值说明是微信网页授权的redirect过来的，此时要根据state执行是去购买还是领券的操作
-          if (this.state == 'buy') {
-            //代表购买商品
-            this.buyClick(this.$route.params.urlCode);
-          } else {
-            //领券操作
-            this.takeCouponClick(this.$route.params.urlCode, this.state.slice(6));
-          }
+        if (this.taobaoCode !== '') {
+          this.taobaoPwd = this.taobaoCode;
+          this.isShowCopyTaobaopwd = true;
         }
+
         this.$q.loading.hide();
       });
+    },
+    copyPwd() {
+      let that = this;
+      if (this.taobaoPwd != '')
+        this.$copyText(this.taobaoPwd).then(
+          function (e) {
+            console.log('this.taobaoPwd = ' + that.taobaoPwd);
+          },
+          function (e) {
+            alert('Can not copy');
+            console.log(e);
+          },
+        );
     },
     turnInOrNotClick() {},
     commentClick() {},
@@ -357,67 +364,36 @@ export default {
       if (this.isTaoPwd) {
         //淘口令要从后台取
         // 这里必须用同步的ajax，否则ios的浏览器无法copy成功，this.$copyText不能放在异步方法里面\
-        $.ajaxSettings.async = false;
-        let that = this;
-        $.ajax({
-          type: 'POST',
-          async: false,
-          xhrFields: {
-            //携带cookie
-            withCredentials: true,
-          },
-          contentType: 'application/json;charset=UTF-8',
-          url: `${this.host}/goods/go/${urlCode}`,
-          success: function (res) {
-            console.log('res = ' + res);
-            if (/(http|https):\S*/.test(res)) {
-              window.location.href = res;
-            } else if (/redirect:\S*/.test(res)) {
-              //redirect其他页面
-              let redirectPath = res.slice(9);
-              that.$router.push({ path: redirectPath });
-            } else {
-              that.taobaoPwd = res;
-              console.log('taobaoPwd = ' + res);
-            }
-            that.$q.loading.hide();
-          },
+        this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
+          console.log('res = ' + res.data);
+          if (/(http|https):\S*/.test(res.data)) {
+            window.location.href = res.data;
+          } else if (/redirect:\S*/.test(res.data)) {
+            //redirect其他页面
+            let redirectPath = res.slice(9);
+            this.$router.push({ path: redirectPath });
+          } else {
+            this.taobaoPwd = res.data;
+            console.log('taobaoPwd = ' + res.data);
+            this.isShowCopyTaobaopwd = true;
+          }
+          this.$q.loading.hide();
         });
-
-        if (this.taobaoPwd != '')
-          this.$copyText(this.taobaoPwd).then(
-            function (e) {
-              console.log('this.taobaoPwd = ' + that.taobaoPwd);
-
-              that.showing = true;
-              let t = setTimeout(() => {
-                that.showing = false;
-              }, 1500);
-            },
-            function (e) {
-              alert('Can not copy');
-              console.log(e);
-            },
-          );
       } else {
         //因为每个用户的链接不同，需要每次从后台取链接
-        this.$axios
-          .post(`${this.host}/goods/go/${urlCode}`, {
-            code: this.code,
-          })
-          .then((res) => {
-            console.log(res.data);
-            if (/(http|https):\S*/.test(res.data)) {
-              window.location.href = res.data;
-              // window.open(res.data, '_blank');
-            } else if (/redirect:\S*/.test(res.data)) {
-              //redirect其他页面
-              let redirectPath = res.data.slice(9);
-              this.$router.push({ path: redirectPath });
-            }
+        this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
+          console.log(res.data);
+          if (/(http|https):\S*/.test(res.data)) {
+            window.location.href = res.data;
             // window.open(res.data, '_blank');
-            this.$q.loading.hide();
-          });
+          } else if (/redirect:\S*/.test(res.data)) {
+            //redirect其他页面
+            let redirectPath = res.data.slice(9);
+            this.$router.push({ path: redirectPath });
+          }
+          // window.open(res.data, '_blank');
+          this.$q.loading.hide();
+        });
       }
     },
 
@@ -429,51 +405,23 @@ export default {
       //   });
 
       if (this.isTaoPwd) {
-        let that = this;
-        $.ajax({
-          type: 'POST',
-          async: false,
-          xhrFields: {
-            //携带cookie
-            withCredentials: true,
-          },
-          contentType: 'application/json;charset=UTF-8',
-          url: `${this.host}/goods/coupon-url/${code}?index=${index}`,
-          success: function (res) {
-            console.log('res = ' + res);
-            if (/(http|https):\S*/.test(res)) {
-              window.location.href = res;
-            } else if (/redirect:\S*/.test(res)) {
-              //redirect其他页面
-              let redirectPath = res.slice(9);
-              that.$router.push({ path: redirectPath });
-            } else {
-              that.taobaoPwd = res;
-              console.log('coupon taobaoPwd = ' + res);
-            }
-            that.$q.loading.hide();
-          },
+        this.$axios.post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {}).then((res) => {
+          console.log('res = ' + res.data);
+          if (/(http|https):\S*/.test(res.data)) {
+            window.location.href = res.data;
+          } else if (/redirect:\S*/.test(res.data)) {
+            //redirect其他页面
+            let redirectPath = res.slice(9);
+            this.$router.push({ path: redirectPath });
+          } else {
+            this.taobaoPwd = res.data;
+            console.log('coupon taobaoPwd = ' + res.data);
+            this.isShowCopyTaobaopwd = true;
+          }
+          this.$q.loading.hide();
         });
-
-        if (this.taobaoPwd != '') {
-          this.$copyText(this.taobaoPwd).then(
-            function (e) {
-              console.log('coupon this.taobaoPwd = ' + that.taobaoPwd);
-
-              that.showing = true;
-              let t = setTimeout(() => {
-                that.showing = false;
-              }, 1500);
-            },
-            function (e) {
-              alert('Can not copy');
-              console.log(e);
-            },
-          );
-        }
       } else {
         //因为每个用户的链接不同，需要每次从后台取链接
-        console.log('coupon this.code = ' + this.code);
         this.$axios
           .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {
             code: this.code,
