@@ -324,12 +324,12 @@ export default {
           this.couponInfo = JSON.parse(this.detail.couponInfo);
         }
         this.categoryInfo = JSON.parse(this.detail.categoryText);
-        console.log('taobaoPwd = ' + this.detail.taobaoPwd);
+        console.log('taobaoPwd = ' + this.taobaoCode);
         if (this.isTaobaoPwd()) {
           this.isTaoPwd = true;
           // this.taobaoPwd = this.detail.taobaoPwd;
         }
-        if (this.taobaoCode !== '') {
+        if (this.taobaoCode !== '' && this.taobaoCode !== undefined) {
           this.taobaoPwd = this.taobaoCode;
           this.isShowCopyTaobaopwd = true;
         }
