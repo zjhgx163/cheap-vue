@@ -47,7 +47,7 @@
                         text-color="white"
                         size="sm"
                       >
-                        {{ item.status == 0 ? '未结算' : '已结算' }}
+                        {{ item.status == 1 ? '已结算' : '未结算' }}
                       </q-chip>
                     </q-item-label>
                   </q-item-section>
@@ -91,8 +91,7 @@
                     >
                     <q-item-label
                       :lines="1"
-                      v-bind:class="[fontFamily, smalltextSize]"
-                      class="text-purple-5"
+                      v-bind:class="[fontFamily, smalltextSize, getDescColor(item.status)]"
                     >
                       {{ item.statusRemark }}</q-item-label
                     >
@@ -190,10 +189,10 @@ export default {
 
     getStatusColor: function () {
       return (parameter) => {
-        if (parameter == 0) {
-          return 'blue';
-        } else {
+        if (parameter == 1) {
           return 'green';
+        } else {
+          return 'blue';
         }
       };
     },
@@ -205,6 +204,15 @@ export default {
           return '京东';
         } else {
           return '拼多多';
+        }
+      };
+    },
+    getDescColor: function () {
+      return (parameter) => {
+        if (parameter == -1) {
+          return 'text-purple-5';
+        } else {
+          return 'text-green-7 ';
         }
       };
     },

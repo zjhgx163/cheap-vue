@@ -1,6 +1,6 @@
 <template>
   <div class="column items-center bg-primary">
-    <div class="q-px-sm q-py-lg YL__750w bg-dark">
+    <div class="q-px-sm q-py-md YL__750w bg-dark">
       <div class="row q-px-sm items-center">
         <div class="col-3">
           <q-avatar size="3.5em">
@@ -34,56 +34,68 @@
       </div>
     </div>
     <div class="YL__750w">
-      <q-list class="q-px-sm q-my-sm bg-secondary" dense>
-        <q-item>
+      <q-list class="q-px-sm q-my-xs bg-secondary" dense>
+        <q-item dense>
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text text-caption">
-              <q-item-label>¥{{ this.userInfo.todayEstimateCommissionAmount }}</q-item-label>
+              <q-item-label class="text-weight-medium"
+                >¥{{ this.userInfo.todayEstimateCommissionAmount }}</q-item-label
+              >
               <q-item-label caption>今日预估</q-item-label>
             </div>
           </q-item-section>
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
-              <q-item-label>¥{{ this.userInfo.monthEstimateCommissionAmount }}</q-item-label>
+              <q-item-label class="text-weight-medium"
+                >¥{{ this.userInfo.monthEstimateCommissionAmount }}</q-item-label
+              >
               <q-item-label caption>本月预估</q-item-label>
             </div>
           </q-item-section>
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
-              <q-item-label>¥{{ this.userInfo.accumulativeActualCommissionAmount }}</q-item-label>
+              <q-item-label class="text-weight-medium"
+                >¥{{ this.userInfo.accumulativeActualCommissionAmount }}</q-item-label
+              >
               <q-item-label caption>累计收入</q-item-label>
             </div>
           </q-item-section>
         </q-item>
         <q-separator />
-        <q-item>
+        <q-item dense>
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
-              <q-item-label>¥{{ this.userInfo.waitEstimateCommissionAmount }}</q-item-label>
+              <q-item-label class="text-weight-medium"
+                >¥{{ this.userInfo.waitEstimateCommissionAmount }}</q-item-label
+              >
               <q-item-label caption>待结算</q-item-label>
             </div>
           </q-item-section>
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
-              <q-item-label>¥{{ this.userInfo.waitActualCommissionAmount }}</q-item-label>
+              <q-item-label class="text-weight-medium"
+                >¥{{ this.userInfo.waitActualCommissionAmount }}</q-item-label
+              >
               <q-item-label caption>待审批</q-item-label>
             </div>
           </q-item-section>
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
-              <q-item-label>¥{{ this.userInfo.withdrawedAmount }}</q-item-label>
+              <q-item-label class="text-weight-medium"
+                >¥{{ this.userInfo.withdrawedAmount }}</q-item-label
+              >
               <q-item-label caption>已提现</q-item-label>
             </div>
           </q-item-section>
         </q-item>
       </q-list>
 
-      <q-list class="q-px-sm q-mb-sm bg-secondary" dense>
+      <q-list class="q-px-sm q-mb-xs bg-secondary" dense>
         <q-item
           dense
-          :to="{ path: '/my/orderlist/all', query: { userId: this.userInfo.id, status: 0 } }"
+          :to="{ path: '/my/orderlist/all', query: { userId: this.userInfo.userId, status: '' } }"
         >
-          <q-item-section avatar top class="q-py-sm">
+          <q-item-section avatar top class="q-py-xs">
             <q-avatar icon="shopping_bag" color="accent" text-color="white" size="2em" />
           </q-item-section>
           <q-item-section>
@@ -100,7 +112,7 @@
           <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
             <strong>敬请期待</strong>
           </q-tooltip>
-          <q-item-section avatar top class="q-py-sm">
+          <q-item-section avatar top class="q-py-xs">
             <q-avatar icon="delivery_dining" color="accent" text-color="white" size="2em" />
           </q-item-section>
           <q-item-section>
@@ -117,7 +129,7 @@
           <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
             <strong>敬请期待</strong>
           </q-tooltip>
-          <q-item-section avatar top class="q-py-sm">
+          <q-item-section avatar top class="q-py-xs">
             <q-avatar icon="favorite" color="accent" text-color="white" size="2em" />
           </q-item-section>
           <q-item-section>
@@ -131,7 +143,7 @@
         <q-separator />
 
         <q-item dense>
-          <q-item-section avatar top class="q-py-sm">
+          <q-item-section avatar top class="q-py-xs">
             <q-avatar icon="support_agent" color="accent" text-color="white" size="2em" />
           </q-item-section>
           <q-item-section>
@@ -146,11 +158,30 @@
       <q-list class="q-px-sm bg-secondary">
         <q-item-label header>提现方式</q-item-label>
 
-        <q-item>
+        <q-item dense class="q-pt-none">
           <q-item-section>
-            <q-item-label caption> 请上传微信收款码，审批后会尽快打款 </q-item-label>
+            <q-item-label caption> 可提现余额达到5元时可提现 </q-item-label>
+            <q-item-label caption class="q-py-xs">
+              请上传微信收款码，会在1～3个工作日内打款
+            </q-item-label>
           </q-item-section>
         </q-item>
+        <q-separator spaced />
+        <q-item-label header class="q-pt-xs">注意事项</q-item-label>
+        <q-item dense class="q-pt-none">
+          <q-item-section>
+            <q-item-label caption>
+              返利目前支持京东，淘宝，拼多多，其他商城暂不支持，持续加入中。
+            </q-item-label>
+            <q-item-label caption class="q-py-xs">
+              请不要事先在京东，拼多多浏览完商品后再在本站下单买同样的商品，这样会使返利失效。一定要在本站浏览商品直接购买。
+            </q-item-label>
+            <q-item-label caption class="q-py-xs">
+              <strong>有问题请直接添加客服微信 </strong></q-item-label
+            >
+          </q-item-section>
+        </q-item>
+        <q-separator spaced />
       </q-list>
     </div>
   </div>

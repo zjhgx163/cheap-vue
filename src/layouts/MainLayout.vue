@@ -40,12 +40,11 @@
             </q-input>
           </div>
           <div class="col-sm-2 gt-sm column items-end justify-center">
-            <div class="row q-gutter-sm gt-xs">
+            <!-- <div class="row q-gutter-sm gt-xs">
               <q-avatar size="2.5em">
                 <img src="https://cdn.quasar.dev/img/avatar.png" />
               </q-avatar>
-              <!-- <div class="column justify-center">zjhgx</div> -->
-            </div>
+            </div> -->
           </div>
 
           <!-- <q-space /> -->
