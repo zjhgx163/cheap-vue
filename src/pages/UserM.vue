@@ -142,7 +142,7 @@
 
         <q-separator />
 
-        <q-item dense>
+        <q-item dense :to="{ path: '/contact' }">
           <q-item-section avatar top class="q-py-xs">
             <q-avatar icon="support_agent" color="accent" text-color="white" size="2em" />
           </q-item-section>
@@ -155,8 +155,8 @@
         </q-item>
       </q-list>
 
-      <q-list class="q-px-sm bg-secondary">
-        <q-item-label header>提现方式</q-item-label>
+      <q-list class="q-px-sm q-pb-none bg-secondary">
+        <q-item-label header class="text-black">提现方式</q-item-label>
 
         <q-item dense class="q-pt-none">
           <q-item-section>
@@ -167,11 +167,14 @@
           </q-item-section>
         </q-item>
         <q-separator spaced />
-        <q-item-label header class="q-pt-xs">注意事项</q-item-label>
+        <q-item-label header class="q-pt-xs text-black">注意事项</q-item-label>
         <q-item dense class="q-pt-none">
           <q-item-section>
             <q-item-label caption>
               返利目前支持京东，淘宝，拼多多，其他商城暂不支持，持续加入中。
+            </q-item-label>
+            <q-item-label caption class="q-py-xs">
+              正常订单返利周期在确认收货订单完成后14天左右
             </q-item-label>
             <q-item-label caption class="q-py-xs">
               请不要事先在京东，拼多多浏览完商品后再在本站下单买同样的商品，这样会使返利失效。一定要在本站浏览商品直接购买。
