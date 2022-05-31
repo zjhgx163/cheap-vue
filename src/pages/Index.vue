@@ -231,7 +231,7 @@
   </q-page>
 </template>
 
-<style lang="sass">
+<style scoped lang="sass">
 .YL
   &__index_img
     @media(max-width: $breakpoint-xs-max)
@@ -283,6 +283,9 @@
     @media(min-width: $breakpoint-xs-max)
       width: 10em
       width: 12em
+a
+  color: #25678c;
+  cursor: pointer;
 </style>
 
 <script>
