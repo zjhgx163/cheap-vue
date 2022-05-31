@@ -124,6 +124,8 @@ const routes = [
     }),
   },
 
+  { path: '/contact', component: () => import('pages/Contact.vue') },
+
   // Always leave this as last one,
   // but you can also remove it
   // {
