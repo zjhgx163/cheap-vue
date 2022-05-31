@@ -171,7 +171,7 @@
         <q-item dense class="q-pt-none">
           <q-item-section>
             <q-item-label caption>
-              返利目前支持京东，淘宝，拼多多，其他商城暂不支持，持续加入中。
+              目前支持京东，淘宝的返利，其他商城暂不支持，拼多多不久之后加入。
             </q-item-label>
             <q-item-label caption class="q-py-xs">
               正常订单返利周期在确认收货订单完成后14天左右
