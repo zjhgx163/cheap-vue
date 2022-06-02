@@ -59,7 +59,7 @@
                     >
                     <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
                       {{
-                        item.actualCosAmount !== null
+                        item.actualCosAmount !== null && item.actualCosAmount > 0
                           ? item.actualCosAmount
                           : item.estimateCosAmount
                       }}</q-item-label
@@ -71,7 +71,8 @@
                     >
                     <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
                       {{
-                        item.userTotalCommissionAmount === null
+                        item.userTotalCommissionAmount === null ||
+                        item.userTotalCommissionAmount === 0
                           ? item.userEstimateCommissionAmount
                           : item.userTotalCommissionAmount
                       }}</q-item-label

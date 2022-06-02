@@ -55,7 +55,7 @@
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
               <q-item-label class="text-weight-medium"
-                >¥{{ this.userInfo.accumulativeActualCommissionAmount }}</q-item-label
+                >¥{{ this.userInfo.accumulativeEstimateCommissionAmount }}</q-item-label
               >
               <q-item-label caption>累计收入</q-item-label>
             </div>
