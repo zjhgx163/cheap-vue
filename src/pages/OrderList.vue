@@ -47,7 +47,7 @@
                         text-color="white"
                         size="sm"
                       >
-                        {{ item.status == 1 ? '已结算' : '未结算' }}
+                        {{ getStatusText(item.status) }}
                       </q-chip>
                     </q-item-label>
                   </q-item-section>
@@ -192,8 +192,30 @@ export default {
       return (parameter) => {
         if (parameter == 1) {
           return 'green';
-        } else {
+        } else if (parameter == 0) {
           return 'blue';
+        } else if (parameter == -1) {
+          return 'blue-grey-5';
+        }
+      };
+    },
+    getStatusText: function () {
+      return (parameter) => {
+        if (parameter == 1) {
+          return '已结算';
+        } else if (parameter == 0) {
+          return '未结算';
+        } else if (parameter == -1) {
+          return '无效';
+        }
+      };
+    },
+    getStatusTextColor: function () {
+      return (parameter) => {
+        if (parameter === -1) {
+          return 'white';
+        } else {
+          return 'white';
         }
       };
     },
