@@ -1,38 +1,5 @@
 <template>
   <div class="column items-center bg-primary">
-    <div class="q-px-sm q-py-md YL__750w bg-dark">
-      <div class="row q-px-sm items-center">
-        <div class="col-3">
-          <q-avatar size="3.5em">
-            <img :src="avatar" />
-          </q-avatar>
-        </div>
-
-        <div class="col">
-          <div class="text-secondary text-overline text-bold">{{ user }}</div>
-          <div class="row justify-between items-center">
-            <div>
-              <div class="text-secondary YL__user_draw_text text-weight-thin YL__user_money">
-                可提现金额
-              </div>
-              <div class="text-amber-11 YL__user_money text-bold">¥ 0.00</div>
-            </div>
-            <div>
-              <q-chip
-                color="accent text-bold"
-                text-color="white"
-                icon="account_balance_wallet"
-                size="0.75rem"
-              >
-                去提现</q-chip
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="column justify-center"></div> -->
-      </div>
-    </div>
     <div class="YL__750w">
       <q-list class="q-px-sm q-my-xs bg-secondary" dense>
         <q-item dense>
@@ -194,62 +161,7 @@
 </template>
 
 <script>
-import 'src/config';
-
 export default {
-  data() {
-    return {
-      user: '登陆/注册',
-      avatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
-      userInfo: {},
-    };
-  },
-
-  props: ['code', 'state'],
-
-  mounted() {
-    //解决iphone移动端的延迟
-    // FastClick.attach(document.body);
-
-    this.wechatLogin(this.code, this.state);
-  },
-
-  methods: {
-    wechatLogin(code, state) {
-      this.$q.loading.show({
-        delay: 400, // ms
-      });
-      this.$axios
-        .post(`${global.config.domain}/wechat/accesstokenlogin`, {
-          code: this.code,
-          state: this.state,
-        })
-        .then((res) => {
-          console.log(res.data);
-          this.avatar = res.data.headimgurl;
-          this.user = res.data.nickname;
-          this.userInfo = res.data;
-          this.$q.loading.hide();
-
-          // console.log(this.isBigSc = reen);
-        });
-    },
-  },
+  props: ['userInfo'],
 };
 </script>
-
-<style lang="sass">
-.YL
-  &__750w
-    width: 100%;
-    max-width: 750px;
-    min-width: 320px;
-  &__user
-    &_money
-      line-height: 1.8em !important
-      font-size: 1.2em
-    &_draw_text
-      font-size: 0.7em
-  &__menu_text
-    font-size: 0.9em
-</style>

@@ -89,13 +89,20 @@ const routes = [
 
   {
     path: '/user',
-    component: () => import('pages/UserM.vue'),
+    component: () => import('layouts/UserLayout.vue'),
     props: (route) => ({ code: route.query.code, state: route.query.state }),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/UserM.vue'),
+      },
+      { path: '/withdraw', component: () => import('pages/Withdraw.vue') },
+    ],
   },
 
   {
     path: '/my/orderlist',
-    component: () => import('pages/Order.vue'),
+    component: () => import('src/layouts/OrderLayout.vue'),
     children: [
       {
         path: 'all',
