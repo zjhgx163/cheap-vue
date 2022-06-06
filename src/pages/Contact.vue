@@ -1,10 +1,10 @@
 <template>
   <div class="q-pa-md">
-    <q-img src="https://private-david.oss-cn-beijing.aliyuncs.com/Wechat_hugaoxiang.jpeg" />
-
-    <!-- <div class="fixed-bottom items-center">
-      <q-item-label header class="q-pt-xs text-black">Email: 82955503@qq.com</q-item-label>
-    </div> -->
+    <img
+      class="flex-center"
+      style="width: 21em; height: 21em"
+      src="https://private-david.oss-cn-beijing.aliyuncs.com/Wechat_hugaoxiang.jpeg"
+    />
   </div>
 </template>
 
