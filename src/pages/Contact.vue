@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <img
       class="flex-center"
-      style="width: 21em; height: 21em"
+      style="width: 100%; height: 100%"
       src="https://private-david.oss-cn-beijing.aliyuncs.com/Wechat_hugaoxiang.jpeg"
     />
   </div>
@@ -12,10 +12,4 @@
 export default {};
 </script>
 
-<style lang="sass">
-.YL
-  &__750w
-    width: 100%;
-    max-width: 750px;
-    min-width: 320px;
-</style>
+<style lang="sass"></style>
