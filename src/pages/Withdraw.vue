@@ -72,6 +72,8 @@
               :filter="checkFileSize"
               accept=".jpg, image/*"
               class="q-py-xs"
+              @uploaded="onUploaded"
+              @failed="onFailed"
             />
             <q-item-label caption>
               <q-icon name="info_outline" color="orange" />提现说明</q-item-label
@@ -158,7 +160,23 @@ export default {
     checkFileSize(files) {
       return files.filter((file) => file.size < 1024000);
     },
-    onRejected(rejectedEntries) {
+    onUploaded(object) {
+      // Notify plugin needs to be installed
+      // https://quasar.dev/quasar-plugins/notify#Installation
+      this.$q.notify({
+        type: 'positive',
+        message: '文件上传成功',
+      });
+    },
+    onFailed(object) {
+      // Notify plugin needs to be installed
+      // https://quasar.dev/quasar-plugins/notify#Installation
+      this.$q.notify({
+        type: 'negative',
+        message: '文件上传失败',
+      });
+    },
+    onRejected(object) {
       // Notify plugin needs to be installed
       // https://quasar.dev/quasar-plugins/notify#Installation
       this.$q.notify({
