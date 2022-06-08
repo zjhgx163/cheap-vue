@@ -3,7 +3,7 @@
     <q-banner inline-actions class="text-white bg-brown">
       <div class="row q-pa-xs items-center">
         <div class="col-3">
-          <q-avatar size="3.5em">
+          <q-avatar size="4.0em">
             <img :src="avatar" />
           </q-avatar>
         </div>
@@ -15,14 +15,18 @@
               <div class="text-secondary YL__user_draw_text text-weight-thin YL__user_money">
                 可提现金额
               </div>
-              <div class="text-amber-11 YL__user_money text-bold">¥ 0.00</div>
+              <div class="text-amber-11 YL__user_money text-bold">
+                {{ userInfo.withdrawableAmount }}
+              </div>
             </div>
-            <div>
+            <div v-if="$route.name == 'account'">
               <q-chip
                 color="accent text-bold"
                 text-color="white"
                 icon="account_balance_wallet"
                 size="0.75rem"
+                clickable
+                @click="goWithdraw"
               >
                 去提现</q-chip
               >
@@ -82,6 +86,10 @@ export default {
           // console.log(this.isBigSc = reen);
         });
     },
+    goWithdraw() {
+      console.log('go withdraw');
+      this.$router.push({ path: 'withdraw', name: 'withdraw' });
+    },
   },
 };
 </script>
@@ -95,9 +103,9 @@ export default {
   &__user
     &_money
       line-height: 1.8em !important
-      font-size: 1.2em
+      font-size: 1.4em
     &_draw_text
-      font-size: 0.7em
+      font-size: 0.8em
   &__menu_text
     font-size: 0.9em
 </style>

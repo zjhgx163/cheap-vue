@@ -94,9 +94,10 @@ const routes = [
     children: [
       {
         path: '',
+        name: 'account',
         component: () => import('pages/UserM.vue'),
       },
-      { path: '/withdraw', component: () => import('pages/Withdraw.vue') },
+      { path: 'withdraw', name: 'withdraw', component: () => import('pages/Withdraw.vue') },
     ],
   },
 
@@ -132,6 +133,7 @@ const routes = [
   },
 
   { path: '/contact', component: () => import('pages/Contact.vue') },
+  { path: '/help', component: () => import('pages/UploadWechatqrHelp.vue') },
 
   // Always leave this as last one,
   // but you can also remove it

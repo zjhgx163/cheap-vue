@@ -127,7 +127,7 @@
 
         <q-item dense class="q-pt-none">
           <q-item-section>
-            <q-item-label caption> 可提现余额达到5元时可提现 </q-item-label>
+            <q-item-label caption> 可提现余额达到2元时可提现 </q-item-label>
             <q-item-label caption class="q-py-xs">
               请上传微信收款码，会在1～3个工作日内打款
             </q-item-label>
