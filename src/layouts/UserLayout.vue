@@ -16,7 +16,11 @@
                 可提现金额
               </div>
               <div class="text-amber-11 YL__user_money text-bold">
-                {{ userInfo.withdrawableAmount }}
+                {{
+                  userInfo.withdrawableAmount != undefined
+                    ? userInfo.withdrawableAmount.toFixed(2)
+                    : userInfo.withdrawableAmount
+                }}
               </div>
             </div>
             <div v-if="$route.name == 'account'">

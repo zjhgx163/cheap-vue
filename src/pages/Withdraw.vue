@@ -7,8 +7,16 @@
 
       <q-item dense>
         <q-item-section>
-          <q-input v-model="withdrawAmount" dense label="请输入提现金额">
-            <template v-slot:append>
+          <q-input
+            v-model="withdrawAmount"
+            type="number"
+            :error="overMaxNumber"
+            dense
+            clearable
+            label="请输入提现金额"
+            error-message="金额超出可提余额"
+          >
+            <template v-slot:prepend>
               <q-icon name="payment" />
             </template>
           </q-input> </q-item-section
@@ -31,8 +39,8 @@
               text-color="green"
               class="my-custom-toggle"
               :options="[
-                { label: '微信收款码', value: 'wechat' },
-                { label: '人工转账', value: 'contact' },
+                { label: '微信收款码', value: '1' },
+                { label: '人工转账', value: '2' },
               ]"
             />
           </div>
@@ -46,7 +54,7 @@
         control-color="primary"
         class="rounded-borders"
       >
-        <q-carousel-slide name="wechat" class="column q-pt-none no-wrap">
+        <q-carousel-slide name="1" class="column q-pt-none no-wrap">
           <div
             class="row items-center"
             v-if="
@@ -66,6 +74,7 @@
               color="green"
               label="请上传微信收款码"
               flat
+              auto-upload
               fieldName="file"
               max-file-size="1024000"
               @rejected="onRejected"
@@ -112,10 +121,11 @@
               class="flex-center"
               rounded
               label="预计一个工作日到账，确认提现"
+              @click="withdraw"
             />
           </q-item-label>
         </q-carousel-slide>
-        <q-carousel-slide name="contact" class="column no-wrap q-pt-none">
+        <q-carousel-slide name="2" class="column no-wrap q-pt-none">
           <div class="q-mt-xs text-center">
             请
             <router-link
@@ -135,6 +145,7 @@
               class="flex-center"
               rounded
               label="预计一个工作日到账，确认提现"
+              @click="withdraw"
             />
           </q-item-label>
         </q-carousel-slide>
@@ -151,16 +162,28 @@ export default {
   props: ['userInfo'],
   data() {
     return {
-      model: 'wechat',
+      model: '1',
       withdrawAmount: '',
       host: global.config.domain,
     };
+  },
+  computed: {
+    overMaxNumber: function () {
+      if (this.withdrawAmount != '' && this.withdrawAmount > this.userInfo.withdrawableAmount) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
     checkFileSize(files) {
       return files.filter((file) => file.size < 1024000);
     },
-    onUploaded(object) {
+    onUploaded(info) {
+      let response = JSON.parse(info.xhr.response);
+      console.log(response.data.accessPath);
+      this.userInfo.userWechatReceiveMoneyQr = response.data.accessPath;
       // Notify plugin needs to be installed
       // https://quasar.dev/quasar-plugins/notify#Installation
       this.$q.notify({
@@ -183,6 +206,45 @@ export default {
         type: 'negative',
         message: `${rejectedEntries.length} 文件不能超过1M`,
       });
+    },
+    withdraw() {
+      if (this.withdrawAmount == '') {
+        this.$q.notify({
+          type: 'negative',
+          message: '请输入提现金额',
+        });
+        return;
+      } else if (this.withdrawAmount <= 0) {
+        this.$q.notify({
+          type: 'negative',
+          message: '请输入正确的金额',
+        });
+        return;
+      }
+      this.$q.loading.show({
+        delay: 400, // ms
+      });
+      this.$axios
+        .post(`${global.config.domain}/user/withdraw/apply`, {
+          userId: this.userInfo.userId,
+          amount: this.withdrawAmount,
+          type: this.model,
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.code != 0) {
+            this.$q.notify({
+              type: 'negative',
+              message: `${res.data.msg}`,
+            });
+          } else {
+            this.$q.notify({
+              type: 'positive',
+              message: '提现申请已提交，请等待到账',
+            });
+          }
+          this.$q.loading.hide();
+        });
     },
   },
 };
