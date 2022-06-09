@@ -220,6 +220,12 @@ export default {
           message: '请输入正确的金额',
         });
         return;
+      } else if (this.withdrawAmount > this.userInfo.withdrawableAmount) {
+        this.$q.notify({
+          type: 'negative',
+          message: '金额超过了可提现金额',
+        });
+        return;
       }
       this.$q.loading.show({
         delay: 400, // ms
