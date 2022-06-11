@@ -224,6 +224,17 @@ export default {
       });
     },
     withdraw() {
+      if (
+        this.model == 1 &&
+        (this.userInfo.userWechatReceiveMoneyQr == '' ||
+          this.userInfo.userWechatReceiveMoneyQr == null)
+      ) {
+        this.$q.notify({
+          type: 'negative',
+          message: '请上传微信收款码',
+        });
+        return;
+      }
       if (this.withdrawAmount == '') {
         this.$q.notify({
           type: 'negative',
