@@ -80,10 +80,10 @@
                   </q-item-section>
                   <q-item-section>
                     <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
-                      <span class="text-grey-7">提成</span></q-item-label
+                      <span class="text-grey-7">数量</span></q-item-label
                     >
                     <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
-                      %{{ item.shareRate }}</q-item-label
+                      {{ item.itemQuantity }}</q-item-label
                     >
                   </q-item-section>
                   <q-item-section no-wrap>
