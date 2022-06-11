@@ -55,16 +55,32 @@
         class="rounded-borders"
       >
         <q-carousel-slide name="1" class="column q-pt-none no-wrap">
-          <div
+          <q-item
+            dense
             class="row items-center"
             v-if="
               userInfo.userWechatReceiveMoneyQr != null && userInfo.userWechatReceiveMoneyQr != ''
             "
           >
-            <q-item-label caption>
-              <q-icon name="done" color="green text-bold" />收款码已上传</q-item-label
-            >
-          </div>
+            <q-item-section>
+              <q-item-label caption>
+                <q-icon name="done" color="green text-bold" />收款码已上传</q-item-label
+              >
+            </q-item-section>
+            <q-item-section>
+              <q-item-label caption class="text-black">
+                <q-chip
+                  color="green text-bold"
+                  text-color="white"
+                  size="0.7rem"
+                  clickable
+                  @click="reUpload"
+                >
+                  重新上传</q-chip
+                >
+              </q-item-label>
+            </q-item-section>
+          </q-item>
           <div v-else>
             <div class="text-caption">
               请上传微信收款码<strong>(注意不是付款码,请点击最下面操作提示)</strong>
@@ -251,6 +267,10 @@ export default {
           }
           this.$q.loading.hide();
         });
+    },
+
+    reUpload() {
+      this.userInfo.userWechatReceiveMoneyQr = '';
     },
   },
 };
