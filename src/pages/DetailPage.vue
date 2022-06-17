@@ -462,7 +462,7 @@ export default {
 };
 </script>
 
-<style lang="sass">
+<style scoped lang="sass">
 a
   color: #424242;
   cursor: none;

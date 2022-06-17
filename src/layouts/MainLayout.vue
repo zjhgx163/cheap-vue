@@ -33,6 +33,7 @@
               placeholder="苹果手机"
               type="search"
               class="YL__toolbar-input-container"
+              v-on:keyup.enter="search"
             >
               <template v-slot:append>
                 <q-btn name="search" icon="search" unelevated @click="search" />
