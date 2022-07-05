@@ -66,24 +66,31 @@ export default {
       //淘口令要从后台取
       this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
         console.log(res.data);
-        if (/(http|https):\S*/.test(res.data)) {
-          window.location.href = res.data;
+        if (typeof res.data === 'string') {
+          if (/(http|https):\S*/.test(res.data)) {
+            window.location.href = res.data;
+            // window.open(res.data, '_blank');
+          } else if (/redirect:\S*/.test(res.data)) {
+            //redirect其他页面
+            let redirectPath = res.data.slice(9);
+            this.$router.push({ path: redirectPath });
+          } else {
+            console.log('taobaoPwd = ' + res.data);
+            this.$router.push({
+              path: 'item',
+              name: 'detail',
+              params: { urlCode: urlCode },
+              query: { taobao_code: res.data },
+            });
+          }
           // window.open(res.data, '_blank');
-        } else if (/redirect:\S*/.test(res.data)) {
-          //redirect其他页面
-          let redirectPath = res.data.slice(9);
-          this.$router.push({ path: redirectPath });
+          this.$q.loading.hide();
         } else {
-          console.log('taobaoPwd = ' + res.data);
-          this.$router.push({
-            path: 'item',
-            name: 'detail',
-            params: { urlCode: urlCode },
-            query: { taobao_code: res.data },
+          this.$q.notify({
+            type: 'negative',
+            message: '好物已过期',
           });
         }
-        // window.open(res.data, '_blank');
-        this.$q.loading.hide();
       });
     },
 
@@ -97,23 +104,30 @@ export default {
         .post(`${this.host}/goods/coupon-url/${urlCode}?index=${index}`, {})
         .then((res) => {
           console.log(res.data);
-          if (/(http|https):\S*/.test(res.data)) {
-            window.location.href = res.data;
-          } else if (/redirect:\S*/.test(res.data)) {
-            //redirect其他页面
-            let redirectPath = res.data.slice(9);
-            this.$router.push({ path: redirectPath });
+          if (typeof res.data === 'string') {
+            if (/(http|https):\S*/.test(res.data)) {
+              window.location.href = res.data;
+            } else if (/redirect:\S*/.test(res.data)) {
+              //redirect其他页面
+              let redirectPath = res.data.slice(9);
+              this.$router.push({ path: redirectPath });
+            } else {
+              console.log('taobaoPwd = ' + res.data);
+              that.$router.push({
+                path: 'item',
+                name: 'detail',
+                params: { urlCode: urlCode },
+                query: { taobao_code: res.data },
+              });
+            }
+            // window.open(res.data, '_blank');
+            this.$q.loading.hide();
           } else {
-            console.log('taobaoPwd = ' + res.data);
-            that.$router.push({
-              path: 'item',
-              name: 'detail',
-              params: { urlCode: urlCode },
-              query: { taobao_code: res.data },
+            this.$q.notify({
+              type: 'negative',
+              message: '好物已过期',
             });
           }
-          // window.open(res.data, '_blank');
-          this.$q.loading.hide();
         });
     },
   },
