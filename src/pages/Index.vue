@@ -16,7 +16,12 @@
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
           <q-list separator dense class="bg-secondary" id="scroll-target-id">
-            <div v-bind:key="item.id" v-for="item in listData" class="q-pb-sm bg-primary">
+            <div
+              v-bind:key="item.id"
+              v-for="item in listData"
+              class="bg-primary"
+              v-bind:class="{ 'q-pb-sm': !isBigScreen }"
+            >
               <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
               <q-item
                 v-ripple
@@ -203,8 +208,8 @@
                   </q-item-label>
                 </q-item-section>
               </q-item>
+              <q-separator color="primary" class="gt-sm" />
             </div>
-            <!-- <q-separator /> -->
           </q-list>
         </q-pull-to-refresh>
 

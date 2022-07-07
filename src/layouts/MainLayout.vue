@@ -94,23 +94,40 @@
       </div>
     </div> -->
 
-    <q-footer reveal bordered class="bg-dark text-grey-8">
-      <div class="YL__toobar YL__footer row justify-evenly gt-sm">
-        <div class="col-4">
-          联系我们:
-          <div>email: 82955503@qq.com</div>
+    <q-footer bordered reveal class="bg-dark text-white">
+      <div class="YL__footer row justify-evenly gt-sm YL__1200w q-pt-md">
+        <div class="col-3 q-py-sm">
+          <q-img
+            src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+            class="items-center justify-center"
+            width="100px"
+            height="100px"
+          />
         </div>
-        <div class="col">
-          <div>Copyright © 2020 Hjdang.com All rights reserved.</div>
-          <div class="row gt-sm q-gutter-md">
-            <a target="_blank" href="https://beian.miit.gov.cn">浙ICP备2020040769号-1</a>
-            <a
-              target="_blank"
-              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
-              ><img src="备案图标.png" style="width: 12px; height: 12px" />
+        <div class="col q-py-sm">
+          <div class="text-h6">关于</div>
+          <div class="row">
+            <div class="col-6">
+              <div>好价党专注为用户提供真正性价比高的好货以及大平台没有的额外价值</div>
+              <span>联系我们</span>
+              <div>email: 82955503@qq.com</div>
+            </div>
+            <div class="col">
+              <div>Copyright © 2020 Hjdang.com All rights reserved.</div>
+              <div class="row gt-sm q-gutter-md">
+                <a target="_blank" style="color: white" href="https://beian.miit.gov.cn"
+                  >浙ICP备2020040769号-1</a
+                >
+                <a
+                  style="color: white"
+                  target="_blank"
+                  href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
+                  ><img src="备案图标.png" style="width: 12px; height: 12px" />
 
-              浙公网安备 33012702000426号
-            </a>
+                  浙公网安备 33012702000426号
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
