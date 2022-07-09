@@ -96,7 +96,7 @@
 
     <q-footer bordered reveal class="bg-dark text-white">
       <div class="YL__footer row justify-evenly gt-sm YL__1200w q-pt-md">
-        <div class="col-3 q-py-sm">
+        <div class="col-2 q-py-sm">
           <q-img
             src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
             class="items-center justify-center"
@@ -109,7 +109,7 @@
           <div class="row">
             <div class="col-6">
               <div>好价党专注为用户提供真正性价比高的好货以及大平台没有的额外价值</div>
-              <span>联系我们</span>
+              <div>请<strong>左边</strong>扫码关注公众号享受更多服务</div>
               <div>email: 82955503@qq.com</div>
             </div>
             <div class="col">
