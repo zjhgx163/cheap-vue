@@ -19,7 +19,7 @@ if (fullCurrentDomain.indexOf(domainDev) > -1) {
   domain = 'https://web.hjdang.com';
 } else {
   // 本地调试
-  domain = 'http://192.168.1.100:8238';
+  domain = 'http://192.168.0.108:8238';
   // websocketHost = 'http://10.0.41.110:7979/websocket';
 
   // domain = 'http://192.168.0.128:8238';

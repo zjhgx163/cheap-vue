@@ -3,10 +3,38 @@
     <q-header class="bg-primary text-grey-8">
       <q-toolbar class="q-mb-sm bg-secondary" v-bind:class="[itemPadding]">
         <div class="YL__1200w row justify-between">
-          <div class="col-10 col-sm-3 q-pa-xs">
-            <router-link :to="{ path: '/' }">
-              <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
-            </router-link>
+          <div class="col-12 col-sm-7 row items-center justify-between q-pa-xs">
+            <div class="col-4 col-sm-3 q-pa-xs">
+              <router-link :to="{ path: '/' }">
+                <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
+              </router-link>
+            </div>
+            <div
+              class="col-2 lt-sm col-sm-auto text-overline text-italic items-center self-center text-bold YL__coupon_text_effect"
+              v-bind:class="{ hidden: isCouponHidden }"
+            >
+              <router-link :to="{ path: '/coupon/0' }" class="text-accent"> 领券 </router-link>
+            </div>
+            <div
+              class="col-12 col-sm-9 q-px-xs q-pt-xs column justify-center"
+              v-bind:class="{ hidden: isSearchHidden }"
+            >
+              <q-input
+                dense
+                filled
+                standout="text-white"
+                square
+                v-model="searchKey"
+                placeholder="苹果手机"
+                type="search"
+                class="YL__toolbar-input-container col-12 col-sm-9"
+                v-on:keyup.enter="search"
+              >
+                <template v-slot:append>
+                  <q-btn name="search" icon="search" unelevated @click="search" />
+                </template>
+              </q-input>
+            </div>
           </div>
 
           <!-- <q-toolbar-title shrink class="text-weight-bold"> 好价党 </q-toolbar-title> -->
@@ -14,33 +42,12 @@
           <!-- <q-space /> -->
 
           <!-- <div class="bg-white YL__toolbar-input-container"> -->
-          <div
-            class="col-2 lt-sm col-sm-auto text-overline text-italic items-center self-center text-bold YL__coupon_text_effect"
-            v-bind:class="{ hidden: isCouponHidden }"
-          >
-            <router-link :to="{ path: '/coupon/0' }" class="text-accent"> 领券 </router-link>
-          </div>
-          <div
-            class="col-12 col-sm-6 q-px-xs q-pt-xs column justify-center"
-            v-bind:class="{ hidden: isSearchHidden }"
-          >
-            <q-input
-              dense
-              filled
-              standout="text-white"
-              square
-              v-model="searchKey"
-              placeholder="苹果手机"
-              type="search"
-              class="YL__toolbar-input-container"
-              v-on:keyup.enter="search"
-            >
-              <template v-slot:append>
-                <q-btn name="search" icon="search" unelevated @click="search" />
-              </template>
-            </q-input>
-          </div>
-          <div class="col-sm-2 gt-sm column items-end justify-center">
+
+          <div class="col-sm-3 gt-sm column items-end justify-center">
+            <q-btn color="accent" text-color="white" unelevated>
+              <a class="text-white text-weight-bold"> 注册/登陆</a>
+            </q-btn>
+
             <!-- <div class="row q-gutter-sm gt-xs">
               <q-avatar size="2.5em">
                 <img src="https://cdn.quasar.dev/img/avatar.png" />
@@ -147,9 +154,9 @@ export default {
     return {
       searchKey: '',
       drawer: false,
-      logoWidth: Screen.gt.sm ? '160px' : '110px',
+      logoWidth: Screen.gt.sm ? '120px' : '110px',
       host: global.config.domain,
-      itemPadding: Screen.gt.sm ? 'q-py-md' : 'q-py-sm',
+      itemPadding: Screen.gt.sm ? 'q-py-xs' : 'q-py-xs',
       isSearchHidden: false,
       isCouponHidden: false,
     };
@@ -216,7 +223,7 @@ export default {
   &__toolbar-input-container
     @media(min-width: $breakpoint-xs-max)
       width: 60%
-      border: 2px solid #f44336
+      // border: 2px solid #f44336
   &__footer
     color: inherit
     text-decoration: none
