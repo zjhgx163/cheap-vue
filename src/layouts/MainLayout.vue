@@ -3,7 +3,7 @@
     <q-header class="bg-primary text-grey-8">
       <q-toolbar class="q-mb-sm bg-secondary" v-bind:class="[itemPadding]">
         <div class="YL__1200w row justify-between">
-          <div class="col-12 col-sm-7 row items-center justify-between q-pa-xs">
+          <div class="col-12 col-sm-6 row items-center justify-between q-pa-xs">
             <div class="col-4 col-sm-3 q-pa-xs">
               <router-link :to="{ path: '/' }">
                 <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
@@ -16,7 +16,7 @@
               <router-link :to="{ path: '/coupon/0' }" class="text-accent"> 领券 </router-link>
             </div>
             <div
-              class="col-12 col-sm-9 q-px-xs q-pt-xs column justify-center"
+              class="col-12 col-sm-8 q-px-xs q-pt-xs column justify-center"
               v-bind:class="{ hidden: isSearchHidden }"
             >
               <q-input
