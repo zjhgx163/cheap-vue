@@ -135,7 +135,7 @@
             <q-item-label caption class="q-py-xs"> 可提现余额达到2元时可提现 </q-item-label>
 
             <q-item-label caption class="q-py-xs">
-              正常订单返利周期在确认收货订单完成后14天左右
+              正常订单返利结算周期一般在确认收货订单完成后14天左右
             </q-item-label>
             <q-item-label caption class="q-py-xs">
               在本站第一次购买淘宝天猫商品时，如果跳出加入会员的页面，要点“是”，否则没有返利
@@ -144,7 +144,7 @@
               请不要事先在京东，拼多多浏览完商品后再在本站下单买同样的商品，这样会使返利失效。一定要在本站浏览商品直接购买。
             </q-item-label>
             <q-item-label caption class="q-py-xs">
-              <strong>有问题请直接添加客服微信 </strong></q-item-label
+              <strong>如有订单未及时结算和其他问题请直接添加客服微信 </strong></q-item-label
             >
           </q-item-section>
         </q-item>
