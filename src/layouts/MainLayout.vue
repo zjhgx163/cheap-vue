@@ -213,7 +213,7 @@ export default {
     console.log('MainLayout mounted');
     let userInfo = this.$q.sessionStorage.getItem('userInfo');
     console.log(userInfo);
-    if (userInfo !== undefined) {
+    if (userInfo !== undefined && (userInfo !==null) {
       this.userName = userInfo.nickname;
     }
   },
