@@ -25,7 +25,7 @@
                 standout="text-white"
                 square
                 v-model="searchKey"
-                placeholder="苹果手机"
+                placeholder="搜索"
                 type="search"
                 class="YL__toolbar-input-container col-12 col-sm-9"
                 v-on:keyup.enter="search"
@@ -43,9 +43,19 @@
 
           <!-- <div class="bg-white YL__toolbar-input-container"> -->
 
-          <div class="col-sm-3 gt-sm column items-end justify-center">
-            <q-btn color="accent" text-color="white" unelevated>
-              <a class="text-white text-weight-bold"> 注册/登陆</a>
+          <div class="col-sm-3 gt-sm row items-center justify-end">
+            <q-btn unelevated flat disable @click="createWechatQr">
+              <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a>
+            </q-btn>
+
+            <q-avatar size="2.5em">
+              <img
+                src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png"
+              />
+            </q-avatar>
+
+            <q-btn unelevated flat disable @click="createWechatQr">
+              <a class="text-grey-9 text-weight-bold text-subtitle2"> 登出</a>
             </q-btn>
 
             <!-- <div class="row q-gutter-sm gt-xs">
@@ -115,8 +125,8 @@
           <div class="text-h6">关于</div>
           <div class="row">
             <div class="col-6">
-              <div>好价党专注为用户提供真正性价比高的好货以及大平台没有的额外价值</div>
-              <div>请<strong>左边</strong>扫码关注公众号享受更多服务</div>
+              <div>宇宙第一性价比之王导购平台</div>
+              <div>请<strong>左边</strong>扫码关注公众号享受返利和其他服务</div>
               <div>email: 82955503@qq.com</div>
             </div>
             <div class="col">
@@ -139,11 +149,39 @@
         </div>
       </div>
     </q-footer>
+
+    <q-dialog v-model="loginCard" @hide="dialogHide">
+      <q-card class="YL__login_card">
+        <q-card-section class="column flex-center">
+          <div class="text-subtitle1">微信扫码登陆</div>
+        </q-card-section>
+        <q-card-section class="q-pt-none column flex-center">
+          <div class="column flex-center" style="width: 150px; height: 150px">
+            <q-spinner-facebook color="accent" size="2em" v-bind:class="{ hidden: !isLoadingQr }" />
+            <q-img
+              :src="wechatQr"
+              position="50% 50%"
+              class="flex-center"
+              v-bind:class="{ hidden: isLoadingQr }"
+              width="150px"
+              height="150px"
+              fit="cover"
+            />
+          </div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none column flex-center">
+          <div class="text-caption text-grey">打开微信扫一扫</div>
+        </q-card-section>
+
+        <q-separator />
+      </q-card>
+    </q-dialog>
   </q-layout>
 </template>
 
 <script>
-import { fabYoutube } from '@quasar/extras/fontawesome-v5';
+// import { fabYoutube } from '@quasar/extras/fontawesome-v5';
 import { Screen } from 'quasar';
 import 'src/config';
 
@@ -154,20 +192,30 @@ export default {
     return {
       searchKey: '',
       drawer: false,
-      logoWidth: Screen.gt.sm ? '120px' : '110px',
+      logoWidth: Screen.gt.sm ? '110px' : '110px',
       host: global.config.domain,
-      itemPadding: Screen.gt.sm ? 'q-py-xs' : 'q-py-xs',
+      itemPadding: Screen.gt.sm ? 'q-py-none' : 'q-py-xs',
       isSearchHidden: false,
       isCouponHidden: false,
+      loginCard: false,
+      wechatQr: '',
+      userName: '注册/登陆',
+      timer: null,
+      isLoadingQr: false,
     };
   },
   created() {
     console.log('MainLayout created');
-    this.fabYoutube = fabYoutube;
+    // this.fabYoutube = fabYoutube;
   },
 
   mounted() {
     console.log('MainLayout mounted');
+    let userInfo = this.$q.sessionStorage.getItem('userInfo');
+    console.log(userInfo);
+    if (userInfo !== undefined) {
+      this.userName = userInfo.nickname;
+    }
   },
 
   watch: {
@@ -202,6 +250,61 @@ export default {
         });
     },
 
+    createWechatQr() {
+      // this.$q.loading.show({
+      //   delay: 400, // ms
+      // });
+      this.loginCard = true;
+      this.isLoadingQr = true;
+      this.$axios.post(`${global.config.domain}/wechat/createQr`, {}).then((res) => {
+        this.isLoadingQr = false;
+        if (res.data.code == 0) {
+          this.wechatQr = res.data.data.qrUrl;
+          let beginTime = new Date();
+          this.timer = setInterval(() => {
+            this.$axios
+              .post(`${global.config.domain}/user/getScanLoginInfo/${res.data.data.sceneStr}`, {})
+              .then((res) => {
+                if (res.data.code == 0) {
+                  if (res.data.data.loginFlag) {
+                    this.userName = res.data.data.nickname;
+                    this.$q.sessionStorage.set('userInfo', res.data.data);
+                    clearInterval(this.timer); //清除定时器
+                    this.loginCard = false;
+                  } else {
+                    let now = new Date();
+                    if (now.getTime() - beginTime.getTime() > 5 * 60 * 1000) {
+                      //如果五分钟了还未登陆则二维码过期
+                      console.log('二维码过期');
+                      clearInterval(this.timer); //清除定时器
+                    }
+                  }
+                } else {
+                  this.$q.notify({
+                    type: 'negative',
+                    message: res.data.msg,
+                  });
+                  clearInterval(this.timer); //清除定时器
+                  this.loginCard = false;
+                }
+              });
+          }, 1000);
+        } else {
+          this.$q.notify({
+            type: 'negative',
+            message: res.data.msg,
+          });
+          this.loginCard = false;
+        }
+
+        // this.$q.loading.hide();
+      });
+    },
+
+    dialogHide() {
+      clearInterval(this.timer);
+      this.isLoadingQr = false;
+    },
     // searchShowChange(data) {
     //   this.isSearchHidden = data;
     //   this.isCouponHidden = data;
@@ -224,6 +327,8 @@ export default {
     @media(min-width: $breakpoint-xs-max)
       width: 60%
       // border: 2px solid #f44336
+  &__login_card
+    width: 300px
   &__footer
     color: inherit
     text-decoration: none
