@@ -272,6 +272,7 @@ export default {
                 if (res.data.code == 0) {
                   if (res.data.data.loginFlag) {
                     this.userName = res.data.data.nickname;
+                    this.isLogin = true;
                     this.$q.localStorage.set('userInfo', res.data.data);
                     clearInterval(this.timer); //清除定时器
                     this.loginCard = false;
