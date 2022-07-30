@@ -44,7 +44,7 @@
           <!-- <div class="bg-white YL__toolbar-input-container"> -->
 
           <div class="col-sm-3 gt-sm row items-center justify-end">
-            <q-btn unelevated flat disable @click="createWechatQr">
+            <q-btn unelevated flat :disable="isLogin" @click="createWechatQr">
               <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a>
             </q-btn>
 
@@ -54,7 +54,7 @@
               />
             </q-avatar>
 
-            <q-btn unelevated flat disable @click="createWechatQr">
+            <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
               <a class="text-grey-9 text-weight-bold text-subtitle2"> 登出</a>
             </q-btn>
 
@@ -202,6 +202,7 @@ export default {
       userName: '注册/登陆',
       timer: null,
       isLoadingQr: false,
+      isLogin: false,
     };
   },
   created() {
@@ -211,10 +212,13 @@ export default {
 
   mounted() {
     console.log('MainLayout mounted');
-    let userInfo = this.$q.sessionStorage.getItem('userInfo');
-    console.log(userInfo);
-    if (userInfo !== undefined && userInfo !== null) {
-      this.userName = userInfo.nickname;
+    if (this.$q.localStorage.has('userInfo')) {
+      let userInfo = this.$q.localStorage.getItem('userInfo');
+      console.log(userInfo);
+      if (userInfo !== undefined && userInfo !== null) {
+        this.userName = userInfo.nickname;
+        this.isLogin = true;
+      }
     }
   },
 
@@ -268,7 +272,7 @@ export default {
                 if (res.data.code == 0) {
                   if (res.data.data.loginFlag) {
                     this.userName = res.data.data.nickname;
-                    this.$q.sessionStorage.set('userInfo', res.data.data);
+                    this.$q.localStorage.set('userInfo', res.data.data);
                     clearInterval(this.timer); //清除定时器
                     this.loginCard = false;
                   } else {
@@ -298,6 +302,16 @@ export default {
         }
 
         // this.$q.loading.hide();
+      });
+    },
+
+    logout() {
+      this.$axios.post(`${global.config.domain}/user/logout`, {}).then((res) => {
+        if (this.$q.localStorage.has('userInfo')) {
+          this.$q.localStorage.remove('userInfo');
+          this.userName = '注册/登陆';
+          this.isLogin = false;
+        }
       });
     },
 

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
-import { SessionStorage } from 'quasar';
+import { LocalStorage } from 'quasar';
 // 请求带cookie
 axios.defaults.withCredentials = true;
 axios.interceptors.response.use(
@@ -11,11 +11,11 @@ axios.interceptors.response.use(
     console.log('isLogin = ' + isLogin);
     if (isLogin == 'false') {
       console.log('is-Login is false');
-      if (SessionStorage.has('userInfo')) {
-        console.log(SessionStorage.getItem('userInfo'));
+      if (LocalStorage.has('userInfo')) {
+        console.log(LocalStorage.getItem('userInfo'));
         console.log('remove userInfo');
 
-        // SessionStorage.remove(userInfo);
+        LocalStorage.remove('userInfo');
       }
     }
     return response;
