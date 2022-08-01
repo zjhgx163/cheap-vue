@@ -119,7 +119,7 @@ export default {
               this.$router.push({ path: redirectPath });
             } else {
               console.log('taobaoPwd = ' + res.data);
-              that.$router.push({
+              this.$router.push({
                 path: 'item',
                 name: 'detail',
                 params: { urlCode: urlCode },
