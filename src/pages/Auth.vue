@@ -37,17 +37,22 @@ export default {
         .then((res) => {
           if (res.data == null) {
             console.log('error! res.data is null');
+            return;
           }
+          //登陆成功
+          this.$q.localStorage.set('userInfo', res.data);
           if (this.state == 'buy') {
-            //代表购买商品
+            //代表购买商品,跳转到购买页面
             this.buyClick(this.$route.params.urlCode);
           } else if (this.state.indexOf('coupon') > -1) {
-            //领券操作
+            //领券操作，跳转到领券页面
             let coupon_index = this.state.slice(6);
             console.log('coupon_index = ' + coupon_index);
             this.takeCouponClick(this.$route.params.urlCode, coupon_index);
           } else {
             console.log('order list' + this.state);
+            this.$q.loading.hide();
+
             this.$router.push({
               path: '/my/orderlist/all',
               query: { userId: this.$route.params.urlCode, status: this.state },
@@ -86,6 +91,7 @@ export default {
           // window.open(res.data, '_blank');
           this.$q.loading.hide();
         } else {
+          this.$q.loading.hide();
           this.$q.notify({
             type: 'negative',
             message: '好物已过期',
@@ -123,6 +129,7 @@ export default {
             // window.open(res.data, '_blank');
             this.$q.loading.hide();
           } else {
+            this.$q.loading.hide();
             this.$q.notify({
               type: 'negative',
               message: '好物已过期',

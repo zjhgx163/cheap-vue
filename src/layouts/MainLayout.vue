@@ -49,9 +49,7 @@
             </q-btn>
 
             <q-avatar size="2.5em">
-              <img
-                src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png"
-              />
+              <img :src="avatar" />
             </q-avatar>
 
             <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
@@ -152,7 +150,7 @@
 
     <q-dialog v-model="loginCard" @hide="dialogHide">
       <q-card class="YL__login_card">
-        <q-card-section class="column flex-center">
+        <q-card-section class="column flex-center q-pt-lg q-pb-sm">
           <div class="text-subtitle1">微信扫码登陆</div>
         </q-card-section>
         <q-card-section class="q-pt-none column flex-center">
@@ -170,8 +168,9 @@
           </div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none column flex-center">
+        <q-card-section class="q-pt-none q-pb-lg column flex-center">
           <div class="text-caption text-grey">打开微信扫一扫</div>
+          <div class="text-caption text-grey">关注公众号完成登陆</div>
         </q-card-section>
 
         <q-separator />
@@ -203,6 +202,7 @@ export default {
       timer: null,
       isLoadingQr: false,
       isLogin: false,
+      avatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
     };
   },
   created() {
@@ -218,6 +218,9 @@ export default {
       if (userInfo !== undefined && userInfo !== null) {
         this.userName = userInfo.nickname;
         this.isLogin = true;
+        if (userInfo.avatar != null && userInfo.avatar != '') {
+          this.avatar = userInfo.avatar;
+        }
       }
     }
   },

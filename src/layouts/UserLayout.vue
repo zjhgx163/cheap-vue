@@ -85,6 +85,9 @@ export default {
           this.avatar = res.data.headimgurl;
           this.user = res.data.nickname;
           this.userInfo = res.data;
+          //登陆成功
+          this.$q.localStorage.set('userInfo', res.data);
+
           this.$q.loading.hide();
 
           // console.log(this.isBigSc = reen);

@@ -107,7 +107,7 @@
                     text-color="white"
                     :size="buttonSize"
                     unelevated
-                    @click="buyClick(detail.urlCode)"
+                    @click="buyClick(detail.urlCode, detail.mall)"
                   >
                     去购买
                   </q-btn>
@@ -119,7 +119,7 @@
                     text-color="white"
                     :size="buttonSize"
                     unelevated
-                    @click="buyClick(detail.urlCode)"
+                    @click="buyClick(detail.urlCode, detail.mall)"
                   >
                     复制淘口令
                   </q-btn>
@@ -149,7 +149,7 @@
                       outline
                       align="left"
                       style="width: 14em"
-                      @click="takeCouponClick(detail.urlCode, coupon.index)"
+                      @click="takeCouponClick(detail.urlCode, coupon.index, detail.mall)"
                     >
                       {{ coupon.coupon_info }}
                       <!-- <a
@@ -169,7 +169,7 @@
                       :size="buttonSize"
                       unelevated
                       class="text-weight-bold"
-                      @click="takeCouponClick(detail.urlCode, coupon.index)"
+                      @click="takeCouponClick(detail.urlCode, coupon.index, detail.mall)"
                     >
                       领取
                     </q-btn>
@@ -182,7 +182,7 @@
                       outline
                       align="left"
                       style="width: 14em"
-                      @click="takeCouponClick(detail.urlCode, coupon.index)"
+                      @click="takeCouponClick(detail.urlCode, coupon.index, detail.mall)"
                     >
                       {{ coupon.coupon_info }}
                       <!-- <a
@@ -202,7 +202,7 @@
                       :size="buttonSize"
                       unelevated
                       class="text-weight-bold"
-                      @click="takeCouponClick(detail.urlCode, coupon.index)"
+                      @click="takeCouponClick(detail.urlCode, coupon.index, detail.mall)"
                     >
                       复制淘口令
                     </q-btn>
@@ -274,7 +274,7 @@ export default {
       categoryInfo: [],
       turnInOrNot: 'turned_in_not',
       comment: 'comment',
-      buttonSize: Screen.gt.sm ? '13px' : '9px',
+      buttonSize: Screen.gt.sm ? '12px' : '9px',
       host: global.config.domain,
       isTaoPwd: false,
       showing: false,
@@ -352,116 +352,289 @@ export default {
     },
     turnInOrNotClick() {},
     commentClick() {},
-    buyClick(urlCode) {
-      this.$q.loading.show({
-        delay: 100, // ms
-      });
+    buyClick(urlCode, mall) {
+      if (
+        !this.isWeixin() && //只有不是微信端才需要提示登录，微信会自动登录
+        /(京东|淘宝|天猫|聚划算)\W*/g.test(mall) &&
+        !this.$q.localStorage.has('userInfo')
+      ) {
+        this.$q
+          .dialog({
+            title: '提醒',
+            message: '未登陆将以非返利形势购买，继续吗？',
+            ok: {
+              color: 'accent',
+              label: '继续',
+              size: this.buttonSize,
+            },
+            cancel: {
+              color: 'accent',
+              label: '取消',
+              size: this.buttonSize,
+            },
+            persistent: true,
+          })
+          .onOk(() => {
+            console.log('>>>> OK');
+            this.$q.loading.show({
+              delay: 100, // ms
+            });
+            if (this.isTaoPwd) {
+              //淘口令要从后台取
+              // 这里必须用同步的ajax，否则ios的浏览器无法copy成功，this.$copyText不能放在异步方法里面\
+              this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
+                console.log('res = ' + res.data);
+                if (typeof res.data === 'string') {
+                  if (/(http|https):\S*/.test(res.data)) {
+                    window.location.href = res.data;
+                  } else if (/redirect:\S*/.test(res.data)) {
+                    //redirect其他页面
+                    let redirectPath = res.slice(9);
+                    this.$router.push({ path: redirectPath });
+                  } else {
+                    this.taobaoPwd = res.data;
+                    console.log('taobaoPwd = ' + res.data);
+                    this.isShowCopyTaobaopwd = true;
+                  }
+                  this.$q.loading.hide();
+                } else {
+                  this.$q.notify({
+                    type: 'negative',
+                    message: '好物已过期',
+                  });
+                }
+              });
+            } else {
+              //因为每个用户的链接不同，需要每次从后台取链接
+              this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
+                console.log(res.data);
+                if (typeof res.data === 'string') {
+                  if (/(http|https):\S*/.test(res.data)) {
+                    window.location.href = res.data;
+                    // window.open(res.data, '_blank');
+                  } else if (/redirect:\S*/.test(res.data)) {
+                    //redirect其他页面
+                    let redirectPath = res.data.slice(9);
+                    this.$router.push({ path: redirectPath });
+                  }
+                  // window.open(res.data, '_blank');
+                  this.$q.loading.hide();
+                } else {
+                  this.$q.notify({
+                    type: 'negative',
+                    message: '好物已过期',
+                  });
+                }
+              });
+            }
+          })
+          .onOk(() => {
+            console.log('>>>> second OK catcher');
+          })
+          .onCancel(() => {
+            console.log('>>>> Cancel');
+          })
+          .onDismiss(() => {
+            console.log('I am triggered on both OK and Cancel');
+          });
+      } else {
+        //无返利模式
+        this.$q.loading.show({
+          delay: 100, // ms
+        });
+        if (this.isTaoPwd) {
+          //淘口令要从后台取
+          // 这里必须用同步的ajax，否则ios的浏览器无法copy成功，this.$copyText不能放在异步方法里面\
+          this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
+            console.log('res = ' + res.data);
+            if (typeof res.data === 'string') {
+              if (/(http|https):\S*/.test(res.data)) {
+                window.location.href = res.data;
+              } else if (/redirect:\S*/.test(res.data)) {
+                //redirect其他页面
+                let redirectPath = res.slice(9);
+                this.$router.push({ path: redirectPath });
+              } else {
+                this.taobaoPwd = res.data;
+                console.log('taobaoPwd = ' + res.data);
+                this.isShowCopyTaobaopwd = true;
+              }
+              this.$q.loading.hide();
+            } else {
+              this.$q.notify({
+                type: 'negative',
+                message: '好物已过期',
+              });
+            }
+          });
+        } else {
+          //因为每个用户的链接不同，需要每次从后台取链接
+          this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
+            console.log(res.data);
+            if (typeof res.data === 'string') {
+              if (/(http|https):\S*/.test(res.data)) {
+                window.location.href = res.data;
+                // window.open(res.data, '_blank');
+              } else if (/redirect:\S*/.test(res.data)) {
+                //redirect其他页面
+                let redirectPath = res.data.slice(9);
+                this.$router.push({ path: redirectPath });
+              }
+              // window.open(res.data, '_blank');
+              this.$q.loading.hide();
+            } else {
+              this.$q.notify({
+                type: 'negative',
+                message: '好物已过期',
+              });
+            }
+          });
+        }
+      }
+
       // this.$axios
       //   .post(`${global.config.domain}/user/event`, { type: '进入推广链接', remark: url })
       //   .then((res) => {
       //     console.log(res.data.data);
       //   });
-      if (this.isTaoPwd) {
-        //淘口令要从后台取
-        // 这里必须用同步的ajax，否则ios的浏览器无法copy成功，this.$copyText不能放在异步方法里面\
-        this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
-          console.log('res = ' + res.data);
-          if (typeof res.data === 'string') {
-            if (/(http|https):\S*/.test(res.data)) {
-              window.location.href = res.data;
-            } else if (/redirect:\S*/.test(res.data)) {
-              //redirect其他页面
-              let redirectPath = res.slice(9);
-              this.$router.push({ path: redirectPath });
-            } else {
-              this.taobaoPwd = res.data;
-              console.log('taobaoPwd = ' + res.data);
-              this.isShowCopyTaobaopwd = true;
-            }
-            this.$q.loading.hide();
-          } else {
-            this.$q.notify({
-              type: 'negative',
-              message: '好物已过期',
-            });
-          }
-        });
-      } else {
-        //因为每个用户的链接不同，需要每次从后台取链接
-        this.$axios.post(`${this.host}/goods/go/${urlCode}`, {}).then((res) => {
-          console.log(res.data);
-          if (typeof res.data === 'string') {
-            if (/(http|https):\S*/.test(res.data)) {
-              window.location.href = res.data;
-              // window.open(res.data, '_blank');
-            } else if (/redirect:\S*/.test(res.data)) {
-              //redirect其他页面
-              let redirectPath = res.data.slice(9);
-              this.$router.push({ path: redirectPath });
-            }
-            // window.open(res.data, '_blank');
-            this.$q.loading.hide();
-          } else {
-            this.$q.notify({
-              type: 'negative',
-              message: '好物已过期',
-            });
-          }
-        });
-      }
     },
 
-    takeCouponClick(code, index) {
+    takeCouponClick(code, index, mall) {
+      if (
+        !this.isWeixin() && //只有不是微信端才需要提示，微信会自动登录
+        /(京东|淘宝|天猫|聚划算)\W*/g.test(mall) &&
+        !this.$q.localStorage.has('userInfo')
+      ) {
+        this.$q
+          .dialog({
+            title: '提醒',
+            message: '未登陆将以非返利形势购买，继续吗？',
+            ok: {
+              color: 'accent',
+              label: '继续',
+              size: this.buttonSize,
+            },
+            cancel: {
+              color: 'accent',
+              label: '取消',
+              size: this.buttonSize,
+            },
+            persistent: true,
+          })
+          .onOk(() => {
+            console.log('>>>> OK');
+            this.$q.loading.show({
+              delay: 100, // ms
+            });
+            if (this.isTaoPwd) {
+              this.$axios
+                .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {})
+                .then((res) => {
+                  console.log('res = ' + res.data);
+                  if (/(http|https):\S*/.test(res.data)) {
+                    window.location.href = res.data;
+                  } else if (/redirect:\S*/.test(res.data)) {
+                    //redirect其他页面
+                    let redirectPath = res.slice(9);
+                    this.$router.push({ path: redirectPath });
+                  } else {
+                    this.taobaoPwd = res.data;
+                    console.log('coupon taobaoPwd = ' + res.data);
+                    this.isShowCopyTaobaopwd = true;
+                  }
+                  this.$q.loading.hide();
+                });
+            } else {
+              //因为每个用户的链接不同，需要每次从后台取链接
+              this.$axios
+                .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {
+                  code: this.code,
+                })
+                .then((res) => {
+                  console.log(res.data);
+                  if (/(http|https):\S*/.test(res.data)) {
+                    window.location.href = res.data;
+                  } else if (/redirect:\S*/.test(res.data)) {
+                    //redirect其他页面
+                    let redirectPath = res.data.slice(9);
+                    this.$router.push({ path: redirectPath });
+                  }
+                  // window.open(res.data, '_blank');
+                  this.$q.loading.hide();
+                });
+            }
+          })
+          .onOk(() => {
+            console.log('>>>> second OK catcher');
+          })
+          .onCancel(() => {
+            console.log('>>>> Cancel');
+          })
+          .onDismiss(() => {
+            console.log('I am triggered on both OK and Cancel');
+          });
+      } else {
+        this.$q.loading.show({
+          delay: 100, // ms
+        });
+        if (this.isTaoPwd) {
+          this.$axios
+            .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {})
+            .then((res) => {
+              console.log('res = ' + res.data);
+              if (/(http|https):\S*/.test(res.data)) {
+                window.location.href = res.data;
+              } else if (/redirect:\S*/.test(res.data)) {
+                //redirect其他页面
+                let redirectPath = res.slice(9);
+                this.$router.push({ path: redirectPath });
+              } else {
+                this.taobaoPwd = res.data;
+                console.log('coupon taobaoPwd = ' + res.data);
+                this.isShowCopyTaobaopwd = true;
+              }
+              this.$q.loading.hide();
+            });
+        } else {
+          //因为每个用户的链接不同，需要每次从后台取链接
+          this.$axios
+            .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {
+              code: this.code,
+            })
+            .then((res) => {
+              console.log(res.data);
+              if (/(http|https):\S*/.test(res.data)) {
+                window.location.href = res.data;
+              } else if (/redirect:\S*/.test(res.data)) {
+                //redirect其他页面
+                let redirectPath = res.data.slice(9);
+                this.$router.push({ path: redirectPath });
+              }
+              // window.open(res.data, '_blank');
+              this.$q.loading.hide();
+            });
+        }
+      }
+
       // this.$axios
       //   .post(`${global.config.domain}/user/event`, { type: '商品领券', remark: url })
       //   .then((res) => {
       //     console.log(res.data.data);
       //   });
-
-      if (this.isTaoPwd) {
-        this.$axios.post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {}).then((res) => {
-          console.log('res = ' + res.data);
-          if (/(http|https):\S*/.test(res.data)) {
-            window.location.href = res.data;
-          } else if (/redirect:\S*/.test(res.data)) {
-            //redirect其他页面
-            let redirectPath = res.slice(9);
-            this.$router.push({ path: redirectPath });
-          } else {
-            this.taobaoPwd = res.data;
-            console.log('coupon taobaoPwd = ' + res.data);
-            this.isShowCopyTaobaopwd = true;
-          }
-          this.$q.loading.hide();
-        });
-      } else {
-        //因为每个用户的链接不同，需要每次从后台取链接
-        this.$axios
-          .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {
-            code: this.code,
-          })
-          .then((res) => {
-            console.log(res.data);
-            if (/(http|https):\S*/.test(res.data)) {
-              window.location.href = res.data;
-            } else if (/redirect:\S*/.test(res.data)) {
-              //redirect其他页面
-              let redirectPath = res.data.slice(9);
-              this.$router.push({ path: redirectPath });
-            }
-            // window.open(res.data, '_blank');
-            this.$q.loading.hide();
-          });
-      }
     },
 
     isTaobaoPwd() {
+      if (this.isWeixin() && /(淘宝|天猫|聚划算)\W*/g.test(this.detail.mall)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+    isWeixin() {
       var ua = window.navigator.userAgent.toLowerCase();
-      // console.log(ua);
-      if (
-        ua.match(/MicroMessenger/i) == 'micromessenger' &&
-        /(淘宝|天猫|聚划算)\W*/g.test(this.detail.mall)
-      ) {
+      console.log(ua);
+      if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         return true;
       } else {
         return false;

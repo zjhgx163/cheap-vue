@@ -200,7 +200,7 @@
                         color="accent"
                         :size="buyButtonSize"
                         unelevated
-                        @click.stop="buyClick(item.urlCode)"
+                        @click.stop="buyClick(item.urlCode, item.mall)"
                       >
                         <a class="text-white text-weight-bold"> 去购买</a>
                       </q-btn>
@@ -505,26 +505,76 @@ export default {
 
       // window.location.href = `${global.config.domain}/goods/detail?id=` + id;
     },
-    buyClick(code) {
-      this.$q.loading.show({
-        delay: 100, // ms
-      });
-      this.$axios
-        .post(`${this.host}/goods/go/${code}`, {
-          code: '',
-        })
-        .then((res) => {
-          console.log(res.data);
-          if (/(http|https):\S*/.test(res.data)) {
-            // window.location.href = res.data;
-            window.open(res.data, '_blank');
-          } else if (/redirect:\S*/.test(res.data)) {
-            //redirect其他页面
-            let redirectPath = res.data.slice(9);
-            this.$router.push({ path: redirectPath });
-          }
-          this.$q.loading.hide();
+    buyClick(code, mall) {
+      if (/(京东|淘宝|天猫|聚划算)\W*/g.test(mall) && !this.$q.localStorage.has('userInfo')) {
+        this.$q
+          .dialog({
+            title: '提醒',
+            message: '未登陆将以非返利形势购买，继续吗？',
+            ok: {
+              color: 'accent',
+              label: '继续',
+            },
+            cancel: {
+              color: 'accent',
+              label: '取消',
+            },
+            persistent: true,
+          })
+          .onOk(() => {
+            console.log('>>>> OK');
+            this.$q.loading.show({
+              delay: 100, // ms
+            });
+
+            this.$axios
+              .post(`${this.host}/goods/go/${code}`, {
+                code: '',
+              })
+              .then((res) => {
+                console.log(res.data);
+                if (/(http|https):\S*/.test(res.data)) {
+                  // window.location.href = res.data;
+                  window.open(res.data, '_blank');
+                } else if (/redirect:\S*/.test(res.data)) {
+                  //redirect其他页面
+                  let redirectPath = res.data.slice(9);
+                  this.$router.push({ path: redirectPath });
+                }
+                this.$q.loading.hide();
+              });
+          })
+          .onOk(() => {
+            console.log('>>>> second OK catcher');
+          })
+          .onCancel(() => {
+            console.log('>>>> Cancel');
+          })
+          .onDismiss(() => {
+            console.log('I am triggered on both OK and Cancel');
+          });
+      } else {
+        this.$q.loading.show({
+          delay: 100, // ms
         });
+
+        this.$axios
+          .post(`${this.host}/goods/go/${code}`, {
+            code: '',
+          })
+          .then((res) => {
+            console.log(res.data);
+            if (/(http|https):\S*/.test(res.data)) {
+              // window.location.href = res.data;
+              window.open(res.data, '_blank');
+            } else if (/redirect:\S*/.test(res.data)) {
+              //redirect其他页面
+              let redirectPath = res.data.slice(9);
+              this.$router.push({ path: redirectPath });
+            }
+            this.$q.loading.hide();
+          });
+      }
     },
     transferLabel(label) {
       if (label != '' && label != undefined) {
