@@ -49,6 +49,12 @@ export default {
             let coupon_index = this.state.slice(6);
             console.log('coupon_index = ' + coupon_index);
             this.takeCouponClick(this.$route.params.urlCode, coupon_index);
+          } else if (this.state == 'yunpanItemList') {
+            this.$q.loading.hide();
+
+            this.$router.push({
+              path: '/yunpan/list',
+            });
           } else {
             console.log('order list' + this.state);
             this.$q.loading.hide();

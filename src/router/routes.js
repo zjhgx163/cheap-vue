@@ -86,6 +86,18 @@ const routes = [
       },
     ],
   },
+  { path: '/yunpan/list', component: () => import('pages/YunpanList.vue') },
+  {
+    path: '/yunpan/detail/:id',
+    component: () => import('pages/YunpanItemDetail.vue'),
+    props: (route) => ({
+      title: route.query.title,
+      auther: route.query.auther,
+      avatar: route.query.avatar,
+      createDateStr: route.query.createDateStr,
+      tag: route.query.tag,
+    }),
+  },
 
   {
     path: '/user',
