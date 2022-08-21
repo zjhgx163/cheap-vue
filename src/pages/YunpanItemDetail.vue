@@ -252,7 +252,7 @@ export default {
     });
 
     if (this.$q.localStorage.has('userInfo')) {
-      this.userAvatar = this.$q.localStorage.getItem('userInfo').avatar;
+      this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
     }
 
     this.getYunpanItemContent(this.$route.params.id);
