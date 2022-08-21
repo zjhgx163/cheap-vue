@@ -90,13 +90,6 @@ const routes = [
   {
     path: '/yunpan/detail/:id',
     component: () => import('pages/YunpanItemDetail.vue'),
-    props: (route) => ({
-      title: route.query.title,
-      auther: route.query.auther,
-      avatar: route.query.avatar,
-      createDateStr: route.query.createDateStr,
-      tag: route.query.tag,
-    }),
   },
 
   {

@@ -30,8 +30,13 @@
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
                 <q-item-label :lines="2" class="row text-h6 text-bold">
                   <div>
-                    {{ title }}
-                    <q-badge transparent align="middle" :color="getTagColor(tag)" :label="tag">
+                    {{ item.title }}
+                    <q-badge
+                      transparent
+                      align="middle"
+                      :color="getTagColor(item.tag)"
+                      :label="item.tag"
+                    >
                     </q-badge>
                   </div>
                 </q-item-label>
@@ -39,13 +44,13 @@
             </q-item>
             <q-item class="items-center">
               <q-item-section avatar style="min-width: 30px">
-                <q-avatar size="1.6em"> <img :src="avatar" /> </q-avatar>
+                <q-avatar size="1.6em"> <img :src="item.avatar" /> </q-avatar>
               </q-item-section>
               <q-item-section class="YL__auther">
-                {{ auther }}
+                {{ item.auther }}
               </q-item-section>
               <q-item-section class="YL__auther">
-                {{ createDateStr }}
+                {{ item.createDateStr }}
               </q-item-section>
             </q-item>
             <q-item dense>
@@ -59,21 +64,15 @@
                 <q-pull-to-refresh @refresh="refresh" no-mouse>
                   <q-list dense separator class="bg-secondary" id="scroll-target-id">
                     <div
-                      v-bind:key="item.id"
-                      v-for="item in listData"
+                      v-bind:key="reply.id"
+                      v-for="reply in listData"
                       class="bg-primary"
                       v-bind:class="{ 'q-pb-xs': !isBigScreen }"
                     >
                       <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
-                      <q-item
-                        dense
-                        v-ripple
-                        :clickable="clickable"
-                        @click="itemClick(item)"
-                        class="bg-secondary"
-                      >
+                      <q-item dense v-ripple :clickable="clickable" class="bg-secondary">
                         <q-item-section avatar>
-                          <q-avatar> <img :src="item.avatar" /> </q-avatar
+                          <q-avatar> <img :src="reply.avatar" /> </q-avatar
                         ></q-item-section>
                         <q-item-section class="q-pb-xs">
                           <q-item-label
@@ -81,7 +80,7 @@
                             v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
                             class="text-black text-bold"
                           >
-                            {{ item.title }}</q-item-label
+                            {{ reply.title }}</q-item-label
                           >
 
                           <q-item-label
@@ -89,30 +88,30 @@
                           >
                             <div class="col-4 row justify-between flex-center">
                               <div class="row flex-center">
-                                <strong>{{ item.auther }}</strong>
+                                <strong>{{ reply.auther }}</strong>
                               </div>
                               <div class="row flex-center">
-                                {{ item.itemCreateDateStr }}
+                                {{ reply.itemCreateDateStr }}
                               </div>
                               <q-icon name="reply" />
 
                               <div class="row flex-center">
-                                {{ item.postTimeStr }}
+                                {{ reply.postTimeStr }}
                               </div>
 
                               <div class="row flex-center">
-                                <div>{{ item.viewCount }}</div>
+                                <div>{{ reply.viewCount }}</div>
                               </div>
                             </div>
                             <div class="col-auto items-start justify-end row">
                               <q-chip
                                 outline
                                 size="sm"
-                                :color="getTagColor(item.tag)"
-                                :icon="getTagIcon(item.tag)"
+                                :color="getTagColor(reply.tag)"
+                                :icon="getTagIcon(reply.tag)"
                                 text-color="white"
                               >
-                                {{ item.tag }}
+                                {{ reply.tag }}
                               </q-chip>
                             </div>
                           </q-item-label>
@@ -129,6 +128,35 @@
                   </div>
                 </template>
               </q-infinite-scroll>
+              <q-item dense class="q-py-xs">
+                <q-item-section avatar top style="min-width: 30px">
+                  <q-avatar size="1.6em">
+                    <img :src="userAvatar" />
+                  </q-avatar>
+                </q-item-section>
+                <!-- <q-item-section class="YL__auther">
+                  {{ auther }}
+                </q-item-section> -->
+                <q-item-section top class="YL__auther">
+                  <q-item-label>
+                    <q-form @submit="onSubmit" class="q-gutter-sm">
+                      <div>
+                        <q-input
+                          dense
+                          filled
+                          v-model="replyContent"
+                          placeholder="说点什么吧"
+                          hide-bottom-space
+                          type="textarea"
+                        />
+                      </div>
+
+                      <div><q-btn label="提交" type="submit" color="light-green" size="xs" /></div>
+                    </q-form>
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+
               <div class="q-my-xs q-pa-lg flex flex-center bg-secondary gt-sm">
                 <q-pagination
                   v-model="current"
@@ -172,10 +200,11 @@ export default {
       isShowCopyTaobaopwd: false,
       current: 1,
       max: 0,
-
+      replyContent: '',
       maxPage: Screen.gt.sm ? 6 : 4,
       paginationSize: Screen.gt.sm ? '12px' : '9px',
       isListEnd: false,
+      userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
     };
   },
   computed: {
@@ -208,7 +237,6 @@ export default {
       };
     },
   },
-  props: ['title', 'auther', 'avatar', 'createDateStr', 'tag'], // 微信auth code
 
   //   components: {
   //     HotList,
@@ -223,19 +251,68 @@ export default {
       delay: 400, // ms
     });
 
+    if (this.$q.localStorage.has('userInfo')) {
+      this.userAvatar = this.$q.localStorage.getItem('userInfo').avatar;
+    }
+
     this.getYunpanItemContent(this.$route.params.id);
   },
   methods: {
+    getReplyList() {
+      this.$q.loading.show({
+        delay: 400, // ms
+      });
+      this.$axios
+        .post(`${global.config.domain}/yunpan/reply/list`, {
+          page: this.current,
+          itemId: this.item.id,
+        })
+        .then((res) => {
+          // console.log(res.data.data);
+          // console.log(this.isBigScreen);
+
+          console.log(res.data);
+          if (res.data.code < 0) {
+            this.$q.notify({
+              type: 'negative',
+              icon: 'warning',
+              message: `${res.data.msg}`,
+            });
+          } else {
+            this.listData = res.data.data.records;
+            if (res.data.data.records.length < 20) {
+              this.isListEnd = true;
+            }
+          }
+          this.$q.loading.hide();
+        });
+    },
     getYunpanItemContent(id) {
       this.$axios.post(`${global.config.domain}/yunpan/item/detail/${id}`).then((res) => {
-        this.item = res.data.data.item;
-        this.listData = res.data.data.firstReplyPage.records;
-        console.log(this.item);
-        if (this.item == null) {
-          this.$router.push({ path: '/error' });
-        }
+        if (res.data.code < 0) {
+          if (!this.$q.localStorage.has('userInfo')) {
+            if (this.isWeixin()) {
+              window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
+            } else {
+              this.$router.push({ path: 'login' });
+            }
+          } else {
+            this.$q.notify({
+              type: 'negative',
+              icon: 'warning',
+              message: `${res.data.msg}`,
+            });
+          }
+        } else {
+          this.item = res.data.data.item;
+          this.listData = res.data.data.firstReplyPage.records;
+          console.log(this.item);
+          if (this.item == null) {
+            this.$router.push({ path: '/error' });
+          }
 
-        this.$q.loading.hide();
+          this.$q.loading.hide();
+        }
       });
     },
     copyPwd() {
@@ -259,6 +336,32 @@ export default {
       } else {
         return false;
       }
+    },
+    onSubmit() {
+      this.$axios
+        .post(`${global.config.domain}/yunpan/resource/reply`, {
+          itemId: this.item.id,
+          reply: this.replyContent,
+        })
+        .then((res) => {
+          if (res.data.code < 0) {
+            if (!this.$q.localStorage.has('userInfo')) {
+              if (this.isWeixin()) {
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.item.id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
+              } else {
+                this.$router.push({ path: 'login' });
+              }
+            } else {
+              this.$q.notify({
+                type: 'negative',
+                icon: 'warning',
+                message: `${res.data.msg}`,
+              });
+            }
+          } else {
+            this.getReplyList();
+          }
+        });
     },
     //向下划动load页面
     onLoad(index, done) {
@@ -305,7 +408,7 @@ export default {
     //列表下拉刷新
     refresh(done) {
       setTimeout(() => {
-        this.getItemList();
+        this.getReplyList();
         done();
       }, 1000);
     },
@@ -332,4 +435,7 @@ export default {
 .break-all
   word-break: break-all;
   word-wrap: break-word;
+.message img
+  width: 100%
+  height: 50%
 </style>

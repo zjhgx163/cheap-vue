@@ -45,7 +45,7 @@
                 v-ripple
                 :clickable="clickable"
                 @click="itemClick(item)"
-                class="bg-secondary"
+                class="bg-secondary q-pt-sm"
               >
                 <q-item-section avatar>
                   <q-avatar> <img :src="item.avatar" /> </q-avatar
@@ -59,25 +59,25 @@
                     {{ item.title }}</q-item-label
                   >
 
-                  <q-item-label class="row justify-between items-center q-mt-none YL__auther">
-                    <div class="col-4 row justify-between flex-center">
+                  <q-item-label
+                    class="row justify-between items-center q-mt-none q-pr-xs YL__auther"
+                  >
+                    <div class="col-auto row flex-center q-gutter-sm">
                       <div class="row flex-center">
                         <strong>{{ item.auther }}</strong>
+                        <q-icon name="reply" />
                       </div>
-                      <div class="row flex-center">
-                        {{ item.itemCreateDateStr }}
-                      </div>
-                      <q-icon name="reply" />
+                      <div class="row flex-center">发表于 {{ item.itemCreateDateStr }}</div>
 
-                      <div class="row flex-center">
-                        {{ item.postTimeStr }}
+                      <!-- <div class="row flex-center">
+                        {{ item.lastPostDateStr }}
                       </div>
 
                       <div class="row flex-center">
                         <div>{{ item.viewCount }}</div>
-                      </div>
+                      </div> -->
                     </div>
-                    <div class="col-auto items-start justify-end row">
+                    <div class="col items-center justify-end row">
                       <q-chip
                         outline
                         size="sm"
@@ -154,7 +154,7 @@
     line-height: 1.2em
   &__title_height
     @media(max-width: $breakpoint-xs-max)
-      height: 2.8em
+      height: 2.9em
     @media(min-width: $breakpoint-xs-max)
       height: 1.6em
   &__list_line_height
@@ -233,7 +233,7 @@ export default {
           return 'orange';
         } else if (parameter == '游戏/软件') {
           return 'purple';
-        } else if (parameter == '学习区') {
+        } else if (parameter == '学习') {
           return 'teal';
         } else if (parameter == '音乐/音频') {
           return 'indigo';
@@ -253,7 +253,7 @@ export default {
           return 'image';
         } else if (parameter == '游戏/软件') {
           return 'sports_esports';
-        } else if (parameter == '学习区') {
+        } else if (parameter == '学习') {
           return 'book';
         } else if (parameter == '音乐/音频') {
           return 'music_note';
@@ -409,13 +409,6 @@ export default {
       console.log('id = ' + item.id);
       this.$router.push({
         path: '/yunpan/detail/' + item.id,
-        query: {
-          title: item.title,
-          auther: item.auther,
-          avatar: item.avatar,
-          createDateStr: item.createDateStr,
-          tag: item.tag,
-        },
       });
       // const { href } = this.$router.resolve({
       //   path: 'item/detail',
