@@ -43,7 +43,7 @@
               <q-item
                 dense
                 v-ripple
-                :clickable="clickable"
+                clickable
                 @click="itemClick(item)"
                 class="bg-secondary q-pt-sm"
               >
