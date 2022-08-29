@@ -27,7 +27,7 @@
       </keep-alive>
     </q-page-container>
 
-    <q-footer bordered reveal class="bg-dark text-white">
+    <!-- <q-footer bordered reveal class="bg-dark text-white">
       <div class="YL__footer row justify-evenly gt-sm YL__1200w q-pt-md">
         <div class="col-2 q-py-sm">
           <q-img
@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-    </q-footer>
+    </q-footer> -->
   </q-layout>
 </template>
 
