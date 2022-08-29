@@ -86,11 +86,23 @@ const routes = [
       },
     ],
   },
-  { path: '/yunpan/list', component: () => import('pages/YunpanList.vue') },
   {
-    path: '/yunpan/detail/:id',
-    component: () => import('pages/YunpanItemDetail.vue'),
+    path: '/yunpan',
+    component: () => import('layouts/YunpanLayout.vue'),
+    children: [
+      { path: 'list', component: () => import('pages/YunpanList.vue') },
+      {
+        path: 'detail/:id',
+        component: () => import('pages/YunpanItemDetail.vue'),
+      },
+      {
+        path: 'search',
+        component: () => import('pages/YunpanList.vue'),
+        props: (route) => ({ query: route.query.q }),
+      },
+    ],
   },
+  // { path: '/yunpan/list', component: () => import('pages/YunpanList.vue') },
 
   {
     path: '/user',

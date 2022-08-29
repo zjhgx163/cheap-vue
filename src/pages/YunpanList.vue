@@ -1,22 +1,5 @@
 <template>
-  <div>
-    <div class="col-12 col-sm-8 q-px-xs q-pt-xs q-pb-sm column justify-center">
-      <q-input
-        dense
-        filled
-        standout="text-white"
-        square
-        v-model="searchKey"
-        placeholder="搜索"
-        type="search"
-        class="YL__toolbar-input-container col-12 col-sm-9"
-        v-on:keyup.enter="search"
-      >
-        <template v-slot:append>
-          <q-btn name="search" icon="search" unelevated @click="getItemList" />
-        </template>
-      </q-input>
-    </div>
+  <q-page class="bg-primary">
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
         <q-img
@@ -116,7 +99,7 @@
         </q-pagination>
       </div>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <style lang="sass">
@@ -185,7 +168,6 @@ export default {
   name: 'PageIndex',
   data() {
     return {
-      searchKey: '',
       sort: 1,
       listData: [],
       current: 1,
@@ -205,6 +187,8 @@ export default {
       // to: false,
     };
   },
+  props: ['query'],
+
   computed: {
     itemPadding: function () {
       return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
@@ -313,7 +297,7 @@ export default {
         .post(`${global.config.domain}/yunpan/resource/list`, {
           page: this.current,
           tag: this.selectedTag,
-          query: this.searchKey,
+          query: this.query,
           sort: this.sort,
         })
         .then((res) => {
@@ -349,7 +333,7 @@ export default {
           .post(`${global.config.domain}/yunpan/resource/list`, {
             page: index,
             tag: this.selectedTag,
-            query: this.searchKey,
+            query: this.query,
             sort: this.sort,
           })
           .then((res) => {
