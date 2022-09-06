@@ -221,8 +221,14 @@ export default {
           return 'teal';
         } else if (parameter == '音乐/音频') {
           return 'indigo';
-        } else {
+        } else if (parameter == '日常') {
+          return 'light-green';
+        } else if (parameter == '求资源') {
+          return 'grey';
+        } else if (parameter == '书籍') {
           return 'brown';
+        } else {
+          return 'blue-grey';
         }
       };
     },
@@ -241,8 +247,14 @@ export default {
           return 'book';
         } else if (parameter == '音乐/音频') {
           return 'music_note';
+        } else if (parameter == '日常') {
+          return 'nightlife';
+        } else if (parameter == '求资源') {
+          return 'help';
+        } else if (parameter == '书籍') {
+          return 'book';
         } else {
-          return 'other';
+          return 'eco';
         }
       };
     },
