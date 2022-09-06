@@ -224,11 +224,11 @@ export default {
         } else if (parameter == '日常') {
           return 'light-green';
         } else if (parameter == '求资源') {
-          return 'grey';
+          return 'blue-grey';
         } else if (parameter == '书籍') {
           return 'brown';
         } else {
-          return 'blue-grey';
+          return 'grey';
         }
       };
     },

@@ -204,8 +204,14 @@ export default {
           return 'teal';
         } else if (parameter == '音乐/音频') {
           return 'indigo';
-        } else {
+        } else if (parameter == '日常') {
+          return 'light-green';
+        } else if (parameter == '求资源') {
+          return 'blue-grey';
+        } else if (parameter == '书籍') {
           return 'brown';
+        } else {
+          return 'grey';
         }
       };
     },
