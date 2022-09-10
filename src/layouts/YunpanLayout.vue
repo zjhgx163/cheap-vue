@@ -22,49 +22,21 @@
       </q-toolbar>
     </q-header>
     <q-page-container class="bg-primary">
-      <keep-alive>
+      <keep-alive exclude="YunpanItemDetail">
         <router-view :key="$route.fullPath" />
       </keep-alive>
     </q-page-container>
 
-    <!-- <q-footer bordered reveal class="bg-dark text-white">
-      <div class="YL__footer row justify-evenly gt-sm YL__1200w q-pt-md">
-        <div class="col-2 q-py-sm">
-          <q-img
-            src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
-            class="items-center justify-center"
-            width="100px"
-            height="100px"
-          />
-        </div>
-        <div class="col q-py-sm">
-          <div class="text-h6">关于</div>
-          <div class="row">
-            <div class="col-6">
-              <div>宇宙第一性价比之王导购平台</div>
-              <div>请<strong>左边</strong>扫码关注公众号享受返利和其他服务</div>
-              <div>email: 82955503@qq.com</div>
-            </div>
-            <div class="col">
-              <div>Copyright © 2020 Hjdang.com All rights reserved.</div>
-              <div class="row gt-sm q-gutter-md">
-                <a target="_blank" style="color: white" href="https://beian.miit.gov.cn"
-                  >浙ICP备2020040769号-1</a
-                >
-                <a
-                  style="color: white"
-                  target="_blank"
-                  href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
-                  ><img src="备案图标.png" style="width: 12px; height: 12px" />
-
-                  浙公网安备 33012702000426号
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </q-footer> -->
+    <q-footer reveal class="bg-secondary q-py-md">
+      <q-item>
+        <q-item-section top side class="text-bold"> 声明：</q-item-section>
+        <q-item-section>
+          <q-item-label caption>
+            本站所有资源均由网友自发提供，本站不存储任何资源，仅供于学习，请于下载24小时后自行删除
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+    </q-footer>
   </q-layout>
 </template>
 

@@ -1,28 +1,8 @@
 <template>
-  <div>
-    <q-dialog v-model="isShowCopyTaobaopwd" @hide="copyPwd" persistent>
-      <q-card>
-        <q-card-section class="column q-pa-sm items-center bg-brown-8 text-white">
-          <span class="text-caption">请点击复制，打开手机淘宝</span>
-        </q-card-section>
-
-        <q-card-actions align="center" class="q-pa-xs">
-          <q-btn
-            rounded
-            outline
-            ripple
-            label="复制"
-            class="text-bold"
-            color="accent"
-            v-close-popup
-          />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-
+  <q-page>
     <div class="row">
       <!-- 详情页 -->
-      <div class="col row">
+      <div class="col row bg-primary">
         <div class="col column">
           <div class="col q-pa-sm bg-secondary">
             <q-item dense>
@@ -44,7 +24,17 @@
             </q-item>
             <q-item class="items-center">
               <q-item-section avatar style="min-width: 30px">
-                <q-avatar size="1.6em"> <img :src="item.avatar" /> </q-avatar>
+                <q-avatar size="1.9em" v-if="item.avatar != '' && item.avatar != null">
+                  <img :src="item.avatar" />
+                </q-avatar>
+                <q-avatar
+                  size="1.9em"
+                  :style="getAvatarColor(item.auther)"
+                  text-color="white"
+                  v-else
+                >
+                  {{ getAvatarText(item.auther) }}</q-avatar
+                >
               </q-item-section>
               <q-item-section class="YL__auther">
                 {{ item.auther }}
@@ -57,21 +47,33 @@
               <div class="text-body2 break-all" v-html="item.content"></div>
             </q-item>
             <q-separator />
-
-            <div ref="scrollTargetRef" class="q-pt-sm">
+            <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
               <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
                 <q-pull-to-refresh @refresh="refresh" no-mouse>
                   <q-item>
                     <div class="text-bold text-body2">最新回复</div>
                   </q-item>
-                  <q-list dense separator class="bg-secondary" id="scroll-target-id">
+                  <q-list dense separator class="bg-secondary">
                     <div v-bind:key="reply.id" v-for="reply in listData" class="bg-primary">
                       <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
                       <q-item dense v-ripple class="bg-secondary q-py-sm">
-                        <q-item-section avatar>
-                          <q-avatar size="1.6em"> <img :src="reply.replyAvatar" /> </q-avatar
-                        ></q-item-section>
+                        <q-item-section avatar top>
+                          <q-avatar
+                            v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
+                            size="1.9em"
+                          >
+                            <img :src="reply.replyAvatar" />
+                          </q-avatar>
+                          <q-avatar
+                            size="1.9em"
+                            :style="getAvatarColor(reply.replyAuther)"
+                            text-color="white"
+                            v-else
+                          >
+                            {{ getAvatarText(reply.replyAuther) }}</q-avatar
+                          >
+                        </q-item-section>
                         <q-item-section>
                           <q-item-label :lines="1" class="row YL__auther q-gutter-sm">
                             <div class="row flex-center">
@@ -85,7 +87,9 @@
                           <q-item-label
                             class="YL__title_font_family YL__list_line_height text-body2"
                           >
-                            {{ reply.content }}
+                            <div class="text-body2 break-all" v-html="reply.content"></div>
+
+                            <!-- {{ reply.content }} -->
                           </q-item-label>
                         </q-item-section>
                         <!-- <q-item-section side top> </q-item-section> -->
@@ -101,34 +105,6 @@
                   </div>
                 </template>
               </q-infinite-scroll>
-              <q-item dense class="q-py-sm">
-                <q-item-section avatar top style="min-width: 30px">
-                  <q-avatar size="1.6em">
-                    <img :src="userAvatar" />
-                  </q-avatar>
-                </q-item-section>
-                <!-- <q-item-section class="YL__auther">
-                  {{ auther }}
-                </q-item-section> -->
-                <q-item-section top class="YL__auther">
-                  <q-item-label>
-                    <q-form @submit="onSubmit" class="q-gutter-sm">
-                      <div>
-                        <q-input
-                          dense
-                          filled
-                          v-model="replyContent"
-                          placeholder="说点什么吧"
-                          hide-bottom-space
-                          type="textarea"
-                        />
-                      </div>
-
-                      <div><q-btn label="提交" type="submit" color="light-green" size="xs" /></div>
-                    </q-form>
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
 
               <div class="q-my-xs q-pa-lg flex flex-center bg-secondary gt-sm">
                 <q-pagination
@@ -144,13 +120,47 @@
                 </q-pagination>
               </div>
             </div>
+            <q-scroll-area style="height: 180px; width: 100%">
+              <div>
+                <q-item dense class="q-py-sm">
+                  <q-item-section avatar top style="min-width: 30px">
+                    <q-avatar size="1.9em">
+                      <img :src="userAvatar" />
+                    </q-avatar>
+                  </q-item-section>
+                  <!-- <q-item-section class="YL__auther">
+                  {{ auther }}
+                </q-item-section> -->
+                  <q-item-section top class="YL__auther">
+                    <q-item-label>
+                      <!-- <q-form @submit="onSubmit" class="q-gutter-sm"> -->
+                      <div>
+                        <q-input
+                          dense
+                          filled
+                          v-model="replyContent"
+                          placeholder="说点什么吧"
+                          hide-bottom-space
+                          type="textarea"
+                        />
+                      </div>
+
+                      <div class="q-mt-sm">
+                        <q-btn label="提交" type="submit" color="light-green" size="xs" />
+                      </div>
+                      <!-- </q-form> -->
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </div>
+            </q-scroll-area>
           </div>
         </div>
       </div>
       <!-- 右边栏 -->
       <div class="col-3 gt-md"></div>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
@@ -162,7 +172,7 @@ import FastClick from 'fastclick';
 // import $ from 'jquery';
 
 export default {
-  name: 'DetailPage',
+  name: 'YunpanItemDetail',
   data() {
     return {
       item: {},
@@ -213,6 +223,22 @@ export default {
         } else {
           return 'grey';
         }
+      };
+    },
+    getAvatarColor: function () {
+      return (parameter) => {
+        if (parameter == null || parameter == undefined) {
+          return;
+        }
+        return 'background-color:#' + this.getHashCode(parameter, true).toString(16).substr(0, 6);
+      };
+    },
+    getAvatarText: function () {
+      return (parameter) => {
+        if (parameter == null || parameter == undefined) {
+          return;
+        }
+        return parameter.slice(0, 1);
       };
     },
   },
@@ -348,7 +374,7 @@ export default {
         return;
       }
       setTimeout(() => {
-        console.log('index = .....' + index);
+        console.log('page = .....' + index);
         this.$axios
           .post(`${global.config.domain}/yunpan/reply/list`, {
             page: index,
@@ -391,6 +417,22 @@ export default {
         done();
       }, 1000);
     },
+    getHashCode(str, caseSensitive) {
+      if (str == null || str == undefined) {
+        return;
+      }
+      if (!caseSensitive) {
+        str = str.toLowerCase();
+      }
+      var hash = 1315423917,
+        i,
+        ch;
+      for (i = str.length - 1; i >= 0; i--) {
+        ch = str.charCodeAt(i);
+        hash ^= (hash << 5) + ch + (hash >> 2);
+      }
+      return hash & 0x7fffffff;
+    },
     //桌面端的分页
     pageNavigate() {
       this.$axios
@@ -415,6 +457,9 @@ export default {
   word-break: break-all;
   word-wrap: break-word;
 .message img
+  width: 100%
+  height: 50%
+.break-all img
   width: 100%
   height: 50%
 </style>

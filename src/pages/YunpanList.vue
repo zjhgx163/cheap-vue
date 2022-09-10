@@ -31,8 +31,13 @@
                 class="bg-secondary q-pt-sm"
               >
                 <q-item-section avatar>
-                  <q-avatar> <img :src="item.avatar" /> </q-avatar
-                ></q-item-section>
+                  <q-avatar v-if="item.avatar != '' && item.avatar != null">
+                    <img :src="item.avatar" />
+                  </q-avatar>
+                  <q-avatar :style="getAvatarColor(item.auther)" text-color="white" v-else>
+                    {{ getAvatarText(item.auther) }}</q-avatar
+                  ></q-item-section
+                >
                 <q-item-section class="q-pb-xs">
                   <q-item-label
                     :lines="2"
@@ -258,6 +263,17 @@ export default {
         }
       };
     },
+
+    getAvatarColor: function () {
+      return (parameter) => {
+        return 'background-color:#' + this.getHashCode(parameter, false).toString(16).substr(0, 6);
+      };
+    },
+    getAvatarText: function () {
+      return (parameter) => {
+        return parameter.slice(0, 1);
+      };
+    },
   },
   // watch: {
   //   $route(to, from) {
@@ -298,6 +314,9 @@ export default {
     console.log('this.isListEnd =' + this.isListEnd);
 
     this.isListEnd = false;
+  },
+  destroyed() {
+    console.log('yunpan list destoryed');
   },
   methods: {
     getItemList() {
@@ -416,6 +435,19 @@ export default {
       // window.open(href, '_blank');
 
       // window.location.href = `${global.config.domain}/goods/detail?id=` + id;
+    },
+    getHashCode(str, caseSensitive) {
+      if (!caseSensitive) {
+        str = str.toLowerCase();
+      }
+      var hash = 1315423911,
+        i,
+        ch;
+      for (i = str.length - 1; i >= 0; i--) {
+        ch = str.charCodeAt(i);
+        hash ^= (hash << 5) + ch + (hash >> 2);
+      }
+      return hash & 0x7fffffff;
     },
   },
 };
