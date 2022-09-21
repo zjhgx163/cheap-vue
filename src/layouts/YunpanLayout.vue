@@ -20,15 +20,15 @@
           </q-input>
         </div>
         <div class="col-sm-2 gt-sm row items-center justify-end">
-          <span>{{ userName }}</span>
+          <!-- <span>{{ userName }}</span> -->
 
           <q-avatar size="2.5em">
             <img :src="avatar" />
           </q-avatar>
 
-          <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
+          <!-- <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
             <a class="text-grey-9 text-weight-bold text-subtitle2"> 登出</a>
-          </q-btn>
+          </q-btn> -->
         </div>
       </q-toolbar>
     </q-header>
