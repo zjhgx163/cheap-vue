@@ -259,7 +259,14 @@ export default {
     });
 
     if (this.$q.localStorage.has('userInfo')) {
-      this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
+      let userInfo = this.$q.localStorage.getItem('userInfo');
+
+      if (userInfo !== undefined && userInfo !== null) {
+        if (userInfo.avatar != null && userInfo.avatar != '') {
+          this.userAvatar = userInfo.avatar;
+        }
+      }
+      // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
     }
 
     this.getYunpanItemContent(this.$route.params.id);

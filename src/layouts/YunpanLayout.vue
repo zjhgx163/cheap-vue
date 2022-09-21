@@ -147,6 +147,7 @@ export default {
                   console.log('this.timer = ' + this.timer);
                   if (res.data.data.loginFlag) {
                     this.userName = res.data.data.nickname;
+                    this.avatar = res.data.data.avatar;
                     this.isLogin = true;
                     this.$q.localStorage.set('userInfo', res.data.data);
                     window.clearInterval(this.timer); //清除定时器

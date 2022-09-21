@@ -275,6 +275,7 @@ export default {
                 if (res.data.code == 0) {
                   if (res.data.data.loginFlag) {
                     this.userName = res.data.data.nickname;
+                    this.avatar = res.data.data.avatar;
                     this.isLogin = true;
                     this.$q.localStorage.set('userInfo', res.data.data);
                     clearInterval(this.timer); //清除定时器
