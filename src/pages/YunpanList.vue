@@ -27,10 +27,10 @@
                 dense
                 v-ripple
                 clickable
-                @click="itemClick(item)"
+                @click="itemClick(item.id)"
                 class="bg-secondary q-pt-sm"
               >
-                <q-item-section avatar>
+                <q-item-section avatar top>
                   <q-avatar v-if="item.avatar != '' && item.avatar != null">
                     <img :src="item.avatar" />
                   </q-avatar>
@@ -80,6 +80,7 @@
                 </q-item-section>
                 <!-- <q-item-section side top> </q-item-section> -->
               </q-item>
+              <q-separator color="primary" class="gt-sm" />
             </div>
           </q-list>
         </q-pull-to-refresh>
@@ -90,8 +91,9 @@
           </div>
         </template>
       </q-infinite-scroll>
-      <div class="q-my-xs q-pa-lg flex flex-center bg-secondary gt-sm">
+      <div class="q-my-xs q-pa-md flex flex-center bg-secondary gt-sm">
         <q-pagination
+          input
           v-model="current"
           :size="paginationSize"
           color="dark"
@@ -109,28 +111,6 @@
 
 <style lang="sass">
 .YL
-  &__index_img
-    @media(max-width: $breakpoint-xs-max)
-      width: 110px
-      height: 110px
-    @media(min-width: $breakpoint-xs-max)
-      width: 170px
-      height: 170px
-  &__label
-    @media(max-width: $breakpoint-xs-max)
-      font-size: 0.7em
-      height: 1.6em
-    @media(min-width: $breakpoint-xs-max)
-      font-size: 0.87em
-    color: rgba(0, 0, 0, 0.54)
-    background: #f5f5f5
-    display: inline-block
-    margin-right: 7px;
-    text-align: center;
-    letter-spacing: 0.03333em
-    list-type: none
-    -webkit-font-smoothing: antialiased
-    line-height: 1.2em
   &__auther
     @media(max-width: $breakpoint-xs-max)
       font-size: 0.8em
@@ -144,16 +124,9 @@
     @media(max-width: $breakpoint-xs-max)
       height: 2.9em
     @media(min-width: $breakpoint-xs-max)
-      height: 1.6em
+      height: 3.2em
   &__list_line_height
     line-height: 22px !important
-  &__content_height
-      height: 3.8em
-  &__badgeSize
-    @media(max-width: $breakpoint-xs-max)
-      font-size: 0.7em
-    @media(min-width: $breakpoint-xs-max)
-      font-size: 0.9em
   &__no_data
     @media(max-width: $breakpoint-xs-max)
       height: 5em
@@ -176,7 +149,7 @@ export default {
       sort: 1,
       listData: [],
       current: 1,
-      max: 0,
+      max: 6,
 
       isBigScreen: Screen.gt.sm ? true : false,
       isNormal: true,
@@ -199,7 +172,7 @@ export default {
       return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
     },
     textSize: function () {
-      return this.isBigScreen ? 'text-h7' : 'text-body2';
+      return this.isBigScreen ? 'text-h8' : 'text-body2';
     },
 
     host: function () {
@@ -305,7 +278,13 @@ export default {
   mounted() {
     //解决iphone移动端的延迟
     FastClick.attach(document.body);
-    console.log('Index mounted');
+    console.log('YunpanList mounted');
+    this.$on('logined', function (itemId) {
+      console.log('我是子组件方法' + itemId);
+      this.$router.push({
+        path: '/yunpan/detail/' + itemId,
+      });
+    });
     // this.selectedTab = 'main';
     this.getItemList();
   },
@@ -335,7 +314,7 @@ export default {
           // console.log(res.data.data);
           // console.log(this.isBigScreen);
 
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.code < 0) {
             if (/(http|https):\S*/.test(res.data.data)) {
               window.location.href = res.data.data;
@@ -350,6 +329,8 @@ export default {
               this.isListEnd = true;
             }
           }
+          this.max = Math.ceil(res.data.data.total / res.data.data.size);
+
           this.$q.loading.hide();
         });
     },
@@ -368,7 +349,7 @@ export default {
             sort: this.sort,
           })
           .then((res) => {
-            console.log(res.data.data.records);
+            // console.log(res.data.data.records);
             if (res.data.data.records.length < 20) {
               this.isListEnd = true;
             }
@@ -392,7 +373,7 @@ export default {
               this.listData.push(item);
             });
 
-            console.log(this.listData);
+            // console.log(this.listData);
             done();
           });
       }, 1000);
@@ -409,32 +390,32 @@ export default {
       this.$axios
         .post(`${global.config.domain}/yunpan/resource/list`, {
           page: this.current,
-          path: this.$route.path,
-          query: this.$route.query.q,
+          tag: this.selectedTag,
+          query: this.query,
           sort: this.sort,
         })
         .then((res) => {
-          console.log(res.data.data.records);
+          // console.log(res.data.data.records);
           this.listData = res.data.data.records;
-          this.max = res.data.data.total / res.data.data.size + 1;
+          this.max = Math.ceil(res.data.data.total / res.data.data.size);
         });
     },
 
-    itemClick(item) {
-      console.log('id = ' + item.id);
-      this.$router.push({
-        path: '/yunpan/detail/' + item.id,
-      });
-      // const { href } = this.$router.resolve({
-      //   path: 'item/detail',
-      //   name: 'detail',
-      //   params: {
-      //     id: id,
-      //   },
+    itemClick(itemId) {
+      // this.$router.push({
+      //   path: '/yunpan/detail/' + itemId,
       // });
-      // window.open(href, '_blank');
-
-      // window.location.href = `${global.config.domain}/goods/detail?id=` + id;
+      this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
+        console.log(res.data.data);
+        if (res.data.data == true) {
+          this.$router.push({
+            path: '/yunpan/detail/' + itemId,
+          });
+        } else {
+          //通知父组件
+          this.$emit('need-login', itemId);
+        }
+      });
     },
     getHashCode(str, caseSensitive) {
       if (!caseSensitive) {

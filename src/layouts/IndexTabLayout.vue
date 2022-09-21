@@ -58,6 +58,7 @@
 <script>
 // import HotList from '../components/HotList.vue';
 export default {
+  name: 'IndexTabLayout',
   data() {
     return {
       selectedTab: 'main',

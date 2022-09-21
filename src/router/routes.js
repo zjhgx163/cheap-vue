@@ -14,7 +14,7 @@ const routes = [
             // component: () => import('layouts/IndexTabLayout.vue'),
             components: {
               default: () => import('layouts/IndexTabLayout.vue'),
-              hot: () => import('components/HotList.vue'),
+              hot: () => import('components/ResourceSideList.vue'),
             },
             children: [
               {

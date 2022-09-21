@@ -134,10 +134,10 @@
 
                   <q-item-label
                     :lines="1"
-                    class="row justify-between items-center gt-sm YL__mall y-pt-sm"
+                    class="row justify-between items-end gt-sm YL__mall y-pt-sm"
                   >
-                    <div class="col-4 row justify-between">
-                      <div class="row items-center">
+                    <div class="col-5 row justify-between flex-center">
+                      <div class="row flex-center">
                         <q-btn
                           size="0.7em"
                           color="grey"
@@ -149,7 +149,7 @@
                         </q-btn>
                         <div>{{ item.zhiCount }}</div>
                       </div>
-                      <div class="row items-center">
+                      <div class="row flex-center">
                         <q-btn
                           size="0.7em"
                           color="grey"
@@ -162,7 +162,7 @@
                         <div>{{ item.buzhiCount }}</div>
                       </div>
 
-                      <div class="row items-center">
+                      <div class="row flex-center">
                         <q-btn
                           size="0.7em"
                           color="grey"
@@ -175,7 +175,7 @@
                         <div>{{ item.starCount }}</div>
                       </div>
 
-                      <div class="row items-center">
+                      <div class="row flex-center">
                         <q-btn
                           size="0.7em"
                           color="grey"
@@ -189,9 +189,9 @@
                       </div>
                     </div>
 
-                    <div class="col-4 justify-end row">
+                    <div class="col-5 justify-end row">
                       <div class="col"></div>
-                      <div class="col-auto items-center row">
+                      <div class="col-auto flex-center row">
                         {{ item.mall }} | {{ item.dateStr }}
                       </div>
                       <div class="col-1"></div>
@@ -354,16 +354,20 @@ export default {
   // },
 
   // beforeRouteEnter(to, from, next) {
-  //   if (from.name == 'search' && to.name == 'search') {
-  //     console.log('dsd');
-  //     this.getItemList();
-  //     next();
-  //   } else {
-  //     log.info('ffff');
-
-  //     next();
-  //   }
+  //   console.log('beforeRouteEnter');
+  // if (from.name == 'search' && to.name == 'search') {
+  //   console.log('dsd');
+  //   this.getItemList();
+  //   next();
+  // } else {
+  //   log.info('ffff');
+  //   next();
+  // }
+  // console.log(vm);
+  // console.log(document.documentElement.scrollTop || document.body.scrollTop);
+  // next();
   // },
+
   // beforeCreate() {
   //   this.$q.loading.show({
   //     delay: 400, // ms
@@ -380,6 +384,7 @@ export default {
     console.log('Index mounted');
     // this.selectedTab = 'main';
     this.getItemList();
+    // console.log(this.$router.options.scrollBehavior);
 
     // this.windowWidth = window.innerWidth;
     // window.onresize = () => {
@@ -389,7 +394,6 @@ export default {
   activated() {
     console.log('Index activated');
     console.log('this.isListEnd =' + this.isListEnd);
-
     this.isListEnd = false;
   },
   methods: {
@@ -413,7 +417,7 @@ export default {
           if (res.data.data.records.length < 20) {
             this.isListEnd = true;
           }
-          this.max = res.data.data.total / res.data.data.size + 1;
+          this.max = Math.ceil(res.data.data.total / res.data.data.size);
           this.$q.loading.hide();
         });
     },
@@ -480,7 +484,7 @@ export default {
         .then((res) => {
           console.log(res.data.data.records);
           this.listData = res.data.data.records;
-          this.max = res.data.data.total / res.data.data.size + 1;
+          this.max = Math.ceil(res.data.data.total / res.data.data.size);
         });
     },
     thumbUpClick() {

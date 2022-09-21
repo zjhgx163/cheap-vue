@@ -4,7 +4,7 @@
       <div class="col">
         <router-view ref="goods"></router-view>
       </div>
-      <div v-if="$q.screen.gt.sm" class="col-3">
+      <div v-if="$q.screen.gt.sm" class="col-4">
         <router-view name="hot"></router-view>
       </div>
     </div>

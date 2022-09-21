@@ -116,6 +116,7 @@
                   :boundary-numbers="false"
                   :direction-links="true"
                   @input="pageNavigate"
+                  :disable="!isBigScreen"
                 >
                 </q-pagination>
               </div>
@@ -158,7 +159,7 @@
         </div>
       </div>
       <!-- 右边栏 -->
-      <div class="col-3 gt-md"></div>
+      <!-- <div class="col-3 gt-md"></div> -->
     </div>
   </q-page>
 </template>
@@ -176,7 +177,7 @@ export default {
   data() {
     return {
       item: {},
-      listData: {},
+      listData: [],
       host: global.config.domain,
       showing: false,
       alertText: '淘口令已复制\n请打开手淘',
@@ -188,6 +189,7 @@ export default {
       paginationSize: Screen.gt.sm ? '12px' : '9px',
       isListEnd: false,
       userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
+      isBigScreen: Screen.gt.sm ? true : false,
     };
   },
   computed: {
@@ -295,6 +297,7 @@ export default {
     getYunpanItemContent(id) {
       this.$axios.post(`${global.config.domain}/yunpan/item/detail/${id}`).then((res) => {
         if (res.data.code < 0) {
+          this.$q.loading.hide();
           if (!this.$q.localStorage.has('userInfo')) {
             if (this.isWeixin()) {
               window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
@@ -311,7 +314,10 @@ export default {
         } else {
           this.item = res.data.data.item;
           this.listData = res.data.data.firstReplyPage.records;
-          console.log(this.item);
+          this.max = Math.ceil(
+            res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size,
+          );
+          // console.log(this.item);
           if (this.item == null) {
             this.$router.push({ path: '/error' });
           }
@@ -319,19 +325,6 @@ export default {
           this.$q.loading.hide();
         }
       });
-    },
-    copyPwd() {
-      let that = this;
-      if (this.taobaoPwd != '')
-        this.$copyText(this.taobaoPwd).then(
-          function (e) {
-            console.log('this.taobaoPwd = ' + that.taobaoPwd);
-          },
-          function (e) {
-            alert('Can not copy');
-            console.log(e);
-          },
-        );
     },
     isWeixin() {
       var ua = window.navigator.userAgent.toLowerCase();
@@ -435,17 +428,16 @@ export default {
     },
     //桌面端的分页
     pageNavigate() {
+      console.log('reply pageNavigate');
       this.$axios
-        .post(`${global.config.domain}/yunpan/resource/list`, {
+        .post(`${global.config.domain}/yunpan/reply/list`, {
           page: this.current,
-          path: this.$route.path,
-          query: this.$route.query.q,
-          sort: this.sort,
+          itemId: this.item.id,
         })
         .then((res) => {
           console.log(res.data.data.records);
           this.listData = res.data.data.records;
-          this.max = res.data.data.total / res.data.data.size + 1;
+          this.max = Math.ceil(res.data.data.total / res.data.data.size);
         });
     },
   },
