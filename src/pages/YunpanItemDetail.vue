@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="bg-secondary">
     <div class="row">
       <!-- 详情页 -->
       <div class="col row bg-primary">
@@ -134,22 +134,22 @@
                 </q-item-section> -->
                   <q-item-section top class="YL__auther">
                     <q-item-label>
-                      <!-- <q-form @submit="onSubmit" class="q-gutter-sm"> -->
-                      <div>
-                        <q-input
-                          dense
-                          filled
-                          v-model="replyContent"
-                          placeholder="说点什么吧"
-                          hide-bottom-space
-                          type="textarea"
-                        />
-                      </div>
+                      <q-form @submit="onSubmit" class="q-gutter-sm">
+                        <div>
+                          <q-input
+                            dense
+                            filled
+                            v-model="replyContent"
+                            placeholder="说点什么吧"
+                            hide-bottom-space
+                            type="textarea"
+                          />
+                        </div>
 
-                      <div class="q-mt-sm">
-                        <q-btn label="提交" type="submit" color="light-green" size="xs" />
-                      </div>
-                      <!-- </q-form> -->
+                        <div class="q-mt-sm">
+                          <q-btn label="提交" type="submit" color="light-green" size="xs" />
+                        </div>
+                      </q-form>
                     </q-item-label>
                   </q-item-section>
                 </q-item>
