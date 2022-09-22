@@ -402,7 +402,7 @@ export default {
     },
 
     itemClick(itemId) {
-      if (isWeixin()) {
+      if (this.isWeixin()) {
         this.$router.push({
           path: '/yunpan/detail/' + itemId,
         });
