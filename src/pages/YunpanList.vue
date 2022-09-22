@@ -402,20 +402,32 @@ export default {
     },
 
     itemClick(itemId) {
-      // this.$router.push({
-      //   path: '/yunpan/detail/' + itemId,
-      // });
-      this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
-        console.log(res.data.data);
-        if (res.data.data == true) {
-          this.$router.push({
-            path: '/yunpan/detail/' + itemId,
-          });
-        } else {
-          //通知父组件
-          this.$emit('need-login', itemId);
-        }
-      });
+      if (isWeixin()) {
+        this.$router.push({
+          path: '/yunpan/detail/' + itemId,
+        });
+      } else {
+        this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
+          console.log(res.data.data);
+          if (res.data.data == true) {
+            this.$router.push({
+              path: '/yunpan/detail/' + itemId,
+            });
+          } else {
+            //通知父组件
+            this.$emit('need-login', itemId);
+          }
+        });
+      }
+    },
+    isWeixin() {
+      var ua = window.navigator.userAgent.toLowerCase();
+      console.log(ua);
+      if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        return true;
+      } else {
+        return false;
+      }
     },
     getHashCode(str, caseSensitive) {
       if (!caseSensitive) {
