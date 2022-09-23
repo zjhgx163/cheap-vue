@@ -96,6 +96,10 @@ const routes = [
         component: () => import('pages/YunpanItemDetail.vue'),
       },
       {
+        path: 'public/:id',
+        component: () => import('pages/YunpanItemDetailShare.vue'),
+      },
+      {
         path: 'search',
         component: () => import('pages/YunpanList.vue'),
         props: (route) => ({ query: route.query.q }),
