@@ -196,7 +196,7 @@ import FastClick from 'fastclick';
 // import $ from 'jquery';
 
 export default {
-  name: 'YunpanItemDetail',
+  name: 'YunpanItemShare',
   data() {
     return {
       item: {},

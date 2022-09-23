@@ -282,7 +282,7 @@ export default {
     this.$on('logined', function (itemId) {
       console.log('我是子组件方法' + itemId);
       this.$router.push({
-        path: '/yunpan/detail/' + itemId,
+        path: '/yunpan/d/' + itemId,
       });
     });
     // this.selectedTab = 'main';
@@ -404,14 +404,14 @@ export default {
     itemClick(itemId) {
       if (this.isWeixin()) {
         this.$router.push({
-          path: '/yunpan/detail/' + itemId,
+          path: '/yunpan/d/' + itemId,
         });
       } else {
         this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
           console.log(res.data.data);
           if (res.data.data == true) {
             this.$router.push({
-              path: '/yunpan/detail/' + itemId,
+              path: '/yunpan/d/' + itemId,
             });
           } else {
             //通知父组件

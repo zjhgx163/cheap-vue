@@ -190,7 +190,7 @@ export default {
     itemClick(item) {
       console.log('id = ' + item.id);
       this.$router.push({
-        path: '/yunpan/public/' + item.id,
+        path: '/yunpan/p/' + item.id,
       });
     },
     getHashCode(str, caseSensitive) {

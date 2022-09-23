@@ -53,7 +53,7 @@ export default {
             this.$q.loading.hide();
 
             this.$router.push({
-              path: '/yunpan/detail/' + this.$route.params.urlCode,
+              path: '/yunpan/d/' + this.$route.params.urlCode,
             });
           } else {
             console.log('order list' + this.state);

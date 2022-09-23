@@ -92,11 +92,11 @@ const routes = [
     children: [
       { path: 'list', component: () => import('pages/YunpanList.vue') },
       {
-        path: 'detail/:id',
+        path: 'd/:id',
         component: () => import('pages/YunpanItemDetail.vue'),
       },
       {
-        path: 'public/:id',
+        path: 'p/:id',
         component: () => import('pages/YunpanItemDetailShare.vue'),
       },
       {
