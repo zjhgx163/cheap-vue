@@ -271,7 +271,7 @@
     line-height: 1.2em
   &__title_height
     @media(max-width: $breakpoint-xs-max)
-      height: 3.2em
+      height: 3.0em
     @media(min-width: $breakpoint-xs-max)
       height: 1.6em
   &__content_height

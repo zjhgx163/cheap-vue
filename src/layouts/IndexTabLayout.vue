@@ -15,15 +15,14 @@
       <!-- <q-space /> -->
       <q-btn-dropdown color="secondary" text-color="grey" flat dense :label="sort">
         <q-list>
-          <q-item clickable v-close-popup @click="onItemClick" tabindex="1">
-            <q-item-section>
-              <q-item-label caption>推荐排序</q-item-label>
-            </q-item-section>
-          </q-item>
-
           <q-item clickable v-close-popup @click="onItemClick" tabindex="2">
             <q-item-section>
               <q-item-label caption>时间排序</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable v-close-popup @click="onItemClick" tabindex="1">
+            <q-item-section>
+              <q-item-label caption>推荐排序</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -62,8 +61,8 @@ export default {
   data() {
     return {
       selectedTab: 'main',
-      sort: '推荐排序',
-      sortIndex: 1,
+      sort: '时间排序',
+      sortIndex: 2,
     };
   },
   // computed: {
