@@ -169,6 +169,9 @@ export default {
       isListEnd: false,
       selectedTag: '',
       pageNavigateHidden: !Screen.gt.sm,
+      stopLoading: false,
+      loadTimes: 0,
+      gapIndex: 0, //refersh之前的load次数
       // to: false,
     };
   },
@@ -189,7 +192,7 @@ export default {
       return this.isBigScreen ? false : true;
     },
     disable: function () {
-      return this.isBigScreen || this.isListEnd ? true : false;
+      return this.isBigScreen || this.isListEnd || this.stopLoading;
     },
 
     getTagColor: function () {
@@ -338,59 +341,66 @@ export default {
           } else {
             this.listData = res.data.data.records;
             this.max = Math.ceil(res.data.data.total / res.data.data.size);
-            if (res.data.data.records.length < 20 || this.$route.params.page >= this.max) {
+            if (res.data.data.records.length < 30 || this.$route.params.page >= this.max) {
               this.isListEnd = true;
               this.pageNavigateHidden = false;
+              this.stopLoading = true;
             }
           }
 
-          if (!this.isBigScreen) {
-            if (this.current % 3 != 0) {
-              this.pageNavigateHidden = true;
-            } else {
-              this.pageNavigateHidden = false;
-            }
-          }
-
+          // if (!this.isBigScreen) {
+          //   if (this.current % 3 != 0) {
+          //     this.pageNavigateHidden = true;
+          //     this.stopLoading = false;
+          //   } else {
+          //     this.pageNavigateHidden = false;
+          //     this.stopLoading = true;
+          //   }
+          // }
+          console.log('hidden = ' + this.pageNavigateHidden);
+          console.log('this.current  = ' + this.current);
+          console.log('this.isListEnd  = ' + this.isListEnd);
           this.$q.loading.hide();
         });
     },
     //向下划动load页面
     onLoad(index, done) {
       console.log('index = .....' + index);
+      console.log('gap = .....' + this.gapIndex);
+      this.loadTimes = index - 1;
 
-      if (this.current >= this.max) {
-        this.isListEnd = true;
-        this.pageNavigateHidden = false;
-        return;
-      }
       if (this.$route.params.page == undefined) {
-        this.current = index;
+        this.current = index - this.gapIndex;
       } else {
-        this.current = parseInt(this.$route.params.page) + index - 1;
+        this.current = parseInt(this.$route.params.page) + this.loadTimes - this.gapIndex; //需要减去refersh之前的load次数
       }
       console.log(' this.current is ' + this.current);
+
       if (this.isBigScreen) {
         return;
       }
-      if (parseInt(index - 1) % 3 == 0) {
+      if (parseInt(this.loadTimes - this.gapIndex) % 3 == 0) {
         this.pageNavigateHidden = false;
+        this.stopLoading = true;
+        done();
       } else {
         this.pageNavigateHidden = true;
+        this.stopLoading = false;
         setTimeout(() => {
           this.$axios
             .post(`${global.config.domain}/yunpan/resource/list`, {
-              page: index,
+              page: this.current,
               tag: this.selectedTag,
               query: this.query,
               sort: this.sort,
             })
             .then((res) => {
               // console.log(res.data.data.records);
-              if (res.data.data.records.length < 20) {
+              if (res.data.data.records.length < 30) {
                 this.isListEnd = true;
                 this.pageNavigateHidden = false;
               }
+
               //过滤页面上重复的
               const filters = res.data.data.records.filter((item) => {
                 let isDupliate = false;
@@ -410,7 +420,11 @@ export default {
               filters.forEach((item) => {
                 this.listData.push(item);
               });
-
+              if (this.current >= this.max) {
+                this.isListEnd = true;
+                this.pageNavigateHidden = false;
+                this.stopLoading = true;
+              }
               // console.log(this.listData);
               done();
             });
@@ -420,11 +434,15 @@ export default {
     //列表下拉刷新
     refresh(done) {
       setTimeout(() => {
+        this.gapIndex = this.loadTimes;
+        this.pageNavigateHidden = true;
+        this.stopLoading = false;
         if (this.$route.params.page != undefined && this.$route.params.page != null) {
           this.current = parseInt(this.$route.params.page);
         } else {
           this.current = 1;
         }
+
         this.getItemList();
         done();
       }, 1000);
