@@ -337,11 +337,12 @@ export default {
             }
           } else {
             this.listData = res.data.data.records;
-            if (res.data.data.records.length < 20) {
+            this.max = Math.ceil(res.data.data.total / res.data.data.size);
+            if (res.data.data.records.length < 20 || this.$route.params.page >= this.max) {
               this.isListEnd = true;
             }
           }
-          this.max = Math.ceil(res.data.data.total / res.data.data.size);
+
           if (!this.isBigScreen) {
             if (this.current % 3 != 0) {
               this.pageNavigateHidden = true;
@@ -360,6 +361,10 @@ export default {
         this.current = index - 1;
       } else {
         this.current = parseInt(this.$route.params.page) + index - 1;
+      }
+      if (this.current >= this.max) {
+        this.isListEnd = true;
+        return;
       }
       console.log(' this.current is ' + this.current);
       if (this.isBigScreen) {
