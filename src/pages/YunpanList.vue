@@ -86,21 +86,27 @@
         </q-pull-to-refresh>
 
         <template v-slot:loading>
-          <div class="row justify-center q-my-md">
+          <div v-bind:class="{ hidden: !pageNavigateHidden }" class="row justify-center q-my-md">
             <q-spinner-dots color="accent" size="40px"></q-spinner-dots>
           </div>
         </template>
       </q-infinite-scroll>
-      <div class="q-my-xs q-pa-md flex flex-center bg-secondary gt-sm">
+      <div
+        v-bind:class="{ hidden: pageNavigateHidden }"
+        class="q-my-xs q-pa-md flex flex-center bg-light-green-1"
+      >
+        <q-tooltip> 输入页码跳转</q-tooltip>
+
         <q-pagination
           input
+          :input-class="'bg-secondary text-dark'"
           v-model="current"
           :size="paginationSize"
-          color="dark"
+          color="purple"
           :max="max"
+          glossy
           :max-pages="maxPage"
-          :boundary-numbers="false"
-          :direction-links="true"
+          boundary-numbers
           @input="pageNavigate"
         >
         </q-pagination>
@@ -162,6 +168,7 @@ export default {
       pricePading: Screen.gt.sm ? 'q-pt-xs q-pb-sm' : 'q-pt-xs',
       isListEnd: false,
       selectedTag: '',
+      pageNavigateHidden: !Screen.gt.sm,
       // to: false,
     };
   },
@@ -286,6 +293,9 @@ export default {
       });
     });
     // this.selectedTab = 'main';
+    if (this.$route.params.page != undefined) {
+      this.current = parseInt(this.$route.params.page);
+    }
     this.getItemList();
   },
   activated() {
@@ -303,6 +313,7 @@ export default {
       this.$q.loading.show({
         delay: 400, // ms
       });
+
       this.$axios
         .post(`${global.config.domain}/yunpan/resource/list`, {
           page: this.current,
@@ -330,53 +341,67 @@ export default {
             }
           }
           this.max = Math.ceil(res.data.data.total / res.data.data.size);
+          if (!this.isBigScreen) {
+            if (this.current % 3 != 0) {
+              this.pageNavigateHidden = true;
+            } else {
+              this.pageNavigateHidden = false;
+            }
+          }
 
           this.$q.loading.hide();
         });
     },
     //向下划动load页面
     onLoad(index, done) {
+      console.log('index = .....' + index);
+      this.current = parseInt(this.$route.params.page) + parseInt(index) - 1;
+
       if (this.isBigScreen) {
         return;
       }
-      setTimeout(() => {
-        console.log('index = .....' + index);
-        this.$axios
-          .post(`${global.config.domain}/yunpan/resource/list`, {
-            page: index,
-            tag: this.selectedTag,
-            query: this.query,
-            sort: this.sort,
-          })
-          .then((res) => {
-            // console.log(res.data.data.records);
-            if (res.data.data.records.length < 20) {
-              this.isListEnd = true;
-            }
-            //过滤页面上重复的
-            const filters = res.data.data.records.filter((item) => {
-              let isDupliate = false;
-              for (let key in this.listData) {
-                if (this.listData[key].id == item.id) {
-                  console.log('this id is duplicate,' + item.id);
-                  isDupliate = true;
-                  break;
+      if (parseInt(index - 1) % 3 == 0) {
+        this.pageNavigateHidden = false;
+      } else {
+        this.pageNavigateHidden = true;
+        setTimeout(() => {
+          this.$axios
+            .post(`${global.config.domain}/yunpan/resource/list`, {
+              page: index,
+              tag: this.selectedTag,
+              query: this.query,
+              sort: this.sort,
+            })
+            .then((res) => {
+              // console.log(res.data.data.records);
+              if (res.data.data.records.length < 20) {
+                this.isListEnd = true;
+              }
+              //过滤页面上重复的
+              const filters = res.data.data.records.filter((item) => {
+                let isDupliate = false;
+                for (let key in this.listData) {
+                  if (this.listData[key].id == item.id) {
+                    console.log('this id is duplicate,' + item.id);
+                    isDupliate = true;
+                    break;
+                  }
                 }
-              }
-              if (isDupliate) {
-                return false;
-              } else {
-                return true;
-              }
-            });
-            filters.forEach((item) => {
-              this.listData.push(item);
-            });
+                if (isDupliate) {
+                  return false;
+                } else {
+                  return true;
+                }
+              });
+              filters.forEach((item) => {
+                this.listData.push(item);
+              });
 
-            // console.log(this.listData);
-            done();
-          });
-      }, 1000);
+              // console.log(this.listData);
+              done();
+            });
+        }, 1000);
+      }
     },
     //列表下拉刷新
     refresh(done) {
@@ -387,18 +412,24 @@ export default {
     },
     //桌面端的分页
     pageNavigate() {
-      this.$axios
-        .post(`${global.config.domain}/yunpan/resource/list`, {
-          page: this.current,
-          tag: this.selectedTag,
-          query: this.query,
-          sort: this.sort,
-        })
-        .then((res) => {
-          // console.log(res.data.data.records);
-          this.listData = res.data.data.records;
-          this.max = Math.ceil(res.data.data.total / res.data.data.size);
+      if (this.isBigScreen) {
+        this.$axios
+          .post(`${global.config.domain}/yunpan/resource/list`, {
+            page: this.current,
+            tag: this.selectedTag,
+            query: this.query,
+            sort: this.sort,
+          })
+          .then((res) => {
+            // console.log(res.data.data.records);
+            this.listData = res.data.data.records;
+            this.max = Math.ceil(res.data.data.total / res.data.data.size);
+          });
+      } else {
+        this.$router.push({
+          path: '/yunpan/list/' + this.current,
         });
+      }
     },
 
     itemClick(itemId) {
