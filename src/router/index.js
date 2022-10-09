@@ -2,6 +2,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import routes from './routes';
+//解决NavigationDuplicated
+const routerPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function (location) {
+  return routerPush.call(this, location).catch((error) => error);
+};
 
 Vue.use(VueRouter);
 
