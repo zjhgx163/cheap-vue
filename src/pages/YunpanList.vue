@@ -293,7 +293,8 @@ export default {
       });
     });
     // this.selectedTab = 'main';
-    if (this.$route.params.page != undefined) {
+    console.log('page = ' + this.$route.params.page);
+    if (this.$route.params.page != undefined && this.$route.params.page != null) {
       this.current = parseInt(this.$route.params.page);
     }
     this.getItemList();
@@ -355,8 +356,12 @@ export default {
     //向下划动load页面
     onLoad(index, done) {
       console.log('index = .....' + index);
-      this.current = parseInt(this.$route.params.page) + parseInt(index) - 1;
-
+      if (this.$route.params.page == undefined) {
+        this.current = index - 1;
+      } else {
+        this.current = parseInt(this.$route.params.page) + index - 1;
+      }
+      console.log(' this.current is ' + this.current);
       if (this.isBigScreen) {
         return;
       }
