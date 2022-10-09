@@ -340,6 +340,7 @@ export default {
             this.max = Math.ceil(res.data.data.total / res.data.data.size);
             if (res.data.data.records.length < 20 || this.$route.params.page >= this.max) {
               this.isListEnd = true;
+              this.pageNavigateHidden = false;
             }
           }
 
@@ -357,14 +358,16 @@ export default {
     //向下划动load页面
     onLoad(index, done) {
       console.log('index = .....' + index);
-      if (this.$route.params.page == undefined) {
-        this.current = index - 1;
-      } else {
-        this.current = parseInt(this.$route.params.page) + index - 1;
-      }
+
       if (this.current >= this.max) {
         this.isListEnd = true;
+        this.pageNavigateHidden = false;
         return;
+      }
+      if (this.$route.params.page == undefined) {
+        this.current = index;
+      } else {
+        this.current = parseInt(this.$route.params.page) + index - 1;
       }
       console.log(' this.current is ' + this.current);
       if (this.isBigScreen) {
@@ -386,6 +389,7 @@ export default {
               // console.log(res.data.data.records);
               if (res.data.data.records.length < 20) {
                 this.isListEnd = true;
+                this.pageNavigateHidden = false;
               }
               //过滤页面上重复的
               const filters = res.data.data.records.filter((item) => {
