@@ -420,6 +420,9 @@ export default {
     //列表下拉刷新
     refresh(done) {
       setTimeout(() => {
+        if (this.$route.params.page != undefined && this.$route.params.page != null) {
+          this.current = parseInt(this.$route.params.page);
+        }
         this.getItemList();
         done();
       }, 1000);
