@@ -162,7 +162,7 @@ export default {
       fontFamily: 'YL__title_font_family',
       lineHeight: 'YL__list_line_height',
       textAccent: 'text-accent',
-      paginationSize: Screen.gt.sm ? '12px' : '9px',
+      paginationSize: Screen.gt.sm ? '18px' : '15px',
       maxPage: Screen.gt.sm ? 6 : 4,
       titleHeight: 'YL__title_height',
       pricePading: Screen.gt.sm ? 'q-pt-xs q-pb-sm' : 'q-pt-xs',
