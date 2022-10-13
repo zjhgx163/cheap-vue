@@ -2,7 +2,9 @@
 <html>
 
 <head>
-  <title><%= productName %></title>
+  <title>
+    <%= productName %>
+  </title>
 
   <meta charset="utf-8">
   <meta name="description" content="<%= productDescription %>">
@@ -16,6 +18,24 @@
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
   <link rel="icon" type="image/ico" href="favicon.ico">
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a263e884d6704221d390c43f88584946";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+    // var _hmt = _hmt || [];
+    // _hmt.push(['_requirePlugin', 'UrlChangeTracker', {
+    //   shouldTrackUrlChange: function (newPath, oldPath) {
+    //     return newPath && oldPath;
+    //   }
+    // }
+    // ]);
+  </script>
+
 </head>
 
 <body>
