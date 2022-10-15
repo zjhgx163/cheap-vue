@@ -91,7 +91,11 @@ const routes = [
     component: () => import('layouts/YunpanLayout.vue'),
     children: [
       { path: 'list', component: () => import('pages/YunpanList.vue') },
-      { path: 'list/:page', component: () => import('pages/YunpanList.vue') },
+      {
+        path: 'list/:page',
+        component: () => import('pages/YunpanList.vue'),
+        props: (route) => ({ query: route.query.q }),
+      },
       {
         path: 'd/:id',
         component: () => import('pages/YunpanItemDetail.vue'),

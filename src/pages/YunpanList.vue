@@ -465,6 +465,7 @@ export default {
       } else {
         this.$router.push({
           path: '/yunpan/list/' + this.current,
+          query: { q: this.query },
         });
       }
     },
