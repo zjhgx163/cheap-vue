@@ -63,11 +63,10 @@
               </q-item-section>
             </q-item>
             <q-item class="flex-center">
-              <q-img
-                width="50%"
+              <img
+                style="width: 70%; height: 100%"
                 src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
-              >
-              </q-img>
+              />
             </q-item>
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
