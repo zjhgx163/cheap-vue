@@ -56,6 +56,7 @@
           class="text-bold"
           :to="{
             path: 'yunpan/list',
+            query: { q: '' },
           }"
           >...更多资源点击查看...
         </router-link>

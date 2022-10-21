@@ -32,71 +32,6 @@
           </q-btn> -->
         </div>
       </q-toolbar>
-
-      <q-toolbar class="q-mb-xs bg-secondary" v-bind:class="[itemPadding]">
-        <q-tabs
-          dense
-          align="left"
-          active-color="pink-4"
-          indicator-color="pink-4"
-          content-class="text-grey-10"
-          narrow-indicator
-          outside-arrows
-          mobile-arrows
-          shrink
-        >
-          <q-route-tab
-            :to="{ path: '/yunpan/list', query: { q: searchKey } }"
-            label="全部"
-            name="all"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/影视', query: { q: searchKey } }"
-            label="影视"
-            name="影视"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/动漫', query: { q: searchKey } }"
-            label="动漫"
-            name="动漫"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/学习', query: { q: searchKey } }"
-            label="学习"
-            name="学习"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/游戏%2F软件', query: { q: searchKey } }"
-            label="游戏/软件"
-            name="游戏/软件"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/音乐%2F音频', query: { q: searchKey } }"
-            label="音乐/音频"
-            name="音乐/音频"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/图片', query: { q: searchKey } }"
-            label="图片"
-            name="图片"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/书籍', query: { q: searchKey } }"
-            label="书籍"
-            name="书籍"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/求资源', query: { q: searchKey } }"
-            label="求资源"
-            name="求资源"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/other', query: { q: searchKey } }"
-            label="其他"
-            name="other"
-          />
-        </q-tabs>
-      </q-toolbar>
     </q-header>
 
     <q-page-container class="bg-primary YL__750w">
@@ -106,9 +41,14 @@
     </q-page-container>
 
     <q-footer reveal class="bg-secondary q-pt-xs q-pb-md">
-      <q-toolbar class="flex-center q-pr-lg">
-        <q-btn round color="pink-4" size="0.9em" text-color="white" dense icon="add" />
-      </q-toolbar>
+      <q-item>
+        <q-item-section top side class="text-bold"> 声明：</q-item-section>
+        <q-item-section>
+          <q-item-label caption>
+            本站所有资源均由网友自发提供，本站不存储任何资源，仅供于学习，请于保存后24小时内自行删除
+          </q-item-label>
+        </q-item-section>
+      </q-item>
     </q-footer>
     <login-qr :is-loading-qr="isLoadingQr" :login-card="loginCard" :wechat-qr="wechatQr" />
   </q-layout>
@@ -125,15 +65,9 @@
   &__toolbar-input-container
     @media(max-width: $breakpoint-xs-max)
       width: 90%
+      height: 60%
     @media(min-width: $breakpoint-xs-max)
       width: 50%
-.q-tab__label
-  @media(max-width: $breakpoint-xs-max)
-   font-size: 0.7em
-   font-weight: 600
-  @media(min-width: $breakpoint-xs-max)
-   font-size: 1.0em
-   font-weight: 700
 </style>
 
 <script>
@@ -160,19 +94,9 @@ export default {
       avatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
     };
   },
-  // computed: {
-  //   categoryTab: function () {
-  //     return this.$refs.child.category;
-  //   },
-  // },
-  created() {
-    console.log('YunpanLayout created');
-  },
-  activated() {
-    console.log('YunpanLayout activated');
-  },
+
   mounted() {
-    console.log('YunpanLayout mounted');
+    console.log('YunpanDetailLayout mounted');
     if (this.$q.localStorage.has('userInfo')) {
       let userInfo = this.$q.localStorage.getItem('userInfo');
       console.log(userInfo);
@@ -200,7 +124,7 @@ export default {
       let randomNum = Math.random();
       this.$router
         .push({
-          path: '/yunpan/list',
+          path: '/yunpan/search',
           query: { q: this.searchKey, x: randomNum },
         })
         .catch((err) => {

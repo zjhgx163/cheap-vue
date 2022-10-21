@@ -3,6 +3,7 @@
     <q-toolbar class="bg-secondary justify-between">
       <q-tabs
         v-model="selectedTab"
+        dense
         align="left"
         active-color="accent"
         indicator-color="accent"
@@ -28,7 +29,6 @@
         </q-list>
       </q-btn-dropdown>
     </q-toolbar>
-
     <!-- <q-page-container> -->
     <!-- <keep-alive>
         <router-view
@@ -46,9 +46,11 @@
         v-if="!$route.meta.keepAlive"
       >
       </router-view> -->
-    <keep-alive>
-      <router-view :key="$route.fullPath" ref="goods-list" :sort="sortIndex"> </router-view>
-    </keep-alive>
+    <q-page-container class="bg-primary">
+      <keep-alive>
+        <router-view :key="$route.fullPath" ref="goods-list" :sort="sortIndex"> </router-view>
+      </keep-alive>
+    </q-page-container>
 
     <!-- </q-page-container> -->
   </q-layout>

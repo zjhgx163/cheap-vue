@@ -167,15 +167,16 @@ export default {
       titleHeight: 'YL__title_height',
       pricePading: Screen.gt.sm ? 'q-pt-xs q-pb-sm' : 'q-pt-xs',
       isListEnd: false,
-      selectedTag: '',
       pageNavigateHidden: !Screen.gt.sm,
       stopLoading: false,
       loadTimes: 0,
       gapIndex: 0, //refersh之前的load次数
+      pageParams: null,
+      // category: '',
       // to: false,
     };
   },
-  props: ['query'],
+  props: ['query', 'page'],
 
   computed: {
     itemPadding: function () {
@@ -295,11 +296,29 @@ export default {
         path: '/yunpan/d/' + itemId,
       });
     });
-    // this.selectedTab = 'main';
-    console.log('page = ' + this.$route.params.page);
+    console.log(' this.$route.path ' + this.$route.path);
     if (this.$route.params.page != undefined && this.$route.params.page != null) {
+      console.log('page = ' + this.$route.params.page);
+      this.pageParams = parseInt(this.$route.params.page);
       this.current = parseInt(this.$route.params.page);
     }
+
+    if (this.page != null && this.page != undefined) {
+      console.log('this page = ' + this.page);
+      this.pageParams = parseInt(this.page);
+      this.current = parseInt(this.page);
+    }
+
+    // if (this.$route.params.category != undefined && this.$route.params.category != null) {
+    //   this.category = this.$route.params.category;
+    //   console.log('category = ' + this.$route.params.category);
+    // }
+    // if (this.tag != undefined && this.tag != null) {
+    //   console.log('tag =' + this.tag);
+    //   this.category = this.tag;
+    //   // console.log('parent =' + this.$parent.name);
+    //   // this.$parent.$parent.categoryTab = this.tag;
+    // }
     this.getItemList();
   },
   activated() {
@@ -321,7 +340,7 @@ export default {
       this.$axios
         .post(`${global.config.domain}/yunpan/resource/list`, {
           page: this.current,
-          tag: this.selectedTag,
+          tag: this.$route.params.category,
           query: this.query,
           sort: this.sort,
         })
@@ -369,10 +388,10 @@ export default {
       console.log('gap = .....' + this.gapIndex);
       this.loadTimes = index - 1;
 
-      if (this.$route.params.page == undefined) {
+      if (this.pageParams == null) {
         this.current = index - this.gapIndex;
       } else {
-        this.current = parseInt(this.$route.params.page) + this.loadTimes - this.gapIndex; //需要减去refersh之前的load次数
+        this.current = this.pageParams + this.loadTimes - this.gapIndex; //需要减去refersh之前的load次数
       }
       console.log(' this.current is ' + this.current);
 
@@ -390,7 +409,7 @@ export default {
           this.$axios
             .post(`${global.config.domain}/yunpan/resource/list`, {
               page: this.current,
-              tag: this.selectedTag,
+              tag: this.$route.params.category,
               query: this.query,
               sort: this.sort,
             })
@@ -453,7 +472,7 @@ export default {
         this.$axios
           .post(`${global.config.domain}/yunpan/resource/list`, {
             page: this.current,
-            tag: this.selectedTag,
+            tag: this.$route.params.category,
             query: this.query,
             sort: this.sort,
           })
@@ -463,10 +482,17 @@ export default {
             this.max = Math.ceil(res.data.data.total / res.data.data.size);
           });
       } else {
-        this.$router.push({
-          path: '/yunpan/list/' + this.current,
-          query: { q: this.query },
-        });
+        if (this.$route.params.category != undefined && this.$route.params.category != null) {
+          this.$router.push({
+            path: this.$route.path,
+            query: { q: this.query, page: this.current },
+          });
+        } else {
+          this.$router.push({
+            path: '/yunpan/list/' + this.current,
+            query: { q: this.query },
+          });
+        }
       }
     },
 

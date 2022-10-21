@@ -90,28 +90,46 @@ const routes = [
     path: '/yunpan',
     component: () => import('layouts/YunpanLayout.vue'),
     children: [
-      { path: 'list', component: () => import('pages/YunpanList.vue') },
+      {
+        path: 'list',
+        component: () => import('pages/YunpanList.vue'),
+        props: (route) => ({ query: route.query.q }),
+      },
       {
         path: 'list/:page',
         component: () => import('pages/YunpanList.vue'),
         props: (route) => ({ query: route.query.q }),
       },
       {
-        path: 'd/:id',
-        component: () => import('pages/YunpanItemDetail.vue'),
-      },
-      {
-        path: 'p/:id',
-        component: () => import('pages/YunpanItemDetailShare.vue'),
-      },
-      {
-        path: 'search',
+        path: 'category/:category',
         component: () => import('pages/YunpanList.vue'),
-        props: (route) => ({ query: route.query.q }),
+        props: (route) => ({ query: route.query.q, page: route.query.page }),
       },
+      // {
+      //   path: 'd/:id',
+      //   component: () => import('pages/YunpanItemDetail.vue'),
+      // },
+      // {
+      //   path: 'p/:id',
+      //   component: () => import('pages/YunpanItemDetailShare.vue'),
+      // },
+      // {
+      //   path: 'search',
+      //   component: () => import('pages/YunpanList.vue'),
+      //   props: (route) => ({ query: route.query.q }),
+      // },
     ],
   },
-  // { path: '/yunpan/list', component: () => import('pages/YunpanList.vue') },
+  {
+    path: '/yunpan/d/',
+    component: () => import('layouts/YunpanDetailLayout.vue'),
+    children: [{ path: ':id', component: () => import('pages/YunpanItemDetail.vue') }],
+  },
+  {
+    path: '/yunpan/p/',
+    component: () => import('layouts/YunpanDetailLayout.vue'),
+    children: [{ path: ':id', component: () => import('pages/YunpanItemDetail.vue') }],
+  },
 
   {
     path: '/user',
