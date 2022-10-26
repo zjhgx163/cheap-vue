@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-primary text-grey-8 YL__750w">
+    <q-header reveal class="bg-primary text-grey-8 YL__750w">
       <q-toolbar class="bg-secondary" v-bind:class="[itemPadding]">
         <div class="col-12 col-sm-10 justify-center">
           <q-input
@@ -301,7 +301,7 @@ export default {
     editorShowChanged(value) {
       this.isEditorShowing = value;
       this.$router.push({
-        path: '/yunpan/list',
+        path: '/yunpan/list/1',
         query: { q: '' },
       });
     },
