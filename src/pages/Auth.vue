@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>正在登陆...</div>
 </template>
 
 <script>
@@ -54,6 +54,12 @@ export default {
 
             this.$router.push({
               path: '/yunpan/d/' + this.$route.params.urlCode,
+            });
+          } else if (this.state == 'yunpanList') {
+            this.$q.loading.hide();
+
+            this.$router.push({
+              path: '/yunpan/list?q=',
             });
           } else {
             console.log('order list' + this.state);

@@ -21,6 +21,7 @@
               v-model="title"
               placeholder="标题"
               hide-bottom-space
+              autofocus
               type="text"
             />
           </div>
@@ -50,6 +51,9 @@
             :options="options"
             label="标签"
             dense
+            options-dense
+            hide-bottom-space
+            style="max-width: 200px"
           />
 
           <div class="q-mt-sm">
@@ -167,7 +171,7 @@ export default {
           if (res.data.code < 0) {
             if (!this.$q.localStorage.has('userInfo')) {
               if (this.isWeixin()) {
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.item.id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
               } else {
                 this.$router.push({ path: 'login' });
               }
@@ -184,6 +188,15 @@ export default {
             this.$emit('editor-show-changed', false);
           }
         });
+    },
+    isWeixin() {
+      var ua = window.navigator.userAgent.toLowerCase();
+      console.log(ua);
+      if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

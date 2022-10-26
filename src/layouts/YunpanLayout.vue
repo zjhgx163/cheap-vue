@@ -107,10 +107,24 @@
 
     <q-footer reveal class="bg-secondary q-pt-xs q-pb-md">
       <q-toolbar class="flex-center q-pr-lg">
-        <q-btn round color="pink-4" size="0.9em" text-color="white" dense icon="add" />
+        <q-btn
+          round
+          color="pink-4"
+          size="0.9em"
+          text-color="white"
+          dense
+          icon="add"
+          @click="addYunpanItem"
+        />
       </q-toolbar>
     </q-footer>
-    <login-qr :is-loading-qr="isLoadingQr" :login-card="loginCard" :wechat-qr="wechatQr" />
+    <login-qr
+      :is-loading-qr="isLoadingQr"
+      @login-card-changed="loginCardChange"
+      :login-card="loginCard"
+      :wechat-qr="wechatQr"
+    />
+    <wysisyg-editor @editor-show-changed="editorShowChanged" :is-editor-show="isEditorShowing" />
   </q-layout>
 </template>
 <style lang="sass">
@@ -141,9 +155,10 @@
 import { Screen } from 'quasar';
 import 'src/config';
 import LoginQr from 'src/components/LoginQr.vue';
+import WysisygEditor from 'src/components/WysiwygEditor.vue';
 
 export default {
-  components: { LoginQr },
+  components: { LoginQr, WysisygEditor },
   name: 'YunpanLayout',
 
   data() {
@@ -158,6 +173,7 @@ export default {
       wechatQr: '',
       timer: null,
       avatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
+      isEditorShowing: false,
     };
   },
   // computed: {
@@ -206,6 +222,9 @@ export default {
         .catch((err) => {
           err;
         });
+    },
+    addYunpanItem() {
+      this.isEditorShowing = true;
     },
     needLogin(itemId) {
       console.log('needLogin is trigged:' + itemId);
@@ -271,6 +290,19 @@ export default {
             'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png';
           this.isLogin = false;
         }
+      });
+    },
+    loginCardChange(value) {
+      this.loginCard = value;
+      this.isLoadingQr = false;
+      this.wechatQr = '';
+      clearInterval(this.timer);
+    },
+    editorShowChanged(value) {
+      this.isEditorShowing = value;
+      this.$router.push({
+        path: '/yunpan/list',
+        query: { q: '' },
       });
     },
   },
