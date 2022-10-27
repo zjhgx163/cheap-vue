@@ -161,6 +161,9 @@ export default {
         });
         return;
       }
+      this.$q.loading.show({
+        delay: 200, // ms
+      });
       this.$axios
         .post(`${global.config.domain}/yunpan/post`, {
           title: this.title,
@@ -168,6 +171,7 @@ export default {
           content: this.post,
         })
         .then((res) => {
+          this.$q.loading.hide();
           if (res.data.code < 0) {
             if (!this.$q.localStorage.has('userInfo')) {
               if (this.isWeixin()) {

@@ -105,8 +105,8 @@
       </keep-alive>
     </q-page-container>
 
-    <q-footer reveal class="bg-secondary q-pt-xs q-pb-md">
-      <q-toolbar class="flex-center q-pr-lg">
+    <q-footer reveal class="bg-secondary q-pt-none q-pb-xs">
+      <q-toolbar class="flex-center q-pr-lg q-py-xs">
         <q-btn
           round
           color="pink-4"
