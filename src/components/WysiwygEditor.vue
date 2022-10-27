@@ -84,6 +84,7 @@ export default {
       options: ['影视', '动漫', '学习', '游戏/软件', '音乐/音频', '图片', '书籍', '求资源', '其他'],
       tag: '',
       maxized: Screen.gt.sm ? false : true,
+      filesSizeTotal: 0,
     };
   },
   computed: {
@@ -114,9 +115,22 @@ export default {
       input.accept = '.png, .jpg, .jpeg, .gif'; // file extensions allowed
       let file;
       input.onchange = (_) => {
+        var image = new Image();
+        image.dynsrc = input.value;
+
         const files = Array.from(input.files);
         file = files[0];
-
+        console.log('size' + file.size);
+        this.filesSizeTotal += file.size;
+        if (this.filesSizeTotal > 5 * 1024 * 1024) {
+          this.$q.notify({
+            type: 'negative',
+            message: '图片不能超过5M',
+            icon: 'warning',
+          });
+          this.filesSizeTotal = this.filesSizeTotal - file.size;
+          return;
+        }
         // lets load the file as dataUrl
         const reader = new FileReader();
         let dataUrl = '';
@@ -175,7 +189,7 @@ export default {
           if (res.data.code < 0) {
             if (!this.$q.localStorage.has('userInfo')) {
               if (this.isWeixin()) {
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
               } else {
                 this.$router.push({ path: 'login' });
               }

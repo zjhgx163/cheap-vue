@@ -224,7 +224,19 @@ export default {
         });
     },
     addYunpanItem() {
-      this.isEditorShowing = true;
+      this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
+        console.log(res.data.data);
+        if (res.data.data == true) {
+          this.isEditorShowing = true;
+        } else {
+          //未登陆的话
+          if (this.$refs.child.isWeixin()) {
+            window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
+          } else {
+            this.needLogin();
+          }
+        }
+      });
     },
     needLogin(itemId) {
       console.log('needLogin is trigged:' + itemId);
@@ -250,7 +262,9 @@ export default {
                     this.$q.localStorage.set('userInfo', res.data.data);
                     window.clearInterval(this.timer); //清除定时器
                     this.loginCard = false;
-                    this.$refs.child.$emit('logined', itemId);
+                    if (itemId != undefined) {
+                      this.$refs.child.$emit('logined', itemId);
+                    }
                   } else {
                     let now = new Date();
                     if (now.getTime() - beginTime.getTime() > 5 * 60 * 1000) {
