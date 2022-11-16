@@ -128,7 +128,7 @@ const routes = [
   {
     path: '/yunpan/p/',
     component: () => import('layouts/YunpanDetailLayout.vue'),
-    children: [{ path: ':id', component: () => import('pages/YunpanItemDetail.vue') }],
+    children: [{ path: ':id', component: () => import('pages/YunpanItemDetailShare.vue') }],
   },
 
   {

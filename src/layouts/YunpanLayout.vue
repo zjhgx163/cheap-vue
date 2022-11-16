@@ -240,6 +240,10 @@ export default {
     },
     needLogin(itemId) {
       console.log('needLogin is trigged:' + itemId);
+      let userInfo = this.$q.localStorage.getItem('userInfo');
+      if (userInfo !== undefined && userInfo !== null) {
+        this.$q.localStorage.remove('userInfo');
+      }
       this.isLoadingQr = true;
       this.loginCard = true;
       this.$axios.post(`${global.config.domain}/wechat/createQr`, {}).then((res) => {
