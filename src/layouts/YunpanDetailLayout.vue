@@ -124,7 +124,7 @@ export default {
       let randomNum = Math.random();
       this.$router
         .push({
-          path: '/yunpan/search',
+          path: '/yunpan/list',
           query: { q: this.searchKey, x: randomNum },
         })
         .catch((err) => {
