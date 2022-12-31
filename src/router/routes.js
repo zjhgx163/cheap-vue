@@ -14,8 +14,8 @@ const routes = [
             // component: () => import('layouts/IndexTabLayout.vue'),
             components: {
               default: () => import('layouts/IndexTabLayout.vue'),
-              hot: () => import('components/HotList.vue'),
-              // hot: () => import('components/ResourceSideList.vue'),
+              // hot: () => import('components/HotList.vue'),
+              hot: () => import('components/ResourceSideList.vue'),
             },
             children: [
               {
@@ -94,7 +94,7 @@ const routes = [
       {
         path: 'list',
         component: () => import('pages/YunpanList.vue'),
-        props: (route) => ({ query: route.query.q }),
+        props: (route) => ({ query: route.query.q, x: route.query.x }),
       },
       {
         path: 'list/:page',

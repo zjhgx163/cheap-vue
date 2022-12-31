@@ -176,7 +176,7 @@ export default {
       // to: false,
     };
   },
-  props: ['query', 'page'],
+  props: ['query', 'page', 'x'],
 
   computed: {
     itemPadding: function () {
@@ -365,17 +365,19 @@ export default {
               this.pageNavigateHidden = false;
               this.stopLoading = true;
             }
+            //只有点击‘搜索’才记录关键词
+            if (this.x !== undefined && this.x != null) {
+              this.$axios
+                .post(`${global.config.domain}/yunpan/search/log`, {
+                  searchKeyword: this.query,
+                  total: res.data.data.total,
+                })
+                .then((res) => {
+                  console.log(res.data.data);
+                });
+            }
           }
 
-          // if (!this.isBigScreen) {
-          //   if (this.current % 3 != 0) {
-          //     this.pageNavigateHidden = true;
-          //     this.stopLoading = false;
-          //   } else {
-          //     this.pageNavigateHidden = false;
-          //     this.stopLoading = true;
-          //   }
-          // }
           console.log('hidden = ' + this.pageNavigateHidden);
           console.log('this.current  = ' + this.current);
           console.log('this.isListEnd  = ' + this.isListEnd);
