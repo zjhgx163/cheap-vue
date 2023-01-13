@@ -326,6 +326,7 @@ export default {
   },
 };
 </script>
+<!--
 <script type="text/javascript">
 // H5 SDK 在线文档地址：http://developers.adnet.qq.com/doc/web/js_develop
 // 全局命名空间申明TencentGDT对象
@@ -366,3 +367,4 @@ window.TencentGDT.push({
   h && h.insertBefore(s, h.firstChild);
 })();
 </script>
+-->
