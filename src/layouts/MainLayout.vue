@@ -110,6 +110,7 @@
 
       </div>
     </div> -->
+    <div id="banner_2_0"></div>
 
     <q-footer bordered reveal class="bg-dark text-white">
       <div class="YL__footer row justify-evenly gt-sm YL__1200w q-pt-md">
