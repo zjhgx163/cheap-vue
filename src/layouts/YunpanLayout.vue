@@ -200,9 +200,6 @@ export default {
         }
       }
     }
-    // H5 SDK 在线文档地址：http://developers.adnet.qq.com/doc/web/js_develop
-    // 全局命名空间申明TencentGDT对象
-    window.TencentGDT = window.TencentGDT || [];
 
     // 广告初始化
     window.TencentGDT.push({
@@ -230,14 +227,14 @@ export default {
     });
 
     // H5 SDK接入全局只需运行一次
-    (function () {
-      var doc = document,
-        h = doc.getElementsByTagName('head')[0],
-        s = doc.createElement('script');
-      s.async = true;
-      s.src = 'https://qzs.gdtimg.com/union/res/union_sdk/page/h5_sdk/i.js';
-      h && h.insertBefore(s, h.firstChild);
-    })();
+    // (function () {
+    //   var doc = document,
+    //     h = doc.getElementsByTagName('head')[0],
+    //     s = doc.createElement('script');
+    //   s.async = true;
+    //   s.src = 'https://qzs.gdtimg.com/union/res/union_sdk/page/h5_sdk/i.js';
+    //   h && h.insertBefore(s, h.firstChild);
+    // })();
   },
   beforeDestroy() {
     console.log('beforeDestroy');
