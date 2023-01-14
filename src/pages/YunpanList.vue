@@ -325,8 +325,9 @@ export default {
     this.getItemList();
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
+    console.log('this.adver = ' + this.adver);
     if (this.adver != null) {
-      window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
+      window.TencentGDT.NATIVE.renderAd(this.adver, 'flowAdverYunpanId');
     } else {
       // 信息流广告初始化
       window.TencentGDT.push({
