@@ -17,7 +17,6 @@
         <q-pull-to-refresh @refresh="refresh" no-mouse>
           <q-list separator dense class="bg-secondary" id="scroll-target-id">
             <div
-              id="containerId"
               v-bind:key="item.id"
               v-for="item in listData"
               class="bg-primary"
