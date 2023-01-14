@@ -174,7 +174,6 @@ export default {
       loadTimes: 0,
       gapIndex: 0, //refersh之前的load次数
       pageParams: null,
-      adver: null,
       // category: '',
       // to: false,
     };
@@ -325,9 +324,9 @@ export default {
     this.getItemList();
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
-    console.log('this.adver = ' + this.adver);
-    if (this.adver != null) {
-      window.TencentGDT.NATIVE.renderAd(this.adver, 'flowAdverYunpanId');
+    console.log('window.adver = ' + window.adver);
+    if (window.adver != undefined && window.adver != null) {
+      window.TencentGDT.NATIVE.renderAd(window.adver, 'flowAdverYunpanId');
     } else {
       // 信息流广告初始化
       window.TencentGDT.push({
@@ -343,7 +342,7 @@ export default {
             // res[0] 代表取广告数组第一个数据
             // containerId：广告容器ID
             window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
-            this.adver = res[0];
+            window.adver = res[0];
             console.log('信息流广告-2');
           } else {
             // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
