@@ -16,13 +16,14 @@
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
           <q-list dense separator class="bg-secondary" id="scroll-target-id">
-            <div id="flowAdverYunpanId"></div>
             <div
               v-bind:key="item.id"
               v-for="item in listData"
               class="bg-primary"
               v-bind:class="{ 'q-pb-xs': !isBigScreen }"
             >
+              <div id="flowAdverYunpanId"></div>
+
               <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
               <q-item
                 dense
