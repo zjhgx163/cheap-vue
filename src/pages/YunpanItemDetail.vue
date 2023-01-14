@@ -47,6 +47,9 @@
               <div class="text-body2 break-all" v-html="item.content"></div>
             </q-item>
             <q-separator />
+            <div id="yunpanDetailAdvert" />
+            <q-separator />
+
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
               <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
