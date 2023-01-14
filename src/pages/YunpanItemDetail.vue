@@ -302,6 +302,15 @@ export default {
           }
         },
       });
+      // H5 SDK接入全局只需运行一次
+      (function () {
+        var doc = document,
+          h = doc.getElementsByTagName('head')[0],
+          s = doc.createElement('script');
+        s.async = true;
+        s.src = '//qzs.qq.com/qzone/biz/res/i.js';
+        h && h.insertBefore(s, h.firstChild);
+      })();
     }
   },
   methods: {

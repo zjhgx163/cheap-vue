@@ -225,16 +225,6 @@ export default {
     //     }
     //   },
     // });
-
-    // H5 SDK接入全局只需运行一次
-    (function () {
-      var doc = document,
-        h = doc.getElementsByTagName('head')[0],
-        s = doc.createElement('script');
-      s.async = true;
-      s.src = 'https://qzs.gdtimg.com/union/res/union_sdk/page/h5_sdk/i.js';
-      h && h.insertBefore(s, h.firstChild);
-    })();
   },
   beforeDestroy() {
     console.log('beforeDestroy');
