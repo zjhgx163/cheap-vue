@@ -110,6 +110,7 @@ export default {
     }
 
     if (window.adver != undefined && window.adver != null) {
+      window.adver.placement_id = '4054888219125381';
       window.TencentGDT.NATIVE.renderAd(window.adver, 'yunpanDetailAdvert');
     } else {
       // 广告初始化

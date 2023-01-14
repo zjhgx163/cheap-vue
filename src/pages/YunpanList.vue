@@ -326,6 +326,7 @@ export default {
     // console.log('container = ' + container);
     console.log('window.adver = ' + window.adver);
     if (window.adver != undefined && window.adver != null) {
+      window.adver.placement_id = '9094884362628825';
       window.TencentGDT.NATIVE.renderAd(window.adver, 'flowAdverYunpanId');
     } else {
       // 信息流广告初始化
