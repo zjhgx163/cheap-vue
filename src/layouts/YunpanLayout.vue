@@ -239,7 +239,7 @@ export default {
           // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
           // res[0] 代表取广告数组第一个数据
           // containerId：广告容器ID
-          window.TencentGDT.NATIVE.renderAd(res[0], 'containerId');
+          window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
           console.log('信息流广告-2');
         } else {
           // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
