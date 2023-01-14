@@ -412,7 +412,7 @@ export default {
         })
         .then((res) => {
           // console.log(res.data.data);
-          // console.log(this.isBigScreen);
+          console.log('index list return');
 
           this.listData = res.data.data.records;
           if (res.data.data.records.length < 20) {
