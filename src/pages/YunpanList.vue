@@ -174,6 +174,7 @@ export default {
       loadTimes: 0,
       gapIndex: 0, //refersh之前的load次数
       pageParams: null,
+      adverPlay: null, //防止信息流广告重复播放
       // category: '',
       // to: false,
     };
@@ -326,18 +327,27 @@ export default {
     // console.log('container = ' + container);
   },
   activated() {
-    console.log('YunpanList activated');
+    console.log('YunpanList activated ' + this.$route.params.category);
     console.log('this.isListEnd =' + this.isListEnd);
     if (this.x === undefined || this.x === null) {
-      if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+      if (
+        window.AdverNativeTemplate != undefined &&
+        window.AdverNativeTemplate != null &&
+        this.adverPlay == null
+      ) {
         window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+        this.adverPlay = true;
       }
     }
 
     this.isListEnd = false;
   },
+  deactivated() {
+    console.log('YunpanList deactivated ' + this.$route.params.category);
+    this.adverPlay = false;
+  },
   destroyed() {
-    console.log('yunpan list destoryed');
+    console.log('yunpanList destoryed');
   },
   methods: {
     getItemList() {
@@ -394,8 +404,13 @@ export default {
             } else {
               // 非搜索播放模版广告
               console.log('window.AdverNativeTemplate = ' + window.AdverNativeTemplate);
-              if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+              if (
+                window.AdverNativeTemplate != undefined &&
+                window.AdverNativeTemplate != null &&
+                this.adverPlay == null
+              ) {
                 window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+                this.adverPlay = true;
               }
             }
           }
