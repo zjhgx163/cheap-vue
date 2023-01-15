@@ -344,7 +344,7 @@ export default {
   },
   deactivated() {
     console.log('YunpanList deactivated ' + this.$route.params.category);
-    this.adverPlay = false;
+    this.adverPlay = null;
   },
   destroyed() {
     console.log('yunpanList destoryed');
