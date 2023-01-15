@@ -312,7 +312,9 @@ export default {
             if (this.isWeixin()) {
               window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
             } else {
-              this.$router.push({ path: 'login' });
+              // this.$router.push({ path: 'login' });
+              //通知父组件
+              this.$emit('need-login', id);
             }
           } else {
             this.$q.notify({
