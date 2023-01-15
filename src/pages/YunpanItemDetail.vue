@@ -262,9 +262,11 @@ export default {
 
     this.$on('logined', function (itemId) {
       console.log('从yunpan detail页面已登陆' + itemId);
-      this.$router.push({
-        path: '/yunpan/d/' + itemId,
-      });
+      window.location.href = `${global.config.domain}/yunpan/d/` + itemId;
+
+      // this.$router.push({
+      //   path: '/yunpan/d/' + itemId,
+      // });
     });
 
     this.$q.loading.show({
