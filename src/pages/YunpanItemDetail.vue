@@ -262,7 +262,7 @@ export default {
 
     this.$on('logined', function (itemId) {
       console.log('从yunpan detail页面已登陆' + itemId);
-      window.location.href = `${global.config.domain}/yunpan/d/` + itemId;
+      window.location.href = `https://www.hjdang.com/yunpan/d/` + itemId;
 
       // this.$router.push({
       //   path: '/yunpan/d/' + itemId,
