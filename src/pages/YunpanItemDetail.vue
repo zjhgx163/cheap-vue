@@ -251,14 +251,17 @@ export default {
   //   components: {
   //     HotList,
   //   },
-
+  activated() {
+    console.log('yunpanItemDetail activated ');
+    this.getYunpanItemContent(this.$route.params.id);
+  },
   mounted() {
     //解决iphone移动端的延迟
     FastClick.attach(document.body);
     console.log('yunpanItemDetail mounted');
 
     this.$on('logined', function (itemId) {
-      console.log('我是子组件方法' + itemId);
+      console.log('从yunpan detail页面已登陆' + itemId);
       this.$router.push({
         path: '/yunpan/d/' + itemId,
       });
