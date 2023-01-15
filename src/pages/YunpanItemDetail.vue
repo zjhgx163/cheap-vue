@@ -255,7 +255,7 @@ export default {
   mounted() {
     //解决iphone移动端的延迟
     FastClick.attach(document.body);
-    console.log('yunpan item mounted');
+    console.log('yunpanItemDetail mounted');
 
     this.$q.loading.show({
       delay: 400, // ms
@@ -274,43 +274,8 @@ export default {
 
     this.getYunpanItemContent(this.$route.params.id);
 
-    if (window.adver != undefined && window.adver != null) {
-      window.adver.placement_id = '4054888219125381';
-      window.TencentGDT.NATIVE.renderAd(window.adver, 'yunpanDetailAdvert');
-    } else {
-      // 广告初始化
-      window.TencentGDT.push({
-        app_id: '1201538404', // {String} - appid - 必填
-        placement_id: '4054888219125381', // {String} - 广告位id - 必填
-        type: 'native', // {String} - 原生广告类型 - 必填
-        // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
-        // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
-        count: 2, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
-        onComplete: function (res) {
-          if (res && res.constructor === Array) {
-            // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
-            // res[0] 代表取广告数组第一个数据
-            // containerId：广告容器ID
-            window.TencentGDT.NATIVE.renderAd(res[0], 'yunpanDetailAdvert');
-            window.adver = res[0];
-          } else {
-            // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
-            // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
-            setTimeout(function () {
-              window.TencentGDT.NATIVE.loadAd(placement_id);
-            }, 3000);
-          }
-        },
-      });
-      // H5 SDK接入全局只需运行一次
-      (function () {
-        var doc = document,
-          h = doc.getElementsByTagName('head')[0],
-          s = doc.createElement('script');
-        s.async = true;
-        s.src = '//qzs.qq.com/qzone/biz/res/i.js';
-        h && h.insertBefore(s, h.firstChild);
-      })();
+    if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
+      window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
     }
   },
   methods: {

@@ -200,31 +200,6 @@ export default {
         }
       }
     }
-
-    // 广告初始化
-    // window.TencentGDT.push({
-    //   app_id: '1201538404', // {String} - appid - 必填
-    //   placement_id: '4034072990480276', // {String} - 广告位id - 必填
-    //   // type: 'interstitial', // {String} - 原生广告类型 - 必填
-    //   type: 'native',
-    //   display_type: 'interstitial', // 播放类型：插屏
-    //   // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
-    //   // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
-    //   count: 3, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
-    //   onComplete: function (res) {
-    //     if (res && res.ret === 0) {
-    //       // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
-    //       // res[0] 代表取广告数组第一个数据
-    //       TencentGDT.NATIVE.renderAd(res.data[0]);
-    //     } else {
-    //       // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
-    //       // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
-    //       setTimeout(function () {
-    //         window.TencentGDT.NATIVE.loadAd(placement_id);
-    //       }, 3000);
-    //     }
-    //   },
-    // });
   },
   beforeDestroy() {
     console.log('beforeDestroy');
