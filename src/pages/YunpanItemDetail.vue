@@ -257,6 +257,13 @@ export default {
     FastClick.attach(document.body);
     console.log('yunpanItemDetail mounted');
 
+    this.$on('logined', function (itemId) {
+      console.log('我是子组件方法' + itemId);
+      this.$router.push({
+        path: '/yunpan/d/' + itemId,
+      });
+    });
+
     this.$q.loading.show({
       delay: 400, // ms
     });
