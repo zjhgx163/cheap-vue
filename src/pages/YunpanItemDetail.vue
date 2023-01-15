@@ -273,10 +273,6 @@ export default {
     }
 
     this.getYunpanItemContent(this.$route.params.id);
-
-    if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
-      window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
-    }
   },
   methods: {
     getReplyList() {
@@ -334,6 +330,10 @@ export default {
           // console.log(this.item);
           if (this.item == null) {
             this.$router.push({ path: '/error' });
+          }
+
+          if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
+            window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
           }
 
           this.$q.loading.hide();

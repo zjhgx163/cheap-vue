@@ -324,26 +324,16 @@ export default {
     this.getItemList();
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
-
-    if (this.x !== undefined && this.x != null) {
-      // 搜索播放插屏广告
-      if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
-        TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
-      }
-    } else {
-      // 非搜索播放模版广告
-      console.log('window.AdverNativeTemplate = ' + window.AdverNativeTemplate);
-      if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
-        window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
-      }
-    }
   },
   activated() {
     console.log('YunpanList activated');
     console.log('this.isListEnd =' + this.isListEnd);
-    if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
-      window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+    if (this.x === undefined || this.x === null) {
+      if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+        window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+      }
     }
+
     this.isListEnd = false;
   },
   destroyed() {
@@ -394,6 +384,19 @@ export default {
                 .then((res) => {
                   console.log(res.data.data);
                 });
+            }
+
+            if (this.x !== undefined && this.x != null) {
+              // 搜索播放插屏广告
+              if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
+                TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
+              }
+            } else {
+              // 非搜索播放模版广告
+              console.log('window.AdverNativeTemplate = ' + window.AdverNativeTemplate);
+              if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+                window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+              }
             }
           }
 
