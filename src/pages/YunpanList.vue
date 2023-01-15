@@ -367,9 +367,12 @@ export default {
     }
   },
   activated() {
-    console.log('Index activated');
+    console.log('YunpanList activated');
     console.log('this.isListEnd =' + this.isListEnd);
-
+    if (window.adver != undefined && window.adver != null) {
+      window.adver.placement_id = '9094884362628825';
+      window.TencentGDT.NATIVE.renderAd(window.adver, 'flowAdverYunpanId');
+    }
     this.isListEnd = false;
   },
   destroyed() {
