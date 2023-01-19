@@ -287,11 +287,13 @@ export default {
     this.getYunpanItemContent(this.$route.params.id);
     if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
       window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
+      window.TencentGDT.NATIVE.loadAd('4054888219125381');
     } else {
       //等待1s后重新展示
       setTimeout(() => {
         if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
           window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
+          window.TencentGDT.NATIVE.loadAd('4054888219125381');
         }
       }, 1000);
       console.log('wait 1s AdverDetailInsert');

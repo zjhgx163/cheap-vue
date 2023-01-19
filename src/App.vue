@@ -70,9 +70,11 @@ export default {
       // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
       count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
       onComplete: function (res) {
+        console.log('插屏广告返回');
         if (res && res.ret === 0) {
           // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
           // res[0] 代表取广告数组第一个数据
+          console.log(JSON.stringify(res.data[0]));
           window.AdverInterstitial = res.data[0];
           // TencentGDT.NATIVE.renderAd(res.data[0]);
         } else {
@@ -94,12 +96,16 @@ export default {
       // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
       count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
       onComplete: function (res) {
+        console.log('信息流广告返回');
+
         if (res && res.constructor === Array) {
           // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
           // res[0] 代表取广告数组第一个数据
           // containerId：广告容器ID
           // window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
           window.AdverNativeTemplate = res[0];
+          console.log(JSON.stringify(res[0]));
+
           // this.$emit('adverNativeTemplateEvent');
           console.log('信息流广告-2');
         } else {
@@ -112,7 +118,7 @@ export default {
       },
     });
 
-    // 云盘详情页插入广告
+    // 详情页插入广告
     window.TencentGDT.push({
       app_id: '1201538404', // {String} - appid - 必填
       placement_id: '4054888219125381', // {String} - 广告位id - 必填
@@ -121,12 +127,15 @@ export default {
       // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
       count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
       onComplete: function (res) {
+        console.log('详情页插入广告返回');
+
         if (res && res.constructor === Array) {
           // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
           // res[0] 代表取广告数组第一个数据
           // containerId：广告容器ID
           // window.TencentGDT.NATIVE.renderAd(res[0], 'yunpanDetailAdvert');
           window.AdverDetailInsert = res[0];
+          console.log(JSON.stringify(res[0]));
         } else {
           // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
           // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率

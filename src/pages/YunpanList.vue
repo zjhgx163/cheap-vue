@@ -329,10 +329,16 @@ export default {
       // 搜索播放插屏广告
       if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
         TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
+        setTimeout(function () {
+          TencentGDT.NATIVE.loadAd('4034072990480276');
+        }, 3000);
       } else {
         setTimeout(() => {
           if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
             TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
+            setTimeout(function () {
+              TencentGDT.NATIVE.loadAd('4034072990480276');
+            }, 3000);
           }
           console.log('wait 1s AdverInterstitial');
         }, 1000);
@@ -343,11 +349,15 @@ export default {
       if (this.adverPlay == null) {
         if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
           window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+          TencentGDT.NATIVE.loadAd('9094884362628825');
+
           this.adverPlay = true;
         } else {
           setTimeout(() => {
             if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
               window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+              TencentGDT.NATIVE.loadAd('9094884362628825');
+
               this.adverPlay = true;
             }
             console.log('wait 1s AdverNativeTemplate');
@@ -363,6 +373,8 @@ export default {
       if (this.adverPlay == null) {
         if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
           window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+          TencentGDT.NATIVE.loadAd('9094884362628825');
+
           this.adverPlay = true;
         }
       }
