@@ -325,18 +325,46 @@ export default {
     this.getItemList();
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
+    if (this.x !== undefined && this.x != null) {
+      // 搜索播放插屏广告
+      if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
+        TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
+      } else {
+        setTimeout(() => {
+          if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
+            TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
+          }
+          console.log('wait 1s AdverInterstitial');
+        }, 1000);
+      }
+    } else {
+      // 非搜索播放模版广告
+      console.log('window.AdverNativeTemplate = ' + window.AdverNativeTemplate);
+      if (this.adverPlay == null) {
+        if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+          window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+          this.adverPlay = true;
+        } else {
+          setTimeout(() => {
+            if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+              window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+              this.adverPlay = true;
+            }
+            console.log('wait 1s AdverNativeTemplate');
+          }, 1000);
+        }
+      }
+    }
   },
   activated() {
     console.log('YunpanList activated ' + this.$route.params.category);
     console.log('this.isListEnd =' + this.isListEnd);
     if (this.x === undefined || this.x === null) {
-      if (
-        window.AdverNativeTemplate != undefined &&
-        window.AdverNativeTemplate != null &&
-        this.adverPlay == null
-      ) {
-        window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
-        this.adverPlay = true;
+      if (this.adverPlay == null) {
+        if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+          window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+          this.adverPlay = true;
+        }
       }
     }
 
@@ -394,24 +422,6 @@ export default {
                 .then((res) => {
                   console.log(res.data.data);
                 });
-            }
-
-            if (this.x !== undefined && this.x != null) {
-              // 搜索播放插屏广告
-              if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
-                TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
-              }
-            } else {
-              // 非搜索播放模版广告
-              console.log('window.AdverNativeTemplate = ' + window.AdverNativeTemplate);
-              if (
-                window.AdverNativeTemplate != undefined &&
-                window.AdverNativeTemplate != null &&
-                this.adverPlay == null
-              ) {
-                window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
-                this.adverPlay = true;
-              }
             }
           }
 
