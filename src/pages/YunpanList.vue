@@ -359,6 +359,8 @@ export default {
               TencentGDT.NATIVE.loadAd('9094884362628825');
 
               this.adverPlay = true;
+            } else {
+              console.log('AdverNativeTemplate not init after wait 1s');
             }
             console.log('wait 1s AdverNativeTemplate');
           }, 1000);
