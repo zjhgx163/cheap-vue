@@ -363,7 +363,7 @@ export default {
               console.log('AdverNativeTemplate not init after wait 1s');
             }
             console.log('wait 1s AdverNativeTemplate');
-          }, 1000);
+          }, 1500);
         }
       }
     }
