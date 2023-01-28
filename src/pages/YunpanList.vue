@@ -202,7 +202,7 @@ export default {
     getTagColor: function () {
       return (parameter) => {
         if (parameter == '影视') {
-          return 'red';
+          return 'pink-4';
         } else if (parameter == '动漫') {
           return 'blue';
         } else if (parameter == '图片') {
