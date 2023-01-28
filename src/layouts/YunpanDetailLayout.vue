@@ -121,15 +121,36 @@ export default {
   },
   methods: {
     search() {
-      let randomNum = Math.random();
-      this.$router
-        .push({
-          path: '/yunpan/list',
-          query: { q: this.searchKey, x: randomNum },
-        })
-        .catch((err) => {
-          err;
-        });
+      //只有点击‘搜索’才展现插屏广告
+      if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
+        TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
+        setTimeout(function () {
+          TencentGDT.NATIVE.loadAd('4034072990480276');
+        }, 3000);
+      } else {
+        setTimeout(() => {
+          if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
+            TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
+            setTimeout(function () {
+              TencentGDT.NATIVE.loadAd('4034072990480276');
+            }, 1000);
+          }
+          console.log('wait 1s AdverInterstitial');
+        }, 1000);
+      }
+      //搜素停顿500ms后展现
+      let that = this;
+      setTimeout(function () {
+        let randomNum = Math.random();
+        that.$router
+          .push({
+            path: '/yunpan/list',
+            query: { q: that.searchKey, x: randomNum },
+          })
+          .catch((err) => {
+            err;
+          });
+      }, 500);
     },
     needLogin(itemId) {
       console.log('needLogin is trigged:' + itemId);

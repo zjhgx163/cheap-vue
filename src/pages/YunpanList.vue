@@ -325,27 +325,9 @@ export default {
     this.getItemList();
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
-    if (this.x !== undefined && this.x != null) {
-      // 搜索播放插屏广告
-      if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
-        TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
-        setTimeout(function () {
-          TencentGDT.NATIVE.loadAd('4034072990480276');
-        }, 3000);
-      } else {
-        setTimeout(() => {
-          if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
-            TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
-            setTimeout(function () {
-              TencentGDT.NATIVE.loadAd('4034072990480276');
-            }, 3000);
-          }
-          console.log('wait 1s AdverInterstitial');
-        }, 1000);
-      }
-    } else {
-      // 非搜索播放模版广告
-      console.log('window.AdverNativeTemplate = ' + window.AdverNativeTemplate);
+    // 如果不是搜索结果播放模版广告
+    console.log('window.AdverNativeTemplate = ' + window.AdverNativeTemplate);
+    if (this.x == undefined || this.x == null) {
       if (this.adverPlay == null) {
         if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
           window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
@@ -360,9 +342,9 @@ export default {
 
               this.adverPlay = true;
             } else {
-              console.log('AdverNativeTemplate not init after wait 1s');
+              console.log('AdverNativeTemplate not init after wait 1.5s');
             }
-            console.log('wait 1s AdverNativeTemplate');
+            console.log('wait 1.5s AdverNativeTemplate');
           }, 1500);
         }
       }
@@ -432,6 +414,7 @@ export default {
                 .post(`${global.config.domain}/yunpan/search/log`, {
                   searchKeyword: this.query,
                   total: res.data.data.total,
+                  x: this.x,
                 })
                 .then((res) => {
                   console.log(res.data.data);
