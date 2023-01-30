@@ -74,6 +74,7 @@
                         :color="getTagColor(item.tag)"
                         :icon="getTagIcon(item.tag)"
                         text-color="white"
+                        class="text-bold"
                       >
                         {{ item.tag }}
                       </q-chip>
@@ -204,23 +205,23 @@ export default {
         if (parameter == '影视') {
           return 'pink-4';
         } else if (parameter == '动漫') {
-          return 'blue';
+          return 'blue-5';
         } else if (parameter == '图片') {
-          return 'orange';
+          return 'orange-5';
         } else if (parameter == '游戏/软件') {
-          return 'purple';
+          return 'purple-4';
         } else if (parameter == '学习') {
-          return 'teal';
+          return 'teal-5';
         } else if (parameter == '音乐/音频') {
-          return 'indigo';
+          return 'indigo-5';
         } else if (parameter == '日常') {
-          return 'light-green';
+          return 'light-green-6';
         } else if (parameter == '求资源') {
-          return 'blue-grey';
+          return 'blue-grey-6';
         } else if (parameter == '书籍') {
-          return 'brown';
+          return 'brown-5';
         } else {
-          return 'grey';
+          return 'lime-8';
         }
       };
     },
