@@ -214,22 +214,25 @@ export default {
   methods: {
     search() {
       //只有点击‘搜索’才展现插屏广告
-      if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
-        TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
-        setTimeout(function () {
-          TencentGDT.NATIVE.loadAd('4034072990480276');
-        }, 3000);
-      } else {
-        setTimeout(() => {
-          if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
-            TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
-            setTimeout(function () {
-              TencentGDT.NATIVE.loadAd('4034072990480276');
-            }, 1000);
-          }
-          console.log('wait 1s AdverInterstitial');
-        }, 1000);
-      }
+      TencentGDT.NATIVE.loadAd('4034072990480276');
+      window.AdverInterstitial = true;
+
+      // if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
+      //   TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
+      //   setTimeout(function () {
+      //     TencentGDT.NATIVE.loadAd('4034072990480276');
+      //   }, 3000);
+      // } else {
+      //   setTimeout(() => {
+      //     if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
+      //       TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
+      //       setTimeout(function () {
+      //         TencentGDT.NATIVE.loadAd('4034072990480276');
+      //       }, 1000);
+      //     }
+      //     console.log('wait 1s AdverInterstitial');
+      //   }, 1000);
+      // }
       //搜素停顿500ms后展现
       let that = this;
       setTimeout(function () {

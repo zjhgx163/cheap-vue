@@ -75,8 +75,11 @@ export default {
           // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
           // res[0] 代表取广告数组第一个数据
           console.log(JSON.stringify(res.data[0]));
-          window.AdverInterstitial = res.data[0];
-          // TencentGDT.NATIVE.renderAd(res.data[0]);
+          if (window.AdverInterstitial === true) {
+            TencentGDT.NATIVE.renderAd(res.data[0]);
+            window.AdverInterstitial = false;
+          }
+          // window.AdverInterstitial = res.data[0];
         } else {
           // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
           // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
@@ -103,9 +106,23 @@ export default {
           // res[0] 代表取广告数组第一个数据
           // containerId：广告容器ID
           // window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
-          window.AdverNativeTemplate = res[0];
+          // window.AdverNativeTemplate = res[0];
           console.log(JSON.stringify(res[0]));
-
+          if (window.AdverNativeTemplate === true) {
+            let container = document.getElementById('flowAdverYunpanId');
+            if (container != undefined) {
+              window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
+            } else {
+              console.log('flowAdverYunpanId is not ready');
+              setTimeout(function () {
+                container = document.getElementById('flowAdverYunpanId');
+                if (container != undefined) {
+                  window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
+                }
+              }, 1000);
+            }
+            window.AdverNativeTemplate = false;
+          }
           // this.$emit('adverNativeTemplateEvent');
           console.log('信息流广告-2');
         } else {
@@ -133,9 +150,25 @@ export default {
           // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
           // res[0] 代表取广告数组第一个数据
           // containerId：广告容器ID
-          // window.TencentGDT.NATIVE.renderAd(res[0], 'yunpanDetailAdvert');
-          window.AdverDetailInsert = res[0];
           console.log(JSON.stringify(res[0]));
+
+          if (window.AdverDetailInsert === true) {
+            let container = document.getElementById('yunpanDetailAdvert');
+            if (container != undefined) {
+              window.TencentGDT.NATIVE.renderAd(res[0], 'yunpanDetailAdvert');
+            } else {
+              console.log('yunpanDetailAdvert is not ready');
+              setTimeout(function () {
+                container = document.getElementById('yunpanDetailAdvert');
+                if (container != undefined) {
+                  window.TencentGDT.NATIVE.renderAd(res[0], 'yunpanDetailAdvert');
+                }
+              }, 1000);
+            }
+            window.AdverDetailInsert = false;
+          }
+
+          // window.AdverDetailInsert = res[0];
         } else {
           // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
           // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
