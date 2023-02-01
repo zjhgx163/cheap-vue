@@ -287,7 +287,9 @@ export default {
     this.getYunpanItemContent(this.$route.params.id);
 
     window.AdverDetailInsert = true;
-    window.TencentGDT.NATIVE.loadAd('4054888219125381');
+    setTimeout(function () {
+      window.TencentGDT.NATIVE.loadAd('4054888219125381');
+    }, 3000);
     // if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
     //   window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
     //   window.TencentGDT.NATIVE.loadAd('4054888219125381');

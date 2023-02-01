@@ -214,7 +214,9 @@ export default {
   methods: {
     search() {
       //只有点击‘搜索’才展现插屏广告
-      TencentGDT.NATIVE.loadAd('4034072990480276');
+      setTimeout(function () {
+        window.TencentGDT.NATIVE.loadAd('4034072990480276');
+      }, 3000);
       window.AdverInterstitial = true;
 
       // if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
