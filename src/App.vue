@@ -100,7 +100,7 @@ export default {
       count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
       onComplete: function (res) {
         console.log('信息流广告返回');
-
+        console.log(JSON.stringify(res));
         if (res && res.constructor === Array) {
           // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
           // res[0] 代表取广告数组第一个数据
