@@ -332,7 +332,7 @@ export default {
         window.AdverNativeTemplate = true;
         setTimeout(function () {
           window.TencentGDT.NATIVE.loadAd('9094884362628825');
-        }, 3000);
+        }, 1500);
         this.adverPlay = true;
         // if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
         //   window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
@@ -363,7 +363,7 @@ export default {
         window.AdverNativeTemplate = true;
         setTimeout(function () {
           window.TencentGDT.NATIVE.loadAd('9094884362628825');
-        }, 3000);
+        }, 1500);
         this.adverPlay = true;
         // if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
         //   window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');

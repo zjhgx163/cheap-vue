@@ -289,7 +289,7 @@ export default {
     window.AdverDetailInsert = true;
     setTimeout(function () {
       window.TencentGDT.NATIVE.loadAd('4054888219125381');
-    }, 3000);
+    }, 1500);
     // if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
     //   window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
     //   window.TencentGDT.NATIVE.loadAd('4054888219125381');
