@@ -125,7 +125,7 @@ export default {
       window.AdverInterstitial = true;
       setTimeout(function () {
         window.TencentGDT.NATIVE.loadAd('4034072990480276');
-      }, 2000);
+      }, 1500);
       // if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
       //   TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
       //   setTimeout(function () {

@@ -93,7 +93,7 @@ export default {
     // 云盘列表页信息流广告初始化
     window.TencentGDT.push({
       app_id: '1201538404', // {String} - appid - 必填
-      placement_id: '9094884362628825', // {String} - 广告位id - 必填
+      placement_id: '1034491449491972', // {String} - 广告位id - 必填
       type: 'native', // {String} - 原生广告类型 - 必填
       // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
       // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
