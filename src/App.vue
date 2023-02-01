@@ -97,7 +97,7 @@ export default {
       type: 'native', // {String} - 原生广告类型 - 必填
       // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
       // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
-      count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
+      count: 3, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
       onComplete: function (res) {
         console.log('信息流广告返回');
         console.log(JSON.stringify(res));
