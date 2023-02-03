@@ -40,12 +40,13 @@
       </keep-alive>
     </q-page-container>
 
-    <q-footer reveal class="bg-secondary q-pt-xs q-pb-md">
+    <q-footer reveal class="bg-secondary q-pt-xs q-pb-md YL__750w">
       <q-item>
         <q-item-section top side class="text-bold"> 声明：</q-item-section>
         <q-item-section>
           <q-item-label caption>
-            本站所有资源均由网友自发提供，本站不存储任何资源，仅供于学习，请于保存后24小时内自行删除
+            本站所有资源均由网友自发提供，本站不缓存、储存、下载、播放等，所列内容仅做学习和带宽测试，请于保存后24小时内自行删除。
+            如有侵权请根据内容页信息自行联系 阿里云盘官方 网站 进行处理。
           </q-item-label>
         </q-item-section>
       </q-item>
