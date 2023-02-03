@@ -1,12 +1,16 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import routes from './routes';
+import routesCheap from './routes';
+import routesYunpan from './routes_yunpan';
 //解决NavigationDuplicated
 const routerPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function (location) {
   return routerPush.call(this, location).catch((error) => error);
 };
+let routes = process.env.ROUTE_YUNPAN ? routesYunpan : routesCheap;
+
+console.log(process.env.ROUTE_YUNPAN + ` #############`);
 
 Vue.use(VueRouter);
 
