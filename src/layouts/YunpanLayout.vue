@@ -216,7 +216,7 @@ export default {
       //只有点击‘搜索’才展现插屏广告
       setTimeout(function () {
         window.TencentGDT.NATIVE.loadAd('4034072990480276');
-      }, 1500);
+      }, 100);
       window.AdverInterstitial = true;
 
       // if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
@@ -247,7 +247,7 @@ export default {
           .catch((err) => {
             err;
           });
-      }, 500);
+      }, 1000);
     },
     addYunpanItem() {
       this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {

@@ -259,6 +259,11 @@ export default {
     //解决iphone移动端的延迟
     FastClick.attach(document.body);
     console.log('yunpanItemDetail mounted');
+    // 详情页插入广告
+    window.AdverDetailInsert = true;
+    setTimeout(function () {
+      window.TencentGDT.NATIVE.loadAd('4054888219125381');
+    }, 100);
 
     this.$on('logined', function (itemId) {
       console.log('从yunpan detail页面已登陆' + itemId);
@@ -286,10 +291,6 @@ export default {
 
     this.getYunpanItemContent(this.$route.params.id);
 
-    window.AdverDetailInsert = true;
-    setTimeout(function () {
-      window.TencentGDT.NATIVE.loadAd('4054888219125381');
-    }, 1500);
     // if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
     //   window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
     //   window.TencentGDT.NATIVE.loadAd('4054888219125381');

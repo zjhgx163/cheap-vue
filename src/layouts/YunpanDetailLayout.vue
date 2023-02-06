@@ -126,7 +126,7 @@ export default {
       window.AdverInterstitial = true;
       setTimeout(function () {
         window.TencentGDT.NATIVE.loadAd('4034072990480276');
-      }, 1500);
+      }, 100);
       // if (window.AdverInterstitial != undefined && window.AdverInterstitial != null) {
       //   TencentGDT.NATIVE.renderAd(window.AdverInterstitial);
       //   setTimeout(function () {
@@ -155,7 +155,7 @@ export default {
           .catch((err) => {
             err;
           });
-      }, 500);
+      }, 1000);
     },
     needLogin(itemId) {
       console.log('needLogin is trigged:' + itemId);
