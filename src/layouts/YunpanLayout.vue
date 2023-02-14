@@ -45,16 +45,56 @@
           mobile-arrows
           shrink
         >
-          <q-route-tab :to="{ path: '/yunpan/list', query: { q: searchKey } }" label="全部" name="all" />
-          <q-route-tab :to="{ path: '/yunpan/category/影视', query: { q: searchKey } }" label="影视" name="影视" />
-          <q-route-tab :to="{ path: '/yunpan/category/动漫', query: { q: searchKey } }" label="动漫" name="动漫" />
-          <q-route-tab :to="{ path: '/yunpan/category/学习', query: { q: searchKey } }" label="学习" name="学习" />
-          <q-route-tab :to="{ path: '/yunpan/category/游戏%2F软件', query: { q: searchKey } }" label="游戏/软件" name="游戏/软件" />
-          <q-route-tab :to="{ path: '/yunpan/category/音乐%2F音频', query: { q: searchKey } }" label="音乐/音频" name="音乐/音频" />
-          <q-route-tab :to="{ path: '/yunpan/category/图片', query: { q: searchKey } }" label="图片" name="图片" />
-          <q-route-tab :to="{ path: '/yunpan/category/书籍', query: { q: searchKey } }" label="书籍" name="书籍" />
-          <q-route-tab :to="{ path: '/yunpan/category/求资源', query: { q: searchKey } }" label="求资源" name="求资源" />
-          <q-route-tab :to="{ path: '/yunpan/category/other', query: { q: searchKey } }" label="其他" name="other" />
+          <q-route-tab
+            :to="{ path: '/yunpan/list', query: { q: searchKey } }"
+            label="全部"
+            name="all"
+          />
+          <q-route-tab
+            :to="{ path: '/yunpan/category/影视', query: { q: searchKey } }"
+            label="影视"
+            name="影视"
+          />
+          <q-route-tab
+            :to="{ path: '/yunpan/category/动漫', query: { q: searchKey } }"
+            label="动漫"
+            name="动漫"
+          />
+          <q-route-tab
+            :to="{ path: '/yunpan/category/学习', query: { q: searchKey } }"
+            label="学习"
+            name="学习"
+          />
+          <q-route-tab
+            :to="{ path: '/yunpan/category/游戏%2F软件', query: { q: searchKey } }"
+            label="游戏/软件"
+            name="游戏/软件"
+          />
+          <q-route-tab
+            :to="{ path: '/yunpan/category/音乐%2F音频', query: { q: searchKey } }"
+            label="音乐/音频"
+            name="音乐/音频"
+          />
+          <q-route-tab
+            :to="{ path: '/yunpan/category/图片', query: { q: searchKey } }"
+            label="图片"
+            name="图片"
+          />
+          <q-route-tab
+            :to="{ path: '/yunpan/category/书籍', query: { q: searchKey } }"
+            label="书籍"
+            name="书籍"
+          />
+          <q-route-tab
+            :to="{ path: '/yunpan/category/求资源', query: { q: searchKey } }"
+            label="求资源"
+            name="求资源"
+          />
+          <q-route-tab
+            :to="{ path: '/yunpan/category/other', query: { q: searchKey } }"
+            label="其他"
+            name="other"
+          />
         </q-tabs>
       </q-toolbar>
     </q-header>
@@ -67,10 +107,23 @@
 
     <q-footer reveal class="bg-secondary q-pt-none q-pb-xs">
       <q-toolbar class="flex-center q-pr-lg q-py-xs">
-        <q-btn round color="pink-4" size="0.9em" text-color="white" dense icon="add" @click="addYunpanItem" />
+        <q-btn
+          round
+          color="pink-4"
+          size="0.9em"
+          text-color="white"
+          dense
+          icon="add"
+          @click="addYunpanItem"
+        />
       </q-toolbar>
     </q-footer>
-    <login-qr :is-loading-qr="isLoadingQr" @login-card-changed="loginCardChange" :login-card="loginCard" :wechat-qr="wechatQr" />
+    <login-qr
+      :is-loading-qr="isLoadingQr"
+      @login-card-changed="loginCardChange"
+      :login-card="loginCard"
+      :wechat-qr="wechatQr"
+    />
     <wysisyg-editor @editor-show-changed="editorShowChanged" :is-editor-show="isEditorShowing" />
   </q-layout>
 </template>
@@ -227,37 +280,39 @@ export default {
           // 先清除旧的timer
           clearInterval(this.timer);
           this.timer = window.setInterval(() => {
-            this.$axios.post(`${global.config.domain}/user/getScanLoginInfo/${res.data.data.sceneStr}`, {}).then((res) => {
-              if (res.data.code == 0) {
-                console.log('this.timer = ' + this.timer);
-                if (res.data.data.loginFlag) {
-                  this.userName = res.data.data.nickname;
-                  this.avatar = res.data.data.avatar;
-                  this.isLogin = true;
-                  this.$q.localStorage.set('userInfo', res.data.data);
-                  window.clearInterval(this.timer); //清除定时器
-                  this.loginCard = false;
-                  if (itemId != undefined) {
-                    this.$refs.child.$emit('logined', itemId);
+            this.$axios
+              .post(`${global.config.domain}/user/getScanLoginInfo/${res.data.data.sceneStr}`, {})
+              .then((res) => {
+                if (res.data.code == 0) {
+                  console.log('this.timer = ' + this.timer);
+                  if (res.data.data.loginFlag) {
+                    this.userName = res.data.data.nickname;
+                    this.avatar = res.data.data.avatar;
+                    this.isLogin = true;
+                    this.$q.localStorage.set('userInfo', res.data.data);
+                    window.clearInterval(this.timer); //清除定时器
+                    this.loginCard = false;
+                    if (itemId != undefined) {
+                      this.$refs.child.$emit('logined', itemId);
+                    }
+                  } else {
+                    let now = new Date();
+                    if (now.getTime() - beginTime.getTime() > 5 * 60 * 1000) {
+                      //如果五分钟了还未登陆则二维码过期
+                      console.log('二维码过期');
+                      window.clearInterval(this.timer); //清除定时器
+                    }
                   }
                 } else {
-                  let now = new Date();
-                  if (now.getTime() - beginTime.getTime() > 5 * 60 * 1000) {
-                    //如果五分钟了还未登陆则二维码过期
-                    console.log('二维码过期');
-                    window.clearInterval(this.timer); //清除定时器
-                  }
+                  this.$q.notify({
+                    type: 'negative',
+                    message: res.data.msg,
+                  });
+                  console.log('that.timer = ' + this.timer);
+                  window.clearInterval(this.timer); //清除定时器
+                  this.loginCard = false;
                 }
-              } else {
-                this.$q.notify({
-                  type: 'negative',
-                  message: res.data.msg,
-                });
-                console.log('that.timer = ' + this.timer);
-                window.clearInterval(this.timer); //清除定时器
-                this.loginCard = false;
-              }
-            });
+              });
           }, 1000);
         } else {
           this.$q.notify({
@@ -275,7 +330,8 @@ export default {
         if (this.$q.localStorage.has('userInfo')) {
           this.$q.localStorage.remove('userInfo');
           this.userName = '注册/登陆';
-          this.avatar = 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png';
+          this.avatar =
+            'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png';
           this.isLogin = false;
         }
       });

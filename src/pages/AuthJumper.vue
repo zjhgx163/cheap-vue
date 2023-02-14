@@ -118,34 +118,36 @@ export default {
       // });
       //因为每个用户的链接不同，需要每次从后台取链接
       console.log('coupon urlCode = ' + urlCode);
-      this.$axios.post(`${this.host}/goods/coupon-url/${urlCode}?index=${index}`, {}).then((res) => {
-        console.log(res.data);
-        if (typeof res.data === 'string') {
-          if (/(http|https):\S*/.test(res.data)) {
-            window.location.href = res.data;
-          } else if (/redirect:\S*/.test(res.data)) {
-            //redirect其他页面
-            let redirectPath = res.data.slice(9);
-            this.$router.push({ path: redirectPath });
+      this.$axios
+        .post(`${this.host}/goods/coupon-url/${urlCode}?index=${index}`, {})
+        .then((res) => {
+          console.log(res.data);
+          if (typeof res.data === 'string') {
+            if (/(http|https):\S*/.test(res.data)) {
+              window.location.href = res.data;
+            } else if (/redirect:\S*/.test(res.data)) {
+              //redirect其他页面
+              let redirectPath = res.data.slice(9);
+              this.$router.push({ path: redirectPath });
+            } else {
+              console.log('taobaoPwd = ' + res.data);
+              this.$router.push({
+                path: 'item',
+                name: 'detail',
+                params: { urlCode: urlCode },
+                query: { taobao_code: res.data },
+              });
+            }
+            // window.open(res.data, '_blank');
+            this.$q.loading.hide();
           } else {
-            console.log('taobaoPwd = ' + res.data);
-            this.$router.push({
-              path: 'item',
-              name: 'detail',
-              params: { urlCode: urlCode },
-              query: { taobao_code: res.data },
+            this.$q.loading.hide();
+            this.$q.notify({
+              type: 'negative',
+              message: '好物已过期',
             });
           }
-          // window.open(res.data, '_blank');
-          this.$q.loading.hide();
-        } else {
-          this.$q.loading.hide();
-          this.$q.notify({
-            type: 'negative',
-            message: '好物已过期',
-          });
-        }
-      });
+        });
     },
   },
 };

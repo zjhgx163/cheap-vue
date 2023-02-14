@@ -1,6 +1,11 @@
 import Vue from 'vue';
 // import VueRouter from 'vue-router';
-import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router';
+import {
+  createRouter,
+  createMemoryHistory,
+  createWebHistory,
+  createWebHashHistory,
+} from 'vue-router';
 
 import routesCheap from './routes';
 import routesYunpan from './routes_yunpan';

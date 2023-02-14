@@ -169,35 +169,37 @@ export default {
           // 先清除旧的timer
           clearInterval(this.timer);
           this.timer = window.setInterval(() => {
-            this.$axios.post(`${global.config.domain}/user/getScanLoginInfo/${res.data.data.sceneStr}`, {}).then((res) => {
-              if (res.data.code == 0) {
-                console.log('this.timer = ' + this.timer);
-                if (res.data.data.loginFlag) {
-                  this.userName = res.data.data.nickname;
-                  this.avatar = res.data.data.avatar;
-                  this.isLogin = true;
-                  this.$q.localStorage.set('userInfo', res.data.data);
+            this.$axios
+              .post(`${global.config.domain}/user/getScanLoginInfo/${res.data.data.sceneStr}`, {})
+              .then((res) => {
+                if (res.data.code == 0) {
+                  console.log('this.timer = ' + this.timer);
+                  if (res.data.data.loginFlag) {
+                    this.userName = res.data.data.nickname;
+                    this.avatar = res.data.data.avatar;
+                    this.isLogin = true;
+                    this.$q.localStorage.set('userInfo', res.data.data);
+                    window.clearInterval(this.timer); //清除定时器
+                    this.loginCard = false;
+                    this.$refs.child.$emit('logined', itemId);
+                  } else {
+                    let now = new Date();
+                    if (now.getTime() - beginTime.getTime() > 5 * 60 * 1000) {
+                      //如果五分钟了还未登陆则二维码过期
+                      console.log('二维码过期');
+                      window.clearInterval(this.timer); //清除定时器
+                    }
+                  }
+                } else {
+                  this.$q.notify({
+                    type: 'negative',
+                    message: res.data.msg,
+                  });
+                  console.log('that.timer = ' + this.timer);
                   window.clearInterval(this.timer); //清除定时器
                   this.loginCard = false;
-                  this.$refs.child.$emit('logined', itemId);
-                } else {
-                  let now = new Date();
-                  if (now.getTime() - beginTime.getTime() > 5 * 60 * 1000) {
-                    //如果五分钟了还未登陆则二维码过期
-                    console.log('二维码过期');
-                    window.clearInterval(this.timer); //清除定时器
-                  }
                 }
-              } else {
-                this.$q.notify({
-                  type: 'negative',
-                  message: res.data.msg,
-                });
-                console.log('that.timer = ' + this.timer);
-                window.clearInterval(this.timer); //清除定时器
-                this.loginCard = false;
-              }
-            });
+              });
           }, 1000);
         } else {
           this.$q.notify({
@@ -215,7 +217,8 @@ export default {
         if (this.$q.localStorage.has('userInfo')) {
           this.$q.localStorage.remove('userInfo');
           this.userName = '注册/登陆';
-          this.avatar = 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png';
+          this.avatar =
+            'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png';
           this.isLogin = false;
         }
       });

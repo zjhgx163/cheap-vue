@@ -10,10 +10,18 @@
             <q-avatar v-if="item.avatar != '' && item.avatar != null">
               <img :src="item.avatar" />
             </q-avatar>
-            <q-avatar :style="getAvatarColor(item.auther)" text-color="white" v-else> {{ getAvatarText(item.auther) }}</q-avatar></q-item-section
+            <q-avatar :style="getAvatarColor(item.auther)" text-color="white" v-else>
+              {{ getAvatarText(item.auther) }}</q-avatar
+            ></q-item-section
           >
           <q-item-section class="q-pb-xs">
-            <q-item-label lines="2" v-bind:class="[fontFamily, lineHeight, titleHeight]" class="text-black text-bold"> {{ item.title }}</q-item-label>
+            <q-item-label
+              lines="2"
+              v-bind:class="[fontFamily, lineHeight, titleHeight]"
+              class="text-black text-bold"
+            >
+              {{ item.title }}</q-item-label
+            >
 
             <q-item-label class="row justify-between items-center q-mt-none q-pr-xs YL__auther">
               <div class="col-auto row flex-center q-gutter-sm">
@@ -24,7 +32,13 @@
                 <div class="row flex-center">发表于 {{ item.itemCreateDateStr }}</div>
               </div>
               <div class="col items-center justify-end row">
-                <q-chip outline size="sm" :color="getTagColor(item.tag)" :icon="getTagIcon(item.tag)" text-color="white">
+                <q-chip
+                  outline
+                  size="sm"
+                  :color="getTagColor(item.tag)"
+                  :icon="getTagIcon(item.tag)"
+                  text-color="white"
+                >
                   {{ item.tag }}
                 </q-chip>
               </div>
@@ -34,7 +48,10 @@
         </q-item>
         <q-separator color="primary" class="gt-sm" />
       </div>
-      <q-item-label :lines="1" class="YL__list_line_height q-py-sm YL__list_font_size text-grey-9 column flex-center">
+      <q-item-label
+        :lines="1"
+        class="YL__list_line_height q-py-sm YL__list_font_size text-grey-9 column flex-center"
+      >
         <router-link
           class="text-bold"
           :to="{

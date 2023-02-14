@@ -11,7 +11,13 @@
                 <q-item-label :lines="2" class="row text-h6 text-bold">
                   <div>
                     {{ item.title }}
-                    <q-badge transparent align="middle" :color="getTagColor(item.tag)" :label="item.tag"> </q-badge>
+                    <q-badge
+                      transparent
+                      align="middle"
+                      :color="getTagColor(item.tag)"
+                      :label="item.tag"
+                    >
+                    </q-badge>
                   </div>
                 </q-item-label>
               </q-item-section>
@@ -21,7 +27,14 @@
                 <q-avatar size="1.9em" v-if="item.avatar != '' && item.avatar != null">
                   <img :src="item.avatar" />
                 </q-avatar>
-                <q-avatar size="1.9em" :style="getAvatarColor(item.auther)" text-color="white" v-else> {{ getAvatarText(item.auther) }}</q-avatar>
+                <q-avatar
+                  size="1.9em"
+                  :style="getAvatarColor(item.auther)"
+                  text-color="white"
+                  v-else
+                >
+                  {{ getAvatarText(item.auther) }}</q-avatar
+                >
               </q-item-section>
               <q-item-section class="YL__auther">
                 {{ item.auther }}
@@ -43,12 +56,17 @@
                   <span class="text-h4 text-accent text-bold"> 老胡为你服务</span>
                 </q-item-label>
                 <q-item-label class="column flex-center">
-                  <span class="text-h6 text-light-green-10 text-bold text-italic">海量免费资源随便看 </span>
+                  <span class="text-h6 text-light-green-10 text-bold text-italic"
+                    >海量免费资源随便看
+                  </span>
                 </q-item-label>
               </q-item-section>
             </q-item>
             <q-item class="flex-center">
-              <img style="width: 70%; height: 100%" src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg" />
+              <img
+                style="width: 70%; height: 100%"
+                src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+              />
             </q-item>
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
@@ -62,10 +80,18 @@
                       <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
                       <q-item dense v-ripple class="bg-secondary q-py-sm">
                         <q-item-section avatar top>
-                          <q-avatar v-if="reply.replyAvatar != '' && reply.replyAvatar != null" size="1.9em">
+                          <q-avatar
+                            v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
+                            size="1.9em"
+                          >
                             <img :src="reply.replyAvatar" />
                           </q-avatar>
-                          <q-avatar size="1.9em" :style="getAvatarColor(reply.replyAuther)" text-color="white" v-else>
+                          <q-avatar
+                            size="1.9em"
+                            :style="getAvatarColor(reply.replyAuther)"
+                            text-color="white"
+                            v-else
+                          >
                             {{ getAvatarText(reply.replyAuther) }}</q-avatar
                           >
                         </q-item-section>
@@ -79,7 +105,9 @@
                             </div></q-item-label
                           >
 
-                          <q-item-label class="YL__title_font_family YL__list_line_height text-body2">
+                          <q-item-label
+                            class="YL__title_font_family YL__list_line_height text-body2"
+                          >
                             <div class="text-body2 break-all" v-html="reply.content"></div>
 
                             <!-- {{ reply.content }} -->
@@ -129,7 +157,14 @@
                     <q-item-label>
                       <q-form @submit="onSubmit" class="q-gutter-sm">
                         <div>
-                          <q-input dense filled v-model="replyContent" placeholder="说点什么吧" hide-bottom-space type="textarea" />
+                          <q-input
+                            dense
+                            filled
+                            v-model="replyContent"
+                            placeholder="说点什么吧"
+                            hide-bottom-space
+                            type="textarea"
+                          />
                         </div>
 
                         <div class="q-mt-sm">
@@ -307,7 +342,9 @@ export default {
         } else {
           this.item = res.data.data.item;
           this.listData = res.data.data.firstReplyPage.records;
-          this.max = Math.ceil(res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size);
+          this.max = Math.ceil(
+            res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
+          );
           // console.log(this.item);
           if (this.item == null) {
             this.$router.push({ path: '/error' });
