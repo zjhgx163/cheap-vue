@@ -80,9 +80,9 @@ const routes = [
         children: [
           {
             path: '',
-            component: () => import('pages/Coupon.vue'),
+            component: () => import('src/pages/CouponPage.vue'),
           },
-          { path: ':tabId', component: () => import('pages/Coupon.vue') },
+          { path: ':tabId', component: () => import('src/pages/CouponPage.vue') },
         ],
       },
     ],
@@ -142,7 +142,7 @@ const routes = [
         name: 'account',
         component: () => import('pages/UserM.vue'),
       },
-      { path: 'withdraw', name: 'withdraw', component: () => import('pages/Withdraw.vue') },
+      { path: 'withdraw', name: 'withdraw', component: () => import('pages/WithdrawFund.vue') },
     ],
   },
 
@@ -170,14 +170,14 @@ const routes = [
 
   {
     path: '/auth/:urlCode',
-    component: () => import('pages/Auth.vue'),
+    component: () => import('src/pages/AuthJumper.vue'),
     props: (route) => ({
       code: route.query.code,
       state: route.query.state,
     }),
   },
 
-  { path: '/contact', component: () => import('pages/Contact.vue') },
+  { path: '/contact', component: () => import('src/pages/ContactMe.vue') },
   { path: '/help', component: () => import('pages/UploadWechatqrHelp.vue') },
 
   // Always leave this as last one,
@@ -195,7 +195,7 @@ const routes = [
   // },
 
   {
-    path: '*',
+    path: '/:catchAll(.*)*',
     component: () => import('pages/Error404.vue'),
   },
 ];
