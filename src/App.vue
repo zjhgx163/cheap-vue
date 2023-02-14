@@ -1,8 +1,22 @@
+<!-- old way -->
+
+<!-- 
 <template>
+
   <div id="q-app">
+
     <router-view />
+
   </div>
+
 </template>
+ -->
+
+<!-- NEW way -->
+<template>
+  <router-view />
+</template>
+
 <script>
 export default {
   name: 'App',
