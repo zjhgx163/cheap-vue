@@ -3,11 +3,7 @@
     <div>
       <div v-if="listData.length === 0" class="column items-center justify-start absolute-full">
         <div class="clo-4 YL__no_data">
-          <q-img
-            src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/no-data.png"
-            spinner-color="white"
-          >
-          </q-img>
+          <q-img src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/no-data.png" spinner-color="white"> </q-img>
           <div class="text-subtitle2 text-center text-grey">~空空如也~</div>
         </div>
         <div class="col-3"></div>
@@ -24,29 +20,17 @@
                     <img v-bind:src="item.itemImg" class="YL__order_img" />
                   </q-item-section>
                   <q-item-section>
-                    <q-item-label :lines="1" v-bind:class="[textSize, fontFamily, titleHeight]">
-                      {{ item.itemTitle }}</q-item-label
-                    >
+                    <q-item-label :lines="1" v-bind:class="[textSize, fontFamily, titleHeight]"> {{ item.itemTitle }}</q-item-label>
                     <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]"
-                      ><span class="text-grey-7">订单号：</span
-                      >{{ item.platformOrderNo }}</q-item-label
+                      ><span class="text-grey-7">订单号：</span>{{ item.platformOrderNo }}</q-item-label
                     >
                     <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]" class="row"
-                      ><div class="col-4">
-                        <span class="text-grey-7">商城：</span>{{ getMall(item.platform) }}
-                      </div>
-                      <div class="col">
-                        <span class="text-grey-7">付款时间：</span>{{ item.payTime }}
-                      </div>
+                      ><div class="col-4"><span class="text-grey-7">商城：</span>{{ getMall(item.platform) }}</div>
+                      <div class="col"><span class="text-grey-7">付款时间：</span>{{ item.payTime }}</div>
                     </q-item-label>
 
                     <q-item-label :lines="1" v-bind:class="[fontFamily]">
-                      <q-chip
-                        dense
-                        :color="getStatusColor(item.status)"
-                        text-color="white"
-                        size="sm"
-                      >
+                      <q-chip dense :color="getStatusColor(item.status)" text-color="white" size="sm">
                         {{ getStatusText(item.status) }}
                       </q-chip>
                     </q-item-label>
@@ -54,46 +38,28 @@
                 </q-item>
                 <q-item>
                   <q-item-section>
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]"> <span class="text-grey-7">记佣金额</span></q-item-label>
                     <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
-                      <span class="text-grey-7">记佣金额</span></q-item-label
-                    >
-                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
-                      {{
-                        item.actualCosAmount !== null && item.actualCosAmount > 0
-                          ? item.actualCosAmount
-                          : item.estimateCosAmount
-                      }}</q-item-label
+                      {{ item.actualCosAmount !== null && item.actualCosAmount > 0 ? item.actualCosAmount : item.estimateCosAmount }}</q-item-label
                     >
                   </q-item-section>
                   <q-item-section>
-                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
-                      <span class="text-grey-7">预估收入</span></q-item-label
-                    >
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]"> <span class="text-grey-7">预估收入</span></q-item-label>
                     <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
                       {{
-                        item.userTotalCommissionAmount === null ||
-                        item.userTotalCommissionAmount === 0
+                        item.userTotalCommissionAmount === null || item.userTotalCommissionAmount === 0
                           ? item.userEstimateCommissionAmount
                           : item.userTotalCommissionAmount
                       }}</q-item-label
                     >
                   </q-item-section>
                   <q-item-section>
-                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
-                      <span class="text-grey-7">数量</span></q-item-label
-                    >
-                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
-                      {{ item.itemQuantity }}</q-item-label
-                    >
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]"> <span class="text-grey-7">数量</span></q-item-label>
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]"> {{ item.itemQuantity }}</q-item-label>
                   </q-item-section>
                   <q-item-section no-wrap>
-                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
-                      <span class="text-grey-7">描述</span></q-item-label
-                    >
-                    <q-item-label
-                      :lines="1"
-                      v-bind:class="[fontFamily, smalltextSize, getDescColor(item.status)]"
-                    >
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]"> <span class="text-grey-7">描述</span></q-item-label>
+                    <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize, getDescColor(item.status)]">
                       {{ item.statusRemark }}</q-item-label
                     >
                   </q-item-section>

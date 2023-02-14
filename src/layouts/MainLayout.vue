@@ -13,14 +13,9 @@
               class="col-2 lt-sm col-sm-auto text-overline text-italic items-center self-center text-bold YL__coupon_text_effect"
               v-bind:class="{ hidden: isCouponHidden }"
             >
-              <router-link :to="{ path: '/coupon/0' }" class="text-deep-purple-10">
-                外卖券
-              </router-link>
+              <router-link :to="{ path: '/coupon/0' }" class="text-deep-purple-10"> 外卖券 </router-link>
             </div>
-            <div
-              class="col-12 col-sm-8 q-px-xs q-pt-xs column justify-center"
-              v-bind:class="{ hidden: isSearchHidden }"
-            >
+            <div class="col-12 col-sm-8 q-px-xs q-pt-xs column justify-center" v-bind:class="{ hidden: isSearchHidden }">
               <q-input
                 dense
                 filled
@@ -133,13 +128,8 @@
             <div class="col">
               <div>Copyright © 2020 Hjdang.com All rights reserved.</div>
               <div class="row gt-sm q-gutter-md">
-                <a target="_blank" style="color: white" href="https://beian.miit.gov.cn"
-                  >浙ICP备2020040769号-1</a
-                >
-                <a
-                  style="color: white"
-                  target="_blank"
-                  href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
+                <a target="_blank" style="color: white" href="https://beian.miit.gov.cn">浙ICP备2020040769号-1</a>
+                <a style="color: white" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
                   ><img src="备案图标.png" style="width: 12px; height: 12px" />
 
                   浙公网安备 33012702000426号
@@ -253,11 +243,9 @@ export default {
   methods: {
     search() {
       let randomNum = Math.random();
-      this.$router
-        .push({ path: 'search', name: 'search', query: { q: this.searchKey, x: randomNum } })
-        .catch((err) => {
-          err;
-        });
+      this.$router.push({ path: 'search', name: 'search', query: { q: this.searchKey, x: randomNum } }).catch((err) => {
+        err;
+      });
     },
 
     createWechatQr() {
@@ -272,34 +260,32 @@ export default {
           this.wechatQr = res.data.data.qrUrl;
           let beginTime = new Date();
           this.timer = setInterval(() => {
-            this.$axios
-              .post(`${global.config.domain}/user/getScanLoginInfo/${res.data.data.sceneStr}`, {})
-              .then((res) => {
-                if (res.data.code == 0) {
-                  if (res.data.data.loginFlag) {
-                    this.userName = res.data.data.nickname;
-                    this.avatar = res.data.data.avatar;
-                    this.isLogin = true;
-                    this.$q.localStorage.set('userInfo', res.data.data);
-                    clearInterval(this.timer); //清除定时器
-                    this.loginCard = false;
-                  } else {
-                    let now = new Date();
-                    if (now.getTime() - beginTime.getTime() > 5 * 60 * 1000) {
-                      //如果五分钟了还未登陆则二维码过期
-                      console.log('二维码过期');
-                      clearInterval(this.timer); //清除定时器
-                    }
-                  }
-                } else {
-                  this.$q.notify({
-                    type: 'negative',
-                    message: res.data.msg,
-                  });
+            this.$axios.post(`${global.config.domain}/user/getScanLoginInfo/${res.data.data.sceneStr}`, {}).then((res) => {
+              if (res.data.code == 0) {
+                if (res.data.data.loginFlag) {
+                  this.userName = res.data.data.nickname;
+                  this.avatar = res.data.data.avatar;
+                  this.isLogin = true;
+                  this.$q.localStorage.set('userInfo', res.data.data);
                   clearInterval(this.timer); //清除定时器
                   this.loginCard = false;
+                } else {
+                  let now = new Date();
+                  if (now.getTime() - beginTime.getTime() > 5 * 60 * 1000) {
+                    //如果五分钟了还未登陆则二维码过期
+                    console.log('二维码过期');
+                    clearInterval(this.timer); //清除定时器
+                  }
                 }
-              });
+              } else {
+                this.$q.notify({
+                  type: 'negative',
+                  message: res.data.msg,
+                });
+                clearInterval(this.timer); //清除定时器
+                this.loginCard = false;
+              }
+            });
           }, 1000);
         } else {
           this.$q.notify({
@@ -318,8 +304,7 @@ export default {
         if (this.$q.localStorage.has('userInfo')) {
           this.$q.localStorage.remove('userInfo');
           this.userName = '注册/登陆';
-          this.avatar =
-            'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png';
+          this.avatar = 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png';
           this.isLogin = false;
         }
       });
@@ -361,25 +346,25 @@ export default {
     &:hover
       color: #000
   &__title_font_family
-    font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif;
+    font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif
   &__list_line_height
     line-height: 24px !important
   &__list_font_size
     font-size: 14px
   &__coupon_text_effect
-    text-decoration: underline black from-font;
-    text-transform: uppercase;
-    letter-spacing: 6px;
-    display: inline-block;
-    position: relative;
-    font-family: 'Merriweather', serif;
-    -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
-    -webkit-mask-size: 200%;
-    animation: shine 2s linear infinite;
+    text-decoration: underline black from-font
+    text-transform: uppercase
+    letter-spacing: 6px
+    display: inline-block
+    position: relative
+    font-family: 'Merriweather', serif
+    -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%)
+    -webkit-mask-size: 200%
+    animation: shine 2s linear infinite
 
 @keyframes shine
   from
-    -webkit-mask-position: 150%;
+    -webkit-mask-position: 150%
   to
-    -webkit-mask-position: -50%;
+    -webkit-mask-position: -50%
 </style>

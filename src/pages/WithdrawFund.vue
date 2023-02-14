@@ -1,9 +1,7 @@
 <template>
   <div>
     <q-list class="q-px-sm q-pt-sm dense bg-secondary">
-      <q-item-label header class="q-pt-sm q-pb-none text-black">
-        <q-icon name="attach_money" class="text-green" />提现金额</q-item-label
-      >
+      <q-item-label header class="q-pt-sm q-pb-none text-black"> <q-icon name="attach_money" class="text-green" />提现金额</q-item-label>
 
       <q-item dense>
         <q-item-section>
@@ -23,9 +21,7 @@
       ></q-item>
       <div></div>
 
-      <q-item-label header class="q-pt-md text-black"
-        ><q-icon name="attach_money" class="text-green" />提现方式</q-item-label
-      >
+      <q-item-label header class="q-pt-md text-black"><q-icon name="attach_money" class="text-green" />提现方式</q-item-label>
       <q-item dense class="q-pt-none">
         <q-item-section>
           <div class="q-gutter-y-md">
@@ -46,45 +42,20 @@
           </div>
         </q-item-section>
       </q-item>
-      <q-carousel
-        v-model="model"
-        transition-prev="slide-right"
-        transition-next="slide-left"
-        animated
-        control-color="primary"
-        class="rounded-borders"
-      >
+      <q-carousel v-model="model" transition-prev="slide-right" transition-next="slide-left" animated control-color="primary" class="rounded-borders">
         <q-carousel-slide name="1" class="column q-pt-none no-wrap">
-          <q-item
-            dense
-            class="row items-center"
-            v-if="
-              userInfo.userWechatReceiveMoneyQr != null && userInfo.userWechatReceiveMoneyQr != ''
-            "
-          >
+          <q-item dense class="row items-center" v-if="userInfo.userWechatReceiveMoneyQr != null && userInfo.userWechatReceiveMoneyQr != ''">
             <q-item-section>
-              <q-item-label caption>
-                <q-icon name="done" color="green text-bold" />收款码已上传</q-item-label
-              >
+              <q-item-label caption> <q-icon name="done" color="green text-bold" />收款码已上传</q-item-label>
             </q-item-section>
             <q-item-section>
               <q-item-label caption class="text-black">
-                <q-chip
-                  color="green text-bold"
-                  text-color="white"
-                  size="0.7rem"
-                  clickable
-                  @click="reUpload"
-                >
-                  重新上传</q-chip
-                >
+                <q-chip color="green text-bold" text-color="white" size="0.7rem" clickable @click="reUpload"> 重新上传</q-chip>
               </q-item-label>
             </q-item-section>
           </q-item>
           <div v-else>
-            <div class="text-caption">
-              请上传微信收款码<strong>(注意不是付款码,请点击最下面操作提示)</strong>
-            </div>
+            <div class="text-caption">请上传微信收款码<strong>(注意不是付款码,请点击最下面操作提示)</strong></div>
             <q-uploader
               :url="`${host}/user/wechatqr/upload?userId=${userInfo.userId}`"
               color="green"
@@ -100,15 +71,11 @@
               @uploaded="onUploaded"
               @failed="onFailed"
             />
-            <q-item-label caption>
-              <q-icon name="info_outline" color="orange" />提现说明</q-item-label
-            >
+            <q-item-label caption> <q-icon name="info_outline" color="orange" />提现说明</q-item-label>
             <q-item-label caption class="q-pt-xs">
               微信收款码是用来收款的，不会有资金风险。本站没有能力也不会利用用户的收款码进行非法洗钱活动，请放心上传。</q-item-label
             >
-            <q-item-label caption class="q-pt-xs">
-              如果对上传收款码有顾虑，可以选择<strong>人工转账</strong>方式。请加客服好友。</q-item-label
-            >
+            <q-item-label caption class="q-pt-xs"> 如果对上传收款码有顾虑，可以选择<strong>人工转账</strong>方式。请加客服好友。</q-item-label>
             <q-item-label caption class="q-pt-xs">
               <router-link
                 :to="{
@@ -130,15 +97,7 @@
             </q-item-label>
           </div>
           <q-item-label class="q-pt-md text-weight-medium justify-center column items-center">
-            <q-btn
-              color="accent"
-              text-color="white"
-              unelevated
-              class="flex-center"
-              rounded
-              label="预计一个工作日到账，确认提现"
-              @click="withdraw"
-            />
+            <q-btn color="accent" text-color="white" unelevated class="flex-center" rounded label="预计一个工作日到账，确认提现" @click="withdraw" />
           </q-item-label>
         </q-carousel-slide>
         <q-carousel-slide name="2" class="column no-wrap q-pt-none">
@@ -154,15 +113,7 @@
             ，给您人工转账。
           </div>
           <q-item-label class="q-pt-md text-weight-medium justify-center column items-center">
-            <q-btn
-              color="accent"
-              text-color="white"
-              unelevated
-              class="flex-center"
-              rounded
-              label="预计一个工作日到账，确认提现"
-              @click="withdraw"
-            />
+            <q-btn color="accent" text-color="white" unelevated class="flex-center" rounded label="预计一个工作日到账，确认提现" @click="withdraw" />
           </q-item-label>
         </q-carousel-slide>
       </q-carousel>
@@ -175,12 +126,12 @@
 // inside of a Vue file
 
 export default {
-  props: ['userInfo'],
   data() {
     return {
       model: '1',
       withdrawAmount: '',
       host: global.config.domain,
+      userInfo: {},
     };
   },
   computed: {
@@ -224,11 +175,7 @@ export default {
       });
     },
     withdraw() {
-      if (
-        this.model == 1 &&
-        (this.userInfo.userWechatReceiveMoneyQr == '' ||
-          this.userInfo.userWechatReceiveMoneyQr == null)
-      ) {
+      if (this.model == 1 && (this.userInfo.userWechatReceiveMoneyQr == '' || this.userInfo.userWechatReceiveMoneyQr == null)) {
         this.$q.notify({
           type: 'negative',
           message: '请上传微信收款码',

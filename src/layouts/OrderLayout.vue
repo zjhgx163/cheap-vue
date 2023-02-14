@@ -1,11 +1,6 @@
 <template>
   <q-layout>
-    <q-tabs
-      align="left"
-      active-color="accent"
-      indicator-color="accent"
-      content-class="text-grey-10"
-    >
+    <q-tabs align="left" active-color="accent" indicator-color="accent" content-class="text-grey-10">
       <q-route-tab
         :to="{
           path: '/my/orderlist/all',

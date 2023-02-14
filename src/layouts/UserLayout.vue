@@ -12,37 +12,28 @@
           <div class="text-secondary text-overline text-bold">{{ user }}</div>
           <div class="row justify-between items-center">
             <div>
-              <div class="text-secondary YL__user_draw_text text-weight-thin YL__user_money">
-                可提现金额
-              </div>
+              <div class="text-secondary YL__user_draw_text text-weight-thin YL__user_money">可提现金额</div>
+
               <div class="text-amber-11 YL__user_money text-bold">
-                {{
-                  userInfo.withdrawableAmount != undefined
-                    ? userInfo.withdrawableAmount.toFixed(2)
-                    : userInfo.withdrawableAmount
-                }}
+                {{ userInfo.withdrawableAmount != undefined ? userInfo.withdrawableAmount.toFixed(2) : userInfo.withdrawableAmount }}
               </div>
             </div>
+
             <div v-if="$route.name == 'account'">
-              <q-chip
-                color="accent text-bold"
-                text-color="white"
-                icon="account_balance_wallet"
-                size="0.75rem"
-                clickable
-                @click="goWithdraw"
-              >
-                去提现</q-chip
-              >
+              <q-chip color="accent text-bold" text-color="white" icon="account_balance_wallet" size="0.75rem" clickable @click="goWithdraw">
+                去提现
+              </q-chip>
             </div>
           </div>
         </div>
 
         <!-- <div class="column justify-center"></div> -->
       </div>
+
       <!-- <div class="YL__user_draw_text text-weight-thin YL__user_money">可提现金额(元)</div>
       <div class="text-amber-11 YL__user_money text-bold">¥ 0.00</div> -->
     </q-banner>
+
     <q-page-container class="bg-primary">
       <router-view :key="$route.fullPath" :userInfo="this.userInfo"> </router-view>
     </q-page-container>
@@ -104,9 +95,9 @@ export default {
 <style lang="sass">
 .YL
   &__750w
-    width: 100%;
-    max-width: 750px;
-    min-width: 320px;
+    width: 100%
+    max-width: 750px
+    min-width: 320px
   &__user
     &_money
       line-height: 1.8em !important

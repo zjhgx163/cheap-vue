@@ -14,16 +14,7 @@
       <q-card-section>
         <q-form @submit="onSubmit" class="q-gutter-sm">
           <div class="q-gutter-sm">
-            <q-input
-              dense
-              outlined
-              standout="bg-yellow"
-              v-model="title"
-              placeholder="标题"
-              hide-bottom-space
-              autofocus
-              type="text"
-            />
+            <q-input dense outlined standout="bg-yellow" v-model="title" placeholder="标题" hide-bottom-space autofocus type="text" />
           </div>
           <q-editor
             ref="editor"
@@ -36,12 +27,7 @@
                 handler: uploadIt,
               },
             }"
-            :toolbar="[
-              ['bold', 'italic', 'strike', 'underline'],
-              ['link'],
-              ['upload'],
-              ['undo', 'redo'],
-            ]"
+            :toolbar="[['bold', 'italic', 'strike', 'underline'], ['link'], ['upload'], ['undo', 'redo']]"
           />
           <q-select
             outlined
@@ -137,11 +123,7 @@ export default {
         reader.onloadend = function () {
           dataUrl = reader.result;
           // insert result to the cursor of your post
-          document.execCommand(
-            'insertHTML',
-            true,
-            '<div><img src="' + dataUrl + '" style="width:50%; height:50%" /></div>',
-          );
+          document.execCommand('insertHTML', true, '<div><img src="' + dataUrl + '" style="width:50%; height:50%" /></div>');
 
           //   post.body += '<div><img src="' + dataUrl + '" style="width:50%; height:50%" /></div>';
           //   console.log(post.body);

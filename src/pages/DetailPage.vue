@@ -22,26 +22,14 @@
         </q-card-section>
 
         <q-card-actions align="center" class="q-pa-xs">
-          <q-btn
-            rounded
-            outline
-            ripple
-            label="复制"
-            class="text-bold"
-            color="accent"
-            v-close-popup
-          />
+          <q-btn rounded outline ripple label="复制" class="text-bold" color="accent" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>
 
     <!-- 面包栏 -->
     <div class="column gt-sm">
-      <q-breadcrumbs
-        active-color="black"
-        separator="---"
-        class="text-grey text-subtitle2 col-auto q-pa-md"
-      >
+      <q-breadcrumbs active-color="black" separator="---" class="text-grey text-subtitle2 col-auto q-pa-md">
         <template v-slot:separator>
           <q-icon size="1.5em" name="chevron_right" color="grey" />
         </template>
@@ -58,16 +46,7 @@
           <div class="col-4"></div>
           <div class="column items-center bg-secondary" style="width: 40px">
             <div class="col-auto">
-              <q-btn
-                size="11px"
-                class="bg-secondary"
-                color="grey"
-                flat
-                round
-                :icon="turnInOrNot"
-                @click="turnInOrNotClick"
-              >
-              </q-btn>
+              <q-btn size="11px" class="bg-secondary" color="grey" flat round :icon="turnInOrNot" @click="turnInOrNotClick"> </q-btn>
             </div>
             <div class="col-auto"><q-badge text-color="grey">0</q-badge></div>
             <div class="col-auto">
@@ -86,15 +65,10 @@
               </div>
               <!-- 主图旁边介绍，响应式 -->
               <div class="column col-md q-pa-xs col-sm-12 justify-between">
-                <div
-                  id="intro"
-                  class="col-md-auto col-sm-auto text-h6 text-dark text-weight-medium"
-                >
+                <div id="intro" class="col-md-auto col-sm-auto text-h6 text-dark text-weight-medium">
                   {{ detail.title }}
                 </div>
-                <div
-                  class="col-md-2 col-sm-2 text-accent text-h6 text-weight-bold YL__title_font_family"
-                >
+                <div class="col-md-2 col-sm-2 text-accent text-h6 text-weight-bold YL__title_font_family">
                   {{ detail.priceText }}
                 </div>
                 <div class="col-md-1 col-sm-2"></div>
@@ -210,36 +184,16 @@
                 </div>
                 <!-- 详细文字 -->
                 <div class="col-auto q-mt-lg">
-                  <span class="text-weight-bold text-grey-9 col" v-if="detail.emphsis != 'null'">
-                    {{ detail.emphsis }}</span
-                  >
-                  <div
-                    class="col-auto text-grey-9"
-                    v-html="part"
-                    v-for="part in detailParts"
-                    :key="part"
-                  ></div>
+                  <span class="text-weight-bold text-grey-9 col" v-if="detail.emphsis != 'null'"> {{ detail.emphsis }}</span>
+                  <div class="col-auto text-grey-9" v-html="part" v-for="part in detailParts" :key="part"></div>
                 </div>
               </div>
               <!-- 大图 -->
               <div class="col">
                 <div class="column items-center q-pb-lg">
-                  <q-img
-                    v-for="bigImage in bigImages"
-                    :key="bigImage"
-                    :src="bigImage"
-                    width="60%"
-                    height="60%"
-                  >
-                  </q-img>
+                  <q-img v-for="bigImage in bigImages" :key="bigImage" :src="bigImage" width="60%" height="60%"> </q-img>
 
-                  <q-img
-                    v-if="bigImages.length == 0"
-                    :src="detail.mainImageUrl"
-                    width="60%"
-                    height="60%"
-                  >
-                  </q-img>
+                  <q-img v-if="bigImages.length == 0" :src="detail.mainImageUrl" width="60%" height="60%"> </q-img>
                 </div>
               </div>
             </div>
@@ -347,7 +301,7 @@ export default {
           function (e) {
             alert('Can not copy');
             console.log(e);
-          },
+          }
         );
     },
     turnInOrNotClick() {},
@@ -527,23 +481,21 @@ export default {
               delay: 100, // ms
             });
             if (this.isTaoPwd) {
-              this.$axios
-                .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {})
-                .then((res) => {
-                  console.log('res = ' + res.data);
-                  if (/(http|https):\S*/.test(res.data)) {
-                    window.location.href = res.data;
-                  } else if (/redirect:\S*/.test(res.data)) {
-                    //redirect其他页面
-                    let redirectPath = res.slice(9);
-                    this.$router.push({ path: redirectPath });
-                  } else {
-                    this.taobaoPwd = res.data;
-                    console.log('coupon taobaoPwd = ' + res.data);
-                    this.isShowCopyTaobaopwd = true;
-                  }
-                  this.$q.loading.hide();
-                });
+              this.$axios.post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {}).then((res) => {
+                console.log('res = ' + res.data);
+                if (/(http|https):\S*/.test(res.data)) {
+                  window.location.href = res.data;
+                } else if (/redirect:\S*/.test(res.data)) {
+                  //redirect其他页面
+                  let redirectPath = res.slice(9);
+                  this.$router.push({ path: redirectPath });
+                } else {
+                  this.taobaoPwd = res.data;
+                  console.log('coupon taobaoPwd = ' + res.data);
+                  this.isShowCopyTaobaopwd = true;
+                }
+                this.$q.loading.hide();
+              });
             } else {
               //因为每个用户的链接不同，需要每次从后台取链接
               this.$axios
@@ -578,23 +530,21 @@ export default {
           delay: 100, // ms
         });
         if (this.isTaoPwd) {
-          this.$axios
-            .post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {})
-            .then((res) => {
-              console.log('res = ' + res.data);
-              if (/(http|https):\S*/.test(res.data)) {
-                window.location.href = res.data;
-              } else if (/redirect:\S*/.test(res.data)) {
-                //redirect其他页面
-                let redirectPath = res.slice(9);
-                this.$router.push({ path: redirectPath });
-              } else {
-                this.taobaoPwd = res.data;
-                console.log('coupon taobaoPwd = ' + res.data);
-                this.isShowCopyTaobaopwd = true;
-              }
-              this.$q.loading.hide();
-            });
+          this.$axios.post(`${this.host}/goods/coupon-url/${code}?index=${index}`, {}).then((res) => {
+            console.log('res = ' + res.data);
+            if (/(http|https):\S*/.test(res.data)) {
+              window.location.href = res.data;
+            } else if (/redirect:\S*/.test(res.data)) {
+              //redirect其他页面
+              let redirectPath = res.slice(9);
+              this.$router.push({ path: redirectPath });
+            } else {
+              this.taobaoPwd = res.data;
+              console.log('coupon taobaoPwd = ' + res.data);
+              this.isShowCopyTaobaopwd = true;
+            }
+            this.$q.loading.hide();
+          });
         } else {
           //因为每个用户的链接不同，需要每次从后台取链接
           this.$axios
@@ -651,6 +601,6 @@ export default {
 
 <style scoped lang="sass">
 a
-  color: #424242;
-  cursor: none;
+  color: #424242
+  cursor: none
 </style>
