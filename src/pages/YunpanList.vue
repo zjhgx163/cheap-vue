@@ -4,59 +4,47 @@
 
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
-        <q-img
-          src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/no-data.png"
-          spinner-color="white"
-        >
-        </q-img>
+        <q-img src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/no-data.png" spinner-color="white"> </q-img>
+
         <div class="text-subtitle2 text-center text-grey">~空空如也~</div>
       </div>
+
       <div class="col-3"></div>
     </div>
+
     <div v-else ref="scrollTargetRef">
       <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
+
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
           <q-list dense separator class="bg-secondary">
-            <div
-              v-bind:key="item.id"
-              v-for="item in listData"
-              class="bg-primary"
-              v-bind:class="{ 'q-pb-xs': !isBigScreen }"
-            >
+            <div v-bind:key="item.id" v-for="item in listData" class="bg-primary" v-bind:class="{ 'q-pb-xs': !isBigScreen }">
               <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
-              <q-item
-                dense
-                v-ripple
-                clickable
-                @click="itemClick(item.id)"
-                class="bg-secondary q-pt-sm"
-              >
+
+              <q-item dense v-ripple clickable @click="itemClick(item.id)" class="bg-secondary q-pt-sm">
                 <q-item-section avatar top>
                   <q-avatar v-if="item.avatar != '' && item.avatar != null">
                     <img :src="item.avatar" />
                   </q-avatar>
-                  <q-avatar :style="getAvatarColor(item.auther)" text-color="white" v-else>
-                    {{ getAvatarText(item.auther) }}</q-avatar
-                  ></q-item-section
-                >
-                <q-item-section class="q-pb-xs">
-                  <q-item-label
-                    :lines="2"
-                    v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
-                    class="text-black text-bold"
-                  >
-                    {{ item.title }}</q-item-label
-                  >
 
-                  <q-item-label
-                    class="row justify-between items-center q-mt-none q-pr-xs YL__auther"
-                  >
+                  <q-avatar :style="getAvatarColor(item.auther)" text-color="white" v-else>
+                    {{ getAvatarText(item.auther) }}
+                  </q-avatar>
+                </q-item-section>
+
+                <q-item-section class="q-pb-xs">
+                  <q-item-label :lines="2" v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]" class="text-black text-bold">
+                    {{ item.title }}
+                  </q-item-label>
+
+                  <q-item-label class="row justify-between items-center q-mt-none q-pr-xs YL__auther">
                     <div class="col-auto row flex-center q-gutter-sm">
                       <div class="row flex-center">
                         <strong>{{ item.auther }}</strong>
+
                         <q-icon name="reply" />
                       </div>
+
                       <div class="row flex-center">发表于 {{ item.itemCreateDateStr }}</div>
 
                       <!-- <div class="row flex-center">
@@ -67,22 +55,18 @@
                         <div>{{ item.viewCount }}</div>
                       </div> -->
                     </div>
+
                     <div class="col items-center justify-end row">
-                      <q-chip
-                        outline
-                        size="sm"
-                        :color="getTagColor(item.tag)"
-                        :icon="getTagIcon(item.tag)"
-                        text-color="white"
-                        class="text-bold"
-                      >
+                      <q-chip outline size="sm" :color="getTagColor(item.tag)" :icon="getTagIcon(item.tag)" text-color="white" class="text-bold">
                         {{ item.tag }}
                       </q-chip>
                     </div>
                   </q-item-label>
                 </q-item-section>
+
                 <!-- <q-item-section side top> </q-item-section> -->
               </q-item>
+
               <q-separator color="primary" class="gt-sm" />
             </div>
           </q-list>
@@ -94,10 +78,8 @@
           </div>
         </template>
       </q-infinite-scroll>
-      <div
-        v-bind:class="{ hidden: pageNavigateHidden }"
-        class="q-my-xs q-pa-md flex flex-center bg-light-green-1"
-      >
+
+      <div v-bind:class="{ hidden: pageNavigateHidden }" class="q-my-xs q-pa-md flex flex-center bg-light-green-1">
         <q-tooltip> 输入页码跳转</q-tooltip>
 
         <q-pagination
@@ -294,7 +276,7 @@ export default {
     //解决iphone移动端的延迟
     FastClick.attach(document.body);
     console.log('YunpanList mounted');
-    this.$on('logined', function (itemId) {
+    this.$bus.$on('logined', function (itemId) {
       console.log('我是子组件方法' + itemId);
       this.$router.push({
         path: '/yunpan/d/' + itemId,
@@ -380,9 +362,7 @@ export default {
     console.log('YunpanList deactivated');
     this.adverPlay = null;
   },
-  destroyed() {
-    console.log('yunpanList destoryed');
-  },
+
   methods: {
     getItemList() {
       // console.log('$$$$$$' + this.query);

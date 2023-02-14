@@ -11,13 +11,7 @@
                 <q-item-label :lines="2" class="row text-h6 text-bold">
                   <div>
                     {{ item.title }}
-                    <q-badge
-                      transparent
-                      align="middle"
-                      :color="getTagColor(item.tag)"
-                      :label="item.tag"
-                    >
-                    </q-badge>
+                    <q-badge transparent align="middle" :color="getTagColor(item.tag)" :label="item.tag"> </q-badge>
                   </div>
                 </q-item-label>
               </q-item-section>
@@ -27,14 +21,7 @@
                 <q-avatar size="1.9em" v-if="item.avatar != '' && item.avatar != null">
                   <img :src="item.avatar" />
                 </q-avatar>
-                <q-avatar
-                  size="1.9em"
-                  :style="getAvatarColor(item.auther)"
-                  text-color="white"
-                  v-else
-                >
-                  {{ getAvatarText(item.auther) }}</q-avatar
-                >
+                <q-avatar size="1.9em" :style="getAvatarColor(item.auther)" text-color="white" v-else> {{ getAvatarText(item.auther) }}</q-avatar>
               </q-item-section>
               <q-item-section class="YL__auther">
                 {{ item.auther }}
@@ -62,18 +49,10 @@
                       <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
                       <q-item dense v-ripple class="bg-secondary q-py-sm">
                         <q-item-section avatar top>
-                          <q-avatar
-                            v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
-                            size="1.9em"
-                          >
+                          <q-avatar v-if="reply.replyAvatar != '' && reply.replyAvatar != null" size="1.9em">
                             <img :src="reply.replyAvatar" />
                           </q-avatar>
-                          <q-avatar
-                            size="1.9em"
-                            :style="getAvatarColor(reply.replyAuther)"
-                            text-color="white"
-                            v-else
-                          >
+                          <q-avatar size="1.9em" :style="getAvatarColor(reply.replyAuther)" text-color="white" v-else>
                             {{ getAvatarText(reply.replyAuther) }}</q-avatar
                           >
                         </q-item-section>
@@ -87,9 +66,7 @@
                             </div></q-item-label
                           >
 
-                          <q-item-label
-                            class="YL__title_font_family YL__list_line_height text-body2"
-                          >
+                          <q-item-label class="YL__title_font_family YL__list_line_height text-body2">
                             <div class="text-body2 break-all" v-html="reply.content"></div>
 
                             <!-- {{ reply.content }} -->
@@ -139,14 +116,7 @@
                     <q-item-label>
                       <q-form @submit="onSubmit" class="q-gutter-sm">
                         <div>
-                          <q-input
-                            dense
-                            filled
-                            v-model="replyContent"
-                            placeholder="说点什么吧"
-                            hide-bottom-space
-                            type="textarea"
-                          />
+                          <q-input dense filled v-model="replyContent" placeholder="说点什么吧" hide-bottom-space type="textarea" />
                         </div>
 
                         <div class="q-mt-sm">
@@ -171,6 +141,7 @@
 import 'src/config';
 import { Screen } from 'quasar';
 import FastClick from 'fastclick';
+import { inject } from 'vue';
 // import clipboard from 'src/clipboard';
 // import Clipboard from 'clipboard';
 // import $ from 'jquery';
@@ -265,7 +236,7 @@ export default {
       window.TencentGDT.NATIVE.loadAd('4054888219125381');
     }, 100);
 
-    this.$on('logined', function (itemId) {
+    this.$bus.$on('logined', function (itemId) {
       console.log('从yunpan detail页面已登陆' + itemId);
       window.location.href = `https://www.hjdang.com/yunpan/d/` + itemId;
 
@@ -357,9 +328,7 @@ export default {
         } else {
           this.item = res.data.data.item;
           this.listData = res.data.data.firstReplyPage.records;
-          this.max = Math.ceil(
-            res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size,
-          );
+          this.max = Math.ceil(res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size);
           // console.log(this.item);
           if (this.item == null) {
             this.$router.push({ path: '/error' });
@@ -489,8 +458,8 @@ export default {
 
 <style lang="sass">
 .break-all
-  word-break: break-all;
-  word-wrap: break-word;
+  word-break: break-all
+  word-wrap: break-word
 .message img
   width: 100%
   height: 50%
