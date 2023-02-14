@@ -347,7 +347,7 @@ export default {
           function (e) {
             alert('Can not copy');
             console.log(e);
-          },
+          }
         );
     },
     turnInOrNotClick() {},
@@ -651,6 +651,6 @@ export default {
 
 <style scoped lang="sass">
 a
-  color: #424242;
-  cursor: none;
+  color: #424242
+  cursor: none
 </style>

@@ -156,7 +156,7 @@ export default {
 <style lang="sass">
 .YL
   &__750w
-    width: 100%;
-    max-width: 750px;
-    min-width: 320px;
+    width: 100%
+    max-width: 750px
+    min-width: 320px
 </style>

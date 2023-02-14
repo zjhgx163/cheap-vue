@@ -23,7 +23,7 @@ axios.interceptors.response.use(
   function (error) {
     // Do something with response error
     return Promise.reject(error);
-  },
+  }
 );
 
 Vue.prototype.$axios = axios;

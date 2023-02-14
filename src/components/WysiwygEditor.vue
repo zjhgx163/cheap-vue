@@ -140,7 +140,7 @@ export default {
           document.execCommand(
             'insertHTML',
             true,
-            '<div><img src="' + dataUrl + '" style="width:50%; height:50%" /></div>',
+            '<div><img src="' + dataUrl + '" style="width:50%; height:50%" /></div>'
           );
 
           //   post.body += '<div><img src="' + dataUrl + '" style="width:50%; height:50%" /></div>';

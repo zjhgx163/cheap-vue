@@ -7,12 +7,16 @@
           spinner-color="white"
         >
         </q-img>
+
         <div class="text-subtitle2 text-center text-grey">~空空如也~</div>
       </div>
+
       <div class="col-3"></div>
     </div>
+
     <div v-else ref="scrollTargetRef">
       <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
+
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
           <q-list separator dense class="bg-secondary" id="scroll-target-id">
@@ -24,6 +28,7 @@
               v-bind:class="{ 'q-pb-sm': !isBigScreen }"
             >
               <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
+
               <q-item
                 v-ripple
                 v-bind:class="[itemPadding]"
@@ -36,6 +41,7 @@
                   <!-- 这里用router-link代替a -->
 
                   <!-- <router-link :to="`/item/${item.id}`"> -->
+
                   <!-- <router-link
               :to="{
                 path: 'item',
@@ -57,20 +63,23 @@
                     <img v-bind:src="item.thumbUrl" class="YL__index_img" />
                   </router-link>
                 </q-item-section>
+
                 <q-item-section class="q-pb-xs">
                   <q-item-label
                     :lines="lines"
                     v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
                     class="text-grey-9 text-bold"
                   >
-                    {{ item.title }}</q-item-label
-                  >
+                    {{ item.title }}
+                  </q-item-label>
+
                   <q-item-label
                     :lines="1"
                     v-bind:class="[textSize, textAccent, fontFamily, pricePading]"
                   >
                     {{ item.priceText }}
                   </q-item-label>
+
                   <q-item-label :lines="1">
                     <span v-if="item.label != ''" style="text-align: left">
                       <li
@@ -82,6 +91,7 @@
                         {{ a }}
                       </li>
                     </span>
+
                     <span v-else> &nbsp; &nbsp; &nbsp;</span>
                   </q-item-label>
 
@@ -89,19 +99,21 @@
                     :lines="2"
                     class="gt-sm YL__list_line_height q-py-sm YL__list_font_size text-grey-9 YL__content_height"
                   >
-                    <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">{{
-                      item.emphsis
-                    }}</span
-                    >{{ item.detailBrief }}
+                    <span v-if="item.emphsis != 'null'" class="text-grey-9 text-weight-bold">
+                      {{ item.emphsis }}
+                    </span>
+                    {{ item.detailBrief }}
                     <router-link
                       :to="{
                         path: 'item',
                         name: 'detail',
                         params: { urlCode: item.urlCode },
                       }"
-                      >...阅读全文
+                    >
+                      ...阅读全文
                     </router-link>
                   </q-item-label>
+
                   <q-item-label :lines="1" class="row items-center justify-between YL__mall lt-sm">
                     <div class="col-auto">{{ item.mall }} | {{ item.dateStr }}</div>
 
@@ -116,8 +128,10 @@
                           @click="thumbUpClick"
                         >
                         </q-btn>
+
                         <div>{{ item.zhiCount }}</div>
                       </div>
+
                       <div class="row items-center">
                         <q-btn
                           size="7px"
@@ -128,6 +142,7 @@
                           @click="thumbDownClick"
                         >
                         </q-btn>
+
                         <div>{{ item.buzhiCount }}</div>
                       </div>
                     </div>
@@ -148,8 +163,10 @@
                           @click="thumbUpClick"
                         >
                         </q-btn>
+
                         <div>{{ item.zhiCount }}</div>
                       </div>
+
                       <div class="row flex-center">
                         <q-btn
                           size="0.7em"
@@ -160,6 +177,7 @@
                           @click="thumbDownClick"
                         >
                         </q-btn>
+
                         <div>{{ item.buzhiCount }}</div>
                       </div>
 
@@ -173,6 +191,7 @@
                           @click="turnInOrNotClick"
                         >
                         </q-btn>
+
                         <div>{{ item.starCount }}</div>
                       </div>
 
@@ -186,16 +205,20 @@
                           @click="commentClick"
                         >
                         </q-btn>
+
                         <div>{{ item.commentsCount }}</div>
                       </div>
                     </div>
 
                     <div class="col-5 justify-end row">
                       <div class="col"></div>
+
                       <div class="col-auto flex-center row">
                         {{ item.mall }} | {{ item.dateStr }}
                       </div>
+
                       <div class="col-1"></div>
+
                       <q-btn
                         class="col-3"
                         color="accent"
@@ -209,6 +232,7 @@
                   </q-item-label>
                 </q-item-section>
               </q-item>
+
               <q-separator color="primary" class="gt-sm" />
             </div>
           </q-list>
@@ -220,6 +244,7 @@
           </div>
         </template>
       </q-infinite-scroll>
+
       <div class="q-my-xs q-pa-lg flex flex-center bg-secondary gt-sm">
         <q-pagination
           v-model="current"
@@ -255,8 +280,8 @@
     color: rgba(0, 0, 0, 0.54)
     background: #f5f5f5
     display: inline-block
-    margin-right: 7px;
-    text-align: center;
+    margin-right: 7px
+    text-align: center
     letter-spacing: 0.03333em
     list-type: none
     -webkit-font-smoothing: antialiased

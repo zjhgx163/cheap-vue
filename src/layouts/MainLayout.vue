@@ -361,25 +361,25 @@ export default {
     &:hover
       color: #000
   &__title_font_family
-    font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif;
+    font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif
   &__list_line_height
     line-height: 24px !important
   &__list_font_size
     font-size: 14px
   &__coupon_text_effect
-    text-decoration: underline black from-font;
-    text-transform: uppercase;
-    letter-spacing: 6px;
-    display: inline-block;
-    position: relative;
-    font-family: 'Merriweather', serif;
-    -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
-    -webkit-mask-size: 200%;
-    animation: shine 2s linear infinite;
+    text-decoration: underline black from-font
+    text-transform: uppercase
+    letter-spacing: 6px
+    display: inline-block
+    position: relative
+    font-family: 'Merriweather', serif
+    -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%)
+    -webkit-mask-size: 200%
+    animation: shine 2s linear infinite
 
 @keyframes shine
   from
-    -webkit-mask-position: 150%;
+    -webkit-mask-position: 150%
   to
-    -webkit-mask-position: -50%;
+    -webkit-mask-position: -50%
 </style>

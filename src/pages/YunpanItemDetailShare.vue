@@ -343,7 +343,7 @@ export default {
           this.item = res.data.data.item;
           this.listData = res.data.data.firstReplyPage.records;
           this.max = Math.ceil(
-            res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size,
+            res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
           );
           // console.log(this.item);
           if (this.item == null) {
@@ -474,8 +474,8 @@ export default {
 
 <style lang="sass">
 .break-all
-  word-break: break-all;
-  word-wrap: break-word;
+  word-break: break-all
+  word-wrap: break-word
 .message img
   width: 100%
   height: 50%

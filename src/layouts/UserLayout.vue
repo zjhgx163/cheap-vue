@@ -104,9 +104,9 @@ export default {
 <style lang="sass">
 .YL
   &__750w
-    width: 100%;
-    max-width: 750px;
-    min-width: 320px;
+    width: 100%
+    max-width: 750px
+    min-width: 320px
   &__user
     &_money
       line-height: 1.8em !important
