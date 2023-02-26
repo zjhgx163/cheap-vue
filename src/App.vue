@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import 'src/config';
 export default {
   name: 'App',
 
@@ -25,12 +26,146 @@ export default {
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
     console.log('App mounted');
-    // 优量汇 H5 SDK 在线文档地址：http://developers.adnet.qq.com/doc/web/js_develop
-    // 优量汇 全局命名空间申明TencentGDT对象
-    // 腾讯广告全局申明只需运行一次
 
-    window.TencentGDT = window.TencentGDT || [];
-    console.log(' window.TencentGDT = window.TencentGDT');
+    console.log('isProEnv = ' + global.config.isProEnv);
+    if (global.config.isProEnv) {
+      // 优量汇 H5 SDK 在线文档地址：http://developers.adnet.qq.com/doc/web/js_develop
+      // 优量汇 全局命名空间申明TencentGDT对象
+      // 腾讯广告全局申明只需运行一次
+      window.TencentGDT = window.TencentGDT || [];
+      console.log(' window.TencentGDT = window.TencentGDT');
+
+      // 检索插屏广告初始化
+      window.TencentGDT.push({
+        app_id: '1201538404', // {String} - appid - 必填
+        placement_id: '4034072990480276', // {String} - 广告位id - 必填
+        // type: 'interstitial', // {String} - 原生广告类型 - 必填
+        type: 'native',
+        display_type: 'interstitial', // 播放类型：插屏
+        // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
+        // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
+        count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
+        onComplete: function (res) {
+          console.log('插屏广告返回');
+          if (res && res.ret === 0) {
+            // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
+            // res[0] 代表取广告数组第一个数据
+            console.log(JSON.stringify(res.data[0]));
+            if (window.AdverInterstitial === true) {
+              TencentGDT.NATIVE.renderAd(res.data[0]);
+              window.AdverInterstitial = false;
+            }
+            // window.AdverInterstitial = res.data[0];
+          } else {
+            // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
+            // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
+            setTimeout(function () {
+              window.TencentGDT.NATIVE.loadAd('4034072990480276');
+            }, 3000);
+          }
+        },
+      });
+
+      // 云盘列表页信息流广告初始化
+      window.TencentGDT.push({
+        app_id: '1201538404', // {String} - appid - 必填
+        placement_id: '5004894439792983', // {String} - 广告位id - 必填
+        type: 'native', // {String} - 原生广告类型 - 必填
+        // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
+        // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
+        count: 3, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
+        onComplete: function (res) {
+          console.log('信息流广告返回');
+          console.log(JSON.stringify(res));
+          if (res && res.constructor === Array) {
+            // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
+            // res[0] 代表取广告数组第一个数据
+            // containerId：广告容器ID
+            // window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
+            // window.AdverNativeTemplate = res[0];
+            console.log(JSON.stringify(res[0]));
+            if (window.AdverNativeTemplate === true) {
+              let container = document.getElementById('flowAdverYunpanId');
+              if (container != undefined) {
+                window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
+              } else {
+                console.log('flowAdverYunpanId is not ready');
+                setTimeout(function () {
+                  container = document.getElementById('flowAdverYunpanId');
+                  if (container != undefined) {
+                    window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
+                  }
+                }, 1000);
+              }
+              window.AdverNativeTemplate = false;
+            }
+            // this.$emit('adverNativeTemplateEvent');
+            console.log('信息流广告-2');
+          } else {
+            // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
+            // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
+            setTimeout(function () {
+              window.TencentGDT.NATIVE.loadAd('9094884362628825');
+            }, 3000);
+          }
+        },
+      });
+
+      // 详情页插入广告
+      window.TencentGDT.push({
+        app_id: '1201538404', // {String} - appid - 必填
+        placement_id: '4054888219125381', // {String} - 广告位id - 必填
+        type: 'native', // {String} - 原生广告类型 - 必填
+        // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
+        // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
+        count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
+        onComplete: function (res) {
+          console.log('详情页插入广告返回');
+
+          if (res && res.constructor === Array) {
+            // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
+            // res[0] 代表取广告数组第一个数据
+            // containerId：广告容器ID
+            console.log(JSON.stringify(res[0]));
+
+            if (window.AdverDetailInsert === true) {
+              let container = document.getElementById('yunpanDetailAdvert');
+              if (container != undefined) {
+                window.TencentGDT.NATIVE.renderAd(res[0], 'yunpanDetailAdvert');
+              } else {
+                console.log('yunpanDetailAdvert is not ready');
+                setTimeout(function () {
+                  container = document.getElementById('yunpanDetailAdvert');
+                  if (container != undefined) {
+                    window.TencentGDT.NATIVE.renderAd(res[0], 'yunpanDetailAdvert');
+                  }
+                }, 1000);
+              }
+              window.AdverDetailInsert = false;
+            }
+
+            // window.AdverDetailInsert = res[0];
+          } else {
+            // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
+            // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
+            setTimeout(function () {
+              window.TencentGDT.NATIVE.loadAd('4054888219125381');
+            }, 3000);
+          }
+        },
+      });
+
+      // H5 SDK接入全局只需运行一次
+      (function () {
+        var doc = document,
+          h = doc.getElementsByTagName('head')[0],
+          s = doc.createElement('script');
+        s.async = true;
+        s.src = 'https://qzs.gdtimg.com/union/res/union_sdk/page/h5_sdk/i.js';
+        h && h.insertBefore(s, h.firstChild);
+      })();
+    }
+
     // // banner广告示例声明
     // TencentGDT.push({
     //   app_id: '1201538404',
@@ -72,136 +207,6 @@ export default {
     //     }
     //   },
     // });
-
-    // 检索插屏广告初始化
-    window.TencentGDT.push({
-      app_id: '1201538404', // {String} - appid - 必填
-      placement_id: '4034072990480276', // {String} - 广告位id - 必填
-      // type: 'interstitial', // {String} - 原生广告类型 - 必填
-      type: 'native',
-      display_type: 'interstitial', // 播放类型：插屏
-      // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
-      // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
-      count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
-      onComplete: function (res) {
-        console.log('插屏广告返回');
-        if (res && res.ret === 0) {
-          // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
-          // res[0] 代表取广告数组第一个数据
-          console.log(JSON.stringify(res.data[0]));
-          if (window.AdverInterstitial === true) {
-            TencentGDT.NATIVE.renderAd(res.data[0]);
-            window.AdverInterstitial = false;
-          }
-          // window.AdverInterstitial = res.data[0];
-        } else {
-          // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
-          // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
-          setTimeout(function () {
-            window.TencentGDT.NATIVE.loadAd('4034072990480276');
-          }, 3000);
-        }
-      },
-    });
-
-    // 云盘列表页信息流广告初始化
-    window.TencentGDT.push({
-      app_id: '1201538404', // {String} - appid - 必填
-      placement_id: '5004894439792983', // {String} - 广告位id - 必填
-      type: 'native', // {String} - 原生广告类型 - 必填
-      // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
-      // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
-      count: 3, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
-      onComplete: function (res) {
-        console.log('信息流广告返回');
-        console.log(JSON.stringify(res));
-        if (res && res.constructor === Array) {
-          // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
-          // res[0] 代表取广告数组第一个数据
-          // containerId：广告容器ID
-          // window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
-          // window.AdverNativeTemplate = res[0];
-          console.log(JSON.stringify(res[0]));
-          if (window.AdverNativeTemplate === true) {
-            let container = document.getElementById('flowAdverYunpanId');
-            if (container != undefined) {
-              window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
-            } else {
-              console.log('flowAdverYunpanId is not ready');
-              setTimeout(function () {
-                container = document.getElementById('flowAdverYunpanId');
-                if (container != undefined) {
-                  window.TencentGDT.NATIVE.renderAd(res[0], 'flowAdverYunpanId');
-                }
-              }, 1000);
-            }
-            window.AdverNativeTemplate = false;
-          }
-          // this.$emit('adverNativeTemplateEvent');
-          console.log('信息流广告-2');
-        } else {
-          // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
-          // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
-          setTimeout(function () {
-            window.TencentGDT.NATIVE.loadAd('9094884362628825');
-          }, 3000);
-        }
-      },
-    });
-
-    // 详情页插入广告
-    window.TencentGDT.push({
-      app_id: '1201538404', // {String} - appid - 必填
-      placement_id: '4054888219125381', // {String} - 广告位id - 必填
-      type: 'native', // {String} - 原生广告类型 - 必填
-      // muid_type: '1', // {String} - 移动终端标识类型，1：imei，2：idfa，3：mac号 - 选填
-      // muid: '******', // {String} - 加密终端标识，详细加密算法见API说明 -  选填
-      count: 1, // {Number} - 拉取广告的数量，默认是3，最高支持10 - 选填
-      onComplete: function (res) {
-        console.log('详情页插入广告返回');
-
-        if (res && res.constructor === Array) {
-          // 原生模板广告位调用 window.TencentGDT.NATIVE.renderAd(res[0], 'containerId') 进行模板广告的渲染
-          // res[0] 代表取广告数组第一个数据
-          // containerId：广告容器ID
-          console.log(JSON.stringify(res[0]));
-
-          if (window.AdverDetailInsert === true) {
-            let container = document.getElementById('yunpanDetailAdvert');
-            if (container != undefined) {
-              window.TencentGDT.NATIVE.renderAd(res[0], 'yunpanDetailAdvert');
-            } else {
-              console.log('yunpanDetailAdvert is not ready');
-              setTimeout(function () {
-                container = document.getElementById('yunpanDetailAdvert');
-                if (container != undefined) {
-                  window.TencentGDT.NATIVE.renderAd(res[0], 'yunpanDetailAdvert');
-                }
-              }, 1000);
-            }
-            window.AdverDetailInsert = false;
-          }
-
-          // window.AdverDetailInsert = res[0];
-        } else {
-          // 加载广告API，如广告回调无广告，可使用loadAd再次拉取广告
-          // 注意：拉取广告频率每分钟不要超过20次，否则会被广告接口过滤，影响广告位填充率
-          setTimeout(function () {
-            window.TencentGDT.NATIVE.loadAd('4054888219125381');
-          }, 3000);
-        }
-      },
-    });
-
-    // H5 SDK接入全局只需运行一次
-    (function () {
-      var doc = document,
-        h = doc.getElementsByTagName('head')[0],
-        s = doc.createElement('script');
-      s.async = true;
-      s.src = 'https://qzs.gdtimg.com/union/res/union_sdk/page/h5_sdk/i.js';
-      h && h.insertBefore(s, h.firstChild);
-    })();
 
     // this.windowWidth = window.innerWidth;
     // window.onresize = () => {
