@@ -307,7 +307,7 @@ export default {
     //解决iphone移动端的延迟
     FastClick.attach(document.body);
     console.log('YunpanList mounted');
-    this.$bus.$on('logined', function (itemId) {
+    this.$bus.on('logined', function (itemId) {
       console.log('我是子组件方法' + itemId);
       this.$router.push({
         path: '/yunpan/d/' + itemId,

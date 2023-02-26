@@ -266,7 +266,7 @@ export default {
       window.TencentGDT.NATIVE.loadAd('4054888219125381');
     }, 100);
 
-    this.$bus.$on('logined', function (itemId) {
+    this.$bus.on('logined', function (itemId) {
       console.log('从yunpan detail页面已登陆' + itemId);
       window.location.href = `https://www.hjdang.com/yunpan/d/` + itemId;
 
