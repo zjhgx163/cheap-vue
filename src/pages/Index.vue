@@ -229,7 +229,7 @@
           :max-pages="maxPage"
           :boundary-numbers="false"
           :direction-links="true"
-          @input="pageNavigate"
+          @update:model-value="pageNavigate"
         >
         </q-pagination>
       </div>
@@ -475,6 +475,7 @@ export default {
     },
     //桌面端的分页
     pageNavigate() {
+      console.log('page is ' + this.current);
       this.$axios
         .post(`${global.config.domain}/goods/list`, {
           page: this.current,
