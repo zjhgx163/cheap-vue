@@ -123,7 +123,7 @@
           glossy
           :max-pages="maxPage"
           boundary-numbers
-          @input="pageNavigate"
+          @update:model-value="pageNavigate"
         >
         </q-pagination>
       </div>

@@ -118,7 +118,7 @@
                   :max-pages="maxPage"
                   :boundary-numbers="false"
                   :direction-links="true"
-                  @input="pageNavigate"
+                  @update:model-value="pageNavigate"
                   :disable="!isBigScreen"
                 >
                 </q-pagination>
