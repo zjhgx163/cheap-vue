@@ -95,7 +95,12 @@ export default {
       // isBigScreen: Screen.gt.sm ? true : false,
     };
   },
+  created() {
+    console.log('ResoureSideList created');
+  },
   mounted() {
+    console.log('ResoureSideList mounted');
+
     this.getItemList();
   },
   computed: {
@@ -186,6 +191,7 @@ export default {
           if (res.data.data.records.length < 20) {
             this.isListEnd = true;
           }
+          this.$q.loading.hide();
         });
     },
     itemClick(item) {
