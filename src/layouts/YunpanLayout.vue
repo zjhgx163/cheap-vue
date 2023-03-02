@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header reveal class="bg-primary text-grey-8 YL__750w">
+    <q-header reveal class="bg-primary text-grey-8 YL__750w q-pb-xs">
       <q-toolbar class="bg-secondary" v-bind:class="[itemPadding]">
         <div class="col-12 col-sm-10 justify-center">
           <q-input
@@ -33,7 +33,11 @@
         </div>
       </q-toolbar>
 
-      <q-toolbar class="q-mb-xs bg-secondary" v-bind:class="[itemPadding]">
+      <q-toolbar
+        v-if="$route.meta.isList"
+        class="q-mb-xs bg-secondary"
+        v-bind:class="[itemPadding]"
+      >
         <q-tabs
           dense
           align="left"
@@ -100,13 +104,15 @@
     </q-header>
 
     <q-page-container class="bg-primary YL__750w">
-      <keep-alive exclude="YunpanItemDetail">
-        <router-view @need-login="needLogin" ref="child" :key="$route.fullPath" />
-      </keep-alive>
+      <router-view v-slot="{ Component }">
+        <keep-alive include="YunpanList">
+          <component :is="Component" @need-login="needLogin" ref="child" :key="$route.fullPath" />
+        </keep-alive>
+      </router-view>
     </q-page-container>
 
     <q-footer reveal class="bg-secondary q-pt-none q-pb-xs">
-      <q-toolbar class="flex-center q-pr-lg q-py-xs">
+      <q-toolbar class="flex-center q-pr-lg q-py-xs" v-if="$route.meta.isList">
         <q-btn
           round
           color="pink-4"
@@ -117,6 +123,15 @@
           @click="addYunpanItem"
         />
       </q-toolbar>
+      <q-item v-if="!$route.meta.isList">
+        <q-item-section top side class="text-bold"> 声明：</q-item-section>
+        <q-item-section>
+          <q-item-label caption>
+            本站所有资源均由网友自发提供，本站不缓存、储存、下载、播放等，所列内容仅做学习和带宽测试，请于保存后24小时内自行删除。
+            如有侵权请根据内容页信息自行联系 阿里云盘官方 网站 进行处理。
+          </q-item-label>
+        </q-item-section>
+      </q-item>
     </q-footer>
     <login-qr
       :is-loading-qr="isLoadingQr"
@@ -165,7 +180,7 @@ export default {
     return {
       searchKey: '',
       host: global.config.domain,
-      itemPadding: Screen.gt.sm ? 'q-py-none' : 'q-py-xs',
+      itemPadding: Screen.gt.sm ? 'q-py-lg' : 'q-py-xs',
       userName: '',
       isLogin: false,
       isLoadingQr: false,

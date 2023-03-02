@@ -165,7 +165,7 @@ import FastClick from 'fastclick';
 import 'src/config';
 
 export default {
-  name: 'PageIndex',
+  name: 'YunpanList',
   data() {
     return {
       sort: 1,
