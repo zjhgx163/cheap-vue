@@ -259,6 +259,7 @@ import 'src/config';
 import HotList from '../components/HotList.vue';
 import { Screen } from 'quasar';
 import FastClick from 'fastclick';
+import useClipboard from 'vue-clipboard3';
 // import clipboard from 'src/clipboard';
 // import Clipboard from 'clipboard';
 // import $ from 'jquery';
@@ -339,16 +340,24 @@ export default {
     },
     copyPwd() {
       let that = this;
-      if (this.taobaoPwd != '')
-        this.$copyText(this.taobaoPwd).then(
-          function (e) {
-            console.log('this.taobaoPwd = ' + that.taobaoPwd);
-          },
-          function (e) {
-            alert('Can not copy');
-            console.log(e);
-          }
-        );
+      if (this.taobaoPwd != '') {
+        const { toClipboard } = useClipboard();
+        try {
+          toClipboard(this.taobaoPwd);
+          console.log('Copied to clipboard');
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      // this.$copyText(this.taobaoPwd).then(
+      //   function (e) {
+      //     console.log('this.taobaoPwd = ' + that.taobaoPwd);
+      //   },
+      //   function (e) {
+      //     alert('Can not copy');
+      //     console.log(e);
+      //   }
+      // );
     },
     turnInOrNotClick() {},
     commentClick() {},
