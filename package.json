@@ -16,7 +16,7 @@
     "fastclick": "^1.0.6",
     "quasar": "2",
     "vue": "3",
-    "vue-clipboard2": "^0.3.1",
+    "vue-clipboard3": "^2.0.0",
     "vue-i18n": "^9.2.2",
     "vue-router": "4",
     "vuex": "4"
