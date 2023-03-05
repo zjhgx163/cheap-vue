@@ -44,7 +44,7 @@ export default function (/* { store, ssrContext } */) {
         return savedPosition;
       } else {
         // 如果不是通过上述行为切换组件，就会让页面回到顶部
-        return { x: 0, y: 0 };
+        return { top: 0 };
       }
     },
     routes,
