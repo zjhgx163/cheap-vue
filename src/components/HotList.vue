@@ -10,7 +10,7 @@
               :to="{
                 path: 'item',
                 name: 'detail',
-                params: { id: item.id },
+                params: { urlCode: item.urlCode },
               }"
             >
               <img v-bind:src="item.thumbUrl" class="YL__hot_img" />

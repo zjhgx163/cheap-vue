@@ -15,6 +15,7 @@
               <div class="text-secondary YL__user_draw_text text-weight-thin YL__user_money">
                 可提现金额
               </div>
+
               <div class="text-amber-11 YL__user_money text-bold">
                 {{
                   userInfo.withdrawableAmount != undefined
@@ -23,6 +24,7 @@
                 }}
               </div>
             </div>
+
             <div v-if="$route.name == 'account'">
               <q-chip
                 color="accent text-bold"
@@ -32,17 +34,19 @@
                 clickable
                 @click="goWithdraw"
               >
-                去提现</q-chip
-              >
+                去提现
+              </q-chip>
             </div>
           </div>
         </div>
 
         <!-- <div class="column justify-center"></div> -->
       </div>
+
       <!-- <div class="YL__user_draw_text text-weight-thin YL__user_money">可提现金额(元)</div>
       <div class="text-amber-11 YL__user_money text-bold">¥ 0.00</div> -->
     </q-banner>
+
     <q-page-container class="bg-primary">
       <router-view :key="$route.fullPath" :userInfo="this.userInfo"> </router-view>
     </q-page-container>

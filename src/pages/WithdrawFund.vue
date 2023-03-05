@@ -175,12 +175,12 @@
 // inside of a Vue file
 
 export default {
-  props: ['userInfo'],
   data() {
     return {
       model: '1',
       withdrawAmount: '',
       host: global.config.domain,
+      userInfo: {},
     };
   },
   computed: {

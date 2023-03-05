@@ -118,7 +118,7 @@
                   :max-pages="maxPage"
                   :boundary-numbers="false"
                   :direction-links="true"
-                  @input="pageNavigate"
+                  @update:model-value="pageNavigate"
                   :disable="!isBigScreen"
                 >
                 </q-pagination>
@@ -171,6 +171,7 @@
 import 'src/config';
 import { Screen } from 'quasar';
 import FastClick from 'fastclick';
+import { inject } from 'vue';
 // import clipboard from 'src/clipboard';
 // import Clipboard from 'clipboard';
 // import $ from 'jquery';
@@ -195,6 +196,8 @@ export default {
       isBigScreen: Screen.gt.sm ? true : false,
     };
   },
+  emits: ['need-login', 'logined'],
+
   computed: {
     imagefullwidth: function () {
       return {
@@ -265,7 +268,7 @@ export default {
       window.TencentGDT.NATIVE.loadAd('4054888219125381');
     }, 100);
 
-    this.$on('logined', function (itemId) {
+    this.$bus.on('logined', function (itemId) {
       console.log('从yunpan detail页面已登陆' + itemId);
       window.location.href = `https://www.hjdang.com/yunpan/d/` + itemId;
 

@@ -63,7 +63,6 @@ import 'src/config';
 import FastClick from 'fastclick';
 
 export default {
-  name: 'Coupon',
   data() {
     return {
       couponList: [],

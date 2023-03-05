@@ -247,6 +247,7 @@
 
       <div class="q-my-xs q-pa-lg flex flex-center bg-secondary gt-sm">
         <q-pagination
+          gutter="md"
           v-model="current"
           :size="paginationSize"
           color="dark"
@@ -254,7 +255,7 @@
           :max-pages="maxPage"
           :boundary-numbers="false"
           :direction-links="true"
-          @input="pageNavigate"
+          @update:model-value="pageNavigate"
         >
         </q-pagination>
       </div>
@@ -500,6 +501,7 @@ export default {
     },
     //桌面端的分页
     pageNavigate() {
+      console.log('page is ' + this.current);
       this.$axios
         .post(`${global.config.domain}/goods/list`, {
           page: this.current,

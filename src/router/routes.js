@@ -1,5 +1,3 @@
-// import IndexTabLayout from  'layouts/IndexTabLayout.vue'
-
 const routes = [
   {
     path: '/',
@@ -7,49 +5,35 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('layouts/IndexLayout.vue'),
-        children: [
-          {
-            path: '',
-            // component: () => import('layouts/IndexTabLayout.vue'),
-            components: {
-              default: () => import('layouts/IndexTabLayout.vue'),
-              // hot: () => import('components/HotList.vue'),
-              hot: () => import('components/ResourceSideList.vue'),
-            },
-            children: [
-              {
-                path: '',
-                component: () => import('pages/Index.vue'),
-              },
-              {
-                path: 'rank',
-                component: () => import('pages/Index.vue'),
-              },
-              {
-                path: 'cheap',
-                component: () => import('pages/Index.vue'),
-              },
-              {
-                path: 'search',
-                name: 'search',
-                component: () => import('pages/Index.vue'),
-                props: (route) => ({ query: route.query.q }),
-              },
-            ],
-          },
-        ],
+        components: {
+          default: () => import('pages/Index.vue'),
+          // hot: () => import('components/HotList.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
       },
-      // {
-      // path: '/search',
-      // name: 'search',
-      // component: () => import('layouts/IndexLayout.vue'),
-      // children: [
-      //   { path: '', component: () => import('pages/Index.vue') },
-      //   { path: 'rank', component: () => import('pages/Index.vue') },
-      //   { path: 'cheap', component: () => import('pages/Index.vue') },
-      // ],
-      // },
+      {
+        path: 'rank',
+        components: {
+          default: () => import('pages/Index.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
+      },
+      {
+        path: 'cheap',
+        components: {
+          default: () => import('pages/Index.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
+      },
+      {
+        path: 'search',
+        name: 'search',
+        components: {
+          default: () => import('pages/Index.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
+        props: (route) => ({ query: route.query.q }),
+      },
       {
         path: 'item',
         component: () => import('layouts/DetailLayout.vue'),
@@ -76,13 +60,16 @@ const routes = [
       },
       {
         path: 'coupon',
-        component: () => import('layouts/CouponLayout.vue'),
+        components: {
+          default: () => import('layouts/CouponLayout.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
         children: [
           {
             path: '',
-            component: () => import('pages/Coupon.vue'),
+            component: () => import('src/pages/CouponPage.vue'),
           },
-          { path: ':tabId', component: () => import('pages/Coupon.vue') },
+          { path: ':tabId', component: () => import('src/pages/CouponPage.vue') },
         ],
       },
     ],
@@ -94,11 +81,13 @@ const routes = [
       {
         path: 'list',
         component: () => import('pages/YunpanList.vue'),
+        meta: { isList: true },
         props: (route) => ({ query: route.query.q, x: route.query.x }),
       },
       {
         path: 'list/:page',
         component: () => import('pages/YunpanList.vue'),
+        meta: { isList: true },
         props: (route) => ({ query: route.query.q }),
       },
       {
@@ -106,31 +95,26 @@ const routes = [
         component: () => import('pages/YunpanList.vue'),
         props: (route) => ({ query: route.query.q, page: route.query.page }),
       },
-      // {
-      //   path: 'd/:id',
-      //   component: () => import('pages/YunpanItemDetail.vue'),
-      // },
-      // {
-      //   path: 'p/:id',
-      //   component: () => import('pages/YunpanItemDetailShare.vue'),
-      // },
-      // {
-      //   path: 'search',
-      //   component: () => import('pages/YunpanList.vue'),
-      //   props: (route) => ({ query: route.query.q }),
-      // },
+      {
+        path: 'd/:id',
+        component: () => import('pages/YunpanItemDetail.vue'),
+      },
+      {
+        path: 'p/:id',
+        component: () => import('pages/YunpanItemDetailShare.vue'),
+      },
     ],
   },
-  {
-    path: '/yunpan/d/',
-    component: () => import('layouts/YunpanDetailLayout.vue'),
-    children: [{ path: ':id', component: () => import('pages/YunpanItemDetail.vue') }],
-  },
-  {
-    path: '/yunpan/p/',
-    component: () => import('layouts/YunpanDetailLayout.vue'),
-    children: [{ path: ':id', component: () => import('pages/YunpanItemDetailShare.vue') }],
-  },
+  // {
+  //   path: '/yunpan/d/',
+  //   component: () => import('layouts/YunpanDetailLayout.vue'),
+  //   children: [{ path: ':id', component: () => import('pages/YunpanItemDetail.vue') }],
+  // },
+  // {
+  //   path: '/yunpan/p/',
+  //   component: () => import('layouts/YunpanDetailLayout.vue'),
+  //   children: [{ path: ':id', component: () => import('pages/YunpanItemDetailShare.vue') }],
+  // },
 
   {
     path: '/user',
@@ -142,7 +126,7 @@ const routes = [
         name: 'account',
         component: () => import('pages/UserM.vue'),
       },
-      { path: 'withdraw', name: 'withdraw', component: () => import('pages/Withdraw.vue') },
+      { path: 'withdraw', name: 'withdraw', component: () => import('pages/WithdrawFund.vue') },
     ],
   },
 
@@ -170,14 +154,14 @@ const routes = [
 
   {
     path: '/auth/:urlCode',
-    component: () => import('pages/Auth.vue'),
+    component: () => import('src/pages/AuthJumper.vue'),
     props: (route) => ({
       code: route.query.code,
       state: route.query.state,
     }),
   },
 
-  { path: '/contact', component: () => import('pages/Contact.vue') },
+  { path: '/contact', component: () => import('src/pages/ContactMe.vue') },
   { path: '/help', component: () => import('pages/UploadWechatqrHelp.vue') },
 
   // Always leave this as last one,
@@ -195,7 +179,7 @@ const routes = [
   // },
 
   {
-    path: '*',
+    path: '/:catchAll(.*)*',
     component: () => import('pages/Error404.vue'),
   },
 ];

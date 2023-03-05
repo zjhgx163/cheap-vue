@@ -1,4 +1,4 @@
-import Vue from 'vue';
+// import Vue from 'vue';
 import axios from 'axios';
 import { LocalStorage } from 'quasar';
 // 请求带cookie
@@ -26,4 +26,9 @@ axios.interceptors.response.use(
   }
 );
 
-Vue.prototype.$axios = axios;
+// Vue.prototype.$axios = axios;
+export default ({ app }) => {
+  app.config.globalProperties.$axios = axios;
+  // app.config.globalProperties.$api = api;
+};
+export { axios };

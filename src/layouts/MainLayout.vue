@@ -1,8 +1,8 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-primary">
-    <q-header class="bg-primary text-grey-8">
-      <q-toolbar class="q-mb-sm bg-secondary" v-bind:class="[itemPadding]">
-        <div class="YL__1200w row justify-between">
+    <q-header class="bg-primary text-grey-8 q-pb-xs">
+      <q-toolbar class="bg-secondary column q-mb-xs" v-bind:class="[itemPadding]">
+        <div class="row justify-between YL__1200w">
           <div class="col-12 col-sm-6 row items-center justify-between q-pa-xs">
             <div class="col-4 col-sm-3 q-pa-xs">
               <router-link :to="{ path: '/' }">
@@ -57,48 +57,69 @@
             <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
               <a class="text-grey-9 text-weight-bold text-subtitle2"> 登出</a>
             </q-btn>
-
-            <!-- <div class="row q-gutter-sm gt-xs">
-              <q-avatar size="2.5em">
-                <img src="https://cdn.quasar.dev/img/avatar.png" />
-              </q-avatar>
-            </div> -->
           </div>
-
-          <!-- <q-space /> -->
-
-          <!-- <div class="q-gutter-sm row no-wrap"> -->
-          <!-- <q-btn round dense flat color="grey-8" icon="smiling-face-outline" v-if="$q.screen.gt.sm">
-            <q-tooltip>Create a video or post</q-tooltip>
-          </q-btn>
-          <q-btn round dense flat color="grey-8" icon="apps" v-if="$q.screen.gt.sm">
-            <q-tooltip>Apps</q-tooltip>
-          </q-btn>
-          <q-btn round dense flat color="grey-8" icon="message" v-if="$q.screen.gt.sm">
-            <q-tooltip>Messages</q-tooltip>
-          </q-btn>
-          <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge color="red" text-color="white" floating> 2 </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
-          </q-btn> -->
-          <!-- <q-btn round flat>
-            <q-avatar size="26px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-            </q-avatar>
-            <q-tooltip>Account</q-tooltip>
-          </q-btn> -->
-          <!-- <q-btn flat dense outline label="登陆" />
-          <q-btn flat dense outline label="注册" /> -->
-          <!-- </div> -->
         </div>
       </q-toolbar>
+
+      <!-- <div class="col-4"></div>
+      </div> -->
     </q-header>
     <!-- <q-drawer show-if-above :width="300" content-class="bg-primary text-white"> </q-drawer> -->
 
     <q-page-container class="bg-primary">
-      <keep-alive exclude="DetailLayout">
-        <router-view />
-      </keep-alive>
+      <div class="row YL__1200w">
+        <div class="col">
+          <div class="bg-secondary row justify-between q-pa-sm">
+            <q-tabs
+              v-model="selectedTab"
+              dense
+              align="left"
+              active-color="accent"
+              indicator-color="accent"
+              content-class="text-grey-10"
+            >
+              <q-route-tab to="/" label="首页" name="main" />
+              <q-route-tab to="/cheap" label="白菜" name="cheap" />
+              <q-route-tab to="/rank" label="排行榜" name="rank" />
+            </q-tabs>
+            <!-- <q-space /> -->
+            <q-btn-dropdown color="secondary" text-color="grey" flat dense :label="sort">
+              <q-list>
+                <q-item clickable v-close-popup @click="sortClick" tabindex="2">
+                  <q-item-section>
+                    <q-item-label caption>时间排序</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item clickable v-close-popup @click="sortClick" tabindex="1">
+                  <q-item-section>
+                    <q-item-label caption>推荐排序</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+          </div>
+          <router-view v-slot="{ Component }">
+            <KeepAlive>
+              <component
+                :is="Component"
+                :key="$route.fullPath"
+                ref="goods-list"
+                :sort="sortIndex"
+              />
+            </KeepAlive>
+          </router-view>
+        </div>
+        <div v-if="$q.screen.gt.sm" class="col-4">
+          <router-view name="hot"></router-view>
+        </div>
+      </div>
+
+      <!-- <router-view /> -->
+      <!-- <router-view v-slot="{ Component }">
+        <keep-alive exclude="DetailLayout">
+          <component :is="Component" />
+        </keep-alive>
+      </router-view> -->
     </q-page-container>
 
     <!-- <q-drawer side="right" :width="300" show-if-above content-class="bg-primary text-white">
@@ -206,6 +227,9 @@ export default {
       isLoadingQr: false,
       isLogin: false,
       avatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
+      selectedTab: 'main',
+      sort: '时间排序',
+      sortIndex: 2,
     };
   },
   created() {
@@ -333,6 +357,13 @@ export default {
     //   this.isSearchHidden = data;
     //   this.isCouponHidden = data;
     // },
+
+    sortClick(event) {
+      this.sort = event.currentTarget.getAttribute('tabindex') == 2 ? '时间排序' : '推荐排序';
+      this.sortIndex = event.currentTarget.getAttribute('tabindex');
+      // 用$refs是非reactive,sortIndex变了但：sort="sortIndex"这里不会改变getItemList里的参数sort的值，所以只能加一个参数this.sortIndex传过去
+      this.$refs['goods-list'].getItemList(this.sortIndex);
+    },
   },
 };
 </script>
@@ -377,9 +408,18 @@ export default {
     -webkit-mask-size: 200%
     animation: shine 2s linear infinite
 
+
 @keyframes shine
   from
     -webkit-mask-position: 150%
   to
     -webkit-mask-position: -50%
+
+.q-tab__label
+  @media(max-width: $breakpoint-xs-max)
+   font-size: 0.9em
+   font-weight: 600
+  @media(min-width: $breakpoint-xs-max)
+   font-size: 1.0em
+   font-weight: 700
 </style>

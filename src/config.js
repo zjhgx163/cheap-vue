@@ -17,6 +17,7 @@ if (fullCurrentDomain.indexOf(domainDev) > -1) {
 } else if (fullCurrentDomain.indexOf(domainPro) > -1) {
   // 生产环境
   domain = 'https://web.hjdang.com';
+  isProEnv = true;
 } else {
   // 本地调试
   domain = 'http://192.168.0.108:8238';
@@ -32,6 +33,7 @@ global.config = {
   mutiLanguage: true, // 是否开启多语言
   defaultLanguage: 'en', // 默认语言 cn en id 只有在开启mutiLanguage下有效
   domain,
+  isProEnv,
 };
 
 // console.log('+++++++');
