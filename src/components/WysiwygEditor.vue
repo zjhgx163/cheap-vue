@@ -99,6 +99,7 @@ export default {
     },
   },
   props: ['isEditorShow'], // 微信auth code
+  emits: ['editor-show-changed'],
 
   mounted() {
     console.log('WysisygEditor is mounted');

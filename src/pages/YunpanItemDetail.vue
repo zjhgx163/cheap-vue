@@ -196,6 +196,8 @@ export default {
       isBigScreen: Screen.gt.sm ? true : false,
     };
   },
+  emits: ['need-login', 'logined'],
+
   computed: {
     imagefullwidth: function () {
       return {

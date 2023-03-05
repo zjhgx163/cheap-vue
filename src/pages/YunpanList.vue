@@ -194,6 +194,7 @@ export default {
     };
   },
   props: ['query', 'page', 'x'],
+  emits: ['need-login', 'logined'],
 
   computed: {
     itemPadding: function () {

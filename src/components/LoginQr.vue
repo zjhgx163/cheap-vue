@@ -39,6 +39,7 @@ export default {
   data() {
     return {};
   },
+  emits: ['login-card-changed'],
   computed: {
     loadingQr: {
       set: function (newV) {
