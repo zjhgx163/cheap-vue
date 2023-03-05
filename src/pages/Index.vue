@@ -222,6 +222,7 @@
       </q-infinite-scroll>
       <div class="q-my-xs q-pa-lg flex flex-center bg-secondary gt-sm">
         <q-pagination
+          gutter="md"
           v-model="current"
           :size="paginationSize"
           color="dark"

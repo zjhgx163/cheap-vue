@@ -114,6 +114,7 @@
         <q-tooltip> 输入页码跳转</q-tooltip>
 
         <q-pagination
+          gutter="sm"
           input
           :input-class="'bg-secondary text-dark'"
           v-model="current"
