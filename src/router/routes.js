@@ -5,6 +5,8 @@ const routes = [
     children: [
       {
         path: '',
+        meta: { isGoodsList: true },
+
         components: {
           default: () => import('pages/Index.vue'),
           // hot: () => import('components/HotList.vue'),
@@ -13,6 +15,8 @@ const routes = [
       },
       {
         path: 'rank',
+        meta: { isGoodsList: true },
+
         components: {
           default: () => import('pages/Index.vue'),
           hot: () => import('components/ResourceSideList.vue'),
@@ -20,6 +24,8 @@ const routes = [
       },
       {
         path: 'cheap',
+        meta: { isGoodsList: true },
+
         components: {
           default: () => import('pages/Index.vue'),
           hot: () => import('components/ResourceSideList.vue'),
@@ -28,6 +34,8 @@ const routes = [
       {
         path: 'search',
         name: 'search',
+        meta: { isGoodsList: true },
+
         components: {
           default: () => import('pages/Index.vue'),
           hot: () => import('components/ResourceSideList.vue'),

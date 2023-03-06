@@ -71,10 +71,10 @@
     height: 2.7em
     color: rgba(0, 0, 0, 0.54)
     line-height: 1.2em
-  &__title_height
-    height: 3.2em
-  &__list_line_height
-    line-height: 22px !important
+  &__r_title_height
+    height: 2.9em
+  &__r_list_line_height
+    line-height: 1.6em !important
   &__no_data
     @media(max-width: $breakpoint-xs-max)
       height: 5em
@@ -90,8 +90,8 @@ export default {
     return {
       listData: [],
       fontFamily: 'YL__title_font_family',
-      lineHeight: 'YL__list_line_height',
-      titleHeight: 'YL__title_height',
+      lineHeight: 'YL__r_list_line_height',
+      titleHeight: 'YL__r_title_height',
       // isBigScreen: Screen.gt.sm ? true : false,
     };
   },

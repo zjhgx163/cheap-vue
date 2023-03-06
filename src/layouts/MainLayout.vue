@@ -69,7 +69,7 @@
     <q-page-container class="bg-primary">
       <div class="row YL__1200w">
         <div class="col">
-          <div class="bg-secondary row justify-between q-pa-sm">
+          <div class="bg-secondary row justify-between q-pa-sm" v-if="$route.meta.isGoodsList">
             <q-tabs
               v-model="selectedTab"
               dense
@@ -393,8 +393,9 @@ export default {
       color: #000
   &__title_font_family
     font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif
+
   &__list_line_height
-    line-height: 24px !important
+    line-height: 1.5em !important
   &__list_font_size
     font-size: 14px
   &__coupon_text_effect
