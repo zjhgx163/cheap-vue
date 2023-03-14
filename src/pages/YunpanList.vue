@@ -162,7 +162,7 @@
 <script>
 import { matTurnedInNot } from '@quasar/extras/material-icons';
 import { Screen } from 'quasar';
-import FastClick from 'fastclick';
+// import FastClick from 'fastclick';
 import 'src/config';
 
 export default {
@@ -307,7 +307,7 @@ export default {
 
   mounted() {
     //解决iphone移动端的延迟
-    FastClick.attach(document.body);
+    // FastClick.attach(document.body);
     console.log('YunpanList mounted');
     this.$bus.on('logined', function (itemId) {
       console.log('我是子组件方法' + itemId);
