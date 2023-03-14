@@ -170,7 +170,7 @@
 <script>
 import 'src/config';
 import { Screen } from 'quasar';
-import FastClick from 'fastclick';
+// import FastClick from 'fastclick';
 import { inject } from 'vue';
 // import clipboard from 'src/clipboard';
 // import Clipboard from 'clipboard';
@@ -260,7 +260,7 @@ export default {
   },
   mounted() {
     //解决iphone移动端的延迟
-    FastClick.attach(document.body);
+    // FastClick.attach(document.body);
     console.log('yunpanItemDetail mounted');
     // 详情页插入广告
     window.AdverDetailInsert = true;

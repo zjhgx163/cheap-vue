@@ -152,7 +152,7 @@
 
 <script>
 import { Screen } from 'quasar';
-import FastClick from 'fastclick';
+// import FastClick from 'fastclick';
 import 'src/config';
 
 export default {
@@ -243,7 +243,7 @@ export default {
 
   mounted() {
     //解决iphone移动端的延迟
-    FastClick.attach(document.body);
+    // FastClick.attach(document.body);
     // this.selectedTab = 'main';
     this.getOrderList(this.userId, this.status);
 

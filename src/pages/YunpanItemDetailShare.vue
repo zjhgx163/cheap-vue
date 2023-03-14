@@ -188,7 +188,7 @@
 <script>
 import 'src/config';
 import { Screen } from 'quasar';
-import FastClick from 'fastclick';
+// import FastClick from 'fastclick';
 // import clipboard from 'src/clipboard';
 // import Clipboard from 'clipboard';
 // import $ from 'jquery';
@@ -272,7 +272,7 @@ export default {
 
   mounted() {
     //解决iphone移动端的延迟
-    FastClick.attach(document.body);
+    // FastClick.attach(document.body);
     console.log('yunpan item mounted');
 
     this.$q.loading.show({

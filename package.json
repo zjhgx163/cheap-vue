@@ -13,7 +13,6 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
-    "fastclick": "^1.0.6",
     "quasar": "2",
     "vue": "3",
     "vue-clipboard3": "^2.0.0",
