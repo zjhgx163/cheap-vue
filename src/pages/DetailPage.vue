@@ -247,7 +247,7 @@
         </div>
       </div>
       <!-- 右边栏 -->
-      <div class="col-3 gt-md">
+      <div v-if="isBigScreen" class="col-3 gt-md">
         <HotList />
       </div>
     </div>
@@ -257,11 +257,15 @@
 <script>
 import 'src/config';
 import HotList from '../components/HotList.vue';
-import { Screen } from 'quasar';
+// import { Screen } from 'quasar';
 // import FastClick from 'fastclick';
-import useClipboard from 'vue-clipboard3';
-// import clipboard from 'src/clipboard';
-// import Clipboard from 'clipboard';
+// if (process.env.SerCLIENTver) {
+//   import useClipboard from 'vue-clipboard3';
+// }
+import { useGoodsStore } from 'stores/goods';
+import { Loading } from 'quasar';
+import { mapState } from 'pinia';
+
 // import $ from 'jquery';
 
 export default {
@@ -275,7 +279,8 @@ export default {
       categoryInfo: [],
       turnInOrNot: 'turned_in_not',
       comment: 'comment',
-      buttonSize: Screen.gt.sm ? '12px' : '9px',
+      isBigScreen: false,
+      // buttonSize: Screen.gt.sm ? '12px' : '9px',
       host: global.config.domain,
       isTaoPwd: false,
       showing: false,
@@ -285,10 +290,21 @@ export default {
     };
   },
   computed: {
+    ...mapState(useGoodsStore, {
+      _detail: 'detail',
+      _detailParts: 'detailParts',
+      _bigImages: 'bigImages',
+      _couponInfo: 'couponInfo',
+      _categoryInfo: 'categoryInfo',
+      _userAgent: 'userAgent',
+    }),
     imagefullwidth: function () {
       return {
-        'full-width': Screen.gt.sm ? false : true,
+        'full-width': this.isBigScreen ? false : true,
       };
+    },
+    buttonSize: function () {
+      return this.isBigScreen ? '12px' : '9px';
     },
   },
   props: ['taobaoCode'], // 微信auth code
@@ -296,17 +312,59 @@ export default {
   components: {
     HotList,
   },
+  // our hook here
+  preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
+    console.log('Detail page prefetch');
+    // const $q = useQuasar();
+    // fetch data, validate route and optionally redirect to some other route...
+    Loading.show();
+
+    // ssrContext is available only server-side in SSR mode
+
+    // No access to "this" here
+
+    // Return a Promise if you are running an async job
+    // Example:
+    const myStore = useGoodsStore(store);
+    if (process.env.SERVER) {
+      myStore.userAgent = ssrContext.req.headers['user-agent'];
+    }
+    return myStore.getGoodDetail(currentRoute.params.urlCode, redirect);
+  },
+  created() {
+    console.log('Detail page created');
+    this.detail = this._detail;
+
+    this.detailParts = this._detailParts;
+
+    this.bigImages = this._bigImages;
+
+    this.couponInfo = this._couponInfo;
+
+    // this.categoryInfo = this._categoryInfo;
+    // console.log('5' + this._categoryInfo);
+  },
 
   mounted() {
-    //解决iphone移动端的延迟
-    // FastClick.attach(document.body);
     console.log('DetailPage mounted');
-
-    this.$q.loading.show({
-      delay: 400, // ms
-    });
-
-    this.getItemDetail(this.$route.params.urlCode);
+    let windowWidth = window.screen.width;
+    if (windowWidth > 1023.99) {
+      this.isBigScreen = true;
+    }
+    if (this.isTaobaoPwd()) {
+      this.isTaoPwd = true;
+      // this.taobaoPwd = this.detail.taobaoPwd;
+    }
+    if (this.taobaoCode !== '' && this.taobaoCode !== undefined) {
+      this.taobaoPwd = this.taobaoCode;
+      this.isShowCopyTaobaopwd = true;
+    }
+    if (!this.detail) {
+      this.$q.loading.show({
+        delay: 400, // ms
+      });
+      this.getItemDetail(this.$route.params.urlCode);
+    }
   },
   methods: {
     getItemDetail(str) {
@@ -325,23 +383,25 @@ export default {
           this.couponInfo = JSON.parse(this.detail.couponInfo);
         }
         this.categoryInfo = JSON.parse(this.detail.categoryText);
-        console.log('taobaoPwd = ' + this.taobaoCode);
-        if (this.isTaobaoPwd()) {
-          this.isTaoPwd = true;
-          // this.taobaoPwd = this.detail.taobaoPwd;
-        }
-        if (this.taobaoCode !== '' && this.taobaoCode !== undefined) {
-          this.taobaoPwd = this.taobaoCode;
-          this.isShowCopyTaobaopwd = true;
-        }
+        // console.log('taobaoPwd = ' + this.taobaoCode);
+        // if (this.isTaobaoPwd()) {
+        //   this.isTaoPwd = true;
+        //   // this.taobaoPwd = this.detail.taobaoPwd;
+        // }
+        // if (this.taobaoCode !== '' && this.taobaoCode !== undefined) {
+        //   this.taobaoPwd = this.taobaoCode;
+        //   this.isShowCopyTaobaopwd = true;
+        // }
 
         this.$q.loading.hide();
       });
     },
-    copyPwd() {
+    async copyPwd() {
       let that = this;
       if (this.taobaoPwd != '') {
-        const { toClipboard } = useClipboard();
+        let obj = await import('vue-clipboard3');
+        const { toClipboard } = obj.default();
+        // const { toClipboard } = useClipboard();
         try {
           toClipboard(this.taobaoPwd);
           console.log('Copied to clipboard');
@@ -641,7 +701,13 @@ export default {
     },
 
     isWeixin() {
-      var ua = window.navigator.userAgent.toLowerCase();
+      let ua;
+      if (process.env.CLIENT) {
+        ua = window.navigator.userAgent.toLowerCase();
+      } else {
+        ua = this._userAgent.toLowerCase();
+      }
+
       console.log(ua);
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         return true;

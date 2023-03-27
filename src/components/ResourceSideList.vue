@@ -84,6 +84,8 @@
       width: 12em
 </style>
 <script>
+import { useYunpanStore } from 'src/stores/yunpan';
+import { mapWritableState } from 'pinia';
 export default {
   name: 'ResoureSideList',
   data() {
@@ -97,16 +99,19 @@ export default {
   },
   created() {
     console.log('ResoureSideList created');
+    this.listData = this._listData;
   },
   mounted() {
     console.log('ResoureSideList mounted');
 
-    this.getItemList();
+    if (this.listData.length === 0) {
+      this.getItemList();
+    }
   },
   computed: {
-    // textSize: function () {
-    //   return this.isBigScreen ? 'text-h7' : 'text-body2';
-    // },
+    ...mapWritableState(useYunpanStore, {
+      _listData: 'sideItems',
+    }),
 
     getTagColor: function () {
       return (parameter) => {
@@ -171,7 +176,21 @@ export default {
       };
     },
   },
+  // our hook here
+  preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
+    console.log('ResourceSideList prefetch');
+    const yunpanStore = useYunpanStore(store);
+    return yunpanStore.getSideYunpanList();
+    // return new Promise((resolve) => {
+    //   resolve();
+    // }).then(() => {
+    //   console.log('66666666');
 
+    //   Loading.hide();
+    // });
+
+    // return store.dispatch('fetchItem', currentRoute.params.id);
+  },
   methods: {
     getItemList() {
       // console.log('$$$$$$' + this.query);
@@ -186,11 +205,8 @@ export default {
           // console.log(res.data.data);
           // console.log(this.isBigScreen);
 
-          console.log(res.data);
           this.listData = res.data.data.records;
-          if (res.data.data.records.length < 20) {
-            this.isListEnd = true;
-          }
+
           this.$q.loading.hide();
         });
     },

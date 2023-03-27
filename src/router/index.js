@@ -29,12 +29,18 @@ console.log(process.env.ROUTE_YUNPAN + ` #############`);
  * with the Router instance.
  */
 
-export default function (/* { store, ssrContext } */) {
+export default function ({ store, ssrContext }) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : process.env.VUE_ROUTER_MODE === 'history'
     ? createWebHistory
     : createWebHashHistory;
+
+  // if (process.env.SERVER) {
+  //   console.log('xxxxxx' + ssrContext.req.url);
+  // } else {
+  //   console.log('isClient?' + process.env.CLIENT);
+  // }
 
   const Router = new createRouter({
     // scrollBehavior: () => ({ x: 0, y: 0 }),

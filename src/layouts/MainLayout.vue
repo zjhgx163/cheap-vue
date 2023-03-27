@@ -98,18 +98,20 @@
               </q-list>
             </q-btn-dropdown>
           </div>
+          <!--  -->
+
           <router-view v-slot="{ Component }">
             <KeepAlive>
               <component
                 :is="Component"
                 :key="$route.fullPath"
-                ref="goods-list"
                 :sort="sortIndex"
+                ref="goods-list"
               />
             </KeepAlive>
           </router-view>
         </div>
-        <div v-if="$q.screen.gt.sm" class="col-4">
+        <div v-if="$q.platform.is.desktop || isBigScreen" class="col-4">
           <router-view name="hot"></router-view>
         </div>
       </div>
@@ -205,7 +207,7 @@
 
 <script>
 // import { fabYoutube } from '@quasar/extras/fontawesome-v5';
-import { Screen } from 'quasar';
+// import { Screen } from 'quasar';
 import 'src/config';
 
 export default {
@@ -215,9 +217,9 @@ export default {
     return {
       searchKey: '',
       drawer: false,
-      logoWidth: Screen.gt.sm ? '110px' : '110px',
+      logoWidth: '110px',
       host: global.config.domain,
-      itemPadding: Screen.gt.sm ? 'q-py-none' : 'q-py-xs',
+      isBigScreen: false,
       isSearchHidden: false,
       isCouponHidden: false,
       loginCard: false,
@@ -232,13 +234,30 @@ export default {
       sortIndex: 2,
     };
   },
+  computed: {
+    itemPadding: function () {
+      return this.$q.platform.is.desktop || this.isBigScreen ? 'q-py-none' : 'q-py-xs';
+    },
+  },
   created() {
     console.log('MainLayout created');
+    // const $q = useQuasar();
+    // console.log('v-if ' + this.$q.screen.gt.sm);
     // this.fabYoutube = fabYoutube;
+  },
+  beforeMount() {
+    console.log('MainLayout before mounted');
+
+    // console.log('window.screen.width = ' + window.screen.width);
+    let windowWidth = window.screen.width;
+    if (windowWidth > 1023.99) {
+      this.isBigScreen = true;
+    }
   },
 
   mounted() {
     console.log('MainLayout mounted');
+
     if (this.$q.localStorage.has('userInfo')) {
       let userInfo = this.$q.localStorage.getItem('userInfo');
       console.log(userInfo);

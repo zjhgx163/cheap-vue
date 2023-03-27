@@ -160,10 +160,11 @@
 </style>
 
 <script>
-import { matTurnedInNot } from '@quasar/extras/material-icons';
-import { Screen } from 'quasar';
-// import FastClick from 'fastclick';
-import 'src/config';
+// import { Screen } from 'quasar';
+// import 'src/config';
+import { useYunpanStore } from 'stores/yunpan.js';
+import { mapWritableState } from 'pinia';
+import { Loading } from 'quasar';
 
 export default {
   name: 'YunpanList',
@@ -173,23 +174,23 @@ export default {
       listData: [],
       current: 1,
       max: 6,
-
-      isBigScreen: Screen.gt.sm ? true : false,
+      isBigScreen: false,
       isNormal: true,
       fontFamily: 'YL__title_font_family',
       lineHeight: 'YL__list_line_height',
       textAccent: 'text-accent',
-      paginationSize: Screen.gt.sm ? '18px' : '15px',
-      maxPage: Screen.gt.sm ? 6 : 4,
+      // paginationSize: Screen.gt.sm ? '18px' : '15px',
+      // maxPage: Screen.gt.sm ? 6 : 4,
       titleHeight: 'YL__title_height',
-      pricePading: Screen.gt.sm ? 'q-pt-xs q-pb-sm' : 'q-pt-xs',
+      // pricePading: Screen.gt.sm ? 'q-pt-xs q-pb-sm' : 'q-pt-xs',
       isListEnd: false,
-      pageNavigateHidden: !Screen.gt.sm,
+      pageNavigateHidden: true,
       stopLoading: false,
       loadTimes: 0,
       gapIndex: 0, //refersh之前的load次数
       pageParams: null,
       adverPlay: null, //防止信息流广告重复播放
+      category: this.$route.params.category,
       // category: '',
       // to: false,
     };
@@ -198,6 +199,25 @@ export default {
   emits: ['need-login', 'logined'],
 
   computed: {
+    ...mapWritableState(useYunpanStore, {
+      _listData: 'items',
+      _isListEnd: 'isListEnd',
+      _pageNavigateHidden: 'pageNavigateHidden',
+      _stopLoading: 'stopLoading',
+      _max: 'max',
+    }),
+    paginationSize() {
+      return this.isBigScreen ? '18px' : '15px';
+    },
+    maxPage() {
+      return this.isBigScreen ? 6 : 4;
+    },
+    pricePading() {
+      return this.isBigScreen ? 'q-pt-xs q-pb-sm' : 'q-pt-xs';
+    },
+    // pageNavigateHidden() {
+    //   return !this.isBigScreen;
+    // },
     itemPadding: function () {
       return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
     },
@@ -278,37 +298,50 @@ export default {
       };
     },
   },
-  // watch: {
-  //   $route(to, from) {
-  //     this.getItemList();
-  //   },
-  // },
+  // our hook here
+  preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
+    console.log('YunpanList prefetch');
+    // fetch data, validate route and optionally redirect to some other route...
+    console.log('path = ' + currentRoute.params.category);
+    Loading.show();
 
-  // beforeRouteEnter(to, from, next) {
-  //   if (from.name == 'search' && to.name == 'search') {
-  //     console.log('dsd');
-  //     this.getItemList();
-  //     next();
-  //   } else {
-  //     log.info('ffff');
+    // ssrContext is available only server-side in SSR mode
 
-  //     next();
-  //   }
-  // },
-  // beforeCreate() {
-  //   this.$q.loading.show({
-  //     delay: 400, // ms
-  //   });
-  // },
+    // No access to "this" here
+
+    // Return a Promise if you are running an async job
+    // Example:
+    const myStore = useYunpanStore();
+    console.log(myStore.prefetchFlag);
+
+    myStore.prefetchFlag = 1;
+
+    return myStore.getItemList(
+      currentRoute.params.page === undefined ? currentRoute.query.page : currentRoute.params.page,
+      currentRoute.query.q,
+      currentRoute.params.category,
+      currentRoute.query.x,
+      redirect
+    );
+  },
 
   created() {
     console.log('YunpanList created');
+    this.listData = this._listData;
+    this.isListEnd = this._isListEnd;
+    this.max = this._max;
+    this.pageNavigateHidden = this._pageNavigateHidden;
+    this.stopLoading = this._stopLoading;
   },
 
   mounted() {
-    //解决iphone移动端的延迟
-    // FastClick.attach(document.body);
-    console.log('YunpanList mounted');
+    console.log('YunpanList mounted' + this.category);
+    console.log('this q is' + this.query);
+    let windowWidth = window.screen.width;
+    if (windowWidth > 1023.99) {
+      this.isBigScreen = true;
+      this.pageNavigateHidden = false;
+    }
     this.$bus.on('logined', function (itemId) {
       console.log('我是子组件方法' + itemId);
       this.$router.push({
@@ -338,7 +371,12 @@ export default {
     //   // console.log('parent =' + this.$parent.name);
     //   // this.$parent.$parent.categoryTab = this.tag;
     // }
-    this.getItemList();
+    const yunpanStore = useYunpanStore();
+    if (yunpanStore.prefetchFlag === 0 || !this.listData) {
+      this.getItemList();
+    } else {
+      yunpanStore.prefetchFlag = 0; //还原是否call到prefetch标志
+    }
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
     // 如果不是搜索结果播放模版广告
@@ -371,7 +409,7 @@ export default {
     }
   },
   activated() {
-    console.log('YunpanList activated ' + this.$route.params.category);
+    console.log('YunpanList activated ' + this.category);
     console.log('this.isListEnd =' + this.isListEnd);
     if (this.x === undefined || this.x === null) {
       if (this.adverPlay == null) {
@@ -392,8 +430,14 @@ export default {
     this.isListEnd = false;
   },
   deactivated() {
-    console.log('YunpanList deactivated');
+    console.log('YunpanList deactivated' + this.category);
     this.adverPlay = null;
+  },
+
+  unmounted() {
+    console.log('YunpanList unmounted' + this.category);
+    const yunpanStore = useYunpanStore();
+    yunpanStore.prefetchFlag = 0; //还原是否call到prefetch标志
   },
 
   methods: {

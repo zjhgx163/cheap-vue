@@ -1,23 +1,41 @@
 // import Vue from 'vue';
+import { boot } from 'quasar/wrappers';
 import axios from 'axios';
 import { LocalStorage } from 'quasar';
+// import { useLoginStore } from 'stores/login';
 // 请求带cookie
 axios.defaults.withCredentials = true;
+
+// axios.interceptors.request.use((req) => {
+//   console.log('request');
+//   console.log(`${JSON.stringify(req, null, 2)}`);
+//   // you must return the request object after you are done
+//   return req;
+// });
+
 axios.interceptors.response.use(
   function (response) {
-    // Do something with response data
-    // console.log(response);
+    console.log('response');
     let isLogin = response.headers['is-login'];
     console.log('isLogin = ' + isLogin);
-    if (isLogin == 'false') {
-      console.log('is-Login is false');
-      if (LocalStorage.has('userInfo')) {
-        // console.log(LocalStorage.getItem('userInfo'));
-        console.log('remove userInfo');
+    // console.log('xxxcxcxcxcx');
 
-        LocalStorage.remove('userInfo');
+    // const loginStore = useLoginStore();
+    // console.log(loginStore);
+
+    //ssr时，返回的isLogin总是false，因为ssr的cookie和浏览器上的是不一样的
+
+    if (process.env.CLIENT) {
+      if (isLogin == 'false') {
+        if (LocalStorage.has('userInfo')) {
+          // console.log(LocalStorage.getItem('userInfo'));
+          console.log('remove userInfo');
+
+          LocalStorage.remove('userInfo');
+        }
       }
     }
+
     return response;
   },
   function (error) {
@@ -27,8 +45,10 @@ axios.interceptors.response.use(
 );
 
 // Vue.prototype.$axios = axios;
-export default ({ app }) => {
+export default boot(({ app, store }) => {
+  // const loginStore = useLoginStore(store);
+
   app.config.globalProperties.$axios = axios;
   // app.config.globalProperties.$api = api;
-};
+});
 export { axios };

@@ -12,35 +12,56 @@ const routes = [
           // hot: () => import('components/HotList.vue'),
           hot: () => import('components/ResourceSideList.vue'),
         },
+        props: {
+          default: (route) => ({
+            sort: route.query.sort,
+          }),
+          hot: false,
+        },
       },
       {
-        path: 'rank',
+        path: 'list/:page',
+        meta: { isGoodsList: true },
+
+        components: {
+          default: () => import('pages/Index.vue'),
+          // hot: () => import('components/HotList.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
+        props: {
+          default: (route) => ({ query: route.query.q, sort: route.query.sort }),
+          hot: false,
+        },
+      },
+      {
+        path: ':path',
         meta: { isGoodsList: true },
 
         components: {
           default: () => import('pages/Index.vue'),
           hot: () => import('components/ResourceSideList.vue'),
         },
-      },
-      {
-        path: 'cheap',
-        meta: { isGoodsList: true },
-
-        components: {
-          default: () => import('pages/Index.vue'),
-          hot: () => import('components/ResourceSideList.vue'),
+        props: {
+          default: (route) => ({
+            query: route.query.q,
+            page: route.query.page,
+            sort: route.query.sort,
+          }),
+          hot: false,
         },
       },
       {
         path: 'search',
         name: 'search',
         meta: { isGoodsList: true },
-
         components: {
           default: () => import('pages/Index.vue'),
           hot: () => import('components/ResourceSideList.vue'),
         },
-        props: (route) => ({ query: route.query.q }),
+        props: {
+          default: (route) => ({ query: route.query.q, x: route.query.x, sort: route.query.sort }),
+          hot: false,
+        },
       },
       {
         path: 'item',
@@ -100,6 +121,7 @@ const routes = [
       },
       {
         path: 'category/:category',
+        meta: { isList: true },
         component: () => import('pages/YunpanList.vue'),
         props: (route) => ({ query: route.query.q, page: route.query.page }),
       },

@@ -6,21 +6,22 @@ let domain = '';
 let shareDomain = '';
 const imageDomain = '';
 let isProEnv = false;
-const fullCurrentDomain = window.location.href;
+// const fullCurrentDomain = window.location.href;
 
 domain = 'http://localhost:8238';
 
-if (fullCurrentDomain.indexOf(domainDev) > -1) {
+// if (fullCurrentDomain.indexOf(domainDev) > -1) {
+if (process.env.DEV) {
   // 测试环境
   domain = 'http://localhost:8238';
   // domain = 'https://web.hjdang.com';
-} else if (fullCurrentDomain.indexOf(domainPro) > -1) {
+  // } else if (fullCurrentDomain.indexOf(domainPro) > -1) {
   // 生产环境
+} else {
   domain = 'https://web.hjdang.com';
   isProEnv = true;
-} else {
   // 本地调试
-  domain = 'http://192.168.0.108:8238';
+  // domain = 'http://192.168.0.108:8238';
   // websocketHost = 'http://10.0.41.110:7979/websocket';
 
   // domain = 'http://192.168.0.128:8238';

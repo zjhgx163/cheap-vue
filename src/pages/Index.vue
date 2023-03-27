@@ -319,8 +319,12 @@
 
 <script>
 import { matTurnedInNot } from '@quasar/extras/material-icons';
-import { Screen } from 'quasar';
+import { mapState, mapWritableState } from 'pinia';
+// import { Screen } from 'quasar';
 // import FastClick from 'fastclick';
+import { useGoodsStore } from 'stores/goods';
+// import { useQuasar } from 'quasar';
+import { Loading } from 'quasar';
 
 export default {
   name: 'PageIndex',
@@ -333,45 +337,62 @@ export default {
       thumbDownIcon: 'thumb_down',
       turnInOrNot: 'turned_in_not',
       comment: 'comment',
-      isBigScreen: Screen.gt.sm ? true : false,
+      isBigScreen: false,
       isNormal: true,
       fontFamily: 'YL__title_font_family',
       lineHeight: 'YL__list_line_height',
       textAccent: 'text-accent',
-      paginationSize: Screen.gt.sm ? '12px' : '9px',
-      maxPage: Screen.gt.sm ? 6 : 4,
       titleHeight: 'YL__title_height',
-      pricePading: Screen.gt.sm ? 'q-pt-xs q-pb-sm' : 'q-pt-xs',
       isListEnd: false,
+      path: '',
       // to: false,
     };
   },
-  props: ['query', 'sort'],
+  props: ['query', 'sort', 'page', 'x'],
   computed: {
+    ...mapWritableState(useGoodsStore, {
+      _listData: 'items',
+      _isListEnd: 'isListEnd',
+      _max: 'maxPage',
+    }),
+
+    paginationSize: function () {
+      return this.$q.platform.is.desktop || this.isBigScreen ? '12px' : '9px';
+    },
+
+    maxPage: function () {
+      return this.$q.platform.is.desktop || this.isBigScreen ? 6 : 4;
+    },
+
+    pricePading: function () {
+      return this.$q.platform.is.desktop || this.isBigScreen ? 'q-pt-xs q-pb-sm' : 'q-pt-xs';
+      // isListEnd: false,
+    },
+
     itemPadding: function () {
-      return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
+      return this.$q.platform.is.desktop || this.isBigScreen ? 'q-py-md' : 'q-py-sm';
     },
     textSize: function () {
-      return this.isBigScreen ? 'text-h7' : 'text-subtitle1';
+      return this.$q.platform.is.desktop || this.isBigScreen ? 'text-h7' : 'text-subtitle1';
     },
 
     lines: function () {
-      return Screen.gt.sm ? 1 : 2;
+      return this.$q.platform.is.desktop || this.isBigScreen ? 1 : 2;
     },
     buyButtonSize: function () {
-      return this.isBigScreen ? '11px' : '8px';
+      return this.$q.platform.is.desktop || this.isBigScreen ? '11px' : '8px';
     },
     host: function () {
       return global.config.domain;
     },
     clickable: function () {
-      return this.isBigScreen ? false : true;
+      return this.$q.platform.is.desktop || this.isBigScreen ? false : true;
     },
     disable: function () {
-      return this.isBigScreen || this.isListEnd ? true : false;
+      return this.$q.platform.is.desktop || this.isBigScreen || this.isListEnd ? true : false;
     },
     iconGutter: function () {
-      return this.isBigScreen ? 'q-gutter-md' : 'q-gutter-none';
+      return this.$q.platform.is.desktop || this.isBigScreen ? 'q-gutter-md' : 'q-gutter-none';
     },
   },
   // watch: {
@@ -400,17 +421,79 @@ export default {
   //     delay: 400, // ms
   //   });
   // },
+  // our hook here
+  preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
+    console.log('Index prefetch');
+    // const $q = useQuasar();
+    // fetch data, validate route and optionally redirect to some other route...
+    console.log('path = ' + currentRoute.params.path);
+    Loading.show();
 
-  created() {
-    console.log('Index created');
+    // ssrContext is available only server-side in SSR mode
+
+    // No access to "this" here
+
+    // Return a Promise if you are running an async job
+    // Example:
+    const myStore = useGoodsStore();
+    console.log(myStore.prefetchFlag);
+
+    myStore.prefetchFlag = 1;
+    // myStore.getItemList(currentRoute.path, currentRoute.query.q);
+    // Loading.show();
+    return myStore.getItemList(
+      currentRoute.params.page === undefined ? currentRoute.query.page : currentRoute.params.page,
+      currentRoute.params.path,
+      currentRoute.query.q,
+      currentRoute.query.sort === undefined ? 2 : currentRoute.query.sort
+    );
+    // return new Promise((resolve) => {
+    //   resolve();
+    // }).then(() => {
+    //   console.log('66666666');
+
+    //   Loading.hide();
+    // });
+
+    // return store.dispatch('fetchItem', currentRoute.params.id);
   },
-
+  created() {
+    console.log('Index created' + this.$route.fullPath);
+    this.listData = this._listData;
+    this.max = this._max;
+    this.listEnd = this._listEnd;
+  },
   mounted() {
-    //解决iphone移动端的延迟
-    // FastClick.attach(document.body);
-    console.log('Index mounted');
+    console.log('Index mounted' + this.$route.fullPath);
+    const myStore = useGoodsStore();
+    console.log('prefetchFlag' + myStore.prefetchFlag);
+    let windowWidth = window.screen.width;
+    if (windowWidth > 1023.99) {
+      this.isBigScreen = true;
+    }
+    this.path = this.$route.fullPath;
+    if (this.$route.params.page != undefined && this.$route.params.page != null) {
+      this.current = parseInt(this.$route.params.page);
+    }
+    if (this.page != null && this.page != undefined) {
+      console.log('this page = ' + this.page);
+      this.current = parseInt(this.page);
+    }
+    console.log('this query is' + this.query);
+    console.log('this sort is' + this.sort);
+    //未执行过prefetch则重新取值
+    if (myStore.prefetchFlag === 0) {
+      this.getItemList();
+    } else {
+      myStore.prefetchFlag = 0; //还原是否call到prefetch标志
+      console.log(myStore.prefetchFlag);
+    }
+
+    // this.isBigScreen = Screen.gt.sm ? true : false;
+    // console.log('screen width' + $q.screen.width);
+    // console.log('screen' + this.isBigScreen);
     // this.selectedTab = 'main';
-    this.getItemList();
+    //
     // console.log(this.$router.options.scrollBehavior);
 
     // this.windowWidth = window.innerWidth;
@@ -419,10 +502,24 @@ export default {
     // };
   },
   activated() {
-    console.log('Index activated');
+    console.log('Index activated' + this.$route.fullPath);
     console.log('this.isListEnd =' + this.isListEnd);
     this.isListEnd = false;
   },
+  deactivated() {
+    console.log('Index deactivated' + this.path);
+  },
+  unmounted() {
+    console.log('Index unmounted' + this.path);
+    const myStore = useGoodsStore();
+    myStore.prefetchFlag = 0; //还原是否call到prefetch标志
+    console.log(myStore.prefetchFlag);
+  },
+  // beforeRouteUpdate(to, from, next) {
+  //   console.log('beforeRouteUpdate');
+
+  //   next();
+  // },
   methods: {
     getItemList(sortIndex) {
       // console.log('$$$$$$' + this.query);
@@ -432,7 +529,7 @@ export default {
       this.$axios
         .post(`${global.config.domain}/goods/list`, {
           page: this.current,
-          path: this.$route.path,
+          path: this.$route.params.path,
           query: this.$route.query.q,
           sort: sortIndex != null ? sortIndex : this.sort,
         })
@@ -502,18 +599,29 @@ export default {
     //桌面端的分页
     pageNavigate() {
       console.log('page is ' + this.current);
-      this.$axios
-        .post(`${global.config.domain}/goods/list`, {
-          page: this.current,
+      if (this.$route.params.path != undefined && this.$route.params.path != null) {
+        this.$router.push({
           path: this.$route.path,
-          query: this.$route.query.q,
-          sort: this.sort,
-        })
-        .then((res) => {
-          console.log(res.data.data.records);
-          this.listData = res.data.data.records;
-          this.max = Math.ceil(res.data.data.total / res.data.data.size);
+          query: { q: this.query, page: this.current },
         });
+      } else {
+        this.$router.push({
+          path: '/list/' + this.current,
+          query: { q: this.query },
+        });
+      }
+      // this.$axios
+      //   .post(`${global.config.domain}/goods/list`, {
+      //     page: this.current,
+      //     path: this.$route.path,
+      //     query: this.$route.query.q,
+      //     sort: this.sort,
+      //   })
+      //   .then((res) => {
+      //     console.log(res.data.data.records);
+      //     this.listData = res.data.data.records;
+      //     this.max = Math.ceil(res.data.data.total / res.data.data.size);
+      //   });
     },
     thumbUpClick() {
       this.thumbUpIcon = 'thumb_up';

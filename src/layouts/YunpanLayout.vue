@@ -180,7 +180,8 @@ export default {
     return {
       searchKey: '',
       host: global.config.domain,
-      itemPadding: Screen.gt.sm ? 'q-py-lg' : 'q-py-xs',
+      isBigScreen: false,
+      // itemPadding: Screen.gt.sm ? 'q-py-lg' : 'q-py-xs',
       userName: '',
       isLogin: false,
       isLoadingQr: false,
@@ -191,11 +192,14 @@ export default {
       isEditorShowing: false,
     };
   },
-  // computed: {
-  //   categoryTab: function () {
-  //     return this.$refs.child.category;
-  //   },
-  // },
+  computed: {
+    itemPadding() {
+      return this.isBigScreen ? 'q-py-lg' : 'q-py-xs';
+    },
+    // categoryTab: function () {
+    //   return this.$refs.child.category;
+    // },
+  },
   created() {
     console.log('YunpanLayout created');
   },
@@ -204,6 +208,10 @@ export default {
   },
   mounted() {
     console.log('YunpanLayout mounted');
+    let windowWidth = window.screen.width;
+    if (windowWidth > 1023.99) {
+      this.isBigScreen = true;
+    }
     if (this.$q.localStorage.has('userInfo')) {
       let userInfo = this.$q.localStorage.getItem('userInfo');
       console.log(userInfo);
