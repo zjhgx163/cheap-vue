@@ -169,12 +169,11 @@
 
 <script>
 import 'src/config';
-import { Screen } from 'quasar';
-// import FastClick from 'fastclick';
-import { inject } from 'vue';
-// import clipboard from 'src/clipboard';
-// import Clipboard from 'clipboard';
-// import $ from 'jquery';
+// import { Screen } from 'quasar';
+import { Loading } from 'quasar';
+import { mapState } from 'pinia';
+import { useYunpanStore } from 'src/stores/yunpan';
+// import { inject } from 'vue';
 
 export default {
   name: 'YunpanItemDetail',
@@ -183,27 +182,35 @@ export default {
       item: {},
       listData: [],
       host: global.config.domain,
-      showing: false,
-      alertText: '淘口令已复制\n请打开手淘',
-      isShowCopyTaobaopwd: false,
       current: 1,
       max: 0,
       replyContent: '',
-      maxPage: Screen.gt.sm ? 6 : 4,
-      paginationSize: Screen.gt.sm ? '12px' : '9px',
+      // maxPage: Screen.gt.sm ? 6 : 4,
+      // paginationSize: Screen.gt.sm ? '12px' : '9px',
       isListEnd: false,
       userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
-      isBigScreen: Screen.gt.sm ? true : false,
+      isBigScreen: false,
     };
   },
   emits: ['need-login', 'logined'],
 
   computed: {
-    imagefullwidth: function () {
-      return {
-        'full-width': Screen.gt.sm ? false : true,
-      };
+    ...mapState(useYunpanStore, {
+      _detail: 'itemDetail',
+      _replyList: 'replyList',
+      _replyMax: 'replyMax',
+    }),
+    maxPage() {
+      return this.isBigScreen ? 6 : 4;
     },
+    paginationSize() {
+      return this.isBigScreen ? '12px' : '9px';
+    },
+    // imagefullwidth: function () {
+    //   return {
+    //     'full-width': this.isBigScreen ? false : true,
+    //   };
+    // },
     disable: function () {
       return this.isBigScreen || this.isListEnd ? true : false;
     },
@@ -251,22 +258,60 @@ export default {
     },
   },
 
-  //   components: {
-  //     HotList,
-  //   },
+  // our hook here
+  preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
+    console.log('yunpanItemDetail page prefetch');
+    // const $q = useQuasar();
+    // fetch data, validate route and optionally redirect to some other route...
+    Loading.show();
+
+    // ssrContext is available only server-side in SSR mode
+
+    // No access to "this" here
+
+    // Return a Promise if you are running an async job
+    // Example:
+    const myStore = useYunpanStore();
+
+    return myStore.getYunpanItemContent(currentRoute.params.id, redirect);
+  },
   activated() {
     console.log('yunpanItemDetail activated ');
-    this.getYunpanItemContent(this.$route.params.id);
+    // this.getYunpanItemContent(this.$route.params.id);
   },
+  created() {
+    console.log('yunpanItemDetail created');
+    this.item = this._detail;
+    this.listData = this._replyList;
+    this.max = this._replyMax;
+  },
+  beforeMount() {
+    console.log('yunpanItemDetail before mounted');
+    this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
+      console.log(res.data.data);
+      if (res.data.data == true) {
+      } else {
+        //未登陆的话
+        if (this.isWeixin()) {
+          window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.$route.params.id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
+        } else {
+          // this.$router.push({ path: 'login' });
+          //通知父组件
+          this.$emit('need-login', id);
+        }
+      }
+    });
+  },
+
   mounted() {
-    //解决iphone移动端的延迟
-    // FastClick.attach(document.body);
     console.log('yunpanItemDetail mounted');
     // 详情页插入广告
-    window.AdverDetailInsert = true;
-    setTimeout(function () {
-      window.TencentGDT.NATIVE.loadAd('4054888219125381');
-    }, 100);
+    if (process.env.PROD) {
+      window.AdverDetailInsert = true;
+      setTimeout(function () {
+        window.TencentGDT.NATIVE.loadAd('4054888219125381');
+      }, 100);
+    }
 
     this.$bus.on('logined', function (itemId) {
       console.log('从yunpan detail页面已登陆' + itemId);
@@ -275,10 +320,6 @@ export default {
       // this.$router.push({
       //   path: '/yunpan/d/' + itemId,
       // });
-    });
-
-    this.$q.loading.show({
-      delay: 400, // ms
     });
 
     if (this.$q.localStorage.has('userInfo')) {
@@ -291,8 +332,12 @@ export default {
       }
       // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
     }
-
-    this.getYunpanItemContent(this.$route.params.id);
+    if (!this.item) {
+      this.$q.loading.show({
+        delay: 400, // ms
+      });
+      this.getYunpanItemContent(this.$route.params.id);
+    }
 
     // if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
     //   window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
@@ -365,7 +410,7 @@ export default {
           );
           // console.log(this.item);
           if (this.item == null) {
-            this.$router.push({ path: '/error' });
+            this.$router.push({ path: '/error/404S' });
           }
 
           this.$q.loading.hide();

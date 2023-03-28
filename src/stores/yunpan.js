@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { axios } from 'boot/axios';
 import { Loading } from 'quasar';
+import { Notify } from 'quasar';
 
 export const useYunpanStore = defineStore('yunpan', {
   state: () => ({
@@ -11,6 +12,9 @@ export const useYunpanStore = defineStore('yunpan', {
     stopLoading: false,
     max: 0,
     prefetchFlag: 0,
+    itemDetail: {},
+    replyList: [],
+    replyMax: 0,
   }),
 
   getters: {
@@ -57,6 +61,29 @@ export const useYunpanStore = defineStore('yunpan', {
           console.log('this.isListEnd  = ' + this.isListEnd);
           Loading.hide();
         });
+    },
+    getYunpanItemContent(id, redirect) {
+      return axios.post(`${global.config.domain}/yunpan/item/public/${id}`).then((res) => {
+        if (res.data.code < 0) {
+          Notify.create({
+            type: 'negative',
+            icon: 'warning',
+            message: `${res.data.msg}`,
+          });
+        } else {
+          this.itemDetail = res.data.data.item;
+          this.replyList = res.data.data.firstReplyPage.records;
+          this.replyMax = Math.ceil(
+            res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
+          );
+          console.log(this.itemDetail);
+          if (this.itemDetail == null) {
+            redirect({ path: '/error/404' }, 301);
+          }
+
+          Loading.hide();
+        }
+      });
     },
     getSideYunpanList() {
       // console.log('$$$$$$' + this.query);
