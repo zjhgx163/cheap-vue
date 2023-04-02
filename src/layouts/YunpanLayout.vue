@@ -112,16 +112,29 @@
     </q-page-container>
 
     <q-footer reveal class="bg-secondary q-pt-none q-pb-xs">
-      <q-toolbar class="flex-center q-pr-lg q-py-xs" v-if="$route.meta.isList">
+      <q-toolbar class="items-center justify-between q-px-lg q-py-xs" v-if="$route.meta.isList">
         <q-btn
-          round
+          flat
+          size="0.7em"
           color="pink-4"
-          size="0.9em"
-          text-color="white"
+          label="今日好价"
+          stack
           dense
-          icon="add"
-          @click="addYunpanItem"
+          icon="o_shopping_cart"
+          to="/"
+          fab-mini
         />
+        <q-btn
+          color="pink-4"
+          rounded
+          size="0.7em"
+          dense
+          fab-mini
+          icon="o_add"
+          @click="addYunpanItem"
+          class="absolute-center"
+        />
+        <q-btn flat size="0.7em" icon="shop" text-color="white" dense />
       </q-toolbar>
       <q-item v-if="!$route.meta.isList">
         <q-item-section top side class="text-bold"> 声明：</q-item-section>

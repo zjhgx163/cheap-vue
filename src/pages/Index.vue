@@ -80,13 +80,13 @@
                     {{ item.priceText }}
                   </q-item-label>
 
-                  <q-item-label :lines="1">
+                  <q-item-label :lines="1" class="text-weight-medium">
                     <span v-if="item.label != ''" style="text-align: left">
                       <li
                         v-for="a in transferLabel(item.label)"
                         v-bind:key="a"
                         style="text-align: left"
-                        class="YL__label q-py-xs"
+                        class="YL__label q-py-none"
                       >
                         {{ a }}
                       </li>
@@ -115,7 +115,9 @@
                   </q-item-label>
 
                   <q-item-label :lines="1" class="row items-center justify-between YL__mall lt-sm">
-                    <div class="col-auto">{{ item.mall }} | {{ item.dateStr }}</div>
+                    <div class="col-auto text-weight-medium">
+                      {{ item.mall }} | {{ item.dateStr }}
+                    </div>
 
                     <div class="col-5 row">
                       <div class="row items-center">
@@ -150,7 +152,7 @@
 
                   <q-item-label
                     :lines="1"
-                    class="row justify-between items-end gt-sm YL__mall y-pt-sm"
+                    class="row justify-between items-end gt-sm YL__mall y-pt-xs"
                   >
                     <div class="col-5 row justify-between flex-center">
                       <div class="row flex-center">
@@ -275,7 +277,7 @@
   &__label
     @media(max-width: $breakpoint-xs-max)
       font-size: 0.7em
-      height: 1.6em
+      height: 1.5em
     @media(min-width: $breakpoint-xs-max)
       font-size: 0.87em
     color: rgba(0, 0, 0, 0.54)
@@ -290,7 +292,7 @@
   &__mall
     @media(max-width: $breakpoint-xs-max)
       font-size: 0.7em
-      height: 1.3em
+      height: 1.4em
     @media(min-width: $breakpoint-xs-max)
       font-size: 0.9em
       height: 2.6em
