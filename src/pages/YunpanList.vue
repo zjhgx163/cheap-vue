@@ -106,7 +106,7 @@
           </div>
         </template>
       </q-infinite-scroll>
-      <div class="YL__list_end" v-bind:class="{ hidden: !isListEnd }">
+      <div class="YL__list_end q-mb-sm" v-bind:class="{ hidden: !isListEnd }">
         <span class="YL__endline">我是有底线的</span>
       </div>
       <div
@@ -186,6 +186,7 @@
   &__endline
     color: #999999
     padding: 0 0.5em
+    font-size: 0.8em
 </style>
 
 <script>

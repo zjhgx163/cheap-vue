@@ -305,6 +305,10 @@ export default {
 
   mounted() {
     console.log('yunpanItemDetail mounted');
+    let windowWidth = window.screen.width;
+    if (windowWidth > 1023.99) {
+      this.isBigScreen = true;
+    }
     // 详情页插入广告
     if (process.env.PROD) {
       window.AdverDetailInsert = true;

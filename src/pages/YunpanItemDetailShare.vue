@@ -187,11 +187,13 @@
 
 <script>
 import 'src/config';
-import { Screen } from 'quasar';
+// import { Screen } from 'quasar';
+import { Loading } from 'quasar';
+import { mapState } from 'pinia';
+import { useYunpanStore } from 'src/stores/yunpan';
 // import FastClick from 'fastclick';
 // import clipboard from 'src/clipboard';
 // import Clipboard from 'clipboard';
-// import $ from 'jquery';
 
 export default {
   name: 'YunpanItemShare',
@@ -206,17 +208,28 @@ export default {
       current: 1,
       max: 0,
       replyContent: '',
-      maxPage: Screen.gt.sm ? 6 : 4,
-      paginationSize: Screen.gt.sm ? '12px' : '9px',
+      // maxPage: Screen.gt.sm ? 6 : 4,
+      // paginationSize: Screen.gt.sm ? '12px' : '9px',
       isListEnd: false,
       userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
-      isBigScreen: Screen.gt.sm ? true : false,
+      isBigScreen: false,
     };
   },
   computed: {
+    ...mapState(useYunpanStore, {
+      _detail: 'itemDetail',
+      _replyList: 'replyList',
+      _replyMax: 'replyMax',
+    }),
+    maxPage() {
+      return this.isBigScreen ? 6 : 4;
+    },
+    paginationSize() {
+      return this.isBigScreen ? '12px' : '9px';
+    },
     imagefullwidth: function () {
       return {
-        'full-width': Screen.gt.sm ? false : true,
+        'full-width': this.isBigScreen ? false : true,
       };
     },
     disable: function () {
@@ -265,19 +278,40 @@ export default {
       };
     },
   },
+  // our hook here
+  preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
+    console.log('yunpanItemDetailShare page prefetch');
+    // const $q = useQuasar();
+    // fetch data, validate route and optionally redirect to some other route...
+    Loading.show();
 
+    // ssrContext is available only server-side in SSR mode
+
+    // No access to "this" here
+
+    // Return a Promise if you are running an async job
+    // Example:
+    const myStore = useYunpanStore();
+
+    return myStore.getYunpanItemContent(currentRoute.params.id, redirect);
+  },
   //   components: {
   //     HotList,
   //   },
-
+  created() {
+    console.log('yunpanItemDetailShare created');
+    this.item = this._detail;
+    this.listData = this._replyList;
+    this.max = this._replyMax;
+  },
   mounted() {
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
-    console.log('yunpan item mounted');
-
-    this.$q.loading.show({
-      delay: 400, // ms
-    });
+    console.log('yunpan item share mounted');
+    let windowWidth = window.screen.width;
+    if (windowWidth > 1023.99) {
+      this.isBigScreen = true;
+    }
 
     if (this.$q.localStorage.has('userInfo')) {
       let userInfo = this.$q.localStorage.getItem('userInfo');
@@ -290,7 +324,12 @@ export default {
       // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
     }
 
-    this.getYunpanItemContent(this.$route.params.id);
+    if (!this.item) {
+      this.$q.loading.show({
+        delay: 400, // ms
+      });
+      this.getYunpanItemContent(this.$route.params.id);
+    }
   },
   methods: {
     getReplyList() {
