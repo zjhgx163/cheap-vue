@@ -13,7 +13,7 @@ domain = 'http://localhost:8238';
 // if (fullCurrentDomain.indexOf(domainDev) > -1) {
 if (process.env.DEV) {
   // 测试环境
-  domain = 'http://localhost:8238';
+  // domain = 'http://192.168.1.103:8238';
   // domain = 'https://web.hjdang.com';
   // } else if (fullCurrentDomain.indexOf(domainPro) > -1) {
   // 生产环境

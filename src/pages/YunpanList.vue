@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-primary">
+  <q-page class="bg-primary" :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
 
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
@@ -106,7 +106,9 @@
           </div>
         </template>
       </q-infinite-scroll>
-
+      <div class="YL__list_end" v-bind:class="{ hidden: !isListEnd }">
+        <span class="YL__endline">我是有底线的</span>
+      </div>
       <div
         v-bind:class="{ hidden: pageNavigateHidden }"
         class="q-my-xs q-pa-md flex flex-center bg-light-green-1"
@@ -157,6 +159,33 @@
     @media(min-width: $breakpoint-xs-max)
       width: 10em
       width: 12em
+  &__list_end
+    display: flex
+    align-items: center
+    justify-content: center
+    justify-items: center
+    white-space: nowrap
+    &::before
+      left:10px
+      content: ''
+      display: block
+      width: 50%
+      height: 1px
+      flex-grow: 1
+      flex-shrink: 1
+      background: linear-gradient(270deg, transparent 0%, #e6e6e6 10%)
+    &::after
+      right:10px
+      content: ''
+      display: block
+      width: 50%
+      height: 1px
+      flex-grow: 1
+      flex-shrink: 1
+      background: linear-gradient(270deg, transparent 0%, #e6e6e6 10%)
+  &__endline
+    color: #999999
+    padding: 0 0.5em
 </style>
 
 <script>
@@ -447,6 +476,14 @@ export default {
   },
 
   methods: {
+    myTweak(offset) {
+      // "offset" is a Number (pixels) that refers to the total
+      // height of header + footer that occupies on screen,
+      // based on the QLayout "view" prop configuration
+
+      // this is actually what the default style-fn does in Quasar
+      return { minHeight: offset ? `calc(100vh - ${offset}px)` : '100vh' };
+    },
     getItemList() {
       // console.log('$$$$$$' + this.query);
       this.$q.loading.show({

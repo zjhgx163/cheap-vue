@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh lpR fFf" style="min-height: 100vh">
     <q-header reveal class="bg-primary text-grey-8 YL__750w q-pb-xs">
       <q-toolbar class="bg-secondary" v-bind:class="[itemPadding]">
         <div class="col-12 col-sm-10 justify-center">
@@ -115,7 +115,7 @@
       <q-toolbar class="items-center justify-between q-px-lg q-py-xs" v-if="$route.meta.isList">
         <q-btn
           flat
-          size="0.8em"
+          size="0.7em"
           color="pink-4"
           label="今日好价"
           stack
