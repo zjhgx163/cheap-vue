@@ -28,13 +28,18 @@
               class="bg-primary"
               v-bind:class="{ 'q-pb-xs': !isBigScreen }"
             >
-              <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
+              <!--               
+                clickable
+                @click="itemClick(item.id)"
+              }" -->
 
               <q-item
                 dense
                 v-ripple
-                clickable
-                @click="itemClick(item.id)"
+                :to="{
+                  name: 'yunpanDetail',
+                  params: { id: item.id },
+                }"
                 class="bg-secondary q-pt-sm"
               >
                 <q-item-section avatar top>
@@ -653,25 +658,25 @@ export default {
       }
     },
 
-    itemClick(itemId) {
-      if (this.isWeixin()) {
-        this.$router.push({
-          path: '/yunpan/d/' + itemId,
-        });
-      } else {
-        this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
-          console.log(res.data.data);
-          if (res.data.data == true) {
-            this.$router.push({
-              path: '/yunpan/d/' + itemId,
-            });
-          } else {
-            //通知父组件
-            this.$emit('need-login', itemId);
-          }
-        });
-      }
-    },
+    // itemClick(itemId) {
+    //   if (this.isWeixin()) {
+    //     this.$router.push({
+    //       path: '/yunpan/d/' + itemId,
+    //     });
+    //   } else {
+    //     this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
+    //       console.log(res.data.data);
+    //       if (res.data.data == true) {
+    //         this.$router.push({
+    //           path: '/yunpan/d/' + itemId,
+    //         });
+    //       } else {
+    //         //通知父组件
+    //         this.$emit('need-login', itemId);
+    //       }
+    //     });
+    //   }
+    // },
     isWeixin() {
       var ua = window.navigator.userAgent.toLowerCase();
       console.log(ua);

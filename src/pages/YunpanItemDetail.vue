@@ -297,7 +297,12 @@ export default {
         } else {
           // this.$router.push({ path: 'login' });
           //通知父组件
-          this.$emit('need-login', id);
+          this.$emit('need-login', this.$route.params.id);
+
+          this.$router.push({
+            path: '/yunpan/list',
+            query: { q: '' },
+          });
         }
       }
     });

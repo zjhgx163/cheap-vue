@@ -127,6 +127,7 @@ const routes = [
       },
       {
         path: 'd/:id',
+        name: 'yunpanDetail',
         component: () => import('pages/YunpanItemDetail.vue'),
       },
       {
