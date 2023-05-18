@@ -265,6 +265,9 @@ import ResoureSideList from '../components/ResourceSideList.vue';
 import { useGoodsStore } from 'stores/goods';
 import { Loading } from 'quasar';
 import { mapState } from 'pinia';
+import { useMeta } from 'quasar';
+import { ref, nextTick } from 'vue';
+import { reactive } from 'vue';
 
 // import $ from 'jquery';
 
@@ -312,6 +315,80 @@ export default {
   components: {
     ResoureSideList,
   },
+  setup() {
+    console.log('DetailPage setup');
+    const title = ref(
+      '好价党 各大电商今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，优惠券，手慢无，秒杀，低价，优惠信息'
+    );
+    const meta = reactive({
+      description: {
+        name: 'description',
+        content:
+          '好价党 汇聚互联网今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，手慢无，秒杀，京东低价，优惠信息',
+      },
+      keywords: {
+        name: 'keywords',
+        content:
+          '好价党 汇聚互联网今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，优惠券，手慢无，秒杀，低价，优惠信息',
+      },
+      ogtype: {
+        property: 'og:type',
+        content: 'product',
+      },
+      ogurl: {
+        property: 'og:url',
+        content: '',
+      },
+      ogtitle: {
+        property: 'og:title',
+        content:
+          '好价党 汇聚互联网今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，优惠券，手慢无，秒杀，低价，优惠信息',
+      },
+      ogdescription: {
+        property: 'og:description',
+        content:
+          '汇聚互联网今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，优惠券，手慢无，秒杀，低价，优惠信息',
+      },
+      ogimage: {
+        property: 'og:image',
+        content: 'https://www.hjdang.com/hjd.png',
+      },
+      weibocreate: {
+        name: 'weibo:webpage:create_at',
+        content: '',
+      },
+      weiboupdate: {
+        name: 'weibo:webpage:update_at',
+        content: '',
+      },
+    });
+    // useMeta({
+    //   meta: {
+    //     myKey: { name: 'description', content: 'Page 1' },
+    //   },
+    // });
+
+    useMeta(() => {
+      return {
+        // whenever "title" from above changes, your meta will automatically update
+        title: title,
+        titleTemplate: (title) => `${title.value}`,
+        meta: meta,
+      };
+    });
+
+    function setAnotherTitle(value) {
+      title.value = value; // will automatically trigger a Meta update due to the binding
+    }
+
+    // setAnotherTitle('sdsdssds');
+    // console.log('title is' + title.value);
+
+    return {
+      setAnotherTitle,
+      meta,
+    };
+  },
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('Detail page prefetch');
@@ -333,6 +410,11 @@ export default {
   },
   created() {
     console.log('Detail page created');
+    // if (process.env.CLIENT) {
+    //   console.log('xxxxxxxxxxxx');
+    //   console.log(document.getElementsByTagName('title')[0].innerHTML);
+    // }
+
     this.detail = this._detail;
 
     this.detailParts = this._detailParts;
@@ -340,10 +422,35 @@ export default {
     this.bigImages = this._bigImages;
 
     this.couponInfo = this._couponInfo;
+    this.setAnotherTitle(this._detail.title);
 
+    this.meta.description.content =
+      this._detail.title + this.detail.emphsis + this.detail.detailBrief;
+    let keywords = this.detail.mall;
+    if (this._categoryInfo) {
+      this._categoryInfo.slice(1).forEach((a) => (keywords += ',' + a));
+    }
+    this.meta.keywords.content = keywords;
+    this.meta.ogtitle.content = this._detail.title;
+    this.meta.ogurl.content = 'https://www.hjdang.com/item/detail/' + this.$route.params.urlCode;
+    this.meta.ogdescription.content = this.detail.emphsis + this.detail.detailBrief;
+    this.meta.ogimage.content = this.detail.mainImageUrl;
+    this.meta.weibocreate.content = new Date();
+    this.meta.weiboupdate.content = new Date();
+    // if (process.env.CLIENT) {
+    //   console.log('sssssssssssfff');
+    //   console.log(document.getElementsByTagName('title')[0].innerHTML);
+    //   console.log(document.getElementsByTagName('title')[0]);
+    // }
+
+    // await nextTick();
     // this.categoryInfo = this._categoryInfo;
-    // console.log('5' + this._categoryInfo);
   },
+
+  // async serverPrefetch() {
+  //   console.log('Detail page serverPrefetch');
+  //   this.setAnotherTitle(this._detail.title + this.detail.detailBrief);
+  // },
 
   mounted() {
     console.log('DetailPage mounted');

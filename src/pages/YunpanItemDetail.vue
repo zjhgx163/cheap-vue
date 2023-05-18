@@ -174,6 +174,9 @@ import { Loading } from 'quasar';
 import { mapState } from 'pinia';
 import { useYunpanStore } from 'src/stores/yunpan';
 // import { inject } from 'vue';
+import { useMeta } from 'quasar';
+import { ref } from 'vue';
+import { reactive } from 'vue';
 
 export default {
   name: 'YunpanItemDetail',
@@ -257,7 +260,69 @@ export default {
       };
     },
   },
+  setup() {
+    console.log('Yun setup');
+    const title = ref('最新阿里云盘资源,深夜加油站');
+    const meta = reactive({
+      description: {
+        name: 'description',
+        content:
+          '云盘资源 阿里云盘 百度云盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+      },
+      keywords: {
+        name: 'keywords',
+        content: '最新影视，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+      },
+      ogtype: {
+        property: 'og:type',
+        content: 'webpage',
+      },
+      ogurl: {
+        property: 'og:url',
+        content: 'https://www.hjdang.com/yunpan/list?q=',
+      },
+      ogtitle: {
+        property: 'og:title',
+        content: '最新阿里云盘资源,深夜加油站',
+      },
+      ogdescription: {
+        property: 'og:description',
+        content:
+          '云盘资源 阿里云盘 百度云盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+      },
+      ogimage: {
+        property: 'og:image',
+        content: 'https://www.hjdang.com/hjd.png',
+      },
+      weibocreate: {
+        name: 'weibo:webpage:create_at',
+        content: '',
+      },
+      weiboupdate: {
+        name: 'weibo:webpage:update_at',
+        content: '',
+      },
+    });
 
+    useMeta(() => {
+      return {
+        // whenever "title" from above changes, your meta will automatically update
+        title: title,
+        titleTemplate: (title) => `${title.value}`,
+
+        meta: meta,
+      };
+    });
+
+    function setAnotherTitle(value) {
+      title.value = value; // will automatically trigger a Meta update due to the binding
+    }
+
+    return {
+      setAnotherTitle,
+      meta,
+    };
+  },
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('yunpanItemDetail page prefetch');
@@ -284,6 +349,18 @@ export default {
     this.item = this._detail;
     this.listData = this._replyList;
     this.max = this._replyMax;
+
+    this.setAnotherTitle(this.item.title);
+    // this.title = this._detail.title;
+    // console.log(this.title);
+    this.meta.description.content = this.item.content;
+
+    this.meta.keywords.content = this.item.title;
+    this.meta.ogtitle.content = this.item.title;
+    this.meta.ogurl.content = 'https://www.hjdang.com/yunpan/d/' + this.$route.params.id;
+    this.meta.ogdescription.content = this.item.content;
+    this.meta.weibocreate.content = new Date();
+    this.meta.weiboupdate.content = new Date();
   },
   beforeMount() {
     console.log('yunpanItemDetail before mounted');

@@ -356,6 +356,11 @@ import { mapState, mapWritableState } from 'pinia';
 import { useGoodsStore } from 'stores/goods';
 // import { useQuasar } from 'quasar';
 import { Loading } from 'quasar';
+import { useMeta } from 'quasar';
+import { ref } from 'vue';
+import { reactive } from 'vue';
+
+// import { createMetaMixin } from 'quasar';
 
 export default {
   name: 'PageIndex',
@@ -452,6 +457,82 @@ export default {
   //     delay: 400, // ms
   //   });
   // },
+  setup() {
+    console.log('Index setup');
+    const title = ref(
+      '好价党 汇聚互联网今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，优惠券，手慢无，秒杀，低价，优惠信息'
+    );
+    const meta = reactive({
+      description: {
+        name: 'description',
+        content:
+          '好价党 汇聚互联网今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，手慢无，秒杀，京东低价，优惠信息',
+      },
+      keywords: {
+        name: 'keywords',
+        content:
+          '好价党 汇聚互联网今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，优惠券，手慢无，秒杀，低价，优惠信息',
+      },
+      ogtype: {
+        property: 'og:type',
+        content: 'webpage',
+      },
+      ogurl: {
+        property: 'og:url',
+        content: 'https://www.hjdang.com/',
+      },
+      ogtitle: {
+        property: 'og:title',
+        content:
+          '好价党 汇聚互联网今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，优惠券，手慢无，秒杀，低价，优惠信息',
+      },
+      ogdescription: {
+        property: 'og:description',
+        content:
+          '汇聚互联网今日特价 京东，淘宝，天猫，唯品会，支付宝，小米，京喜百元生活费，折扣，优惠券，手慢无，秒杀，低价，优惠信息',
+      },
+      ogimage: {
+        property: 'og:image',
+        content: 'https://www.hjdang.com/hjd.png',
+      },
+      weibocreate: {
+        name: 'weibo:webpage:create_at',
+        content: '',
+      },
+      weiboupdate: {
+        name: 'weibo:webpage:update_at',
+        content: '',
+      },
+    });
+    // useMeta({
+    //   meta: {
+    //     myKey: { name: 'description', content: 'Page 1' },
+    //   },
+    // });
+    useMeta(() => {
+      return {
+        // whenever "title" from above changes, your meta will automatically update
+        title: title.value,
+        meta: meta,
+      };
+    });
+    // function setAnotherTitle() {
+    //   title.value = 'Another title'; // will automatically trigger a Meta update due to the binding
+    // }
+
+    // return {
+    //   setAnotherTitle,
+    // };
+  },
+  // mixins: [
+  //   createMetaMixin(function () {
+  //     // "this" here refers to your component
+  //     return {
+  //       // assuming `this.myTitle` exists in your mixed in component
+  //       title: 'xxxxxxxx',
+  //     };
+  //   }),
+  // ],
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('Index prefetch');
