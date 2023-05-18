@@ -371,8 +371,8 @@ export default {
     useMeta(() => {
       return {
         // whenever "title" from above changes, your meta will automatically update
-        title: title.value,
-        // titleTemplate: (title) => `${title.value}`,
+        title: title,
+        titleTemplate: (title) => `${title.value}`,
         meta: meta,
       };
     });
