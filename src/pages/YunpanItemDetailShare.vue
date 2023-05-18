@@ -372,12 +372,12 @@ export default {
     this.setAnotherTitle(this.item.title);
     // this.title = this._detail.title;
     // console.log(this.title);
-    this.meta.description.content = this.item.content;
+    this.meta.description.content = this.item.title;
 
     this.meta.keywords.content = this.item.title;
     this.meta.ogtitle.content = this.item.title;
     this.meta.ogurl.content = 'https://www.hjdang.com/yunpan/p/' + this.$route.params.id;
-    this.meta.ogdescription.content = this.item.content;
+    this.meta.ogdescription.content = this.item.title;
     this.meta.weibocreate.content = new Date();
     this.meta.weiboupdate.content = new Date();
   },
