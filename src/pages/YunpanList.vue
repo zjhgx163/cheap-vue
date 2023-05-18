@@ -233,7 +233,7 @@ export default {
       // to: false,
     };
   },
-  props: ['query', 'page', 'x'],
+  props: ['query', 'page', 'x', 'idForLogin'],
   emits: ['need-login', 'logined'],
 
   computed: {
@@ -419,6 +419,12 @@ export default {
     this.max = this._max;
     this.pageNavigateHidden = this._pageNavigateHidden;
     this.stopLoading = this._stopLoading;
+
+    //在yunpanDetail页面上需要登陆
+    if (this.idForLogin) {
+      //通知父组件
+      this.$emit('need-login', this.idForLogin);
+    }
   },
 
   mounted() {

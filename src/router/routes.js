@@ -111,7 +111,11 @@ const routes = [
         path: 'list',
         component: () => import('pages/YunpanList.vue'),
         meta: { isList: true },
-        props: (route) => ({ query: route.query.q, x: route.query.x }),
+        props: (route) => ({
+          query: route.query.q,
+          x: route.query.x,
+          idForLogin: route.query.idForLogin,
+        }),
       },
       {
         path: 'list/:page',
