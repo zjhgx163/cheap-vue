@@ -202,6 +202,7 @@ export default {
       _detail: 'itemDetail',
       _replyList: 'replyList',
       _replyMax: 'replyMax',
+      _contentStr: 'contentStr',
     }),
     maxPage() {
       return this.isBigScreen ? 6 : 4;
@@ -352,13 +353,21 @@ export default {
 
     this.setAnotherTitle(this.item.title);
     // this.title = this._detail.title;
-    // console.log(this.title);
-    this.meta.description.content = this.item.title;
+    console.log(this._contentStr);
+    if (this._contentStr) {
+      this.meta.description.content = this.item.title + this._contentStr;
+      this.meta.keywords.content = this.item.title + this._contentStr;
+      this.meta.ogtitle.content = this.item.title + this._contentStr;
+      this.meta.ogdescription.content = this.item.title + this._contentStr;
+    } else {
+      this.meta.description.content = this.item.title;
+      this.meta.keywords.content = this.item.title;
+      this.meta.ogtitle.content = this.item.title;
+      this.meta.ogdescription.content = this.item.title;
+    }
 
-    this.meta.keywords.content = this.item.title;
-    this.meta.ogtitle.content = this.item.title;
     this.meta.ogurl.content = 'https://www.hjdang.com/yunpan/d/' + this.$route.params.id;
-    this.meta.ogdescription.content = this.item.title;
+
     this.meta.weibocreate.content = new Date();
     this.meta.weiboupdate.content = new Date();
   },

@@ -419,17 +419,10 @@ export default {
     this.max = this._max;
     this.pageNavigateHidden = this._pageNavigateHidden;
     this.stopLoading = this._stopLoading;
-
-    //在yunpanDetail页面上需要登陆
-    if (this.idForLogin) {
-      //通知父组件
-      this.$emit('need-login', this.idForLogin);
-    }
   },
 
   mounted() {
     console.log('YunpanList mounted' + this.category);
-    console.log('this q is' + this.query);
     let windowWidth = window.screen.width;
     if (windowWidth > 1023.99) {
       this.isBigScreen = true;
@@ -441,6 +434,11 @@ export default {
         path: '/yunpan/d/' + itemId,
       });
     });
+    //在yunpanDetail页面上需要登陆
+    if (this.idForLogin) {
+      //通知父组件
+      this.$emit('need-login', this.idForLogin);
+    }
     console.log(' this.$route.path ' + this.$route.path);
     if (this.$route.params.page != undefined && this.$route.params.page != null) {
       console.log('page = ' + this.$route.params.page);

@@ -15,6 +15,7 @@ export const useYunpanStore = defineStore('yunpan', {
     itemDetail: {},
     replyList: [],
     replyMax: 0,
+    contentStr: '',
   }),
 
   getters: {
@@ -72,11 +73,12 @@ export const useYunpanStore = defineStore('yunpan', {
           });
         } else {
           this.itemDetail = res.data.data.item;
+          this.contentStr = res.data.data.contentStr;
           this.replyList = res.data.data.firstReplyPage.records;
           this.replyMax = Math.ceil(
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
           );
-          console.log(this.itemDetail);
+
           if (this.itemDetail == null) {
             redirect({ path: '/error/404' }, 301);
           }
