@@ -351,19 +351,23 @@ export default {
     this.listData = this._replyList;
     this.max = this._replyMax;
 
-    this.setAnotherTitle(this.item.title);
+    this.setAnotherTitle(this.item.title + ' 阿里云盘 百度云盘 夸克云盘');
     // this.title = this._detail.title;
     console.log(this._contentStr);
     if (this._contentStr) {
-      this.meta.description.content = this.item.title + this._contentStr;
-      this.meta.keywords.content = this.item.title + this._contentStr;
-      this.meta.ogtitle.content = this.item.title + this._contentStr;
-      this.meta.ogdescription.content = this.item.title + this._contentStr;
+      this.meta.description.content =
+        this.item.title + ' 阿里云盘 百度云盘 夸克云盘' + this._contentStr;
+      this.meta.keywords.content =
+        this.item.title + ' 阿里云盘 百度云盘 夸克云盘' + this._contentStr;
+      this.meta.ogtitle.content =
+        this.item.title + ' 阿里云盘 百度云盘 夸克云盘' + this._contentStr;
+      this.meta.ogdescription.content =
+        this.item.title + ' 阿里云盘 百度云盘 夸克云盘' + this._contentStr;
     } else {
-      this.meta.description.content = this.item.title;
-      this.meta.keywords.content = this.item.title;
-      this.meta.ogtitle.content = this.item.title;
-      this.meta.ogdescription.content = this.item.title;
+      this.meta.description.content = this.item.title + ' 阿里云盘 百度云盘 夸克云盘';
+      this.meta.keywords.content = this.item.title + ' 阿里云盘 百度云盘 夸克云盘';
+      this.meta.ogtitle.content = this.item.title + ' 阿里云盘 百度云盘 夸克云盘';
+      this.meta.ogdescription.content = this.item.title + ' 阿里云盘 百度云盘 夸克云盘';
     }
 
     this.meta.ogurl.content = 'https://www.hjdang.com/yunpan/d/' + this.$route.params.id;
