@@ -56,7 +56,7 @@ export const useGoodsStore = defineStore('goods', {
         this.detail = res.data.data;
         // console.log(this.detail);
         if (this.detail == null) {
-          redirect({ path: '/error/404' }, 301);
+          redirect({ path: '/' }, 301);
 
           Loading.hide();
         }
