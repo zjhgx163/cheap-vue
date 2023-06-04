@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="isLoginCard" @hide="dialogHide">
+  <q-dialog v-model="isLoginCard" @hide="dialogHide" :persistent="isPersistent">
     <q-card class="YL__login_card">
       <q-card-section class="column flex-center q-pt-lg q-pb-sm">
         <div class="text-subtitle1">微信扫码登陆</div>
@@ -67,7 +67,7 @@ export default {
       },
     },
   },
-  props: ['isLoadingQr', 'loginCard', 'wechatQr'], // 微信auth code
+  props: ['isLoadingQr', 'loginCard', 'wechatQr', 'isPersistent'], // 微信auth code
 
   mounted() {
     console.log('LoginQr mounted');
