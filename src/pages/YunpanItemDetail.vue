@@ -1,5 +1,12 @@
 <template>
   <q-page class="bg-secondary">
+    <q-dialog persistent v-model="mobileBroswer">
+      <q-card class="bg-blue text-white">
+        <q-card-section>
+          移动端请关注微信公众号“老胡为你服务”，在公众号内访问。PC端请访问“www.hjdang.com”
+        </q-card-section>
+      </q-card>
+    </q-dialog>
     <div class="row">
       <!-- 详情页 -->
       <div class="col row bg-primary">
@@ -177,6 +184,7 @@ import { useYunpanStore } from 'src/stores/yunpan';
 import { useMeta } from 'quasar';
 import { ref } from 'vue';
 import { reactive } from 'vue';
+// import { useQuasar } from 'quasar';
 
 export default {
   name: 'YunpanItemDetail',
@@ -193,6 +201,7 @@ export default {
       isListEnd: false,
       userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
       isBigScreen: false,
+      mobileBroswer: false,
     };
   },
   emits: ['need-login', 'logined'],
@@ -385,8 +394,13 @@ export default {
         if (this.isWeixin()) {
           window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.$route.params.id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
         } else {
-          //通知父组件
-          this.$emit('need-login', this.$route.params.id);
+          // const $q = useQuasar();
+          if (this.$q.platform.is.desktop) {
+            //通知父组件
+            this.$emit('need-login', this.$route.params.id);
+          } else {
+            this.mobileBroswer = true;
+          }
 
           // this.$router.push({
           //   path: '/yunpan/list',
