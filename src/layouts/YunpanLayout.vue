@@ -149,7 +149,7 @@
       @login-card-changed="loginCardChange"
       :login-card="loginCard"
       :wechat-qr="wechatQr"
-      is-persistent="true"
+      :is-persistent="true"
     />
     <wysisyg-editor @editor-show-changed="editorShowChanged" :is-editor-show="isEditorShowing" />
   </q-layout>
