@@ -1,5 +1,10 @@
 <template>
-  <q-dialog v-model="isLoginCard" @hide="dialogHide" :persistent="isPersistent">
+  <q-dialog
+    v-model="isLoginCard"
+    @hide="dialogHide"
+    :no-esc-dismiss="isPersistent"
+    :no-backdrop-dismiss="isPersistent"
+  >
     <q-card class="YL__login_card">
       <q-card-section class="column flex-center q-pt-lg q-pb-sm">
         <div class="text-subtitle1">微信扫码登陆</div>
