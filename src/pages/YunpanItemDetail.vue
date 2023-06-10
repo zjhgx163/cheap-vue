@@ -418,12 +418,12 @@ export default {
       this.isBigScreen = true;
     }
     // 详情页插入广告
-    if (process.env.PROD) {
-      window.AdverDetailInsert = true;
-      setTimeout(function () {
-        window.TencentGDT.NATIVE.loadAd('4054888219125381');
-      }, 100);
-    }
+    // if (process.env.PROD) {
+    //   window.AdverDetailInsert = true;
+    //   setTimeout(function () {
+    //     window.TencentGDT.NATIVE.loadAd('4054888219125381');
+    //   }, 100);
+    // }
 
     this.$bus.on('logined', function (itemId) {
       console.log('从yunpan detail页面已登陆' + itemId);

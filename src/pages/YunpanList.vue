@@ -471,58 +471,58 @@ export default {
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
     // 如果不是搜索结果播放模版广告
-    if (this.x == undefined || this.x == null) {
-      if (process.env.PROD) {
-        if (this.adverPlay == null) {
-          window.AdverNativeTemplate = true;
-          setTimeout(function () {
-            window.TencentGDT.NATIVE.loadAd('5004894439792983');
-          }, 1500);
-          this.adverPlay = true;
-        }
+    // if (this.x == undefined || this.x == null) {
+    //   if (process.env.PROD) {
+    //     if (this.adverPlay == null) {
+    //       window.AdverNativeTemplate = true;
+    //       setTimeout(function () {
+    //         window.TencentGDT.NATIVE.loadAd('5004894439792983');
+    //       }, 1500);
+    //       this.adverPlay = true;
+    //     }
 
-        // if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
-        //   window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
-        //   TencentGDT.NATIVE.loadAd('9094884362628825');
+    // if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+    //   window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+    //   TencentGDT.NATIVE.loadAd('9094884362628825');
 
-        //   this.adverPlay = true;
-        // } else {
-        //   setTimeout(() => {
-        //     if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
-        //       window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
-        //       TencentGDT.NATIVE.loadAd('9094884362628825');
+    //   this.adverPlay = true;
+    // } else {
+    //   setTimeout(() => {
+    //     if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+    //       window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+    //       TencentGDT.NATIVE.loadAd('9094884362628825');
 
-        //       this.adverPlay = true;
-        //     } else {
-        //       console.log('AdverNativeTemplate not init after wait 1.5s');
-        //     }
-        //     console.log('wait 1.5s AdverNativeTemplate');
-        //   }, 1500);
-        // }
-      }
-    }
+    //       this.adverPlay = true;
+    //     } else {
+    //       console.log('AdverNativeTemplate not init after wait 1.5s');
+    //     }
+    //     console.log('wait 1.5s AdverNativeTemplate');
+    //   }, 1500);
+    // }
+    // }
+    // }
   },
   activated() {
     console.log('YunpanList activated ' + this.category);
     console.log('this.isListEnd =' + this.isListEnd);
-    if (this.x === undefined || this.x === null) {
-      if (process.env.PROD) {
-        if (this.adverPlay == null) {
-          window.AdverNativeTemplate = true;
-          setTimeout(function () {
-            window.TencentGDT.NATIVE.loadAd('5004894439792983');
-          }, 1500);
-          this.adverPlay = true;
-        }
+    // if (this.x === undefined || this.x === null) {
+    //   if (process.env.PROD) {
+    //     if (this.adverPlay == null) {
+    //       window.AdverNativeTemplate = true;
+    //       setTimeout(function () {
+    //         window.TencentGDT.NATIVE.loadAd('5004894439792983');
+    //       }, 1500);
+    //       this.adverPlay = true;
+    //     }
 
-        // if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
-        //   window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
-        //   TencentGDT.NATIVE.loadAd('9094884362628825');
+    //     // if (window.AdverNativeTemplate != undefined && window.AdverNativeTemplate != null) {
+    //     //   window.TencentGDT.NATIVE.renderAd(window.AdverNativeTemplate, 'flowAdverYunpanId');
+    //     //   TencentGDT.NATIVE.loadAd('9094884362628825');
 
-        //   this.adverPlay = true;
-        // }
-      }
-    }
+    //     //   this.adverPlay = true;
+    //     // }
+    //   }
+    // }
 
     this.isListEnd = false;
   },
