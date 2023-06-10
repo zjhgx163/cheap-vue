@@ -86,12 +86,14 @@
               </div>
               <!-- 主图旁边介绍，响应式 -->
               <div class="column col-md q-pa-xs col-sm-12 justify-between">
-                <div
-                  id="intro"
-                  class="col-md-auto col-sm-auto text-h6 text-dark text-weight-medium"
-                >
-                  {{ detail.title }}
-                </div>
+                <header>
+                  <h1
+                    id="intro"
+                    class="col-md-auto col-sm-auto text-h6 text-dark text-bold q-mt-none"
+                  >
+                    {{ detail.title }}
+                  </h1>
+                </header>
                 <div
                   class="col-md-2 col-sm-2 text-accent text-h6 text-weight-bold YL__title_font_family"
                 >

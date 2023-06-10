@@ -15,17 +15,20 @@
             <q-item dense>
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
-                <q-item-label :lines="2" class="row text-h6 text-bold">
-                  <div>
-                    {{ item.title }}
-                    <q-badge
-                      transparent
-                      align="middle"
-                      :color="getTagColor(item.tag)"
-                      :label="item.tag"
-                    >
-                    </q-badge>
-                  </div>
+                <q-item-label :lines="2">
+                  <header>
+                    <h1 class="text-h6 text-bold">
+                      {{ item.title }}
+
+                      <q-badge
+                        transparent
+                        align="middle"
+                        :color="getTagColor(item.tag)"
+                        :label="item.tag"
+                      >
+                      </q-badge>
+                    </h1>
+                  </header>
                 </q-item-label>
               </q-item-section>
             </q-item>

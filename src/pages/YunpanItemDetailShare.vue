@@ -8,17 +8,20 @@
             <q-item dense>
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
-                <q-item-label :lines="2" class="row text-h6 text-bold">
-                  <div>
-                    {{ item.title }}
-                    <q-badge
-                      transparent
-                      align="middle"
-                      :color="getTagColor(item.tag)"
-                      :label="item.tag"
-                    >
-                    </q-badge>
-                  </div>
+                <q-item-label :lines="2" class="row">
+                  <header>
+                    <h1 class="text-h6 text-bold">
+                      {{ item.title }}
+
+                      <q-badge
+                        transparent
+                        align="middle"
+                        :color="getTagColor(item.tag)"
+                        :label="item.tag"
+                      >
+                      </q-badge>
+                    </h1>
+                  </header>
                 </q-item-label>
               </q-item-section>
             </q-item>
@@ -47,7 +50,7 @@
               <div class="text-body2 break-all" v-html="item.content"></div>
             </q-item>
             <q-separator />
-            <q-item dense class="q-pt-sm">
+            <q-item dense class="q-pt-md">
               <q-item-section>
                 <q-item-label class="column flex-center">
                   <span class="text-h6 text-deep-purple text-bold">关注微信公众号 </span>
