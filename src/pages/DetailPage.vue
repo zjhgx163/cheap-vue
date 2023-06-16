@@ -401,6 +401,11 @@ export default {
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('Detail page prefetch');
+    const myStore = useGoodsStore(store);
+    myStore.detail = {};
+    myStore.detailParts = [];
+    myStore.bigImages = [];
+    myStore.couponInfo = [];
     // const $q = useQuasar();
     // fetch data, validate route and optionally redirect to some other route...
     if (process.env.SERVER) {
@@ -412,7 +417,7 @@ export default {
 
       // Return a Promise if you are running an async job
       // Example:
-      const myStore = useGoodsStore(store);
+
       if (process.env.SERVER) {
         myStore.userAgent = ssrContext.req.headers['user-agent'];
       }

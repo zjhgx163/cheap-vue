@@ -352,6 +352,11 @@ export default {
     console.log('yunpanItemDetailShare page prefetch');
     // const $q = useQuasar();
     // fetch data, validate route and optionally redirect to some other route...
+    const myStore = useYunpanStore();
+    myStore.itemDetail = {};
+    myStore.replyList = [];
+    myStore.contentStr = '';
+
     if (process.env.SERVER) {
       Loading.show();
 
@@ -361,7 +366,6 @@ export default {
 
       // Return a Promise if you are running an async job
       // Example:
-      const myStore = useYunpanStore();
 
       return myStore.getYunpanItemContent(currentRoute.params.id, redirect);
     }

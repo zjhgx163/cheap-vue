@@ -339,16 +339,20 @@ export default {
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('yunpanItemDetail page prefetch');
+    // 先把旧数据重置
+    const myStore = useYunpanStore();
+    myStore.itemDetail = {};
+    myStore.replyList = [];
+    myStore.contentStr = '';
+
     if (process.env.SERVER) {
       Loading.show();
-
       // ssrContext is available only server-side in SSR mode
 
       // No access to "this" here
 
       // Return a Promise if you are running an async job
       // Example:
-      const myStore = useYunpanStore();
 
       return myStore.getYunpanItemContent(currentRoute.params.id, redirect);
     }
