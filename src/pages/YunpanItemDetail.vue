@@ -280,7 +280,7 @@ export default {
       description: {
         name: 'description',
         content:
-          '云盘资源 阿里云盘 百度云盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+          '云盘资源 阿里云盘 百度网盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
       },
       keywords: {
         name: 'keywords',
@@ -301,7 +301,7 @@ export default {
       ogdescription: {
         property: 'og:description',
         content:
-          '云盘资源 阿里云盘 百度云盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+          '云盘资源 阿里云盘 百度网盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
       },
       ogimage: {
         property: 'og:image',
@@ -365,23 +365,23 @@ export default {
     this.listData = this._replyList;
     this.max = this._replyMax;
 
-    this.setAnotherTitle(this.item.title + ' 阿里云盘 百度云盘 夸克云盘');
+    this.setAnotherTitle(this.item.title + ' 阿里云盘 百度网盘 夸克云盘');
     // this.title = this._detail.title;
     console.log(this._contentStr);
     if (this._contentStr) {
       this.meta.description.content =
-        this.item.title + ' 阿里云盘 百度云盘 夸克云盘' + this._contentStr;
+        this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
       this.meta.keywords.content =
-        this.item.title + ' 阿里云盘 百度云盘 夸克云盘' + this._contentStr;
+        this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
       this.meta.ogtitle.content =
-        this.item.title + ' 阿里云盘 百度云盘 夸克云盘' + this._contentStr;
+        this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
       this.meta.ogdescription.content =
-        this.item.title + ' 阿里云盘 百度云盘 夸克云盘' + this._contentStr;
+        this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
     } else {
-      this.meta.description.content = this.item.title + ' 阿里云盘 百度云盘 夸克云盘';
-      this.meta.keywords.content = this.item.title + ' 阿里云盘 百度云盘 夸克云盘';
-      this.meta.ogtitle.content = this.item.title + ' 阿里云盘 百度云盘 夸克云盘';
-      this.meta.ogdescription.content = this.item.title + ' 阿里云盘 百度云盘 夸克云盘';
+      this.meta.description.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+      this.meta.keywords.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+      this.meta.ogtitle.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+      this.meta.ogdescription.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
     }
 
     this.meta.ogurl.content = 'https://www.hjdang.com/yunpan/d/' + this.$route.params.id;
