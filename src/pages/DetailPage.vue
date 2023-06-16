@@ -82,7 +82,12 @@
             <div class="row col q-gutter-md">
               <!-- 主图 -->
               <div class="row col-auto justify-center" v-bind:class="[imagefullwidth]">
-                <q-img :src="detail.mainImageUrl" width="250px" height="250px" />
+                <q-img
+                  :src="detail.mainImageUrl"
+                  width="250px"
+                  height="250px"
+                  :alt="detail.title"
+                />
               </div>
               <!-- 主图旁边介绍，响应式 -->
               <div class="column col-md q-pa-xs col-sm-12 justify-between">
@@ -232,6 +237,7 @@
                     :src="bigImage"
                     width="60%"
                     height="60%"
+                    :alt="detail.title"
                   >
                   </q-img>
 
@@ -240,6 +246,7 @@
                     :src="detail.mainImageUrl"
                     width="60%"
                     height="60%"
+                    :alt="detail.title"
                   >
                   </q-img>
                 </div>

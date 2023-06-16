@@ -1,10 +1,11 @@
 <template>
-  <q-page class="bg-primary" :style-fn="myTweak">
+  <q-page class="bg-primary">
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
         <q-img
           src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/no-data.png"
           spinner-color="white"
+          alt="空空如也～"
         >
         </q-img>
 
@@ -60,7 +61,7 @@
                       params: { urlCode: item.urlCode },
                     }"
                   >
-                    <img v-bind:src="item.thumbUrl" class="YL__index_img" />
+                    <img v-bind:src="item.thumbUrl" class="YL__index_img" :alt="item.title" />
                   </router-link>
                 </q-item-section>
 
@@ -536,29 +537,29 @@ export default {
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('Index prefetch');
-    // const $q = useQuasar();
     // fetch data, validate route and optionally redirect to some other route...
-    console.log('path = ' + currentRoute.params.path);
-    Loading.show();
+    if (process.env.SERVER) {
+      Loading.show();
 
-    // ssrContext is available only server-side in SSR mode
+      // ssrContext is available only server-side in SSR mode
 
-    // No access to "this" here
+      // No access to "this" here
 
-    // Return a Promise if you are running an async job
-    // Example:
-    const myStore = useGoodsStore();
-    console.log(myStore.prefetchFlag);
+      // Return a Promise if you are running an async job
+      // Example:
+      const myStore = useGoodsStore();
+      console.log(myStore.prefetchFlag);
 
-    myStore.prefetchFlag = 1;
-    // myStore.getItemList(currentRoute.path, currentRoute.query.q);
-    // Loading.show();
-    return myStore.getItemList(
-      currentRoute.params.page === undefined ? currentRoute.query.page : currentRoute.params.page,
-      currentRoute.params.path,
-      currentRoute.query.q,
-      currentRoute.query.sort === undefined ? 2 : currentRoute.query.sort
-    );
+      myStore.prefetchFlag = 1;
+
+      return myStore.getItemList(
+        currentRoute.params.page === undefined ? currentRoute.query.page : currentRoute.params.page,
+        currentRoute.params.path,
+        currentRoute.query.q,
+        currentRoute.query.sort === undefined ? 2 : currentRoute.query.sort
+      );
+    }
+
     // return new Promise((resolve) => {
     //   resolve();
     // }).then(() => {

@@ -7,6 +7,7 @@
         <q-img
           src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/no-data.png"
           spinner-color="white"
+          alt="空空如也～"
         >
         </q-img>
 
@@ -44,7 +45,7 @@
               >
                 <q-item-section avatar top>
                   <q-avatar v-if="item.avatar != '' && item.avatar != null">
-                    <img :src="item.avatar" />
+                    <img :src="item.avatar" alt="头像" />
                   </q-avatar>
 
                   <q-avatar :style="getAvatarColor(item.auther)" text-color="white" v-else>

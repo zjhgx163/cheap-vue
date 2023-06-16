@@ -46,7 +46,7 @@ export default function ({ store, ssrContext }) {
     // scrollBehavior: () => ({ x: 0, y: 0 }),
     scrollBehavior: function (to, from, savedPosition) {
       if (savedPosition) {
-        console.log('savedPosition is ' + savedPosition);
+        console.log('savedPosition is ' + JSON.stringify(savedPosition));
         return savedPosition;
       } else {
         // 如果不是通过上述行为切换组件，就会让页面回到顶部

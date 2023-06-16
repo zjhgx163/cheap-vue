@@ -35,7 +35,7 @@
             <q-item class="items-center">
               <q-item-section avatar style="min-width: 30px">
                 <q-avatar size="1.9em" v-if="item.avatar != '' && item.avatar != null">
-                  <img :src="item.avatar" />
+                  <img :src="item.avatar" alt="头像" />
                 </q-avatar>
                 <q-avatar
                   size="1.9em"
@@ -76,7 +76,7 @@
                             v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
                             size="1.9em"
                           >
-                            <img :src="reply.replyAvatar" />
+                            <img :src="reply.replyAvatar" alt="头像" />
                           </q-avatar>
                           <q-avatar
                             size="1.9em"
@@ -139,7 +139,7 @@
                 <q-item dense class="q-py-sm">
                   <q-item-section avatar top style="min-width: 30px">
                     <q-avatar size="1.9em">
-                      <img :src="userAvatar" />
+                      <img :src="userAvatar" alt="头像" />
                     </q-avatar>
                   </q-item-section>
                   <!-- <q-item-section class="YL__auther">
