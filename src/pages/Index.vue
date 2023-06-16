@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-primary">
+  <q-page class="bg-primary" :style-fn="myTweak">
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
         <q-img
