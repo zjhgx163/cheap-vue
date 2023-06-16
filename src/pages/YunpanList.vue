@@ -390,27 +390,28 @@ export default {
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('YunpanList prefetch');
     // fetch data, validate route and optionally redirect to some other route...
-    console.log('path = ' + currentRoute.params.category);
-    Loading.show();
+    if (process.env.SERVER) {
+      Loading.show();
 
-    // ssrContext is available only server-side in SSR mode
+      // ssrContext is available only server-side in SSR mode
 
-    // No access to "this" here
+      // No access to "this" here
 
-    // Return a Promise if you are running an async job
-    // Example:
-    const myStore = useYunpanStore();
-    console.log(myStore.prefetchFlag);
+      // Return a Promise if you are running an async job
+      // Example:
+      const myStore = useYunpanStore();
+      console.log(myStore.prefetchFlag);
 
-    myStore.prefetchFlag = 1;
+      myStore.prefetchFlag = 1;
 
-    return myStore.getItemList(
-      currentRoute.params.page === undefined ? currentRoute.query.page : currentRoute.params.page,
-      currentRoute.query.q,
-      currentRoute.params.category,
-      currentRoute.query.x,
-      redirect
-    );
+      return myStore.getItemList(
+        currentRoute.params.page === undefined ? currentRoute.query.page : currentRoute.params.page,
+        currentRoute.query.q,
+        currentRoute.params.category,
+        currentRoute.query.x,
+        redirect
+      );
+    }
   },
 
   created() {

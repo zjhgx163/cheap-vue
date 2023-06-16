@@ -403,19 +403,21 @@ export default {
     console.log('Detail page prefetch');
     // const $q = useQuasar();
     // fetch data, validate route and optionally redirect to some other route...
-    Loading.show();
-
-    // ssrContext is available only server-side in SSR mode
-
-    // No access to "this" here
-
-    // Return a Promise if you are running an async job
-    // Example:
-    const myStore = useGoodsStore(store);
     if (process.env.SERVER) {
-      myStore.userAgent = ssrContext.req.headers['user-agent'];
+      Loading.show();
+
+      // ssrContext is available only server-side in SSR mode
+
+      // No access to "this" here
+
+      // Return a Promise if you are running an async job
+      // Example:
+      const myStore = useGoodsStore(store);
+      if (process.env.SERVER) {
+        myStore.userAgent = ssrContext.req.headers['user-agent'];
+      }
+      return myStore.getGoodDetail(currentRoute.params.urlCode, redirect);
     }
-    return myStore.getGoodDetail(currentRoute.params.urlCode, redirect);
   },
   created() {
     console.log('Detail page created');
@@ -475,7 +477,7 @@ export default {
       this.taobaoPwd = this.taobaoCode;
       this.isShowCopyTaobaopwd = true;
     }
-    if (!this.detail) {
+    if (Object.keys(this.detail).length === 0) {
       this.$q.loading.show({
         delay: 400, // ms
       });
@@ -488,7 +490,7 @@ export default {
         this.detail = res.data.data;
         console.log(this.detail);
         if (this.detail == null) {
-          this.$router.push({ path: '/error' });
+          this.$router.push({ path: '/' });
           this.$q.loading.hide();
         }
         this.detailParts = JSON.parse(this.detail.detail);

@@ -602,11 +602,6 @@ export default {
       console.log(myStore.prefetchFlag);
     }
 
-    // this.isBigScreen = Screen.gt.sm ? true : false;
-    // console.log('screen width' + $q.screen.width);
-    // console.log('screen' + this.isBigScreen);
-    // this.selectedTab = 'main';
-    //
     // console.log(this.$router.options.scrollBehavior);
 
     // this.windowWidth = window.innerWidth;
