@@ -1,8 +1,13 @@
 <template>
   <q-layout view="hHh lpR fFf" style="min-height: 100vh">
     <q-header reveal class="bg-primary text-grey-8 YL__750w q-pb-xs">
-      <q-toolbar class="bg-secondary" v-bind:class="[itemPadding]">
-        <div class="col-12 col-sm-10 justify-center">
+      <q-toolbar class="bg-secondary justify-between q-gutter-sm" v-bind:class="[itemPadding]">
+        <div class="col-3 col-sm-2 q-pa-xs">
+          <router-link :to="{ path: '/' }">
+            <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
+          </router-link>
+        </div>
+        <div class="col-9 col-sm-8 justify-center">
           <q-input
             dense
             filled
@@ -11,7 +16,7 @@
             v-model="searchKey"
             placeholder="搜索"
             type="search"
-            class="absolute-center YL__toolbar-input-container"
+            class="YL__toolbar-input-container"
             v-on:keyup.enter="search"
             hide-bottom-space
           >
@@ -206,8 +211,12 @@ export default {
   },
   computed: {
     itemPadding() {
-      return this.isBigScreen ? 'q-py-lg' : 'q-py-xs';
+      return this.isBigScreen ? 'q-py-lg' : 'q-py-sm';
     },
+    logoWidth() {
+      return this.isBigScreen ? '110px' : '90px';
+    },
+
     // categoryTab: function () {
     //   return this.$refs.child.category;
     // },
