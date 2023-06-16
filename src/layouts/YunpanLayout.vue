@@ -1,13 +1,13 @@
 <template>
   <q-layout view="hHh lpR fFf" style="min-height: 100vh">
     <q-header reveal class="bg-primary text-grey-8 YL__750w q-pb-xs">
-      <q-toolbar class="bg-secondary justify-between q-gutter-sm" v-bind:class="[itemPadding]">
-        <div class="col-3 col-sm-2 q-pa-xs">
+      <q-toolbar class="bg-secondary justify-between" v-bind:class="[itemPadding]">
+        <div class="col-auto col-sm-auto q-pa-xs">
           <router-link :to="{ path: '/' }">
             <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
           </router-link>
         </div>
-        <div class="col-9 col-sm-8 justify-center">
+        <div class="col col-sm-7 justify-center">
           <q-input
             dense
             filled
@@ -170,9 +170,9 @@
       width: 100%
   &__toolbar-input-container
     @media(max-width: $breakpoint-xs-max)
-      width: 90%
+      width: 98%
     @media(min-width: $breakpoint-xs-max)
-      width: 50%
+      width: 90%
 .q-tab__label
   @media(max-width: $breakpoint-xs-max)
    font-size: 0.7em
