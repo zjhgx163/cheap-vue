@@ -379,24 +379,26 @@ export default {
     this.listData = this._replyList;
     this.max = this._replyMax;
 
-    this.setAnotherTitle(this.item.title + ' 阿里云盘 百度网盘 夸克云盘');
-    // this.title = this._detail.title;
-    // console.log(this.title);
-    console.log(this._contentStr);
-    if (this._contentStr) {
-      this.meta.description.content =
-        this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
-      this.meta.keywords.content =
-        this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
-      this.meta.ogtitle.content =
-        this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
-      this.meta.ogdescription.content =
-        this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
-    } else {
-      this.meta.description.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
-      this.meta.keywords.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
-      this.meta.ogtitle.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
-      this.meta.ogdescription.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+    if (Object.keys(this.item).length > 0) {
+      this.setAnotherTitle(this.item.title + ' 阿里云盘 百度网盘 夸克云盘');
+      // this.title = this._detail.title;
+      // console.log(this.title);
+      console.log(this._contentStr);
+      if (this._contentStr) {
+        this.meta.description.content =
+          this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+        this.meta.keywords.content =
+          this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+        this.meta.ogtitle.content =
+          this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+        this.meta.ogdescription.content =
+          this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+      } else {
+        this.meta.description.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+        this.meta.keywords.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+        this.meta.ogtitle.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+        this.meta.ogdescription.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+      }
     }
 
     this.meta.ogurl.content = 'https://www.hjdang.com/p/' + this.$route.params.id;
@@ -479,6 +481,8 @@ export default {
           }
         } else {
           this.item = res.data.data.item;
+          this._contentStr = res.data.data.contentStr;
+
           this.listData = res.data.data.firstReplyPage.records;
           this.max = Math.ceil(
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
@@ -487,7 +491,23 @@ export default {
           if (this.item == null) {
             this.$router.push({ path: '/error' });
           }
-
+          this.setAnotherTitle(this.item.title + ' 阿里云盘 百度网盘 夸克云盘');
+          // this.title = this._detail.title;
+          if (this._contentStr) {
+            this.meta.description.content =
+              this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+            this.meta.keywords.content =
+              this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+            this.meta.ogtitle.content =
+              this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+            this.meta.ogdescription.content =
+              this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          } else {
+            this.meta.description.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+            this.meta.keywords.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+            this.meta.ogtitle.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+            this.meta.ogdescription.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+          }
           this.$q.loading.hide();
         }
       });

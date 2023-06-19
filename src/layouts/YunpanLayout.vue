@@ -122,7 +122,7 @@
           stack
           dense
           icon="o_shopping_cart"
-          to="/"
+          href="https://shop.hjdang.com"
         />
         <q-btn
           color="pink-4"
