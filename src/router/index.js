@@ -7,16 +7,17 @@ import {
   createWebHashHistory,
 } from 'vue-router';
 
-import routesCheap from './routes';
-import routesYunpan from './routes_yunpan';
+import routesYunpan from './routes';
+import routesShop from './routes_shop';
 //解决NavigationDuplicated
 // const routerPush = VueRouter.prototype.push;
 // VueRouter.prototype.push = function (location) {
 //   return routerPush.call(this, location).catch((error) => error);
 // };
-let routes = process.env.ROUTE_YUNPAN ? routesYunpan : routesCheap;
+let routes = process.env.ROUTE_SHOP ? routesShop : routesYunpan;
 
-console.log(process.env.ROUTE_YUNPAN + ` #############`);
+console.log(process.env.ROUTE_SHOP + ` #############`);
+console.log(process.env.PORT + ` $$$$$$$$`);
 
 // Vue.use(VueRouter);
 

@@ -1,60 +1,72 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/YunpanLayout.vue'),
+    component: () => import('layouts/MainLayout.vue'),
     children: [
       {
         path: '',
-        component: () => import('pages/YunpanList.vue'),
-        meta: { isList: true },
-        props: (route) => ({
-          query: route.query.q,
-          x: route.query.x,
-          idForLogin: route.query.idForLogin,
-        }),
-      },
-      {
-        path: 'list',
-        component: () => import('pages/YunpanList.vue'),
-        meta: { isList: true },
-        props: (route) => ({
-          query: route.query.q,
-          x: route.query.x,
-          idForLogin: route.query.idForLogin,
-        }),
+        meta: { isGoodsList: true },
+
+        components: {
+          default: () => import('pages/Index.vue'),
+          // hot: () => import('components/HotList.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
+        props: {
+          default: (route) => ({
+            sort: route.query.sort,
+          }),
+          hot: false,
+        },
       },
       {
         path: 'list/:page',
-        component: () => import('pages/YunpanList.vue'),
-        meta: { isList: true },
-        props: (route) => ({ query: route.query.q }),
-      },
-      {
-        path: 'category/:category',
-        meta: { isList: true },
-        component: () => import('pages/YunpanList.vue'),
-        props: (route) => ({ query: route.query.q, page: route.query.page }),
-      },
-      {
-        path: 'd/:id',
-        name: 'yunpanDetail',
-        component: () => import('pages/YunpanItemDetail.vue'),
-      },
-      {
-        path: 'p/:id',
-        component: () => import('pages/YunpanItemDetailShare.vue'),
-      },
-    ],
-  },
-  {
-    path: '/item',
-    component: () => import('layouts/MainLayout.vue'),
-    // props: true,
+        meta: { isGoodsList: true },
 
-    children: [
+        components: {
+          default: () => import('pages/Index.vue'),
+          // hot: () => import('components/HotList.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
+        props: {
+          default: (route) => ({ query: route.query.q, sort: route.query.sort }),
+          hot: false,
+        },
+      },
       {
-        path: '',
+        path: ':path',
+        meta: { isGoodsList: true },
+
+        components: {
+          default: () => import('pages/Index.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
+        props: {
+          default: (route) => ({
+            query: route.query.q,
+            page: route.query.page,
+            sort: route.query.sort,
+          }),
+          hot: false,
+        },
+      },
+      {
+        path: 'search',
+        name: 'search',
+        meta: { isGoodsList: true },
+        components: {
+          default: () => import('pages/Index.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
+        props: {
+          default: (route) => ({ query: route.query.q, x: route.query.x, sort: route.query.sort }),
+          hot: false,
+        },
+      },
+      {
+        path: 'item',
         component: () => import('layouts/DetailLayout.vue'),
+        // props: true,
         beforeEnter: (to, from, next) => {
           console.info('##before enter DetailLayout, to=' + to.fullPath);
           next();
@@ -65,47 +77,29 @@ const routes = [
             path: 'detail/:urlCode',
             component: () => import('pages/DetailPage.vue'),
             props: (route) => ({ taobaoCode: route.query.taobao_code }),
+
+            // beforeEnter: (to, from, next) => {
+            //   console.info('%%before enter DetailPage, to=' + to.fullPath);
+            //   next();
+            // },
           },
         ],
-      },
-    ],
-    // 在router之间传递参数用下面配置
-    // props: (route) => ({ title: route.query.title, detail: route.query.detail }),
-  },
-
-  {
-    path: '/yunpan',
-    component: () => import('layouts/YunpanLayout.vue'),
-    children: [
-      {
-        path: 'list',
-        component: () => import('pages/YunpanList.vue'),
-        meta: { isList: true },
-        props: (route) => ({
-          query: route.query.q,
-          x: route.query.x,
-          idForLogin: route.query.idForLogin,
-        }),
+        // 在router之间传递参数用下面配置
+        // props: (route) => ({ title: route.query.title, detail: route.query.detail }),
       },
       {
-        path: 'list/:page',
-        component: () => import('pages/YunpanList.vue'),
-        meta: { isList: true },
-        props: (route) => ({ query: route.query.q }),
-      },
-      {
-        path: 'category/:category',
-        meta: { isList: true },
-        component: () => import('pages/YunpanList.vue'),
-        props: (route) => ({ query: route.query.q, page: route.query.page }),
-      },
-      {
-        path: 'd/:id',
-        component: () => import('pages/YunpanItemDetail.vue'),
-      },
-      {
-        path: 'p/:id',
-        component: () => import('pages/YunpanItemDetailShare.vue'),
+        path: 'coupon',
+        components: {
+          default: () => import('layouts/CouponLayout.vue'),
+          hot: () => import('components/ResourceSideList.vue'),
+        },
+        children: [
+          {
+            path: '',
+            component: () => import('src/pages/CouponPage.vue'),
+          },
+          { path: ':tabId', component: () => import('src/pages/CouponPage.vue') },
+        ],
       },
     ],
   },

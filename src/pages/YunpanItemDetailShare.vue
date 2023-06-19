@@ -304,7 +304,7 @@ export default {
       },
       ogurl: {
         property: 'og:url',
-        content: 'https://www.hjdang.com/yunpan/list?q=',
+        content: 'https://www.hjdang.com/list?q=',
       },
       ogtitle: {
         property: 'og:title',
@@ -399,7 +399,7 @@ export default {
       this.meta.ogdescription.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
     }
 
-    this.meta.ogurl.content = 'https://www.hjdang.com/yunpan/p/' + this.$route.params.id;
+    this.meta.ogurl.content = 'https://www.hjdang.com/p/' + this.$route.params.id;
     this.meta.weibocreate.content = new Date();
     this.meta.weiboupdate.content = new Date();
   },

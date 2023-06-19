@@ -292,7 +292,7 @@ export default {
       },
       ogurl: {
         property: 'og:url',
-        content: 'https://www.hjdang.com/yunpan/list?q=',
+        content: 'https://www.hjdang.com/list?q=',
       },
       ogtitle: {
         property: 'og:title',

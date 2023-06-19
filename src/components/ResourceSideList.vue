@@ -48,19 +48,14 @@
         </q-item>
         <q-separator color="primary" class="gt-sm" />
       </div>
-      <q-item-label
-        :lines="1"
-        class="YL__list_line_height q-py-sm YL__list_font_size text-grey-9 column flex-center"
-      >
-        <router-link
-          class="text-bold"
-          :to="{
-            path: 'yunpan/list',
-            query: { q: '' },
-          }"
+      <q-item href="https://shop.hjdang.com" class="flex-center">
+        <q-item-label
+          :lines="1"
+          class="YL__list_line_height q-py-sm YL__list_font_size text-bold"
+          style="color: #25678c"
           >...更多资源点击查看...
-        </router-link>
-      </q-item-label>
+        </q-item-label>
+      </q-item>
     </q-list>
   </div>
 </template>
@@ -213,7 +208,7 @@ export default {
     itemClick(item) {
       console.log('id = ' + item.id);
       this.$router.push({
-        path: '/yunpan/p/' + item.id,
+        path: '/p/' + item.id,
       });
     },
     getHashCode(str, caseSensitive) {

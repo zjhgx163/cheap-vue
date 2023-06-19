@@ -46,7 +46,8 @@ module.exports = function (/* ctx */) {
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env: {
-        ROUTE_YUNPAN: process.env.PROD_YUNPAN ? true : false,
+        ROUTE_SHOP: process.env.PROD_SHOP ? true : false,
+        PORT: '' + process.env.PORT, //用于部署shop应用的端口
       },
       // transpile: false,
 

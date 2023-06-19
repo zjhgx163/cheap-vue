@@ -72,7 +72,7 @@ export const useYunpanStore = defineStore('yunpan', {
             message: `${res.data.msg}`,
           });
           Loading.hide();
-          redirect({ path: '/yunpan/list' }, 301);
+          redirect({ path: '/list' }, 301);
         } else {
           this.itemDetail = res.data.data.item;
           this.contentStr = res.data.data.contentStr;
@@ -82,7 +82,7 @@ export const useYunpanStore = defineStore('yunpan', {
           );
 
           if (this.itemDetail == null) {
-            redirect({ path: '/yunpan/list' }, 301);
+            redirect({ path: '/list' }, 301);
           }
 
           Loading.hide();

@@ -54,53 +54,49 @@
           mobile-arrows
           shrink
         >
+          <q-route-tab :to="{ path: '/list', query: { q: searchKey } }" label="全部" name="all" />
           <q-route-tab
-            :to="{ path: '/yunpan/list', query: { q: searchKey } }"
-            label="全部"
-            name="all"
-          />
-          <q-route-tab
-            :to="{ path: '/yunpan/category/影视', query: { q: searchKey } }"
+            :to="{ path: '/category/影视', query: { q: searchKey } }"
             label="影视"
             name="影视"
           />
           <q-route-tab
-            :to="{ path: '/yunpan/category/动漫', query: { q: searchKey } }"
+            :to="{ path: '/category/动漫', query: { q: searchKey } }"
             label="动漫"
             name="动漫"
           />
           <q-route-tab
-            :to="{ path: '/yunpan/category/学习', query: { q: searchKey } }"
+            :to="{ path: '/category/学习', query: { q: searchKey } }"
             label="学习"
             name="学习"
           />
           <q-route-tab
-            :to="{ path: '/yunpan/category/游戏%2F软件', query: { q: searchKey } }"
+            :to="{ path: '/category/游戏%2F软件', query: { q: searchKey } }"
             label="游戏/软件"
             name="游戏/软件"
           />
           <q-route-tab
-            :to="{ path: '/yunpan/category/音乐%2F音频', query: { q: searchKey } }"
+            :to="{ path: '/category/音乐%2F音频', query: { q: searchKey } }"
             label="音乐/音频"
             name="音乐/音频"
           />
           <q-route-tab
-            :to="{ path: '/yunpan/category/图片', query: { q: searchKey } }"
+            :to="{ path: '/category/图片', query: { q: searchKey } }"
             label="图片"
             name="图片"
           />
           <q-route-tab
-            :to="{ path: '/yunpan/category/书籍', query: { q: searchKey } }"
+            :to="{ path: '/category/书籍', query: { q: searchKey } }"
             label="书籍"
             name="书籍"
           />
           <q-route-tab
-            :to="{ path: '/yunpan/category/求资源', query: { q: searchKey } }"
+            :to="{ path: '/category/求资源', query: { q: searchKey } }"
             label="求资源"
             name="求资源"
           />
           <q-route-tab
-            :to="{ path: '/yunpan/category/other', query: { q: searchKey } }"
+            :to="{ path: '/category/other', query: { q: searchKey } }"
             label="其他"
             name="other"
           />
@@ -424,7 +420,7 @@ export default {
         let randomNum = Math.random();
         that.$router
           .push({
-            path: '/yunpan/list',
+            path: '/list',
             query: { q: that.searchKey, x: randomNum },
           })
           .catch((err) => {
@@ -528,7 +524,7 @@ export default {
     editorShowChanged(value) {
       this.isEditorShowing = value;
       this.$router.push({
-        path: '/yunpan/list/1',
+        path: '/list/1',
         query: { q: '' },
       });
     },

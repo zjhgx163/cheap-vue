@@ -356,7 +356,7 @@ export default {
       },
       ogurl: {
         property: 'og:url',
-        content: 'https://www.hjdang.com/yunpan/list?q=',
+        content: 'https://www.hjdang.com/list?q=',
       },
       ogtitle: {
         property: 'og:title',
@@ -433,7 +433,7 @@ export default {
     this.$bus.on('logined', function (itemId) {
       console.log('我是子组件方法' + itemId);
       this.$router.push({
-        path: '/yunpan/d/' + itemId,
+        path: '/d/' + itemId,
       });
     });
     //在yunpanDetail页面上需要登陆
@@ -709,7 +709,7 @@ export default {
           });
         } else {
           this.$router.push({
-            path: '/yunpan/list/' + this.current,
+            path: '/list/' + this.current,
             query: { q: this.query },
           });
         }

@@ -53,13 +53,13 @@ export default {
             this.$q.loading.hide();
 
             this.$router.push({
-              path: '/yunpan/d/' + this.$route.params.urlCode,
+              path: '/d/' + this.$route.params.urlCode,
             });
           } else if (this.state == 'yunpanList') {
             this.$q.loading.hide();
 
             this.$router.push({
-              path: '/yunpan/list?q=',
+              path: '/list?q=',
             });
           } else {
             console.log('order list' + this.state);
