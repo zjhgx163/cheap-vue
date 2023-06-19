@@ -48,7 +48,7 @@
         </q-item>
         <q-separator color="primary" class="gt-sm" />
       </div>
-      <q-item href="https://shop.hjdang.com" class="flex-center">
+      <q-item href="https://www.hjdang.com" class="flex-center">
         <q-item-label
           :lines="1"
           class="YL__list_line_height q-py-sm YL__list_font_size text-bold"
