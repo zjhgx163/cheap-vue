@@ -7,9 +7,9 @@
   >
     <q-card class="YL__login_card">
       <q-card-section class="column flex-center q-pt-lg q-pb-sm">
-        <div class="text-subtitle1">微信扫码登陆</div>
+        <div class="text-subtitle1 text-bold">微信扫码登陆</div>
       </q-card-section>
-      <q-card-section class="q-pt-none column flex-center">
+      <q-card-section class="q-pt-none q-pb-sm column flex-center">
         <div class="column flex-center" style="width: 150px; height: 150px">
           <q-spinner-facebook color="accent" size="2em" v-bind:class="{ hidden: !isLoadingQr }" />
           <q-img
@@ -25,8 +25,11 @@
       </q-card-section>
 
       <q-card-section class="q-pt-none q-pb-lg column flex-center">
-        <div class="text-caption text-grey">打开微信扫一扫</div>
-        <div class="text-caption text-grey">关注公众号完成登陆</div>
+        <div class="text-caption text-grey text-bold">打开微信扫一扫</div>
+        <div class="text-caption text-grey text-bold">关注公众号完成登陆</div>
+        <div class="text-caption text-pink-4 text-bold">
+          更多资源，请在公众号'老胡为你服务'内获取
+        </div>
       </q-card-section>
 
       <q-separator />
