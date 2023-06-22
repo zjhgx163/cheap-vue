@@ -3,7 +3,15 @@
     <q-dialog persistent v-model="mobileBroswer">
       <q-card class="bg-blue text-white">
         <q-card-section>
-          移动端请关注微信公众号“老胡为你服务”，在公众号内访问。PC端请访问“www.hjdang.com”
+          &#9996;&#9996;实现看片自由。移动端请关注微信公众号“老胡为你服务”，在公众号内访问。PC端请在浏览器上访问“www.hjdang.com”
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="isInvalid">
+      <q-card class="bg-blue text-white">
+        <q-card-section>
+          此资源已失效，请在站内搜索其他资源。&#9996;&#9996;实现看片自由，请关注微信公众号“老胡为你服务“，或在浏览器上访问
+          “www.hjdang.com”
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -205,6 +213,7 @@ export default {
       userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
       isBigScreen: false,
       mobileBroswer: false,
+      isInvalid: false,
     };
   },
   emits: ['need-login', 'logined'],
@@ -215,6 +224,7 @@ export default {
       _replyList: 'replyList',
       _replyMax: 'replyMax',
       _contentStr: 'contentStr',
+      _isInvalid: 'isInvalid',
     }),
     maxPage() {
       return this.isBigScreen ? 6 : 4;
@@ -344,6 +354,7 @@ export default {
     myStore.itemDetail = {};
     myStore.replyList = [];
     myStore.contentStr = '';
+    myStore.isInvalid = false;
 
     if (process.env.SERVER) {
       Loading.show();
@@ -368,6 +379,8 @@ export default {
     this.item = this._detail;
     this.listData = this._replyList;
     this.max = this._replyMax;
+    this.isInvalid = this._isInvalid;
+
     if (Object.keys(this.item).length > 0) {
       this.setAnotherTitle(this.item.title + ' 阿里云盘 百度网盘 夸克云盘');
       // this.title = this._detail.title;
@@ -526,6 +539,7 @@ export default {
           }
         } else {
           this.item = res.data.data.item;
+          this.isInvalid = res.data.data.invalid;
           this._contentStr = res.data.data.contentStr;
           this.listData = res.data.data.firstReplyPage.records;
           this.max = Math.ceil(

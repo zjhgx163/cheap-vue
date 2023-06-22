@@ -1,5 +1,13 @@
 <template>
   <q-page class="bg-secondary">
+    <q-dialog v-model="isInvalid">
+      <q-card class="bg-blue text-white">
+        <q-card-section>
+          此资源已失效，请在站内搜索其他资源。&#9996;&#9996;实现看片自由，请关注微信公众号“老胡为你服务“，或在浏览器上访问
+          “www.hjdang.com”
+        </q-card-section>
+      </q-card>
+    </q-dialog>
     <div class="row">
       <!-- 详情页 -->
       <div class="col row bg-primary">
@@ -219,6 +227,7 @@ export default {
       isListEnd: false,
       userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
       isBigScreen: false,
+      isInvalid: false,
     };
   },
   computed: {
@@ -227,6 +236,7 @@ export default {
       _replyList: 'replyList',
       _replyMax: 'replyMax',
       _contentStr: 'contentStr',
+      _isInvalid: 'isInvalid',
     }),
     maxPage() {
       return this.isBigScreen ? 6 : 4;
@@ -356,6 +366,7 @@ export default {
     myStore.itemDetail = {};
     myStore.replyList = [];
     myStore.contentStr = '';
+    myStore.isInvalid = false;
 
     if (process.env.SERVER) {
       Loading.show();
@@ -378,6 +389,7 @@ export default {
     this.item = this._detail;
     this.listData = this._replyList;
     this.max = this._replyMax;
+    this.isInvalid = this._isInvalid;
 
     if (Object.keys(this.item).length > 0) {
       this.setAnotherTitle(this.item.title + ' 阿里云盘 百度网盘 夸克云盘');
@@ -482,7 +494,7 @@ export default {
         } else {
           this.item = res.data.data.item;
           this._contentStr = res.data.data.contentStr;
-
+          this.isInvalid = res.data.data.invalid;
           this.listData = res.data.data.firstReplyPage.records;
           this.max = Math.ceil(
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size

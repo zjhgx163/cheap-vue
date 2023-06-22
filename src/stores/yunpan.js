@@ -16,6 +16,7 @@ export const useYunpanStore = defineStore('yunpan', {
     replyList: [],
     replyMax: 0,
     contentStr: '',
+    isInvalid: false,
   }),
 
   getters: {
@@ -75,6 +76,7 @@ export const useYunpanStore = defineStore('yunpan', {
           redirect({ path: '/list' }, 301);
         } else {
           this.itemDetail = res.data.data.item;
+          this.isInvalid = res.data.data.invalid;
           this.contentStr = res.data.data.contentStr;
           this.replyList = res.data.data.firstReplyPage.records;
           this.replyMax = Math.ceil(
