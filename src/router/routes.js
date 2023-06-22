@@ -42,6 +42,7 @@ const routes = [
       },
       {
         path: 'p/:id',
+        name: 'yunpanDetailShare',
         component: () => import('pages/YunpanItemDetailShare.vue'),
       },
     ],

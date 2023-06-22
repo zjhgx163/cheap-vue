@@ -38,7 +38,7 @@
                 dense
                 v-ripple
                 :to="{
-                  name: 'yunpanDetail',
+                  name: detailPageName,
                   params: { id: item.id },
                 }"
                 class="bg-secondary q-pt-sm"
@@ -245,6 +245,13 @@ export default {
       _stopLoading: 'stopLoading',
       _max: 'max',
     }),
+    detailPageName() {
+      if (!this.isBigScreen && !this.isWeixin()) {
+        return 'yunpanDetailShare';
+      } else {
+        return 'yunpanDetail';
+      }
+    },
     paginationSize() {
       return this.isBigScreen ? '18px' : '15px';
     },

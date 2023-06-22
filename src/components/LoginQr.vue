@@ -7,7 +7,7 @@
   >
     <q-card class="YL__login_card">
       <q-card-section class="column flex-center q-pt-lg q-pb-sm">
-        <div class="text-subtitle1 text-bold">微信扫码登陆</div>
+        <div class="text-subtitle1">微信扫码登陆</div>
       </q-card-section>
       <q-card-section class="q-pt-none q-pb-sm column flex-center">
         <div class="column flex-center" style="width: 150px; height: 150px">
