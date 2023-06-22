@@ -126,20 +126,20 @@
         <q-item-label header class="text-black">注意事项</q-item-label>
         <q-item dense class="q-pt-none">
           <q-item-section>
-            <q-item-label caption class="q-py-xs">
+            <q-item-label caption class="q-pt-none q-pb-xs">
               在下单后有一定延迟，大约5分钟后会显示
             </q-item-label>
             <q-item-label caption class="q-py-xs">
-              目前支持京东，淘宝的返利，其他商城暂不支持，拼多多不久之后加入。
+              目前仅支持京东返利(淘宝因规则改变不再支持)，其他商城暂不支持，拼多多不久之后加入。
             </q-item-label>
             <q-item-label caption class="q-py-xs"> 可提现余额达到2元时可提现 </q-item-label>
 
             <q-item-label caption class="q-py-xs">
               正常订单返利结算周期一般在确认收货订单完成后14天左右
             </q-item-label>
-            <q-item-label caption class="q-py-xs">
+            <!-- <q-item-label caption class="q-py-xs">
               在本站第一次购买淘宝天猫商品时，如果跳出加入会员的页面，要点“是”，否则没有返利
-            </q-item-label>
+            </q-item-label> -->
             <q-item-label caption class="q-py-xs">
               请不要事先在京东，拼多多浏览完商品后再在本站下单买同样的商品，这样会使返利失效。一定要在本站浏览商品直接购买。
             </q-item-label>
