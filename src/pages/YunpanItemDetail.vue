@@ -419,8 +419,10 @@ export default {
         } else {
           // const $q = useQuasar();
           if (this.$q.platform.is.desktop) {
-            //通知父组件
-            this.$emit('need-login', this.$route.params.id);
+            if (!this.isInvalid) {
+              //通知父组件
+              this.$emit('need-login', this.$route.params.id);
+            }
           } else {
             this.mobileBroswer = true;
           }
