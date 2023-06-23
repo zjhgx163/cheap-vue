@@ -13,6 +13,25 @@
       <div class="col row bg-primary">
         <div class="col column">
           <div class="col q-pa-sm bg-secondary">
+            <q-item dense class="q-pt-md">
+              <q-item-section>
+                <q-item-label class="column flex-center">
+                  <span class="text-h6 text-pink-4 text-bold">扫下面二维码关注微信公众号 </span>
+                </q-item-label>
+                <q-item-label class="column flex-center">
+                  <span class="text-h5 text-deep-blue text-bold"> “老胡为你服务”</span>
+                </q-item-label>
+                <q-item-label class="column flex-center">
+                  <span class="text-h6 text-pink-4 text-bold text-italic">海量免费资源随便看 </span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item class="flex-center">
+              <img
+                style="width: 30%; height: 40%"
+                src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+              />
+            </q-item>
             <q-item dense>
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
@@ -58,27 +77,7 @@
               <div class="text-body2 break-all" v-html="item.content"></div>
             </q-item>
             <q-separator />
-            <q-item dense class="q-pt-md">
-              <q-item-section>
-                <q-item-label class="column flex-center">
-                  <span class="text-h6 text-deep-purple text-bold">关注微信公众号 </span>
-                </q-item-label>
-                <q-item-label class="column flex-center">
-                  <span class="text-h4 text-accent text-bold"> 老胡为你服务</span>
-                </q-item-label>
-                <q-item-label class="column flex-center">
-                  <span class="text-h6 text-light-green-10 text-bold text-italic"
-                    >海量免费资源随便看
-                  </span>
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item class="flex-center">
-              <img
-                style="width: 70%; height: 100%"
-                src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
-              />
-            </q-item>
+
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
               <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
