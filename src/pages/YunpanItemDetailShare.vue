@@ -16,13 +16,17 @@
             <q-item dense class="q-pt-md">
               <q-item-section>
                 <q-item-label class="column flex-center">
-                  <span class="text-h6 text-pink-4 text-bold">扫下面二维码关注微信公众号 </span>
+                  <span class="text-h6 text-pink-4 text-bold"
+                    >更多最新资源，扫描二维码关注微信公众号
+                  </span>
                 </q-item-label>
                 <q-item-label class="column flex-center">
                   <span class="text-h5 text-deep-blue text-bold"> “老胡为你服务”</span>
                 </q-item-label>
                 <q-item-label class="column flex-center">
-                  <span class="text-h6 text-pink-4 text-bold text-italic">海量免费资源随便看 </span>
+                  <span class="text-h6 text-pink-4 text-bold text-italic"
+                    >&#9996;&#9996;实现看片自由
+                  </span>
                 </q-item-label>
               </q-item-section>
             </q-item>
