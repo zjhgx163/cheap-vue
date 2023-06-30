@@ -418,9 +418,8 @@ export default {
       // Return a Promise if you are running an async job
       // Example:
 
-      if (process.env.SERVER) {
-        myStore.userAgent = ssrContext.req.headers['user-agent'];
-      }
+      myStore.userAgent = ssrContext.req.headers['user-agent'];
+
       return myStore.getGoodDetail(currentRoute.params.urlCode, redirect);
     }
   },

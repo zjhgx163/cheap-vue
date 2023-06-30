@@ -244,6 +244,7 @@ export default {
       _pageNavigateHidden: 'pageNavigateHidden',
       _stopLoading: 'stopLoading',
       _max: 'max',
+      _userAgent: 'userAgent',
     }),
     detailPageName() {
       if (!this.isBigScreen && !this.isWeixin()) {
@@ -410,6 +411,7 @@ export default {
       console.log(myStore.prefetchFlag);
 
       myStore.prefetchFlag = 1;
+      myStore.userAgent = ssrContext.req.headers['user-agent'];
 
       return myStore.getItemList(
         currentRoute.params.page === undefined ? currentRoute.query.page : currentRoute.params.page,
@@ -743,8 +745,13 @@ export default {
     //   }
     // },
     isWeixin() {
-      var ua = window.navigator.userAgent.toLowerCase();
-      console.log(ua);
+      let ua;
+      if (process.env.CLIENT) {
+        ua = window.navigator.userAgent.toLowerCase();
+      } else {
+        ua = this._userAgent.toLowerCase();
+      }
+      console.log('userAgent = ' + ua);
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         return true;
       } else {

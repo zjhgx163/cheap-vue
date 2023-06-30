@@ -17,6 +17,7 @@ export const useYunpanStore = defineStore('yunpan', {
     replyMax: 0,
     contentStr: '',
     isInvalid: false,
+    userAgent: '',
   }),
 
   getters: {
