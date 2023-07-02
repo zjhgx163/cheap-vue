@@ -328,10 +328,17 @@ export default {
                     this.loginCard = false;
                   } else {
                     let now = new Date();
-                    if (now.getTime() - beginTime.getTime() > 5 * 60 * 1000) {
+                    if (now.getTime() - beginTime.getTime() > 10 * 60 * 1000) {
                       //如果五分钟了还未登陆则二维码过期
                       console.log('二维码过期');
                       clearInterval(this.timer); //清除定时器
+                      this.$q.notify({
+                        type: 'negative',
+                        message: '二维码已过期，2秒后跳转页面',
+                      });
+                      setTimeout(() => {
+                        this.$router.push({ path: '/' });
+                      }, 2000);
                     }
                   }
                 } else {
