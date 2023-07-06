@@ -155,17 +155,12 @@
             </div>
             <div class="col">
               <div>Copyright © 2020 Hjdang.com All rights reserved.</div>
-              <div class="row">
-                <a
-                  target="_blank"
-                  class="q-px-sm"
-                  style="color: white"
-                  href="https://beian.miit.gov.cn"
+              <div class="row q-gutter-md">
+                <a target="_blank" style="color: white" href="https://beian.miit.gov.cn"
                   >浙ICP备2020040769号-1</a
                 >
                 <a
                   style="color: white"
-                  class="q-px-sm"
                   target="_blank"
                   href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
                   ><img src="备案图标.png" style="width: 12px; height: 12px" />
