@@ -137,7 +137,7 @@
 
     <q-footer bordered reveal class="bg-dark text-white">
       <div v-if="isBigScreen" class="YL__footer row justify-evenly YL__1200w q-pt-md">
-        <div class="col-2 q-py-sm">
+        <div class="col-2 flex-center q-py-sm">
           <q-img
             src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
             class="items-center justify-center"
@@ -145,15 +145,15 @@
             height="100px"
           />
         </div>
-        <div class="col q-py-sm">
+        <div class="col flex-center q-py-sm">
           <div class="text-h6">关于</div>
           <div class="row">
-            <div class="col-6">
+            <div class="col-6 flex-center">
               <div>宇宙第一性价比之王导购平台</div>
               <div>请<strong>左边</strong>扫码关注公众号享受返利和其他服务</div>
               <div>email: 82955503@qq.com</div>
             </div>
-            <div class="col">
+            <div class="col flex-center">
               <div>Copyright © 2020 Hjdang.com All rights reserved.</div>
               <div class="row q-gutter-md">
                 <a target="_blank" style="color: white" href="https://beian.miit.gov.cn"
@@ -172,19 +172,26 @@
           </div>
         </div>
       </div>
-      <div v-else class="row flex-center">
-        <a target="_blank" class="text-grey-5 q-px-sm text-caption" href="https://beian.miit.gov.cn"
-          >浙ICP备2020040769号-1</a
-        >
+      <div v-else class="flex-center">
+        <div>好价手慢无，给你返利</div>
+        <div>请关注微信公众号<strong>老胡为你服务</strong>享受返利和云盘资源服务</div>
+        <div class="row flex-center">
+          <a
+            target="_blank"
+            class="text-grey-5 q-px-sm text-caption"
+            href="https://beian.miit.gov.cn"
+            >浙ICP备2020040769号-1</a
+          >
 
-        <a
-          class="text-grey-5 q-px-sm text-caption"
-          target="_blank"
-          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
-          ><img src="备案图标.png" style="width: 12px; height: 12px" />
+          <a
+            class="text-grey-5 q-px-sm text-caption"
+            target="_blank"
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
+            ><img src="备案图标.png" style="width: 12px; height: 12px" />
 
-          浙公网安备 33012702000426号
-        </a>
+            浙公网安备 33012702000426号
+          </a>
+        </div>
       </div>
     </q-footer>
 
