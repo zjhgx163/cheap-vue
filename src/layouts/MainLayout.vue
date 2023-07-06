@@ -173,8 +173,10 @@
         </div>
       </div>
       <div v-else class="flex-center">
-        <div>好价手慢无，给你返利</div>
-        <div>请关注微信公众号<strong>老胡为你服务</strong>享受返利和云盘资源服务</div>
+        <div class="text-grey-5 q-px-sm text-caption">好价手慢无，给你返利</div>
+        <div class="text-grey-5 q-px-sm text-caption">
+          请关注微信公众号<strong>老胡为你服务</strong>享受返利和云盘资源服务
+        </div>
         <div class="row flex-center">
           <a
             target="_blank"
