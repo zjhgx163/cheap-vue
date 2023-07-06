@@ -136,7 +136,7 @@
     <div id="banner_2_0"></div>
 
     <q-footer bordered reveal class="bg-dark text-white">
-      <div class="YL__footer row justify-evenly gt-sm YL__1200w q-pt-md">
+      <div v-if="isBigScreen" class="YL__footer row justify-evenly YL__1200w q-pt-md">
         <div class="col-2 q-py-sm">
           <q-img
             src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
@@ -176,6 +176,20 @@
             </div>
           </div>
         </div>
+      </div>
+      <div v-else class="row flex-center">
+        <a target="_blank" class="text-grey-5 q-px-sm text-caption" href="https://beian.miit.gov.cn"
+          >浙ICP备2020040769号-1</a
+        >
+
+        <a
+          class="text-grey-5 q-px-sm text-caption"
+          target="_blank"
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
+          ><img src="备案图标.png" style="width: 12px; height: 12px" />
+
+          浙公网安备 33012702000426号
+        </a>
       </div>
     </q-footer>
 
