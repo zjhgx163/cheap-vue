@@ -481,19 +481,12 @@ export default {
       this.$axios.post(`${global.config.domain}/yunpan/item/public/${id}`).then((res) => {
         if (res.data.code < 0) {
           this.$q.loading.hide();
-          if (!this.$q.localStorage.has('userInfo')) {
-            if (this.isWeixin()) {
-              window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
-            } else {
-              this.$router.push({ path: 'login' });
-            }
-          } else {
-            this.$q.notify({
-              type: 'negative',
-              icon: 'warning',
-              message: `${res.data.msg}`,
-            });
-          }
+          this.$q.notify({
+            type: 'negative',
+            icon: 'warning',
+            message: `${res.data.msg}`,
+          });
+          this.$router.push({ path: '/list' });
         } else {
           this.item = res.data.data.item;
           this._contentStr = res.data.data.contentStr;
