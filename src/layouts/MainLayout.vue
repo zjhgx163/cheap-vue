@@ -136,7 +136,7 @@
     <div id="banner_2_0"></div>
 
     <q-footer bordered reveal class="bg-dark text-white">
-      <div v-if="isBigScreen" class="YL__footer row justify-evenly YL__1200w q-pt-md">
+      <div v-if="$q.platform.is.desktop" class="YL__footer row justify-evenly YL__1200w q-pt-md">
         <div class="col-2 flex-center q-py-sm">
           <q-img
             src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
@@ -173,8 +173,7 @@
         </div>
       </div>
       <div v-else class="flex-center">
-        <div class="text-grey-5 q-px-sm text-caption">好价手慢无，给你返利</div>
-        <div class="text-grey-5 q-px-sm text-caption">
+        <div class="text-grey-5 q-px-sm text-caption row flex-center">
           请关注微信公众号<strong>老胡为你服务</strong>享受返利和云盘资源服务
         </div>
         <div class="row flex-center">
