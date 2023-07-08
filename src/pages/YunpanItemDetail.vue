@@ -542,22 +542,22 @@ export default {
           if (this.item == null) {
             this.$router.push({ path: '/error/404S' });
           }
-          this.setAnotherTitle(this.item.title + ' 阿里云盘 百度网盘 夸克云盘');
+          this.setAnotherTitle(this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘');
           // this.title = this._detail.title;
           if (this._contentStr) {
             this.meta.description.content =
-              this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
             this.meta.keywords.content =
-              this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
             this.meta.ogtitle.content =
-              this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
             this.meta.ogdescription.content =
-              this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
           } else {
-            this.meta.description.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
-            this.meta.keywords.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
-            this.meta.ogtitle.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
-            this.meta.ogdescription.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+            this.meta.description.content = this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘';
+            this.meta.keywords.content = this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘';
+            this.meta.ogtitle.content = this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘';
+            this.meta.ogdescription.content = this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘';
           }
 
           this.$q.loading.hide();
