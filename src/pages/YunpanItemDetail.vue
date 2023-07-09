@@ -29,6 +29,7 @@
                 <q-icon name="keyboard_return" color="pink-4" />
                 <span> &nbsp;&nbsp;</span>
                 <router-link
+                  class="text-pink-4"
                   :to="{
                     path: '/',
                   }"
@@ -271,25 +272,25 @@ export default {
     getTagColor: function () {
       return (parameter) => {
         if (parameter == '影视') {
-          return 'red';
+          return 'pink-4';
         } else if (parameter == '动漫') {
-          return 'blue';
+          return 'blue-5';
         } else if (parameter == '图片') {
-          return 'orange';
+          return 'orange-5';
         } else if (parameter == '游戏/软件') {
-          return 'purple';
+          return 'purple-4';
         } else if (parameter == '学习区') {
-          return 'teal';
+          return 'teal-5';
         } else if (parameter == '音乐/音频') {
-          return 'indigo';
+          return 'indigo-5';
         } else if (parameter == '日常') {
-          return 'light-green';
+          return 'light-green-6';
         } else if (parameter == '求资源') {
-          return 'blue-grey';
+          return 'blue-grey-6';
         } else if (parameter == '书籍') {
-          return 'brown';
+          return 'brown-5';
         } else {
-          return 'grey';
+          return 'lime-8';
         }
       };
     },
@@ -409,23 +410,23 @@ export default {
     this.isInvalid = this._isInvalid;
 
     if (Object.keys(this.item).length > 0) {
-      this.setAnotherTitle(this.item.title + ' 阿里云盘 百度网盘 夸克云盘');
+      this.setAnotherTitle(this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘');
       // this.title = this._detail.title;
       console.log(this._contentStr);
       if (this._contentStr) {
         this.meta.description.content =
-          this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
         this.meta.keywords.content =
-          this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
         this.meta.ogtitle.content =
-          this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
         this.meta.ogdescription.content =
-          this.item.title + ' 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
       } else {
-        this.meta.description.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
-        this.meta.keywords.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
-        this.meta.ogtitle.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
-        this.meta.ogdescription.content = this.item.title + ' 阿里云盘 百度网盘 夸克云盘';
+        this.meta.description.content = this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘';
+        this.meta.keywords.content = this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘';
+        this.meta.ogtitle.content = this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘';
+        this.meta.ogdescription.content = this.item.title + ' 下载 阿里云盘 百度网盘 夸克云盘';
       }
     }
 
