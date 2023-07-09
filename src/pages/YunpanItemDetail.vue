@@ -25,11 +25,12 @@
         <div class="col column">
           <div class="col q-pa-sm bg-secondary">
             <q-item dense class="YL__return q-pt-sm q-mt-sm">
-              <q-item-label class="flex-center row text-bold">
+              <q-item-label class="flex-center row">
                 <q-icon name="keyboard_return" color="pink-4" />
                 <span> &nbsp;&nbsp;</span>
                 <router-link
                   class="text-pink-4"
+                  style="text-decoration: underline"
                   :to="{
                     path: '/',
                   }"
