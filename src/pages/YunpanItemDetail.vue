@@ -25,7 +25,7 @@
         <div class="col column">
           <div class="col q-pa-sm bg-secondary">
             <q-item dense class="YL__return q-pt-sm q-mt-sm">
-              <q-item-label class="flex-center row">
+              <q-item-label class="flex-center row text-bold">
                 <q-icon name="keyboard_return" color="pink-4" />
                 <span> &nbsp;&nbsp;</span>
                 <router-link
@@ -204,8 +204,12 @@
 <style lang="sass">
 .YL
   &__return
-    font-size: 0.8em
-    height: 0.8em
+    @media(max-width: $breakpoint-xs-max)
+      font-size: 0.7em
+      height: 0.8em
+    @media(min-width: $breakpoint-xs-max)
+      font-size: 0.9em
+      height: 0.8em
 </style>
 
 <script>
@@ -449,7 +453,7 @@ export default {
           } else {
             setTimeout(() => {
               this.mobileBroswer = true;
-            }, 3000);
+            }, 2000);
           }
 
           // this.$router.push({
