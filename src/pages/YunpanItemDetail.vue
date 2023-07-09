@@ -447,7 +447,9 @@ export default {
               this.$emit('need-login', this.$route.params.id);
             }
           } else {
-            this.mobileBroswer = true;
+            setTimeout(() => {
+              this.mobileBroswer = true;
+            }, 3000);
           }
 
           // this.$router.push({
