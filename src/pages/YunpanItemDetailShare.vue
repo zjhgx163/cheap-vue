@@ -13,6 +13,19 @@
       <div class="col row bg-primary">
         <div class="col column">
           <div class="col q-pa-sm bg-secondary">
+            <q-item dense class="YL__return q-pt-sm q-mt-sm">
+              <q-item-label class="flex-center row">
+                <q-icon name="keyboard_return" color="pink-4" />
+                <span> &nbsp;&nbsp;</span>
+                <router-link
+                  :to="{
+                    path: '/',
+                  }"
+                >
+                  返回资源列表
+                </router-link>
+              </q-item-label>
+            </q-item>
             <q-item dense class="q-pt-md">
               <q-item-section>
                 <q-item-label class="column flex-center">
@@ -198,7 +211,12 @@
     </div>
   </q-page>
 </template>
-
+<style lang="sass">
+.YL
+  &__return
+    font-size: 0.8em
+    height: 0.8em
+</style>
 <script>
 import 'src/config';
 // import { Screen } from 'quasar';

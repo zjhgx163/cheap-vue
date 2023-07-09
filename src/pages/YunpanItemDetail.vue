@@ -1,8 +1,12 @@
 <template>
   <q-page class="bg-secondary">
-    <q-dialog persistent v-model="mobileBroswer">
+    <q-dialog auto-close v-model="mobileBroswer">
       <q-card class="bg-blue text-white">
-        <q-card-section>
+        <q-card-section class="row items-center q-pb-none q-pt-xs">
+          <q-space />
+          <q-btn icon="close" flat round dense v-close-popup />
+        </q-card-section>
+        <q-card-section class="q-pt-none">
           &#9996;&#9996;实现看片自由。移动端请关注微信公众号“老胡为你服务”，在公众号内访问。PC端请在浏览器上访问“www.hjdang.com”
         </q-card-section>
       </q-card>
@@ -20,6 +24,19 @@
       <div class="col row bg-primary">
         <div class="col column">
           <div class="col q-pa-sm bg-secondary">
+            <q-item dense class="YL__return q-pt-sm q-mt-sm">
+              <q-item-label class="flex-center row">
+                <q-icon name="keyboard_return" color="pink-4" />
+                <span> &nbsp;&nbsp;</span>
+                <router-link
+                  :to="{
+                    path: '/',
+                  }"
+                >
+                  返回资源列表
+                </router-link>
+              </q-item-label>
+            </q-item>
             <q-item dense>
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
@@ -184,6 +201,12 @@
     </div>
   </q-page>
 </template>
+<style lang="sass">
+.YL
+  &__return
+    font-size: 0.8em
+    height: 0.8em
+</style>
 
 <script>
 import 'src/config';
