@@ -336,7 +336,12 @@ export default {
       };
     },
     mobileBroswer: function () {
-      return this.$q.platform.is.mobile && !this.isWeixin();
+      let isMobile = this.$q.platform.is.mobile;
+      console.log('isMobile = ' + isMobile);
+      let isWeixin = this.isWeixin();
+      console.log('isWeixin = ' + isWeixin);
+
+      return isMobile && isWeixin;
     },
   },
   setup() {
@@ -658,6 +663,7 @@ export default {
       } else {
         ua = this._userAgent.toLowerCase();
       }
+      console.log(ua);
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         return true;
       } else {
