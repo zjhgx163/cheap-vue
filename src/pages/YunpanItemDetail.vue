@@ -341,7 +341,7 @@ export default {
       let isWeixin = this.isWeixin();
       console.log('isWeixin = ' + isWeixin);
 
-      return isMobile && isWeixin;
+      return isMobile && !isWeixin;
     },
   },
   setup() {
