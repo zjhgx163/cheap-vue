@@ -1,6 +1,6 @@
 <template>
   <q-page class="bg-secondary">
-    <q-dialog auto-close v-model="mobileBroswer">
+    <!-- <q-dialog auto-close v-model="mobileBroswer">
       <q-card class="bg-blue text-white">
         <q-card-section class="row items-center q-pb-none q-pt-xs">
           <q-space />
@@ -10,7 +10,7 @@
           &#9996;&#9996;实现看片自由。移动端请关注微信公众号“老胡为你服务”，在公众号内访问。PC端请在浏览器上访问“www.hjdang.com”
         </q-card-section>
       </q-card>
-    </q-dialog>
+    </q-dialog> -->
     <q-dialog v-model="isInvalid">
       <q-card class="bg-blue text-white">
         <q-card-section>
@@ -38,6 +38,29 @@
                   返回资源列表
                 </router-link>
               </q-item-label>
+            </q-item>
+            <q-item dense class="q-pt-md" v-bind:class="{ hidden: !mobileBroswer }">
+              <q-item-section>
+                <q-item-label class="column flex-center">
+                  <span class="text-h6 text-pink-4 text-bold"
+                    >更多最新资源，扫描二维码关注微信公众号
+                  </span>
+                </q-item-label>
+                <q-item-label class="column flex-center">
+                  <span class="text-h5 text-deep-blue text-bold"> “老胡为你服务”</span>
+                </q-item-label>
+                <q-item-label class="column flex-center">
+                  <span class="text-h6 text-pink-4 text-bold text-italic"
+                    >&#9996;&#9996;实现看片自由
+                  </span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item class="flex-center" v-bind:class="{ hidden: !mobileBroswer }">
+              <img
+                style="width: 30%; height: 40%"
+                src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+              />
             </q-item>
             <q-item dense>
               <q-item-section>
@@ -241,7 +264,7 @@ export default {
       isListEnd: false,
       userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
       isBigScreen: false,
-      mobileBroswer: false,
+      // mobileBroswer: false,
       isInvalid: false,
     };
   },
@@ -254,6 +277,7 @@ export default {
       _replyMax: 'replyMax',
       _contentStr: 'contentStr',
       _isInvalid: 'isInvalid',
+      _userAgent: 'userAgent',
     }),
     maxPage() {
       return this.isBigScreen ? 6 : 4;
@@ -311,6 +335,9 @@ export default {
         return parameter.slice(0, 1);
       };
     },
+    mobileBroswer: function () {
+      return this.$q.platform.is.mobile && !this.isWeixin();
+    },
   },
   setup() {
     console.log('Yun setup');
@@ -319,11 +346,12 @@ export default {
       description: {
         name: 'description',
         content:
-          '云盘资源 阿里云盘 百度网盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+          '网盘资源 阿里云盘 百度网盘 夸克云盘，下载，影视，动漫，游戏，软件，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
       },
       keywords: {
         name: 'keywords',
-        content: '最新影视，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+        content:
+          '网盘资源 阿里云盘 百度网盘 夸克云盘，下载，影视，动漫，游戏，软件，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
       },
       ogtype: {
         property: 'og:type',
@@ -340,7 +368,7 @@ export default {
       ogdescription: {
         property: 'og:description',
         content:
-          '云盘资源 阿里云盘 百度网盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+          '网盘资源 阿里云盘 百度网盘 夸克云盘，下载，影视，动漫，游戏，软件，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
       },
       ogimage: {
         property: 'og:image',
@@ -393,6 +421,7 @@ export default {
 
       // Return a Promise if you are running an async job
       // Example:
+      myStore.userAgent = ssrContext.req.headers['user-agent'];
 
       return myStore.getYunpanItemContent(currentRoute.params.id, redirect);
     }
@@ -411,27 +440,35 @@ export default {
     this.isInvalid = this._isInvalid;
 
     if (Object.keys(this.item).length > 0) {
-      this.setAnotherTitle(this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘');
+      this.setAnotherTitle(this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p');
       // this.title = this._detail.title;
       console.log(this._contentStr);
       if (this._contentStr) {
         this.meta.description.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title +
+          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+          this._contentStr;
         this.meta.keywords.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title +
+          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+          this._contentStr;
         this.meta.ogtitle.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title +
+          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+          this._contentStr;
         this.meta.ogdescription.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title +
+          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+          this._contentStr;
       } else {
         this.meta.description.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
         this.meta.keywords.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
         this.meta.ogtitle.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
         this.meta.ogdescription.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
       }
     }
 
@@ -456,11 +493,12 @@ export default {
               //通知父组件
               this.$emit('need-login', this.$route.params.id);
             }
-          } else {
-            setTimeout(() => {
-              this.mobileBroswer = true;
-            }, 2000);
           }
+          // else {
+          //   setTimeout(() => {
+          //     this.mobileBroswer = true;
+          //   }, 2000);
+          // }
 
           // this.$router.push({
           //   path: '/yunpan/list',
@@ -577,26 +615,36 @@ export default {
           if (this.item == null) {
             this.$router.push({ path: '/error/404S' });
           }
-          this.setAnotherTitle(this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘');
+          this.setAnotherTitle(
+            this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p'
+          );
           // this.title = this._detail.title;
           if (this._contentStr) {
             this.meta.description.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title +
+              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+              this._contentStr;
             this.meta.keywords.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title +
+              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+              this._contentStr;
             this.meta.ogtitle.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title +
+              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+              this._contentStr;
             this.meta.ogdescription.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title +
+              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+              this._contentStr;
           } else {
             this.meta.description.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
             this.meta.keywords.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
             this.meta.ogtitle.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
             this.meta.ogdescription.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
           }
 
           this.$q.loading.hide();
@@ -604,8 +652,12 @@ export default {
       });
     },
     isWeixin() {
-      var ua = window.navigator.userAgent.toLowerCase();
-      console.log(ua);
+      let ua;
+      if (process.env.CLIENT) {
+        ua = window.navigator.userAgent.toLowerCase();
+      } else {
+        ua = this._userAgent.toLowerCase();
+      }
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         return true;
       } else {

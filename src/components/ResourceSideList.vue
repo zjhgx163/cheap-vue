@@ -5,7 +5,16 @@
 
       <div v-bind:key="item.id" v-for="item in listData" class="bg-primary">
         <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
-        <q-item dense v-ripple clickable @click="itemClick(item)" class="bg-secondary q-pt-sm">
+        <q-item
+          dense
+          v-ripple
+          clickable
+          :to="{
+            name: 'yunpanDetail',
+            params: { id: item.id },
+          }"
+          class="bg-secondary q-pt-sm"
+        >
           <q-item-section avatar top>
             <q-avatar v-if="item.avatar != '' && item.avatar != null">
               <img :src="item.avatar" />
@@ -111,25 +120,25 @@ export default {
     getTagColor: function () {
       return (parameter) => {
         if (parameter == '影视') {
-          return 'red';
+          return 'pink-4';
         } else if (parameter == '动漫') {
-          return 'blue';
+          return 'blue-5';
         } else if (parameter == '图片') {
-          return 'orange';
+          return 'orange-5';
         } else if (parameter == '游戏/软件') {
-          return 'purple';
-        } else if (parameter == '学习') {
-          return 'teal';
+          return 'purple-4';
+        } else if (parameter == '学习区') {
+          return 'teal-5';
         } else if (parameter == '音乐/音频') {
-          return 'indigo';
+          return 'indigo-5';
         } else if (parameter == '日常') {
-          return 'light-green';
+          return 'light-green-6';
         } else if (parameter == '求资源') {
-          return 'blue-grey';
+          return 'blue-grey-6';
         } else if (parameter == '书籍') {
-          return 'brown';
+          return 'brown-5';
         } else {
-          return 'grey';
+          return 'lime-8';
         }
       };
     },

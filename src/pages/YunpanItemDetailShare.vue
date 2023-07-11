@@ -553,8 +553,12 @@ export default {
       });
     },
     isWeixin() {
-      var ua = window.navigator.userAgent.toLowerCase();
-      console.log(ua);
+      let ua;
+      if (process.env.CLIENT) {
+        ua = window.navigator.userAgent.toLowerCase();
+      } else {
+        ua = this._userAgent.toLowerCase();
+      }
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         return true;
       } else {

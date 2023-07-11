@@ -38,7 +38,7 @@
                 dense
                 v-ripple
                 :to="{
-                  name: detailPageName,
+                  name: 'yunpanDetail',
                   params: { id: item.id },
                 }"
                 class="bg-secondary q-pt-sm"
