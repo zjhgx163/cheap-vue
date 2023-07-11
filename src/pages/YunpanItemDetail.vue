@@ -66,19 +66,17 @@
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
                 <q-item-label :lines="2">
-                  <header>
-                    <h1 class="text-h6 text-bold">
-                      {{ item.title }}
+                  <h1 class="text-h6 text-bold">
+                    {{ item.title }}
 
-                      <q-badge
-                        transparent
-                        align="middle"
-                        :color="getTagColor(item.tag)"
-                        :label="item.tag"
-                      >
-                      </q-badge>
-                    </h1>
-                  </header>
+                    <q-badge
+                      transparent
+                      align="middle"
+                      :color="getTagColor(item.tag)"
+                      :label="item.tag"
+                    >
+                    </q-badge>
+                  </h1>
                 </q-item-label>
               </q-item-section>
             </q-item>
@@ -445,7 +443,9 @@ export default {
     this.isInvalid = this._isInvalid;
 
     if (Object.keys(this.item).length > 0) {
-      this.setAnotherTitle(this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p');
+      this.setAnotherTitle(
+        this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p'
+      );
       // this.title = this._detail.title;
       console.log(this._contentStr);
       if (this._contentStr) {
@@ -621,7 +621,7 @@ export default {
             this.$router.push({ path: '/error/404S' });
           }
           this.setAnotherTitle(
-            this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p'
+            this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p'
           );
           // this.title = this._detail.title;
           if (this._contentStr) {
