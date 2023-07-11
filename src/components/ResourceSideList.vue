@@ -5,16 +5,7 @@
 
       <div v-bind:key="item.id" v-for="item in listData" class="bg-primary">
         <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
-        <q-item
-          dense
-          v-ripple
-          clickable
-          :to="{
-            name: 'yunpanDetail',
-            params: { id: item.id },
-          }"
-          class="bg-secondary q-pt-sm"
-        >
+        <q-item dense v-ripple clickable :href="getHref(item.id)" class="bg-secondary q-pt-sm">
           <q-item-section avatar top>
             <q-avatar v-if="item.avatar != '' && item.avatar != null">
               <img :src="item.avatar" />
@@ -177,6 +168,11 @@ export default {
     getAvatarText: function () {
       return (parameter) => {
         return parameter.slice(0, 1);
+      };
+    },
+    getHref: function () {
+      return (parameter) => {
+        return 'https://www.hjdang.com/d/' + parameter;
       };
     },
   },
