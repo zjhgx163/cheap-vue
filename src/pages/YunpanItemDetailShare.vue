@@ -55,19 +55,17 @@
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
                 <q-item-label :lines="2" class="row">
-                  <header>
-                    <h1 class="text-h6 text-bold">
-                      {{ item.title }}
+                  <h1 class="text-h6 text-bold">
+                    {{ item.title }}
 
-                      <q-badge
-                        transparent
-                        align="middle"
-                        :color="getTagColor(item.tag)"
-                        :label="item.tag"
-                      >
-                      </q-badge>
-                    </h1>
-                  </header>
+                    <q-badge
+                      transparent
+                      align="middle"
+                      :color="getTagColor(item.tag)"
+                      :label="item.tag"
+                    >
+                    </q-badge>
+                  </h1>
                 </q-item-label>
               </q-item-section>
             </q-item>
