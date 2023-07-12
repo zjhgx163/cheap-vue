@@ -493,18 +493,17 @@ export default {
           window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.$route.params.id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
         } else {
           // const $q = useQuasar();
-          if (this.$q.platform.is.desktop) {
-            if (!this.isInvalid) {
-              //通知父组件
-              this.$emit('need-login', this.$route.params.id);
-            }
-          }
+          // if (this.$q.platform.is.desktop) {
+          //   if (!this.isInvalid) {
+          //     //通知父组件
+          //     this.$emit('need-login', this.$route.params.id);
+          //   }
+          // }
           // else {
           //   setTimeout(() => {
           //     this.mobileBroswer = true;
           //   }, 2000);
           // }
-
           // this.$router.push({
           //   path: '/yunpan/list',
           //   query: { q: '', idForLogin: this.$route.params.id },

@@ -7,7 +7,7 @@
             <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
           </router-link>
         </div>
-        <div class="col col-sm-7 justify-center">
+        <div class="col col-sm-6 justify-center">
           <q-input
             dense
             filled
@@ -25,16 +25,17 @@
             </template>
           </q-input>
         </div>
-        <div class="col-sm-2 gt-sm row items-center justify-end">
-          <!-- <span>{{ userName }}</span> -->
-
+        <div class="col-sm-3 gt-sm row items-center justify-end">
+          <q-btn unelevated flat :disable="isLogin" @click="needLogin">
+            <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a>
+          </q-btn>
           <q-avatar size="2.5em">
             <img :src="avatar" />
           </q-avatar>
 
-          <!-- <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
+          <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
             <a class="text-grey-9 text-weight-bold text-subtitle2"> 登出</a>
-          </q-btn> -->
+          </q-btn>
         </div>
       </q-toolbar>
 
@@ -209,7 +210,7 @@ export default {
       host: global.config.domain,
       isBigScreen: false,
       // itemPadding: Screen.gt.sm ? 'q-py-lg' : 'q-py-xs',
-      userName: '',
+      userName: '注册/登陆',
       isLogin: false,
       isLoadingQr: false,
       loginCard: false,
