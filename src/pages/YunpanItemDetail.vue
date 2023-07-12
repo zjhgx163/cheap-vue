@@ -56,7 +56,7 @@
                 </q-item-label>
               </q-item-section>
             </q-item>
-            <q-item class="flex-center" v-bind:class="{ hidden: !mobileBroswer }">
+            <q-item class="flex-center" v-bind:class="{ hidden: weixin }">
               <img
                 style="width: 30%; height: 40%"
                 src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
@@ -340,6 +340,9 @@ export default {
       console.log('isWeixin = ' + isWeixin);
 
       return isMobile && !isWeixin;
+    },
+    weixin: function () {
+      return this.isWeixin();
     },
   },
   setup() {
