@@ -39,29 +39,6 @@
                 </router-link>
               </q-item-label>
             </q-item>
-            <q-item dense class="q-pt-md" v-bind:class="{ hidden: !mobileBroswer }">
-              <q-item-section>
-                <q-item-label class="column flex-center">
-                  <span class="text-h6 text-pink-4 text-bold"
-                    >更多最新资源，扫描二维码关注微信公众号
-                  </span>
-                </q-item-label>
-                <q-item-label class="column flex-center">
-                  <span class="text-h5 text-deep-blue text-bold"> “老胡为你服务”</span>
-                </q-item-label>
-                <q-item-label class="column flex-center">
-                  <span class="text-h6 text-pink-4 text-bold text-italic"
-                    >&#9996;&#9996;实现看片自由
-                  </span>
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item class="flex-center" v-bind:class="{ hidden: weixin }">
-              <img
-                style="width: 30%; height: 40%"
-                src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
-              />
-            </q-item>
             <q-item dense>
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
@@ -107,7 +84,29 @@
             <q-separator />
             <div id="yunpanDetailAdvert" />
             <q-separator />
-
+            <q-item dense class="q-pt-md" v-bind:class="{ hidden: weixin }">
+              <q-item-section>
+                <q-item-label class="column flex-center">
+                  <span class="text-h6 text-pink-4 text-bold"
+                    >更多最新资源，扫描二维码关注微信公众号
+                  </span>
+                </q-item-label>
+                <q-item-label class="column flex-center">
+                  <span class="text-h5 text-deep-blue text-bold"> “老胡为你服务”</span>
+                </q-item-label>
+                <q-item-label class="column flex-center">
+                  <span class="text-h6 text-pink-4 text-bold text-italic"
+                    >&#9996;&#9996;实现看片自由
+                  </span>
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item class="flex-center" v-bind:class="{ hidden: weixin }">
+              <img
+                style="width: 30%; height: 40%"
+                src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+              />
+            </q-item>
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
               <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
