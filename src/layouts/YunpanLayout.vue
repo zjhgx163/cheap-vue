@@ -39,11 +39,7 @@
         </div>
       </q-toolbar>
 
-      <q-toolbar
-        v-if="$route.meta.isList"
-        class="q-mb-xs bg-secondary"
-        v-bind:class="[itemPadding]"
-      >
+      <q-toolbar class="q-mb-xs bg-secondary" v-bind:class="[itemPadding]">
         <q-tabs
           dense
           align="left"
@@ -59,42 +55,42 @@
           <q-route-tab
             :to="{ path: '/category/影视', query: { q: searchKey } }"
             label="影视"
-            name="影视"
+            name="movie"
           />
           <q-route-tab
             :to="{ path: '/category/动漫', query: { q: searchKey } }"
             label="动漫"
-            name="动漫"
+            name="anime"
           />
           <q-route-tab
             :to="{ path: '/category/学习', query: { q: searchKey } }"
             label="学习"
-            name="学习"
+            name="learn"
           />
           <q-route-tab
             :to="{ path: '/category/游戏%2F软件', query: { q: searchKey } }"
             label="游戏/软件"
-            name="游戏/软件"
+            name="game/software"
           />
           <q-route-tab
             :to="{ path: '/category/音乐%2F音频', query: { q: searchKey } }"
             label="音乐/音频"
-            name="音乐/音频"
+            name="music"
           />
           <q-route-tab
             :to="{ path: '/category/图片', query: { q: searchKey } }"
             label="图片"
-            name="图片"
+            name="picture"
           />
           <q-route-tab
             :to="{ path: '/category/书籍', query: { q: searchKey } }"
             label="书籍"
-            name="书籍"
+            name="books"
           />
           <q-route-tab
             :to="{ path: '/category/求资源', query: { q: searchKey } }"
             label="求资源"
-            name="求资源"
+            name="help"
           />
           <q-route-tab
             :to="{ path: '/category/other', query: { q: searchKey } }"

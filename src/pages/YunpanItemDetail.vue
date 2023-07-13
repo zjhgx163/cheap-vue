@@ -230,7 +230,7 @@
       font-size: 0.7em
       height: 0.8em
     @media(min-width: $breakpoint-xs-max)
-      font-size: 0.9em
+      font-size: 1.1em
       height: 0.8em
 </style>
 
