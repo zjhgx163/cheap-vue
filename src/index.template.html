@@ -52,7 +52,11 @@
   <script>
     (function () {
       var el = document.createElement("script");
-      el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?fec97b62b69f27620404ee4bbbc60ce18de3b33a974ff1222d2ce2f51fe24ea5fd9a9dcb5ced4d7780eb6f3bbd089073c2a6d54440560d63862bbf4ec01bba3a";
+      if (document.domain === "shop.hjdang.com") {
+        el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?22d5735a69d8ccd1eea2dbc806fc0e0698079c9af12734c2e727766db80cc2b030632485602430134f60bc55ca391050b680e2741bf7233a8f1da9902314a3fa";
+      } else {
+        el.src = "https://lf1-cdn-tos.bytegoofy.com/goofy/ttzz/push.js?fec97b62b69f27620404ee4bbbc60ce18de3b33a974ff1222d2ce2f51fe24ea5fd9a9dcb5ced4d7780eb6f3bbd089073c2a6d54440560d63862bbf4ec01bba3a";
+      }
       el.id = "ttzz";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(el, s);
