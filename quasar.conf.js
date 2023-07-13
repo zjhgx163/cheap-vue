@@ -47,7 +47,7 @@ module.exports = function (/* ctx */) {
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env: {
         ROUTE_SHOP: process.env.PROD_SHOP ? true : false,
-        PORT: '' + process.env.PORT, //用于部署shop应用的端口
+        PORT: process.env.PORT ? process.env.PORT : '3000', //用于部署shop应用的端口
       },
       // transpile: false,
 
