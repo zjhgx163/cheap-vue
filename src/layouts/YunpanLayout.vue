@@ -132,10 +132,10 @@
         />
         <q-btn flat :size="shopButtionSize" icon="shop" text-color="white" dense />
       </q-toolbar>
-      <q-item v-if="!$route.meta.isList">
+      <q-item v-if="!$route.meta.isList" class="q-pb-xs">
         <q-item-section top side class="text-bold"> 声明：</q-item-section>
         <q-item-section>
-          <q-item-label caption>
+          <q-item-label caption class="YL__notice">
             本站所有资源均由网友自发提供，本站不缓存、储存、下载、播放等，所列内容仅做学习和带宽测试，请于保存后24小时内自行删除。
             如有侵权请根据内容页信息自行联系 阿里云盘官方 网站 进行处理。
           </q-item-label>
@@ -183,6 +183,11 @@
       width: 98%
     @media(min-width: $breakpoint-xs-max)
       width: 90%
+  &__notice
+    @media(max-width: $breakpoint-xs-max)
+      font-size: 0.65rem
+    @media(min-width: $breakpoint-xs-max)
+      font-size: 0.75rem
 .q-tab__label
   @media(max-width: $breakpoint-xs-max)
    font-size: 0.7em
