@@ -17,6 +17,9 @@
           此资源已失效，不过有朋友分享了同样的资源，请在站内用关键词搜索。&#9996;&#9996;实现看片自由，请关注微信公众号“老胡为你服务“，或在浏览器上访问
           “www.hjdang.com”
         </q-card-section>
+        <q-card-actions align="right" class="bg-white text-teal">
+          <q-btn flat label="关闭" v-close-popup />
+        </q-card-actions>
       </q-card>
     </q-dialog>
     <div class="row">
