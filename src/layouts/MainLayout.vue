@@ -172,26 +172,23 @@
           </div>
         </div>
       </div>
-      <div v-else class="flex-center">
+      <div v-else class="flex-center YL__notice">
         <div class="text-grey-5 q-px-sm text-caption row flex-center">
           请关注微信公众号<strong>老胡为你服务</strong>享受返利和云盘资源服务
         </div>
         <div class="row flex-center">
-          <a
-            target="_blank"
-            class="text-grey-5 q-px-sm text-caption"
-            href="https://beian.miit.gov.cn"
+          <a target="_blank" class="text-dark q-px-sm text-caption" href="https://beian.miit.gov.cn"
             >浙ICP备2020040769号-1</a
           >
 
-          <a
+          <!-- <a
             class="text-grey-5 q-px-sm text-caption"
             target="_blank"
             href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
             ><img src="备案图标.png" style="width: 12px; height: 12px" />
 
             浙公网安备 33012702000426号
-          </a>
+          </a> -->
         </div>
       </div>
     </q-footer>
@@ -456,6 +453,11 @@ export default {
     -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%)
     -webkit-mask-size: 200%
     animation: shine 2s linear infinite
+  &__notice
+    @media(max-width: $breakpoint-xs-max)
+      font-size: 0.65rem
+    @media(min-width: $breakpoint-xs-max)
+      font-size: 0.75rem
 
 
 @keyframes shine

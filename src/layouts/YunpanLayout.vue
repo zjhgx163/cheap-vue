@@ -141,19 +141,22 @@
           </q-item-label>
         </q-item-section>
       </q-item>
-      <div class="row flex-center">
-        <a target="_blank" class="text-grey-5 q-px-sm text-caption" href="https://beian.miit.gov.cn"
+      <div class="row flex-center YL__notice">
+        <a
+          target="_blank"
+          class="text-secondary q-px-sm text-caption"
+          href="https://beian.miit.gov.cn"
           >浙ICP备2020040769号-1</a
         >
 
-        <a
+        <!-- <a
           class="text-grey-5 q-px-sm text-caption"
           target="_blank"
           href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
           ><img src="备案图标.png" style="width: 12px; height: 12px" />
 
           浙公网安备 33012702000426号
-        </a>
+        </a> -->
       </div>
     </q-footer>
     <login-qr
