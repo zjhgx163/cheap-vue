@@ -24,7 +24,7 @@
       <div class="col row bg-primary">
         <div class="col column">
           <div class="col q-pa-sm bg-secondary">
-            <q-item dense class="YL__return q-pt-sm q-mt-sm">
+            <q-item dense class="YL__return q-pt-none q-mt-xs">
               <q-item-label class="flex-center row">
                 <q-icon name="keyboard_return" color="pink-4" />
                 <span> &nbsp;&nbsp;</span>
@@ -43,7 +43,7 @@
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
                 <q-item-label :lines="2">
-                  <h1 class="text-h6 text-bold">
+                  <h1 class="text-h6 text-bold q-mt-none q-mb-sm">
                     {{ item.title }}
 
                     <q-badge
