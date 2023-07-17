@@ -14,7 +14,7 @@
     <q-dialog v-model="isInvalid">
       <q-card class="bg-blue text-white">
         <q-card-section>
-          此资源已失效，请在站内搜索其他资源。&#9996;&#9996;实现看片自由，请关注微信公众号“老胡为你服务“，或在浏览器上访问
+          此资源已失效，不过有朋友分享了同样的资源，请在站内用关键词搜索。&#9996;&#9996;实现看片自由，请关注微信公众号“老胡为你服务“，或在浏览器上访问
           “www.hjdang.com”
         </q-card-section>
       </q-card>
