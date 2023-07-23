@@ -354,12 +354,12 @@ export default {
       description: {
         name: 'description',
         content:
-          '网盘资源 阿里云盘 百度网盘 夸克云盘，下载，影视，动漫，游戏，软件，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+          '网盘资源 阿里云盘 百度云盘 夸克云盘 影视 动漫 游戏 软件 网盘资源 4k 1080p 美剧 韩剧 韩国电影 大尺度 速存 易和谐 河蟹 禁播',
       },
       keywords: {
         name: 'keywords',
         content:
-          '网盘资源 阿里云盘 百度网盘 夸克云盘，下载，影视，动漫，游戏，软件，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+          '网盘资源 阿里云盘 百度云盘 夸克云盘 影视 动漫 游戏 软件 网盘资源 4k 1080p 美剧 韩剧 韩国电影 大尺度 速存 易和谐 河蟹 禁播',
       },
       ogtype: {
         property: 'og:type',
@@ -376,7 +376,7 @@ export default {
       ogdescription: {
         property: 'og:description',
         content:
-          '网盘资源 阿里云盘 百度网盘 夸克云盘，下载，影视，动漫，游戏，软件，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+          '网盘资源 阿里云盘 百度云盘 夸克云盘 影视 动漫 游戏 软件 网盘资源 4k 1080p 美剧 韩剧 韩国电影 大尺度 速存 易和谐 河蟹 禁播',
       },
       ogimage: {
         property: 'og:image',
@@ -449,36 +449,36 @@ export default {
 
     if (Object.keys(this.item).length > 0) {
       this.setAnotherTitle(
-        this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p'
+        this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p'
       );
       // this.title = this._detail.title;
       console.log(this._contentStr);
       if (this._contentStr) {
         this.meta.description.content =
           this.item.title +
-          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
           this._contentStr;
         this.meta.keywords.content =
           this.item.title +
-          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
           this._contentStr;
         this.meta.ogtitle.content =
           this.item.title +
-          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
           this._contentStr;
         this.meta.ogdescription.content =
           this.item.title +
-          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
           this._contentStr;
       } else {
         this.meta.description.content =
-          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
+          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
         this.meta.keywords.content =
-          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
+          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
         this.meta.ogtitle.content =
-          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
+          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
         this.meta.ogdescription.content =
-          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
+          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
       }
     }
 
@@ -625,35 +625,35 @@ export default {
             this.$router.push({ path: '/error/404S' });
           }
           this.setAnotherTitle(
-            this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p'
+            this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p'
           );
           // this.title = this._detail.title;
           if (this._contentStr) {
             this.meta.description.content =
               this.item.title +
-              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
               this._contentStr;
             this.meta.keywords.content =
               this.item.title +
-              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
               this._contentStr;
             this.meta.ogtitle.content =
               this.item.title +
-              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
               this._contentStr;
             this.meta.ogdescription.content =
               this.item.title +
-              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p' +
+              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
               this._contentStr;
           } else {
             this.meta.description.content =
-              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
+              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
             this.meta.keywords.content =
-              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
+              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
             this.meta.ogtitle.content =
-              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
+              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
             this.meta.ogdescription.content =
-              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 1080p';
+              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
           }
 
           this.$q.loading.hide();
