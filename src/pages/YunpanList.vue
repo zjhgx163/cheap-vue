@@ -361,7 +361,7 @@ export default {
       },
       ogtype: {
         property: 'og:type',
-        content: 'webpage',
+        content: 'article',
       },
       ogurl: {
         property: 'og:url',

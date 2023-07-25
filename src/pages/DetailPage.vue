@@ -342,7 +342,7 @@ export default {
       },
       ogtype: {
         property: 'og:type',
-        content: 'product',
+        content: 'article',
       },
       ogurl: {
         property: 'og:url',
