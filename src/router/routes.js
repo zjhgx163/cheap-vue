@@ -47,69 +47,43 @@ const routes = [
       },
     ],
   },
-  {
-    path: '/item',
-    component: () => import('layouts/MainLayout.vue'),
-    // props: true,
 
-    children: [
-      {
-        path: '',
-        component: () => import('layouts/DetailLayout.vue'),
-        beforeEnter: (to, from, next) => {
-          console.info('##before enter DetailLayout, to=' + to.fullPath);
-          next();
-        },
-        children: [
-          {
-            name: 'detail',
-            path: 'detail/:urlCode',
-            component: () => import('pages/DetailPage.vue'),
-            props: (route) => ({ taobaoCode: route.query.taobao_code }),
-          },
-        ],
-      },
-    ],
-    // 在router之间传递参数用下面配置
-    // props: (route) => ({ title: route.query.title, detail: route.query.detail }),
-  },
-
-  {
-    path: '/yunpan',
-    component: () => import('layouts/YunpanLayout.vue'),
-    children: [
-      {
-        path: 'list',
-        component: () => import('pages/YunpanList.vue'),
-        meta: { isList: true },
-        props: (route) => ({
-          query: route.query.q,
-          x: route.query.x,
-          idForLogin: route.query.idForLogin,
-        }),
-      },
-      {
-        path: 'list/:page',
-        component: () => import('pages/YunpanList.vue'),
-        meta: { isList: true },
-        props: (route) => ({ query: route.query.q }),
-      },
-      {
-        path: 'category/:category',
-        meta: { isList: true },
-        component: () => import('pages/YunpanList.vue'),
-        props: (route) => ({ query: route.query.q, page: route.query.page }),
-      },
-      {
-        path: 'd/:id',
-        component: () => import('pages/YunpanItemDetail.vue'),
-      },
-      {
-        path: 'p/:id',
-        component: () => import('pages/YunpanItemDetailShare.vue'),
-      },
-    ],
-  },
+  // {
+  //   path: '/yunpan',
+  //   component: () => import('layouts/YunpanLayout.vue'),
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       component: () => import('pages/YunpanList.vue'),
+  //       meta: { isList: true },
+  //       props: (route) => ({
+  //         query: route.query.q,
+  //         x: route.query.x,
+  //         idForLogin: route.query.idForLogin,
+  //       }),
+  //     },
+  //     {
+  //       path: 'list/:page',
+  //       component: () => import('pages/YunpanList.vue'),
+  //       meta: { isList: true },
+  //       props: (route) => ({ query: route.query.q }),
+  //     },
+  //     {
+  //       path: 'category/:category',
+  //       meta: { isList: true },
+  //       component: () => import('pages/YunpanList.vue'),
+  //       props: (route) => ({ query: route.query.q, page: route.query.page }),
+  //     },
+  //     {
+  //       path: 'd/:id',
+  //       component: () => import('pages/YunpanItemDetail.vue'),
+  //     },
+  //     {
+  //       path: 'p/:id',
+  //       component: () => import('pages/YunpanItemDetailShare.vue'),
+  //     },
+  //   ],
+  // },
 
   {
     path: '/user',
