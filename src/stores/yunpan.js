@@ -87,6 +87,9 @@ export const useYunpanStore = defineStore('yunpan', {
           if (this.itemDetail == null) {
             redirect({ path: '/list' }, 301);
           }
+          if (res.data.data.redirectId != null && res.data.data.redirectId > 0) {
+            redirect({ path: '/d/' + res.data.data.redirectId }, 302);
+          }
 
           Loading.hide();
         }
