@@ -96,7 +96,7 @@
                 <q-item-section>
                   <q-item-label class="text-caption text-weight-bold text-indigo-7"
                     ><span class="text-pink-4 text-weight-bolder text-subtitle1">好家当 </span
-                    >已经汇聚上万T网友分享的资源，如果链接失效，请尝试在站内搜索框搜索</q-item-label
+                    >已经汇聚上万T网友分享的资源，如果主贴和回复里的链接失效，请尝试在站内搜索框搜索</q-item-label
                   >
                 </q-item-section>
               </q-item>
@@ -110,14 +110,14 @@
                 class="flex items-center justify-start"
               >
                 <q-card-section class="q-mr-md">
-                  <div class="text-subtitle1 text-indigo-7 text-bold q-mt-xs text-no-wrap">
+                  <div class="text-caption text-indigo-7 text-bold q-mt-xs text-no-wrap">
                     更多最新资源，扫描右侧二维码
                   </div>
                   <!-- <div class="text-h6 text-pink-4 text-bold "></div> -->
-                  <div class="text-subtitle1 text-pink-4 text-bold q-mt-xs">关注微信公众号</div>
-                  <div class="text-h6 text-grey-10 text-bold q-mt-xs">“老胡为你服务”</div>
+                  <div class="text-caption text-pink-4 text-bold q-mt-xs">关注微信公众号</div>
+                  <div class="text-subtitle1 text-grey-10 text-bold q-mt-xs">“老胡为你服务”</div>
 
-                  <div class="text-subtitle1 text-indigo-7 text-bold q-mt-xs q-mb-xs">
+                  <div class="text-caption text-indigo-7 text-bold q-mt-xs q-mb-xs">
                     &#9996;&#9996;实现看片自由
                   </div>
                 </q-card-section>
