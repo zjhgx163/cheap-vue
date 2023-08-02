@@ -84,10 +84,55 @@
             <q-item dense>
               <div class="text-body2 break-all" v-html="item.content"></div>
             </q-item>
-            <q-separator />
+
             <div id="yunpanDetailAdvert" />
-            <q-separator />
-            <q-item dense class="q-pt-md" v-bind:class="{ hidden: weixin }">
+            <q-separator inset />
+            <q-card class="my-card flex-center" flat>
+              <q-item class="q-pt-sm justify-start items-center">
+                <q-item-section avatar class="q-pr-sm">
+                  <q-icon name="o_info" color="indigo-7" />
+                </q-item-section>
+
+                <q-item-section>
+                  <q-item-label class="text-caption text-weight-bold text-indigo-7"
+                    ><span class="text-pink-4 text-weight-bolder text-subtitle1">好家当 </span
+                    >已经汇聚上万T网友分享的资源，如果链接失效，请尝试在站内搜索框搜索</q-item-label
+                  >
+                </q-item-section>
+              </q-item>
+              <!-- <q-card-section horizontal>
+                <q-card-section> </q-card-section>
+              </q-card-section> -->
+              <q-separator inset />
+              <q-card-section
+                horizontal
+                v-bind:class="{ hidden: weixin }"
+                class="flex items-center justify-start"
+              >
+                <q-card-section class="q-mr-md">
+                  <div class="text-subtitle1 text-indigo-7 text-bold q-mt-xs text-no-wrap">
+                    更多最新资源，扫描右侧二维码
+                  </div>
+                  <!-- <div class="text-h6 text-pink-4 text-bold "></div> -->
+                  <div class="text-subtitle1 text-pink-4 text-bold q-mt-xs">关注微信公众号</div>
+                  <div class="text-h6 text-grey-10 text-bold q-mt-xs">“老胡为你服务”</div>
+
+                  <div class="text-subtitle1 text-indigo-7 text-bold q-mt-xs q-mb-xs">
+                    &#9996;&#9996;实现看片自由
+                  </div>
+                </q-card-section>
+
+                <!-- <q-card-section> <div class="flex-center">==></div> </q-card-section> -->
+
+                <q-card-section class="flex justif-start">
+                  <img
+                    class="YL__wechat_img"
+                    src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+                  />
+                </q-card-section>
+              </q-card-section>
+            </q-card>
+            <!-- <q-item dense class="q-pt-md" v-bind:class="{ hidden: weixin }">
               <q-item-section>
                 <q-item-label class="column flex-center">
                   <span class="text-h6 text-pink-4 text-bold"
@@ -109,7 +154,7 @@
                 style="width: 30%; height: 40%"
                 src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
               />
-            </q-item>
+            </q-item> -->
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
               <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
@@ -235,6 +280,11 @@
     @media(min-width: $breakpoint-xs-max)
       font-size: 1.1em
       height: 0.8em
+  &__wechat_img
+    @media(max-width: $breakpoint-xs-max)
+      width: 75%
+    @media(min-width: $breakpoint-xs-max)
+      width: 60%
 </style>
 
 <script>
