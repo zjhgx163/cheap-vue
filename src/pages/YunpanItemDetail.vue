@@ -90,7 +90,13 @@
             <q-card class="my-card flex-center" flat>
               <q-item class="q-pt-sm justify-start items-center">
                 <q-item-section avatar class="q-pr-sm">
-                  <q-icon name="o_info" color="indigo-7" />
+                  <!-- <q-icon name="o_info" color="indigo-7" /> -->
+                  <q-avatar size="1.9em">
+                    <img
+                      src="https://aliyundriver.oss-cn-hangzhou.aliyuncs.com/avatar/1111111_AlwUJhuGAEQcf572.png"
+                      alt="头像"
+                    />
+                  </q-avatar>
                 </q-item-section>
 
                 <q-item-section>
@@ -105,19 +111,20 @@
               </q-card-section> -->
               <q-separator inset />
               <q-card-section
+                v-if="$q.platform.is.desktop"
                 horizontal
                 v-bind:class="{ hidden: weixin }"
                 class="flex items-center justify-start"
               >
                 <q-card-section class="q-mr-md">
-                  <div class="text-caption text-indigo-7 text-bold q-mt-xs text-no-wrap">
+                  <div class="text-h6 text-indigo-7 text-bold q-mt-xs text-no-wrap">
                     更多最新资源，扫描右侧二维码
                   </div>
                   <!-- <div class="text-h6 text-pink-4 text-bold "></div> -->
-                  <div class="text-caption text-pink-4 text-bold q-mt-xs">关注微信公众号</div>
-                  <div class="text-subtitle1 text-grey-10 text-bold q-mt-xs">“老胡为你服务”</div>
+                  <div class="text-h6 text-pink-4 text-bold q-mt-xs">关注微信公众号</div>
+                  <div class="text-h5 text-grey-10 text-bold q-mt-xs">“老胡为你服务”</div>
 
-                  <div class="text-caption text-indigo-7 text-bold q-mt-xs q-mb-xs">
+                  <div class="text-h6 text-indigo-7 text-bold q-mt-xs q-mb-xs">
                     &#9996;&#9996;实现看片自由
                   </div>
                 </q-card-section>
@@ -131,30 +138,34 @@
                   />
                 </q-card-section>
               </q-card-section>
+              <q-card-section v-else>
+                <q-item dense class="q-pt-none" v-bind:class="{ hidden: weixin }">
+                  <q-item-section>
+                    <q-item-label class="column flex-center">
+                      <span class="text-h6 text-indigo-7 text-bold">更多最新资源，扫描二维码 </span>
+                    </q-item-label>
+                    <q-item-label class="column flex-center">
+                      <span class="text-h6 text-pink-4 text-bold">关注微信公众号 </span>
+                    </q-item-label>
+                    <q-item-label class="column flex-center">
+                      <span class="text-h5 text-grey-10 text-bold"> “老胡为你服务”</span>
+                    </q-item-label>
+                    <q-item-label class="column flex-center">
+                      <span class="text-h6 text-indigo-7 text-bold text-italic"
+                        >&#9996;&#9996;实现看片自由
+                      </span>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item class="flex-center" v-bind:class="{ hidden: weixin }">
+                  <img
+                    style="width: 40%; height: 50%"
+                    src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+                  />
+                </q-item>
+              </q-card-section>
             </q-card>
-            <!-- <q-item dense class="q-pt-md" v-bind:class="{ hidden: weixin }">
-              <q-item-section>
-                <q-item-label class="column flex-center">
-                  <span class="text-h6 text-pink-4 text-bold"
-                    >更多最新资源，扫描二维码关注微信公众号
-                  </span>
-                </q-item-label>
-                <q-item-label class="column flex-center">
-                  <span class="text-h5 text-deep-blue text-bold"> “老胡为你服务”</span>
-                </q-item-label>
-                <q-item-label class="column flex-center">
-                  <span class="text-h6 text-pink-4 text-bold text-italic"
-                    >&#9996;&#9996;实现看片自由
-                  </span>
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item class="flex-center" v-bind:class="{ hidden: weixin }">
-              <img
-                style="width: 30%; height: 40%"
-                src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
-              />
-            </q-item> -->
+
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
               <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
@@ -499,36 +510,36 @@ export default {
 
     if (Object.keys(this.item).length > 0) {
       this.setAnotherTitle(
-        this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p'
+        this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p'
       );
       // this.title = this._detail.title;
       console.log(this._contentStr);
       if (this._contentStr) {
         this.meta.description.content =
           this.item.title +
-          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
+          ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p' +
           this._contentStr;
         this.meta.keywords.content =
           this.item.title +
-          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
+          ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p' +
           this._contentStr;
         this.meta.ogtitle.content =
           this.item.title +
-          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
+          ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p' +
           this._contentStr;
         this.meta.ogdescription.content =
           this.item.title +
-          ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
+          ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p' +
           this._contentStr;
       } else {
         this.meta.description.content =
-          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
+          this.item.title + ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p';
         this.meta.keywords.content =
-          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
+          this.item.title + ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p';
         this.meta.ogtitle.content =
-          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
+          this.item.title + ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p';
         this.meta.ogdescription.content =
-          this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
+          this.item.title + ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p';
       }
     }
 
@@ -675,35 +686,35 @@ export default {
             this.$router.push({ path: '/error/404S' });
           }
           this.setAnotherTitle(
-            this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p'
+            this.item.title + ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p'
           );
           // this.title = this._detail.title;
           if (this._contentStr) {
             this.meta.description.content =
               this.item.title +
-              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
+              ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p' +
               this._contentStr;
             this.meta.keywords.content =
               this.item.title +
-              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
+              ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p' +
               this._contentStr;
             this.meta.ogtitle.content =
               this.item.title +
-              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
+              ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p' +
               this._contentStr;
             this.meta.ogdescription.content =
               this.item.title +
-              ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p' +
+              ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p' +
               this._contentStr;
           } else {
             this.meta.description.content =
-              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
+              this.item.title + ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p';
             this.meta.keywords.content =
-              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
+              this.item.title + ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p';
             this.meta.ogtitle.content =
-              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
+              this.item.title + ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p';
             this.meta.ogdescription.content =
-              this.item.title + ' 下载 网盘资源 百度云 阿里云盘 百度网盘 夸克云盘 4k 1080p';
+              this.item.title + ' 下载 网盘资源 阿里云盘 百度网盘 夸克云盘 云盘资源 4k 1080p';
           }
 
           this.$q.loading.hide();
