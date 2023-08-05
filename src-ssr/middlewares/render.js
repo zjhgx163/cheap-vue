@@ -40,6 +40,8 @@ export default ssrMiddleware(({ app, resolve, render, serve }) => {
           // serve.error is available on dev only
           // serve.error({ err, req, res });
         } else {
+          console.error('error occur');
+          console.error(err.stack);
           // we're in production, so we should have another method
           // to display something to the client when we encounter an error
           // (for security reasons, it's not ok to display the same wealth
