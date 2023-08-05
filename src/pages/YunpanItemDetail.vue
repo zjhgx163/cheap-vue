@@ -642,6 +642,7 @@ export default {
         .post(`${global.config.domain}/yunpan/reply/list`, {
           page: this.current,
           itemId: this.item.id,
+          isInvalid: this.isInvalid,
         })
         .then((res) => {
           // console.log(res.data.data);
@@ -772,6 +773,7 @@ export default {
           .post(`${global.config.domain}/yunpan/reply/list`, {
             page: index,
             itemId: this.item.id,
+            isInvalid: this.isInvalid,
           })
           .then((res) => {
             console.log(res.data.data.records);
@@ -833,6 +835,7 @@ export default {
         .post(`${global.config.domain}/yunpan/reply/list`, {
           page: this.current,
           itemId: this.item.id,
+          isInvalid: this.isInvalid,
         })
         .then((res) => {
           console.log(res.data.data.records);
