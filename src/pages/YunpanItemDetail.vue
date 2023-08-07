@@ -11,7 +11,7 @@
         </q-card-section>
       </q-card>
     </q-dialog> -->
-    <q-dialog v-model="isInvalid">
+    <!-- <q-dialog v-model="isInvalid">
       <q-card class="bg-blue text-white">
         <q-card-section>
           此资源已失效，不过有朋友分享了同样的资源，请在站内用关键词搜索。&#9996;&#9996;实现看片自由，请关注微信公众号“老胡为你服务“，或在浏览器上访问
@@ -21,7 +21,7 @@
           <q-btn flat label="关闭" v-close-popup />
         </q-card-actions>
       </q-card>
-    </q-dialog>
+    </q-dialog> -->
     <div class="row">
       <!-- 详情页 -->
       <div class="col row bg-primary">
@@ -46,7 +46,10 @@
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
                 <q-item-label :lines="2">
-                  <h1 class="text-h6 text-bold q-mt-none q-mb-sm">
+                  <h1
+                    class="text-h6 text-bold q-mt-none q-mb-sm"
+                    v-bind:class="{ 'text-grey': isInvalid, YL__invalid_item: isInvalid }"
+                  >
                     {{ item.title }}
 
                     <q-badge
@@ -57,6 +60,9 @@
                     >
                     </q-badge>
                   </h1>
+                </q-item-label>
+                <q-item-label :lines="1" class="text-red text-bold">
+                  链接已失效，请试试用关键字在搜索框内搜索
                 </q-item-label>
               </q-item-section>
             </q-item>
@@ -296,6 +302,8 @@
       width: 75%
     @media(min-width: $breakpoint-xs-max)
       width: 60%
+  &__invalid_item
+    text-decoration: line-through blue
 </style>
 
 <script>
@@ -852,6 +860,11 @@ export default {
   position: relative
   overflow: auto
   overflow-wrap: break-word
+.break-all
+  word-break: break-all
+  word-wrap: break-word
 .Post-body img
+  max-width: 100%
+.break-all imag
   max-width: 100%
 </style>
