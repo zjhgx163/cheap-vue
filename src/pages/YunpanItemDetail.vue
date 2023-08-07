@@ -61,7 +61,11 @@
                     </q-badge>
                   </h1>
                 </q-item-label>
-                <q-item-label :lines="1" class="text-red text-bold">
+                <q-item-label
+                  :lines="1"
+                  class="text-red text-bold"
+                  v-bind:class="{ hidden: !isInvalid }"
+                >
                   链接已失效，请试试用关键字在搜索框内搜索
                 </q-item-label>
               </q-item-section>
