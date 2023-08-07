@@ -82,7 +82,7 @@
               </q-item-section>
             </q-item>
             <q-item dense>
-              <div class="text-body2 break-all" v-html="item.content"></div>
+              <div class="text-body2 Post-body" v-html="item.content"></div>
             </q-item>
 
             <div id="yunpanDetailAdvert" />
@@ -206,7 +206,7 @@
                           <q-item-label
                             class="YL__title_font_family YL__list_line_height text-body2"
                           >
-                            <div class="text-body2 break-all" v-html="reply.content"></div>
+                            <div class="text-body2 Post-body" v-html="reply.content"></div>
 
                             <!-- {{ reply.content }} -->
                           </q-item-label>
@@ -848,13 +848,10 @@ export default {
 </script>
 
 <style lang="sass">
-.break-all
-  word-break: break-all
-  word-wrap: break-word
-.message img
-  width: 100%
-  height: 50%
-.break-all img
-  width: 100%
-  height: 50%
+.Post-body
+  position: relative
+  overflow: auto
+  overflow-wrap: break-word
+.Post-body img
+  max-width: 100%
 </style>
