@@ -48,8 +48,9 @@
                 <q-item-label :lines="2">
                   <h1
                     class="text-h6 text-bold q-mt-none q-mb-sm"
-                    v-bind:class="{ 'text-grey': isInvalid, YL__invalid_item: isInvalid }"
+                    v-bind:class="{ 'text-grey': isInvalid }"
                   >
+                    <!-- , YL__invalid_item: isInvalid -->
                     {{ item.title }}
 
                     <q-badge
@@ -63,10 +64,11 @@
                 </q-item-label>
                 <q-item-label
                   :lines="1"
-                  class="text-red text-bold"
+                  class="text-blue text-bold"
                   v-bind:class="{ hidden: !isInvalid }"
                 >
-                  链接已失效，请试试用关键字在搜索框内搜索
+                  链接已失效，<span class="text-subtitle1 text-red text-bold">站内有相同资源</span
+                  >，请在搜索框内<span class="text-subtitle1 text-red text-bold">搜索</span>
                 </q-item-label>
               </q-item-section>
             </q-item>
