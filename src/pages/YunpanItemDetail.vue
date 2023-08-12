@@ -94,7 +94,7 @@
               </q-item-section>
             </q-item>
             <q-item dense>
-              <div class="text-body2 Post-body" v-html="item.content"></div>
+              <div class="text-body2 Post-body break-all" v-html="item.content"></div>
             </q-item>
 
             <div id="yunpanDetailAdvert" />
@@ -218,7 +218,10 @@
                           <q-item-label
                             class="YL__title_font_family YL__list_line_height text-body2"
                           >
-                            <div class="text-body2 Post-body" v-html="reply.content"></div>
+                            <div
+                              class="text-body2 Post-body break-all"
+                              v-html="reply.content"
+                            ></div>
 
                             <!-- {{ reply.content }} -->
                           </q-item-label>
@@ -871,6 +874,6 @@ export default {
   word-wrap: break-word
 .Post-body img
   max-width: 100%
-.break-all imag
+.break-all img
   max-width: 100%
 </style>
