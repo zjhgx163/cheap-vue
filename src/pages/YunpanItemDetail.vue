@@ -63,12 +63,15 @@
                   </h1>
                 </q-item-label>
                 <q-item-label
-                  :lines="1"
+                  :lines="2"
                   class="text-blue text-bold"
-                  v-bind:class="{ hidden: !isInvalid }"
+                  v-bind:class="{ hidden: !isInvalid, 'text-body2': $q.platform.is.mobile }"
                 >
-                  链接已失效，<span class="text-subtitle1 text-red text-bold">站内有相同资源</span
-                  >，请在搜索框内<span class="text-subtitle1 text-red text-bold">搜索</span>
+                  链接已失效，<span v-bind:class="[noticefont]" class="text-red text-bold"
+                    >站内有相同资源</span
+                  >，请在搜索框内<span v-bind:class="[noticefont]" class="text-red text-bold"
+                    >搜索</span
+                  >
                 </q-item-label>
               </q-item-section>
             </q-item>
@@ -423,6 +426,9 @@ export default {
     },
     weixin: function () {
       return this.isWeixin();
+    },
+    noticefont: function () {
+      return this.isBigScreen ? 'text-subtitle1' : 'text-subtitle2';
     },
   },
   setup() {
