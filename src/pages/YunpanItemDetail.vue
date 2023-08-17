@@ -97,7 +97,11 @@
               </q-item-section>
             </q-item>
             <q-item dense>
-              <div class="text-body2 Post-body break-all" v-html="item.content"></div>
+              <q-item-section>
+                <q-item-label>
+                  <div class="text-body2 Post-body break-all" v-html="item.content"></div>
+                </q-item-label>
+              </q-item-section>
             </q-item>
 
             <div id="yunpanDetailAdvert" />
