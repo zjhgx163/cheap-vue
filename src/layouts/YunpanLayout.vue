@@ -124,7 +124,7 @@
         <q-btn
           color="pink-4"
           rounded
-          :size="addButtionSize"
+          :size="addButtonSize"
           dense
           icon="o_add"
           @click="addYunpanItem"
