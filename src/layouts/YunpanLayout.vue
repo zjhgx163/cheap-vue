@@ -257,7 +257,8 @@ export default {
     script.src =
       'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3935005489954231';
     script.crossorigin = 'anonymous';
-    document.body.append(script);
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(script, s);
     // if (global.config.isProEnv) {
     //   // 优量汇 H5 SDK 在线文档地址：http://developers.adnet.qq.com/doc/web/js_develop
     //   // 优量汇 全局命名空间申明TencentGDT对象
