@@ -252,6 +252,12 @@ export default {
     console.log('YunpanLayout mounted');
 
     console.log('isProEnv = ' + global.config.isProEnv);
+
+    let script = document.createElement('script');
+    script.src =
+      'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3935005489954231';
+    script.crossorigin = 'anonymous';
+    document.body.append(script);
     // if (global.config.isProEnv) {
     //   // 优量汇 H5 SDK 在线文档地址：http://developers.adnet.qq.com/doc/web/js_develop
     //   // 优量汇 全局命名空间申明TencentGDT对象
