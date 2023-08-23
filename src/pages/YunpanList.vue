@@ -62,9 +62,7 @@
                     {{ item.title }}
                   </q-item-label>
 
-                  <q-item-label
-                    class="row justify-between items-center q-mt-none q-pr-xs YL__auther"
-                  >
+                  <q-item-label class="row justify-between items-center q-py-xs q-pr-xs YL__auther">
                     <div class="col-auto row flex-center q-gutter-sm">
                       <div class="row flex-center">
                         <strong>{{ item.auther }}</strong>
