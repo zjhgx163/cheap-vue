@@ -41,7 +41,7 @@
                   name: 'yunpanDetail',
                   params: { id: item.id },
                 }"
-                class="bg-secondary q-pt-sm"
+                class="bg-secondary q-py-sm"
               >
                 <q-item-section avatar top>
                   <q-avatar v-if="item.avatar != '' && item.avatar != null">
@@ -62,7 +62,9 @@
                     {{ item.title }}
                   </q-item-label>
 
-                  <q-item-label class="row justify-between items-center q-py-xs q-pr-xs YL__auther">
+                  <q-item-label
+                    class="row justify-between items-center q-pt-sm q-pb-xs q-pr-xs YL__auther"
+                  >
                     <div class="col-auto row flex-center q-gutter-sm">
                       <div class="row flex-center">
                         <strong>{{ item.auther }}</strong>
