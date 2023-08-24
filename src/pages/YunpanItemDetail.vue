@@ -203,7 +203,7 @@
                 height="320"
                 type="adsense"
                 data-ad-client="ca-pub-3935005489954231"
-                data-ad-slot="4387276146"
+                data-ad-slot="6650477400"
                 data-auto-format="rspv"
                 data-full-width=""
               >
