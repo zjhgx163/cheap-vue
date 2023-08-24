@@ -104,7 +104,6 @@
               </q-item-section>
             </q-item>
 
-            <div id="yunpanDetailAdvert" />
             <q-separator inset />
             <q-card class="my-card flex-center" flat>
               <q-item class="q-pt-sm justify-start items-center">
@@ -125,6 +124,20 @@
                   >
                 </q-item-section>
               </q-item>
+
+              <div id="yunpanDetailAdvert">
+                <amp-ad
+                  width="100vw"
+                  height="320"
+                  type="adsense"
+                  data-ad-client="ca-pub-3935005489954231"
+                  data-ad-slot="4387276146"
+                  data-auto-format="rspv"
+                  data-full-width=""
+                >
+                  <div overflow=""></div>
+                </amp-ad>
+              </div>
               <!-- <q-card-section horizontal>
                 <q-card-section> </q-card-section>
               </q-card-section> -->
@@ -184,7 +197,19 @@
                 </q-item>
               </q-card-section>
             </q-card>
-
+            <div id="yunpanDetailSquare">
+              <amp-ad
+                width="100vw"
+                height="320"
+                type="adsense"
+                data-ad-client="ca-pub-3935005489954231"
+                data-ad-slot="4387276146"
+                data-auto-format="rspv"
+                data-full-width=""
+              >
+                <div overflow=""></div>
+              </amp-ad>
+            </div>
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
               <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
