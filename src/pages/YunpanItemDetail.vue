@@ -640,7 +640,7 @@ export default {
     console.log('yunpanItemDetail mounted');
     //启动谷歌unit广告
     let adsenseUnitLength = document.getElementsByClassName('adsbygoogle');
-    for (let i = 0; i < childList.length; i++) {
+    for (let i = 0; i < adsenseUnitLength.length; i++) {
       (adsbygoogle = window.adsbygoogle || []).push({});
     }
 
