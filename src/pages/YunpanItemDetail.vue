@@ -638,11 +638,6 @@ export default {
 
   mounted() {
     console.log('yunpanItemDetail mounted');
-    //启动谷歌unit广告
-    let adsenseUnitLength = document.getElementsByClassName('adsbygoogle');
-    for (let i = 0; i < adsenseUnitLength.length; i++) {
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    }
 
     let windowWidth = window.screen.width;
     if (windowWidth > 1023.99) {
@@ -680,6 +675,12 @@ export default {
         delay: 400, // ms
       });
       this.getYunpanItemContent(this.$route.params.id);
+    }
+
+    //启动谷歌unit广告
+    let adsenseUnitLength = document.getElementsByClassName('adsbygoogle');
+    for (let i = 0; i < adsenseUnitLength.length; i++) {
+      (adsbygoogle = window.adsbygoogle || []).push({});
     }
 
     // if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
