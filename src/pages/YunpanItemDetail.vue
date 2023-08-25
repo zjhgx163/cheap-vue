@@ -679,9 +679,12 @@ export default {
 
     //启动谷歌unit广告
     let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
+    console.log('adsenseUnitLength length is ' + adsenseUnitLength);
     window.onload = function () {
+      console.log('onload ...');
       for (let i = 0; i < adsenseUnitLength.length; i++) {
         (adsbygoogle = window.adsbygoogle || []).push({});
+        console.log('i = ' + i);
       }
     };
 
