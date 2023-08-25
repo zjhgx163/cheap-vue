@@ -678,10 +678,12 @@ export default {
     }
 
     //启动谷歌unit广告
-    let adsenseUnitLength = document.getElementsByClassName('adsbygoogle');
-    for (let i = 0; i < adsenseUnitLength.length; i++) {
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    }
+    let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
+    window.onload = function () {
+      for (let i = 0; i < adsenseUnitLength.length; i++) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    };
 
     // if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
     //   window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
