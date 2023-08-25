@@ -124,7 +124,10 @@
                   >
                 </q-item-section>
               </q-item>
-
+              <!-- <q-card-section horizontal>
+                <q-card-section> </q-card-section>
+              </q-card-section> -->
+              <q-separator inset />
               <div class="adsenseunit">
                 <!-- in-article-aquare2 -->
                 <ins
@@ -136,10 +139,6 @@
                   data-full-width-responsive="true"
                 ></ins>
               </div>
-              <!-- <q-card-section horizontal>
-                <q-card-section> </q-card-section>
-              </q-card-section> -->
-              <q-separator inset />
               <q-card-section
                 v-if="$q.platform.is.desktop"
                 horizontal
@@ -169,30 +168,48 @@
                 </q-card-section>
               </q-card-section>
               <q-card-section v-else>
-                <q-item dense class="q-pt-none" v-bind:class="{ hidden: weixin }">
-                  <q-item-section>
-                    <q-item-label class="column flex-center">
-                      <span class="text-h6 text-indigo-7 text-bold">更多最新资源，扫描二维码 </span>
-                    </q-item-label>
-                    <q-item-label class="column flex-center">
-                      <span class="text-h6 text-pink-4 text-bold">关注微信公众号 </span>
-                    </q-item-label>
-                    <q-item-label class="column flex-center">
-                      <span class="text-h5 text-grey-10 text-bold"> “老胡为你服务”</span>
-                    </q-item-label>
-                    <q-item-label class="column flex-center">
-                      <span class="text-h6 text-indigo-7 text-bold text-italic"
-                        >&#9996;&#9996;实现看片自由
-                      </span>
-                    </q-item-label>
-                  </q-item-section>
-                </q-item>
-                <q-item class="flex-center" v-bind:class="{ hidden: weixin }">
-                  <img
-                    style="width: 40%; height: 50%"
-                    src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
-                  />
-                </q-item>
+                <div v-if="weixin">
+                  <q-item dense class="q-pt-none">
+                    <q-item-section>
+                      <q-item-label class="column flex-center">
+                        <span class="text-h6 text-deep-orange-9 text-bold"
+                          >经费告急，不差钱的大佬可以长按下方图片赞赏支持下，好心人的名字将会定期出现在小站的感谢名单中。🙏
+                        </span>
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                  <q-item class="flex-center">
+                    <img style="max-width: 100%; height: 50%" src="donate.jpg" />
+                  </q-item>
+                </div>
+                <div v-else>
+                  <q-item dense class="q-pt-none">
+                    <q-item-section>
+                      <q-item-label class="column flex-center">
+                        <span class="text-h6 text-indigo-7 text-bold"
+                          >更多最新资源，扫描二维码
+                        </span>
+                      </q-item-label>
+                      <q-item-label class="column flex-center">
+                        <span class="text-h6 text-pink-4 text-bold">关注微信公众号 </span>
+                      </q-item-label>
+                      <q-item-label class="column flex-center">
+                        <span class="text-h5 text-grey-10 text-bold"> “老胡为你服务”</span>
+                      </q-item-label>
+                      <q-item-label class="column flex-center">
+                        <span class="text-h6 text-indigo-7 text-bold text-italic"
+                          >&#9996;&#9996;实现看片自由
+                        </span>
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                  <q-item class="flex-center">
+                    <img
+                      style="width: 40%; height: 50%"
+                      src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+                    />
+                  </q-item>
+                </div>
               </q-card-section>
             </q-card>
             <div class="adsenseunit">
