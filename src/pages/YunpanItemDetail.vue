@@ -125,18 +125,16 @@
                 </q-item-section>
               </q-item>
 
-              <div id="yunpanDetailAdvert">
-                <amp-ad
-                  width="100vw"
-                  height="320"
-                  type="adsense"
+              <div class="adsenseunit">
+                <!-- in-article-aquare2 -->
+                <ins
+                  class="adsbygoogle"
+                  style="display: block"
                   data-ad-client="ca-pub-3935005489954231"
-                  data-ad-slot="4387276146"
-                  data-auto-format="rspv"
-                  data-full-width=""
-                >
-                  <div overflow=""></div>
-                </amp-ad>
+                  data-ad-slot="6650477400"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                ></ins>
               </div>
               <!-- <q-card-section horizontal>
                 <q-card-section> </q-card-section>
@@ -197,18 +195,16 @@
                 </q-item>
               </q-card-section>
             </q-card>
-            <div id="yunpanDetailSquare">
-              <amp-ad
-                width="100vw"
-                height="320"
-                type="adsense"
+            <div class="adsenseunit">
+              <!-- in-article-aqure -->
+              <ins
+                class="adsbygoogle"
+                style="display: block"
                 data-ad-client="ca-pub-3935005489954231"
-                data-ad-slot="6650477400"
-                data-auto-format="rspv"
-                data-full-width=""
-              >
-                <div overflow=""></div>
-              </amp-ad>
+                data-ad-slot="4387276146"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
             </div>
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
@@ -642,6 +638,12 @@ export default {
 
   mounted() {
     console.log('yunpanItemDetail mounted');
+    //启动谷歌unit广告
+    let adsenseUnitLength = document.getElementsByClassName('adsbygoogle');
+    for (let i = 0; i < childList.length; i++) {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+
     let windowWidth = window.screen.width;
     if (windowWidth > 1023.99) {
       this.isBigScreen = true;
