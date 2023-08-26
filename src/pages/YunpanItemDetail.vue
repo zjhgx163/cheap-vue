@@ -171,14 +171,14 @@
                   <q-item dense class="q-pt-none">
                     <q-item-section>
                       <q-item-label class="column flex-center">
-                        <span class="text-h6 text-deep-orange-9 text-bold"
+                        <span class="text-subtitle1 text-deep-orange-9 text-bold"
                           >经费告急，不差钱的大佬可以长按下方二维码赞赏支持下，好心人的名字将会定期出现在小站的感谢名单中。🙏
                         </span>
                       </q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item class="flex-center">
-                    <img style="max-width: 90%; height: 50%" src="donate.jpg" />
+                    <img style="max-width: 85%; height: 40%" src="donate.jpg" />
                   </q-item>
                 </div>
                 <div v-else>
