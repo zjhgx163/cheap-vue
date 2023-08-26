@@ -103,7 +103,17 @@
                 </q-item-label>
               </q-item-section>
             </q-item>
-
+            <div class="adsenseunit q-pa-xs">
+              <!-- in-article-aquare2 -->
+              <ins
+                class="adsbygoogle"
+                style="display: block"
+                data-ad-client="ca-pub-3935005489954231"
+                data-ad-slot="6650477400"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+            </div>
             <q-separator inset />
             <q-card class="my-card flex-center" flat>
               <q-item class="q-pt-sm justify-start items-center">
@@ -128,17 +138,6 @@
                 <q-card-section> </q-card-section>
               </q-card-section> -->
               <q-separator inset />
-              <div class="adsenseunit">
-                <!-- in-article-aquare2 -->
-                <ins
-                  class="adsbygoogle"
-                  style="display: block"
-                  data-ad-client="ca-pub-3935005489954231"
-                  data-ad-slot="6650477400"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"
-                ></ins>
-              </div>
               <q-card-section
                 v-if="$q.platform.is.desktop"
                 horizontal
@@ -173,13 +172,13 @@
                     <q-item-section>
                       <q-item-label class="column flex-center">
                         <span class="text-h6 text-deep-orange-9 text-bold"
-                          >经费告急，不差钱的大佬可以长按下方图片赞赏支持下，好心人的名字将会定期出现在小站的感谢名单中。🙏
+                          >经费告急，不差钱的大佬可以长按下方二维码赞赏支持下，好心人的名字将会定期出现在小站的感谢名单中。🙏
                         </span>
                       </q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item class="flex-center">
-                    <img style="max-width: 100%; height: 50%" src="donate.jpg" />
+                    <img style="max-width: 90%; height: 50%" src="donate.jpg" />
                   </q-item>
                 </div>
                 <div v-else>
@@ -212,7 +211,8 @@
                 </div>
               </q-card-section>
             </q-card>
-            <div class="adsenseunit">
+
+            <div class="adsenseunit q-pa-xs">
               <!-- in-article-aqure -->
               <ins
                 class="adsbygoogle"
