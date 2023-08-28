@@ -702,7 +702,7 @@ export default {
         for (let i = 0; i < adsenseUnitLength.length; i++) {
           (adsbygoogle = window.adsbygoogle || []).push({});
         }
-      }, 300);
+      }, 600);
     } else {
       let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
 
