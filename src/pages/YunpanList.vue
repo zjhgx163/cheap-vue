@@ -23,6 +23,14 @@
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
           <q-list dense separator class="bg-secondary">
+            <ins
+              class="adsbygoogle"
+              style="display: block"
+              data-ad-format="fluid"
+              data-ad-layout-key="-ho-l+13-3s+9g"
+              data-ad-client="ca-pub-3935005489954231"
+              data-ad-slot="2761528811"
+            ></ins>
             <div
               v-bind:key="item.id"
               v-for="item in listData"
@@ -479,6 +487,16 @@ export default {
       this.getItemList();
     } else {
       yunpanStore.prefetchFlag = 0; //还原是否call到prefetch标志
+    }
+
+    //启动谷歌unit广告
+    if (window.adsbygoogle == undefined) {
+      setTimeout(function () {
+        console.log('adsbygoogle delay 1s');
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }, 1000);
+    } else {
+      (adsbygoogle = window.adsbygoogle || []).push({});
     }
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
