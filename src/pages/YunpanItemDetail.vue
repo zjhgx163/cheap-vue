@@ -696,13 +696,13 @@ export default {
     //启动谷歌unit广告
     if (window.adsbygoogle == undefined) {
       setTimeout(function () {
-        console.log('adsbygoogle delay 300');
+        console.log('adsbygoogle delay 700');
         let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
 
         for (let i = 0; i < adsenseUnitLength.length; i++) {
           (adsbygoogle = window.adsbygoogle || []).push({});
         }
-      }, 600);
+      }, 700);
     } else {
       let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
 
