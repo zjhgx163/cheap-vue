@@ -141,11 +141,8 @@
           </q-item-label>
         </q-item-section>
       </q-item>
-      <div class="row flex-center YL__notice">
-        <a
-          target="_blank"
-          class="text-secondary q-px-sm text-caption"
-          href="https://beian.miit.gov.cn"
+      <div v-if="$q.platform.is.desktop" class="row flex-center YL__notice">
+        <a target="_blank" class="text-grey-6 q-px-sm text-caption" href="https://beian.miit.gov.cn"
           >浙ICP备2020040769号-1</a
         >
 
