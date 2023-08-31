@@ -103,13 +103,23 @@
                 </q-item-label>
               </q-item-section>
             </q-item>
-            <div class="adsenseunit q-pa-xs">
+            <div v-if="$q.platform.is.desktop" class="adsenseunit q-pa-xs">
               <!-- in-article-aquare2 -->
               <ins
                 class="adsbygoogle"
                 style="display: block"
                 data-ad-client="ca-pub-3935005489954231"
                 data-ad-slot="6650477400"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+            </div>
+            <div v-else class="adsenseunit q-pa-xs">
+              <ins
+                class="adsbygoogle"
+                style="display: block"
+                data-ad-client="ca-pub-3935005489954231"
+                data-ad-slot="4295345601"
                 data-ad-format="auto"
                 data-full-width-responsive="true"
               ></ins>
