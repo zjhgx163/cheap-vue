@@ -355,17 +355,16 @@ export default {
   },
   setup() {
     console.log('Yun setup');
-    const title = ref('最新阿里云盘资源,深夜加油站');
+    const title = ref('好家当 - 最新阿里云盘资源发布');
     const meta = reactive({
       description: {
         name: 'description',
         content:
-          '网盘资源 阿里云盘 百度云盘 夸克云盘 影视 动漫 游戏 软件 网盘资源 4k 1080p 美剧 韩剧 韩国电影 大尺度 速存 易和谐 河蟹 禁播',
+          '最新阿里云盘资源发布，包括影视，动漫，综艺节目，游戏，软件，音乐，学习资源，图片，电子书等应有尽有，视频大多是4k，1080p高清，高达万T资料',
       },
       keywords: {
         name: 'keywords',
-        content:
-          '网盘资源 阿里云盘 百度云盘 夸克云盘 影视 动漫 游戏 软件 网盘资源 4k 1080p 美剧 韩剧 韩国电影 大尺度 速存 易和谐 河蟹 禁播',
+        content: '阿里云盘 网盘资源 影视 动漫 游戏 学习资源 软件 音乐 图片 电子书 4k 1080p',
       },
       ogtype: {
         property: 'og:type',
@@ -377,12 +376,12 @@ export default {
       },
       ogtitle: {
         property: 'og:title',
-        content: '最新阿里云盘资源,深夜加油站',
+        content: '好家当 - 最新阿里云盘资源发布',
       },
       ogdescription: {
         property: 'og:description',
         content:
-          '网盘资源 阿里云盘 百度云盘 夸克云盘 影视 动漫 游戏 软件 网盘资源 4k 1080p 美剧 韩剧 韩国电影 大尺度 速存 易和谐 河蟹 禁播',
+          '最新阿里云盘资源发布，包括影视，动漫，综艺节目，游戏，软件，音乐，学习资源，图片，电子书等应有尽有，视频大多是4k，1080p高清，高达万T资料',
       },
       ogimage: {
         property: 'og:image',
