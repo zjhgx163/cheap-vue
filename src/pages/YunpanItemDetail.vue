@@ -493,7 +493,7 @@ export default {
       },
       keywords: {
         name: 'keywords',
-        content: '阿里云盘 网盘资源 影视 动漫 游戏 学习资源 软件 音乐 图片 电子书 4k 1080p',
+        content: '阿里云盘 网盘资源 影视 动漫 游戏 学习资源 软件 音乐 图片 电子书 4k 1080p 下载',
       },
       ogtype: {
         property: 'og:type',
