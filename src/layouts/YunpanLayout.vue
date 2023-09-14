@@ -253,6 +253,7 @@ export default {
     let script = document.createElement('script');
     script.src =
       'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3935005489954231';
+    script.setAttribute('async', '');
     script.setAttribute('crossorigin', 'anonymous');
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(script, s);
