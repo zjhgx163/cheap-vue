@@ -456,6 +456,7 @@ export default {
         if (parameter == null || parameter == undefined) {
           return;
         }
+
         return 'background-color:#' + this.getHashCode(parameter, true).toString(16).substr(0, 6);
       };
     },
@@ -874,7 +875,7 @@ export default {
       if (!caseSensitive) {
         str = str.toLowerCase();
       }
-      var hash = 1315423917,
+      var hash = 1315423911,
         i,
         ch;
       for (i = str.length - 1; i >= 0; i--) {

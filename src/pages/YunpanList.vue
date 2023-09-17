@@ -344,7 +344,7 @@ export default {
 
     getAvatarColor: function () {
       return (parameter) => {
-        return 'background-color:#' + this.getHashCode(parameter, false).toString(16).substr(0, 6);
+        return 'background-color:#' + this.getHashCode(parameter, true).toString(16).substr(0, 6);
       };
     },
     getAvatarText: function () {
@@ -777,6 +777,9 @@ export default {
       }
     },
     getHashCode(str, caseSensitive) {
+      if (str == null || str == undefined) {
+        return;
+      }
       if (!caseSensitive) {
         str = str.toLowerCase();
       }
