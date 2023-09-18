@@ -105,14 +105,14 @@
             </q-item>
             <div class="adsenseunit q-pa-xs">
               <!-- in-article-aquare2 -->
-              <ins
+              <!-- <ins
                 class="adsbygoogle"
                 style="display: block"
                 data-ad-client="ca-pub-3935005489954231"
                 data-ad-slot="6650477400"
                 data-ad-format="auto"
                 data-full-width-responsive="true"
-              ></ins>
+              ></ins> -->
             </div>
             <q-separator inset />
             <q-card class="my-card flex-center" flat>
@@ -214,14 +214,14 @@
 
             <div class="adsenseunit q-pa-xs">
               <!-- in-article-aqure -->
-              <ins
+              <!-- <ins
                 class="adsbygoogle"
                 style="display: block"
                 data-ad-client="ca-pub-3935005489954231"
                 data-ad-slot="4387276146"
                 data-ad-format="auto"
                 data-full-width-responsive="true"
-              ></ins>
+              ></ins> -->
             </div>
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
@@ -676,22 +676,22 @@ export default {
       this.getYunpanItemContent(this.$route.params.id);
     }
     //启动谷歌unit广告
-    if (window.adsbygoogle == undefined) {
-      setTimeout(function () {
-        console.log('adsbygoogle delay 1s');
-        let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
+    // if (window.adsbygoogle == undefined) {
+    //   setTimeout(function () {
+    //     console.log('adsbygoogle delay 1s');
+    //     let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
 
-        for (let i = 0; i < adsenseUnitLength.length; i++) {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-      }, 1000);
-    } else {
-      let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
+    //     for (let i = 0; i < adsenseUnitLength.length; i++) {
+    //       (adsbygoogle = window.adsbygoogle || []).push({});
+    //     }
+    //   }, 1000);
+    // } else {
+    //   let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
 
-      for (let i = 0; i < adsenseUnitLength.length; i++) {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      }
-    }
+    //   for (let i = 0; i < adsenseUnitLength.length; i++) {
+    //     (adsbygoogle = window.adsbygoogle || []).push({});
+    //   }
+    // }
 
     // if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
     //   window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
