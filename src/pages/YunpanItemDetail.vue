@@ -42,7 +42,7 @@
                 </router-link>
               </q-item-label>
             </q-item>
-            <div v-if="!$q.platform.is.mobile" class="adsenseunit q-pa-xs">
+            <div v-if="$q.platform.is.mobile" class="adsenseunit q-pa-xs">
               <!-- in-article-aquare2 -->
               <ins
                 class="adsbygoogle"
@@ -114,7 +114,7 @@
                 </q-item-label>
               </q-item-section>
             </q-item>
-            <div v-if="!$q.platform.is.desktop" class="adsenseunit q-pa-xs">
+            <div v-if="$q.platform.is.desktop" class="adsenseunit q-pa-xs">
               <!-- in-article-aquare2 -->
               <ins
                 class="adsbygoogle"
