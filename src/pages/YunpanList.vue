@@ -1,7 +1,14 @@
 <template>
   <q-page class="bg-primary" :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
-
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-format="fluid"
+      data-ad-layout-key="-ho-l+13-3s+9g"
+      data-ad-client="ca-pub-3935005489954231"
+      data-ad-slot="2761528811"
+    ></ins>
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
         <q-img
@@ -23,14 +30,6 @@
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
           <q-list dense separator class="bg-secondary">
-            <ins
-              class="adsbygoogle"
-              style="display: block"
-              data-ad-format="fluid"
-              data-ad-layout-key="-ho-l+13-3s+9g"
-              data-ad-client="ca-pub-3935005489954231"
-              data-ad-slot="2761528811"
-            ></ins>
             <div
               v-bind:key="item.id"
               v-for="item in listData"
