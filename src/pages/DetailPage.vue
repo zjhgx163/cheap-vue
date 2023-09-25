@@ -446,27 +446,29 @@ export default {
     //   console.log('xxxxxxxxxxxx');
     //   console.log(document.getElementsByTagName('title')[0].innerHTML);
     // }
+    if (Object.keys(this._detail).length > 0) {
+      this.detail = this._detail;
 
-    this.detail = this._detail;
+      this.detailParts = this._detailParts;
 
-    this.detailParts = this._detailParts;
+      this.bigImages = this._bigImages;
 
-    this.bigImages = this._bigImages;
+      this.couponInfo = this._couponInfo;
+      this.setAnotherTitle(this._detail.title);
 
-    this.couponInfo = this._couponInfo;
-    this.setAnotherTitle(this._detail.title);
-
-    this.meta.description.content =
-      this._detail.title + this.detail.emphsis + this.detail.detailBrief;
-    let keywords = this.detail.mall;
-    if (this._categoryInfo) {
-      this._categoryInfo.slice(1).forEach((a) => (keywords += ',' + a));
+      this.meta.description.content =
+        this._detail.title + this.detail.emphsis + this.detail.detailBrief;
+      let keywords = this.detail.mall;
+      if (this._categoryInfo) {
+        this._categoryInfo.slice(1).forEach((a) => (keywords += ',' + a));
+      }
+      this.meta.keywords.content = keywords;
+      this.meta.ogtitle.content = this._detail.title;
+      this.meta.ogdescription.content = this.detail.emphsis + this.detail.detailBrief;
+      this.meta.ogimage.content = this.detail.mainImageUrl;
     }
-    this.meta.keywords.content = keywords;
-    this.meta.ogtitle.content = this._detail.title;
+
     this.meta.ogurl.content = 'https://www.hjdang.com/item/detail/' + this.$route.params.urlCode;
-    this.meta.ogdescription.content = this.detail.emphsis + this.detail.detailBrief;
-    this.meta.ogimage.content = this.detail.mainImageUrl;
     this.meta.weibocreate.content = new Date();
     this.meta.weiboupdate.content = new Date();
     // if (process.env.CLIENT) {
@@ -522,6 +524,14 @@ export default {
           this.couponInfo = JSON.parse(this.detail.couponInfo);
         }
         this.categoryInfo = JSON.parse(this.detail.categoryText);
+        this.setAnotherTitle(this.detail.title);
+        this.meta.description.content =
+          this.detail.title + this.detail.emphsis + this.detail.detailBrief;
+        let keywords = this.detail.mall;
+        this.meta.keywords.content = keywords;
+        this.meta.ogtitle.content = this.detail.title;
+        this.meta.ogdescription.content = this.detail.emphsis + this.detail.detailBrief;
+        this.meta.ogimage.content = this.detail.mainImageUrl;
         // console.log('taobaoPwd = ' + this.taobaoCode);
         // if (this.isTaobaoPwd()) {
         //   this.isTaoPwd = true;
