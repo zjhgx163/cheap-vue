@@ -282,9 +282,9 @@ export default {
     host: function () {
       return global.config.domain;
     },
-    clickable: function () {
-      return this.isBigScreen ? false : true;
-    },
+    // clickable: function () {
+    //   return this.isBigScreen ? false : true;
+    // },
     disable: function () {
       return this.isBigScreen || this.isListEnd || this.stopLoading;
     },

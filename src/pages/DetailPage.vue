@@ -36,7 +36,24 @@
     </q-dialog>
 
     <!-- 面包栏 -->
-    <div class="column gt-sm">
+    <div v-if="$q.platform.is.mobile" class="bg-secondary">
+      <q-item dense class="YL__return q-pt-none q-mt-none">
+        <q-item-label class="flex-center row">
+          <q-icon name="keyboard_return" color="pink-4" />
+          <span> &nbsp;&nbsp;</span>
+          <router-link
+            class="text-accent"
+            style="text-decoration: underline"
+            :to="{
+              path: '/',
+            }"
+          >
+            返回列表页
+          </router-link>
+        </q-item-label>
+      </q-item>
+    </div>
+    <div v-else class="column">
       <q-breadcrumbs
         active-color="black"
         separator="---"
