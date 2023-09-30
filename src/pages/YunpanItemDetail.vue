@@ -919,6 +919,7 @@ export default {
   position: relative
   overflow: auto
   overflow-wrap: break-word
+  max-width: 100%
 .break-all
   word-break: break-all
   word-wrap: break-word
