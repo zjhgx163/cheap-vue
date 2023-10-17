@@ -89,7 +89,7 @@
             <q-item class="items-center">
               <q-item-section avatar style="min-width: 30px">
                 <q-avatar size="1.9em" v-if="item.avatar != '' && item.avatar != null">
-                  <img :src="item.avatar" alt="头像" />
+                  <img :src="item.avatar" :alt="item.auther" />
                 </q-avatar>
                 <q-avatar
                   size="1.9em"
@@ -133,7 +133,7 @@
                   <q-avatar size="1.9em">
                     <img
                       src="https://aliyundriver.oss-cn-hangzhou.aliyuncs.com/avatar/1111111_AlwUJhuGAEQcf572.png"
-                      alt="头像"
+                      alt="notice"
                     />
                   </q-avatar>
                 </q-item-section>
@@ -174,6 +174,7 @@
                   <img
                     class="YL__wechat_img"
                     src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+                    alt="wechat_code"
                   />
                 </q-card-section>
               </q-card-section>
@@ -183,13 +184,13 @@
                     <q-item-section>
                       <q-item-label class="column flex-center">
                         <span class="text-subtitle1 text-deep-orange-9 text-bold"
-                          >经费告急，不差钱的大佬可以长按下方二维码赞赏支持下，好心人的名字将会定期出现在小站的感谢名单中。🙏
+                          >经费告急，有需要的朋友可以在‘手慢无’里支持一下，京东拼多多即时优惠，性价比全网最高。不差钱的大佬也可以长按下方二维码赞赏下，好心人的名字将会定期出现在小站的感谢名单中。🙏
                         </span>
                       </q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item class="flex-center">
-                    <img style="max-width: 85%; height: 40%" src="donate.jpg" />
+                    <img style="max-width: 85%; height: 40%" src="donate.jpg" alt="wechat_donate" />
                   </q-item>
                 </div>
                 <div v-else>
@@ -217,6 +218,7 @@
                     <img
                       style="width: 40%; height: 50%"
                       src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+                      alt="wechat_code"
                     />
                   </q-item>
                 </div>
@@ -250,7 +252,7 @@
                             v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
                             size="1.9em"
                           >
-                            <img :src="reply.replyAvatar" alt="头像" />
+                            <img :src="reply.replyAvatar" :alt="reply.replyAuther" />
                           </q-avatar>
                           <q-avatar
                             size="1.9em"
@@ -316,7 +318,7 @@
                 <q-item dense class="q-py-sm">
                   <q-item-section avatar top style="min-width: 30px">
                     <q-avatar size="1.9em">
-                      <img :src="userAvatar" alt="头像" />
+                      <img :src="userAvatar" :alt="item.auther" />
                     </q-avatar>
                   </q-item-section>
                   <!-- <q-item-section class="YL__auther">
