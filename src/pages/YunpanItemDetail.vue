@@ -183,9 +183,14 @@
                   <q-item dense class="q-pt-none">
                     <q-item-section>
                       <q-item-label class="column flex-center">
-                        <span class="text-subtitle1 text-deep-orange-9 text-bold"
+                        <span class="text-subtitle1 text-deep-orange-9 text-weight-medium"
                           >经费告急，有需要网购的朋友可以在
-                          <a href="https://shop.hjdang.com"> 手慢无 </a
+                          <a
+                            href="https://shop.hjdang.com"
+                            style="text-decoration: underline"
+                            class="text-indigo-7 text-bold"
+                          >
+                            手慢无 </a
                           >里支持一下，京东拼多多即逝优惠，性价比全网最高。不差钱的大佬也可以长按下方二维码赞赏下，好心人的名字将会定期出现在小站的感谢名单中。🙏
                         </span>
                       </q-item-label>
