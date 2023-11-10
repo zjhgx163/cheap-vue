@@ -130,7 +130,7 @@
               在下单后有一定延迟，大约5分钟后会显示
             </q-item-label>
             <q-item-label caption class="q-py-xs">
-              目前仅支持京东返利(淘宝因规则改变不再支持)，其他商城暂不支持，拼多多不久之后加入。
+              目前仅支持京东返利，其他商城暂不支持，拼多多不久之后加入。
             </q-item-label>
             <q-item-label caption class="q-py-xs"> 可提现余额达到2元时可提现 </q-item-label>
 
@@ -141,7 +141,7 @@
               在本站第一次购买淘宝天猫商品时，如果跳出加入会员的页面，要点“是”，否则没有返利
             </q-item-label> -->
             <q-item-label caption class="q-py-xs">
-              请不要事先在京东，拼多多浏览完商品后再在本站下单买同样的商品，这样会使返利失效。一定要在本站浏览商品直接购买。
+              京东的返利请不要在购买过程中使用红包和礼金，否则返利对象会变成发放红包和礼金的人。
             </q-item-label>
             <q-item-label caption class="q-py-xs">
               <strong>如有订单未及时结算和其他问题请直接添加客服微信 </strong></q-item-label
