@@ -78,9 +78,9 @@
                   class="text-black text-bold"
                   v-bind:class="{ hidden: !isInvalid, 'text-body2': $q.platform.is.mobile }"
                 >
-                  链接已失效，<span v-bind:class="[noticefont]" class="text-red text-bold"
+                  链接已失效，<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
                     >站内有相同资源</span
-                  >，请在搜索框内<span v-bind:class="[noticefont]" class="text-red text-bold"
+                  >，请在搜索框内<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
                     >搜索</span
                   >
                 </q-item-label>
@@ -110,7 +110,11 @@
             <q-item dense>
               <q-item-section>
                 <q-item-label>
-                  <div class="text-body2 Post-body break-all" v-html="item.content"></div>
+                  <div
+                    class="text-body2 Post-body break-all"
+                    v-bind:class="{ 'text-grey': isInvalid }"
+                    v-html="item.content"
+                  ></div>
                 </q-item-label>
               </q-item-section>
             </q-item>
