@@ -81,7 +81,9 @@
                   链接已失效，<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
                     >站内有相同资源</span
                   >，请在搜索框内<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
-                    >搜索或关注微信公众号“老胡为你服务”</span
+                    >搜索</span
+                  >或关注微信公众号<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
+                    >老胡为你服务</span
                   >
                 </q-item-label>
               </q-item-section>
