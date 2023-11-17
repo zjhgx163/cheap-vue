@@ -75,7 +75,7 @@
                 </q-item-label>
                 <q-item-label
                   :lines="2"
-                  class="text-blue text-bold"
+                  class="text-black text-bold"
                   v-bind:class="{ hidden: !isInvalid, 'text-body2': $q.platform.is.mobile }"
                 >
                   链接已失效，<span v-bind:class="[noticefont]" class="text-red text-bold"
