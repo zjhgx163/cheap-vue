@@ -113,7 +113,7 @@ export default {
       // create an input file element to open file dialog
       const input = document.createElement('input');
       input.type = 'file';
-      input.accept = '.png, .jpg, .jpeg, .gif'; // file extensions allowed
+      input.accept = '.png, .jpg, .jpeg, .gif, .webp'; // file extensions allowed
       let file;
       input.onchange = (_) => {
         var image = new Image();
@@ -202,8 +202,9 @@ export default {
               });
             }
           } else {
-            this.content = '';
+            this.post = '';
             this.title = '';
+            this.tag = '';
             this.$emit('editor-show-changed', false);
           }
         });

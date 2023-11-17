@@ -45,6 +45,7 @@ const routes = [
         name: 'yunpanDetailShare',
         component: () => import('pages/YunpanItemDetailShare.vue'),
       },
+      { path: 'mock/login', name: 'mocklogin', component: () => import('pages/MockLogin.vue') },
     ],
   },
 
