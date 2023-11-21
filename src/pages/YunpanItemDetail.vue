@@ -137,10 +137,7 @@
                 <q-item-section avatar class="q-pr-sm">
                   <!-- <q-icon name="o_info" color="indigo-7" /> -->
                   <q-avatar size="1.9em">
-                    <img
-                      src="https://aliyundriver.oss-cn-hangzhou.aliyuncs.com/avatar/1111111_AlwUJhuGAEQcf572.png"
-                      alt="notice"
-                    />
+                    <img src="david_avatar.png" alt="notice" />
                   </q-avatar>
                 </q-item-section>
 
@@ -942,4 +939,6 @@ export default {
   max-width: 100%
 .break-all img
   max-width: 100%
+ins.adsbygoogle[data-ad-status="unfilled"]
+  display: none !important
 </style>
