@@ -274,9 +274,9 @@ export default {
           if (res.data.code < 0) {
             if (/(http|https):\S*/.test(res.data.data)) {
               window.location.href = res.data.data;
-            } else if (/redirect:\S*/.test(res.data)) {
+            } else if (/redirect:\S*/.test(res.data.message)) {
               //redirect其他页面
-              let redirectPath = res.data.slice(9);
+              let redirectPath = res.data.message.slice(9);
               this.$router.push({ path: redirectPath });
             }
           } else {

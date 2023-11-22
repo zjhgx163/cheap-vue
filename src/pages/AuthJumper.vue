@@ -55,6 +55,12 @@ export default {
             this.$router.push({
               path: '/d/' + this.$route.params.urlCode,
             });
+          } else if (this.state == 'yunpanArticle') {
+            this.$q.loading.hide();
+
+            this.$router.push({
+              path: '/article/' + this.$route.params.urlCode,
+            });
           } else if (this.state == 'yunpanList') {
             this.$q.loading.hide();
 

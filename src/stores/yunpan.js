@@ -6,6 +6,7 @@ import { Notify } from 'quasar';
 export const useYunpanStore = defineStore('yunpan', {
   state: () => ({
     items: [],
+    topArticleList: [],
     sideItems: [],
     isListEnd: false,
     pageNavigateHidden: true,
@@ -28,6 +29,10 @@ export const useYunpanStore = defineStore('yunpan', {
 
   actions: {
     getItemList(page, query, tag, x, redirect) {
+      // 取top article
+      axios.post(`${global.config.domain}/yunpan/top/article/list`, {}).then((res) => {
+        this.topArticleList = res.data.data;
+      });
       return axios
         .post(`${global.config.domain}/yunpan/resource/list`, {
           page: page === undefined ? 1 : page,
@@ -45,6 +50,7 @@ export const useYunpanStore = defineStore('yunpan', {
               this.pageNavigateHidden = false;
               this.stopLoading = true;
             }
+
             //只有点击‘搜索’才记录关键词
             if (x !== undefined && x != null) {
               axios
@@ -89,6 +95,33 @@ export const useYunpanStore = defineStore('yunpan', {
           }
           if (res.data.data.redirectId != null && res.data.data.redirectId > 0) {
             redirect({ path: '/d/' + res.data.data.redirectId }, 302);
+          }
+
+          Loading.hide();
+        }
+      });
+    },
+
+    getYunpanArticleContent(id, redirect) {
+      return axios.post(`${global.config.domain}/yunpan/article/${id}`).then((res) => {
+        if (res.data.code < 0) {
+          Notify.create({
+            type: 'negative',
+            icon: 'warning',
+            message: `${res.data.msg}`,
+          });
+          Loading.hide();
+          redirect({ path: '/list' }, 301);
+        } else {
+          this.itemDetail = res.data.data.article;
+          this.replyList = res.data.data.firstReplyPage.records;
+          this.contentStr = res.data.data.contentStr;
+          this.replyMax = Math.ceil(
+            res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
+          );
+
+          if (this.itemDetail == null) {
+            redirect({ path: '/list' }, 301);
           }
 
           Loading.hide();

@@ -1,14 +1,60 @@
 <template>
   <q-page class="bg-primary" :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
-    <ins
+    <q-list dense separator class="bg-primary" padding bordered>
+      <div
+        v-bind:key="item.id"
+        v-for="item in topArticleList"
+        v-bind:class="{ 'q-pb-xs': !isBigScreen }"
+      >
+        <q-item
+          dense
+          v-ripple
+          :to="{
+            name: 'articleDetail',
+            params: { id: item.id },
+          }"
+          class="bg-light-green-1 q-py-sm"
+        >
+          <q-item-section avatar top>
+            <q-avatar>
+              <img src="david_avatar.png" alt="站长" />
+            </q-avatar>
+          </q-item-section>
+
+          <q-item-section class="q-pb-xs">
+            <q-item-label :lines="2" class="text-black text-bold text-overline">
+              {{ item.title }}
+            </q-item-label>
+            <div class="row q-mt-sm" v-if="isBigScreen">
+              <q-badge color="pink-4" label="置顶" class="col-auto" />
+              <div class="col"></div>
+            </div>
+          </q-item-section>
+          <q-item-section class="q-pb-xs" side>
+            <q-item-label v-if="isBigScreen" class="row q-pt-sm q-pb-xs q-pr-xs YL__auther">
+              <q-btn outline class="text-black" label="点击查看" />
+            </q-item-label>
+            <div v-else class="row">
+              <q-badge color="pink-4" label="置顶" class="col-auto" />
+              <div class="col"></div>
+            </div>
+          </q-item-section>
+
+          <!-- <q-item-section side top> </q-item-section> -->
+        </q-item>
+
+        <q-separator color="primary" class="gt-sm" />
+      </div>
+    </q-list>
+    <!-- <ins
       class="adsbygoogle"
       style="display: block"
       data-ad-format="fluid"
       data-ad-layout-key="-ho-l+13-3s+9g"
       data-ad-client="ca-pub-3935005489954231"
       data-ad-slot="2761528811"
-    ></ins>
+    ></ins> -->
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
         <q-img
@@ -200,6 +246,8 @@
     color: #999999
     padding: 0 0.5em
     font-size: 0.8em
+ins.adsbygoogle[data-ad-status="unfilled"]
+  display: none !important
 </style>
 
 <script>
@@ -218,6 +266,7 @@ export default {
     return {
       sort: 1,
       listData: [],
+      topArticleList: [],
       current: 1,
       max: 6,
       isBigScreen: false,
@@ -247,6 +296,7 @@ export default {
   computed: {
     ...mapWritableState(useYunpanStore, {
       _listData: 'items',
+      _topArticleList: 'topArticleList',
       _isListEnd: 'isListEnd',
       _pageNavigateHidden: 'pageNavigateHidden',
       _stopLoading: 'stopLoading',
@@ -277,6 +327,9 @@ export default {
     },
     textSize: function () {
       return this.isBigScreen ? 'text-h8' : 'text-body2';
+    },
+    topArticleSize: function () {
+      return this.isBigScreen ? 'text-body2' : 'text-overline';
     },
 
     host: function () {
@@ -434,6 +487,7 @@ export default {
     console.log('YunpanList created');
     this.listData = this._listData;
     this.isListEnd = this._isListEnd;
+    this.topArticleList = this._topArticleList;
     this.max = this._max;
     this.pageNavigateHidden = this._pageNavigateHidden;
     this.stopLoading = this._stopLoading;
@@ -481,21 +535,25 @@ export default {
     //   // this.$parent.$parent.categoryTab = this.tag;
     // }
     const yunpanStore = useYunpanStore();
-    if (yunpanStore.prefetchFlag === 0 || !this.listData) {
+    if (yunpanStore.prefetchFlag === 0 || this.listData.length === 0) {
       this.getItemList();
     } else {
       yunpanStore.prefetchFlag = 0; //还原是否call到prefetch标志
     }
 
-    //启动谷歌unit广告
-    if (window.adsbygoogle == undefined) {
-      setTimeout(function () {
-        console.log('adsbygoogle delay 1s');
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      }, 1000);
-    } else {
-      (adsbygoogle = window.adsbygoogle || []).push({});
+    if (this.topArticleList.length === 0) {
+      this.getTopArticleList();
     }
+
+    //启动谷歌unit广告
+    // if (window.adsbygoogle == undefined) {
+    //   setTimeout(function () {
+    //     console.log('adsbygoogle delay 1s');
+    //     (adsbygoogle = window.adsbygoogle || []).push({});
+    //   }, 1000);
+    // } else {
+    //   (adsbygoogle = window.adsbygoogle || []).push({});
+    // }
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
     // 如果不是搜索结果播放模版广告
@@ -574,6 +632,12 @@ export default {
       // this is actually what the default style-fn does in Quasar
       return { minHeight: offset ? `calc(100vh - ${offset}px)` : '100vh' };
     },
+    getTopArticleList() {
+      // 取top article
+      this.$axios.post(`${global.config.domain}/yunpan/top/article/list`, {}).then((res) => {
+        this.topArticleList = res.data.data;
+      });
+    },
     getItemList() {
       // console.log('$$$$$$' + this.query);
       this.$q.loading.show({
@@ -589,25 +653,20 @@ export default {
         })
         .then((res) => {
           // console.log(res.data.data);
-          // console.log(this.isBigScreen);
-
-          // console.log(res.data);
           if (res.data.code < 0) {
-            if (/(http|https):\S*/.test(res.data.data)) {
-              window.location.href = res.data.data;
-            } else if (/redirect:\S*/.test(res.data)) {
-              //redirect其他页面
-              let redirectPath = res.data.slice(9);
-              this.$router.push({ path: redirectPath });
-            }
+            redirect({ path: '/error/404' }, 301);
           } else {
             this.listData = res.data.data.records;
+            this.topArticleList = res.data.data.yunpanTopArticleList;
             this.max = Math.ceil(res.data.data.total / res.data.data.size);
             if (res.data.data.records.length < 30 || this.$route.params.page >= this.max) {
               this.isListEnd = true;
               this.pageNavigateHidden = false;
               this.stopLoading = true;
             }
+            axios.post(`${global.config.domain}/yunpan/top/article/list`, {}).then((res) => {
+              this.topArticleList = res.data.data;
+            });
             //只有点击‘搜索’才记录关键词
             if (this.x !== undefined && this.x != null) {
               this.$axios

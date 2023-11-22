@@ -15,7 +15,6 @@ axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use(
   function (response) {
-    console.log('response');
     let isLogin = response.headers['is-login'];
     console.log('isLogin = ' + isLogin);
     // console.log('xxxcxcxcxcx');

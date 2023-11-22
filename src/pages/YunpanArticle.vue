@@ -1,25 +1,17 @@
 <template>
   <q-page class="bg-secondary">
-    <q-dialog v-model="isInvalid">
-      <q-card class="bg-blue text-white">
-        <q-card-section>
-          此资源已失效，请在站内搜索其他资源。&#9996;&#9996;实现看片自由，请关注微信公众号“老胡为你服务“，或在浏览器上访问
-          “www.hjdang.com”
-        </q-card-section>
-      </q-card>
-    </q-dialog>
     <div class="row">
       <!-- 详情页 -->
       <div class="col row bg-primary">
         <div class="col column">
           <div class="col q-pa-sm bg-secondary">
-            <q-item dense class="YL__return q-pt-sm q-mt-sm">
+            <q-item dense class="YL__return q-pt-none q-mt-xs">
               <q-item-label class="flex-center row">
                 <q-icon name="keyboard_return" color="pink-4" />
                 <span> &nbsp;&nbsp;</span>
                 <router-link
-                  style="text-decoration: underline"
                   class="text-pink-4"
+                  style="text-decoration: underline"
                   :to="{
                     path: '/',
                   }"
@@ -28,72 +20,37 @@
                 </router-link>
               </q-item-label>
             </q-item>
-            <q-item dense class="q-pt-md">
-              <q-item-section>
-                <q-item-label class="column flex-center">
-                  <span class="text-h6 text-pink-4 text-bold"
-                    >更多最新资源，扫描二维码关注微信公众号
-                  </span>
-                </q-item-label>
-                <q-item-label class="column flex-center">
-                  <span class="text-h5 text-deep-blue text-bold"> “老胡为你服务”</span>
-                </q-item-label>
-                <q-item-label class="column flex-center">
-                  <span class="text-h6 text-pink-4 text-bold text-italic"
-                    >&#9996;&#9996;实现看片自由
-                  </span>
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item class="flex-center">
-              <img
-                style="width: 30%; height: 40%"
-                src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
-              />
-            </q-item>
             <q-item dense>
               <q-item-section>
-                <!-- <q-item-label class="column flex-center"> </q-item-label> -->
-                <q-item-label :lines="2" class="row">
-                  <h1 class="text-h6 text-bold">
+                <q-item-label :lines="2">
+                  <h1 class="text-h6 text-bold q-mt-none q-mb-sm">
+                    <!-- , YL__invalid_item: isInvalid -->
                     {{ item.title }}
 
-                    <q-badge
-                      transparent
-                      align="middle"
-                      :color="getTagColor(item.tag)"
-                      :label="item.tag"
-                    >
-                    </q-badge>
+                    <q-badge color="pink-4" label="置顶" />
                   </h1>
                 </q-item-label>
               </q-item-section>
             </q-item>
             <q-item class="items-center">
               <q-item-section avatar style="min-width: 30px">
-                <q-avatar size="1.9em" v-if="item.avatar != '' && item.avatar != null">
-                  <img :src="item.avatar" />
+                <q-avatar size="1.9em">
+                  <img src="david_avatar.png" alt="站长" />
                 </q-avatar>
-                <q-avatar
-                  size="1.9em"
-                  :style="getAvatarColor(item.auther)"
-                  text-color="white"
-                  v-else
-                >
-                  {{ getAvatarText(item.auther) }}</q-avatar
-                >
               </q-item-section>
+              <q-item-section class="YL__auther"> 老胡 本人 </q-item-section>
               <q-item-section class="YL__auther">
-                {{ item.auther }}
-              </q-item-section>
-              <q-item-section class="YL__auther">
-                {{ item.createDateStr }}
+                <!-- {{ item.itemCreateDate }} -->
               </q-item-section>
             </q-item>
             <q-item dense>
-              <div class="text-body2 break-all" v-html="item.content"></div>
+              <q-item-section>
+                <q-item-label>
+                  <div class="text-body2 Post-body break-all" v-html="item.content"></div>
+                </q-item-label>
+              </q-item-section>
             </q-item>
-            <q-separator />
+            <q-separator inset />
 
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
@@ -111,7 +68,7 @@
                             v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
                             size="1.9em"
                           >
-                            <img :src="reply.replyAvatar" />
+                            <img :src="reply.replyAvatar" :alt="reply.replyAuther" />
                           </q-avatar>
                           <q-avatar
                             size="1.9em"
@@ -135,7 +92,10 @@
                           <q-item-label
                             class="YL__title_font_family YL__list_line_height text-body2"
                           >
-                            <div class="text-body2 break-all" v-html="reply.content"></div>
+                            <div
+                              class="text-body2 Post-body break-all"
+                              v-html="reply.content"
+                            ></div>
 
                             <!-- {{ reply.content }} -->
                           </q-item-label>
@@ -174,7 +134,7 @@
                 <q-item dense class="q-py-sm">
                   <q-item-section avatar top style="min-width: 30px">
                     <q-avatar size="1.9em">
-                      <img :src="userAvatar" />
+                      <img :src="userAvatar" :alt="item.auther" />
                     </q-avatar>
                   </q-item-section>
                   <!-- <q-item-section class="YL__auther">
@@ -213,37 +173,50 @@
 </template>
 <style lang="sass">
 .YL
+  &__auther
+    @media(max-width: $breakpoint-xs-max)
+      font-size: 0.8em
+      height: 2.1em
+    @media(min-width: $breakpoint-xs-max)
+      font-size: 0.9em
+      height: 2.6em
+    color: rgba(0, 0, 0, 0.54)
+    line-height: 1.2em
   &__return
     @media(max-width: $breakpoint-xs-max)
       font-size: 0.7em
       height: 0.8em
     @media(min-width: $breakpoint-xs-max)
-      font-size: 0.9em
+      font-size: 1.1em
       height: 0.8em
+  &__wechat_img
+    @media(max-width: $breakpoint-xs-max)
+      width: 75%
+    @media(min-width: $breakpoint-xs-max)
+      width: 60%
+  &__invalid_item
+    text-decoration: line-through blue
 </style>
+
 <script>
 import 'src/config';
 // import { Screen } from 'quasar';
 import { Loading } from 'quasar';
 import { mapState } from 'pinia';
 import { useYunpanStore } from 'src/stores/yunpan';
-// import FastClick from 'fastclick';
-// import clipboard from 'src/clipboard';
-// import Clipboard from 'clipboard';
+// import { inject } from 'vue';
 import { useMeta } from 'quasar';
 import { ref } from 'vue';
 import { reactive } from 'vue';
+// import { useQuasar } from 'quasar';
 
 export default {
-  name: 'YunpanItemShare',
+  name: 'YunpanItemDetail',
   data() {
     return {
       item: {},
       listData: [],
       host: global.config.domain,
-      showing: false,
-      alertText: '淘口令已复制\n请打开手淘',
-      isShowCopyTaobaopwd: false,
       current: 1,
       max: 0,
       replyContent: '',
@@ -252,16 +225,19 @@ export default {
       isListEnd: false,
       userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
       isBigScreen: false,
+      // mobileBroswer: false,
       isInvalid: false,
     };
   },
+  emits: ['need-login', 'logined'],
+
   computed: {
     ...mapState(useYunpanStore, {
       _detail: 'itemDetail',
       _replyList: 'replyList',
       _replyMax: 'replyMax',
       _contentStr: 'contentStr',
-      _isInvalid: 'isInvalid',
+      _userAgent: 'userAgent',
     }),
     maxPage() {
       return this.isBigScreen ? 6 : 4;
@@ -269,45 +245,21 @@ export default {
     paginationSize() {
       return this.isBigScreen ? '12px' : '9px';
     },
-    imagefullwidth: function () {
-      return {
-        'full-width': this.isBigScreen ? false : true,
-      };
-    },
+    // imagefullwidth: function () {
+    //   return {
+    //     'full-width': this.isBigScreen ? false : true,
+    //   };
+    // },
     disable: function () {
       return this.isBigScreen || this.isListEnd ? true : false;
     },
 
-    getTagColor: function () {
-      return (parameter) => {
-        if (parameter == '影视') {
-          return 'pink-4';
-        } else if (parameter == '动漫') {
-          return 'blue-5';
-        } else if (parameter == '图片') {
-          return 'orange-5';
-        } else if (parameter == '游戏/软件') {
-          return 'purple-4';
-        } else if (parameter == '学习区') {
-          return 'teal-5';
-        } else if (parameter == '音乐/音频') {
-          return 'indigo-5';
-        } else if (parameter == '日常') {
-          return 'light-green-6';
-        } else if (parameter == '求资源') {
-          return 'blue-grey-6';
-        } else if (parameter == '书籍') {
-          return 'brown-5';
-        } else {
-          return 'lime-8';
-        }
-      };
-    },
     getAvatarColor: function () {
       return (parameter) => {
         if (parameter == null || parameter == undefined) {
           return;
         }
+
         return 'background-color:#' + this.getHashCode(parameter, true).toString(16).substr(0, 6);
       };
     },
@@ -319,23 +271,34 @@ export default {
         return parameter.slice(0, 1);
       };
     },
+    mobileBroswer: function () {
+      let isMobile = this.$q.platform.is.mobile;
+      console.log('isMobile = ' + isMobile);
+      let isWeixin = this.isWeixin();
+      console.log('isWeixin = ' + isWeixin);
+
+      return isMobile && !isWeixin;
+    },
+    weixin: function () {
+      return this.isWeixin();
+    },
   },
   setup() {
     console.log('Yun setup');
-    const title = ref('最新阿里云盘资源,深夜加油站');
+    const title = ref('好家当 - 最新阿里云盘资源发布');
     const meta = reactive({
       description: {
         name: 'description',
         content:
-          '云盘资源 阿里云盘 百度云盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+          '最新阿里云盘资源发布，包括影视，动漫，综艺节目，游戏，软件，音乐，学习资源，图片，电子书等应有尽有，视频大多是4k，1080p高清，高达万T资料',
       },
       keywords: {
         name: 'keywords',
-        content: '最新影视，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+        content: '阿里云盘 网盘资源 影视 动漫 游戏 学习资源 软件 音乐 图片 电子书 4k 1080p 下载',
       },
       ogtype: {
         property: 'og:type',
-        content: 'webpage',
+        content: 'article',
       },
       ogurl: {
         property: 'og:url',
@@ -343,12 +306,12 @@ export default {
       },
       ogtitle: {
         property: 'og:title',
-        content: '最新阿里云盘资源,深夜加油站',
+        content: '好家当 - 最新阿里云盘资源发布',
       },
       ogdescription: {
         property: 'og:description',
         content:
-          '云盘资源 阿里云盘 百度云盘 夸克云盘，影视，动漫，游戏，软件，学习资料，最新影视，美剧，韩剧，韩国电影，大尺度，速存，易和谐，河蟹，禁播，精彩镜头，欧洲文艺电影',
+          '最新阿里云盘资源发布，包括影视，动漫，综艺节目，游戏，软件，音乐，学习资源，图片，电子书等应有尽有，视频大多是4k，1080p高清，高达万T资料',
       },
       ogimage: {
         property: 'og:image',
@@ -369,6 +332,7 @@ export default {
         // whenever "title" from above changes, your meta will automatically update
         title: title,
         titleTemplate: (title) => `${title.value}`,
+
         meta: meta,
       };
     });
@@ -384,72 +348,63 @@ export default {
   },
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
-    console.log('yunpanItemDetailShare page prefetch');
-    // const $q = useQuasar();
-    // fetch data, validate route and optionally redirect to some other route...
+    console.log('yunpanArticle page prefetch');
+    // 先把旧数据重置
     const myStore = useYunpanStore();
     myStore.itemDetail = {};
     myStore.replyList = [];
-    myStore.contentStr = '';
-    myStore.isInvalid = false;
 
     if (process.env.SERVER) {
       Loading.show();
-
       // ssrContext is available only server-side in SSR mode
 
       // No access to "this" here
 
       // Return a Promise if you are running an async job
       // Example:
+      myStore.userAgent = ssrContext.req.headers['user-agent'];
 
-      return myStore.getYunpanItemContent(currentRoute.params.id, redirect);
+      return myStore.getYunpanArticleContent(currentRoute.params.id, redirect);
     }
+    // const $q = useQuasar();
+    // fetch data, validate route and optionally redirect to some other route...
   },
-  //   components: {
-  //     HotList,
-  //   },
+  activated() {
+    console.log('yunpanArticle activated ');
+    // this.getYunpanItemContent(this.$route.params.id);
+  },
   created() {
-    console.log('yunpanItemDetailShare created');
+    console.log('yunpanArticle created');
     this.item = this._detail;
     this.listData = this._replyList;
     this.max = this._replyMax;
-    this.isInvalid = this._isInvalid;
 
     if (Object.keys(this.item).length > 0) {
-      this.setAnotherTitle(this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘');
+      this.setAnotherTitle(this.item.title + ' - 阿里云盘 - 好家当');
       // this.title = this._detail.title;
-      // console.log(this.title);
       console.log(this._contentStr);
+      this.meta.keywords.content = this.item.title + ' - 阿里云盘 网盘资源';
+      this.meta.ogtitle.content = this.item.title + ' - 阿里云盘 - 好家当';
       if (this._contentStr) {
         this.meta.description.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
-        this.meta.keywords.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
-        this.meta.ogtitle.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title + ' - 阿里云盘，网盘资源 - ' + this._contentStr;
         this.meta.ogdescription.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+          this.item.title + ' - 阿里云盘，网盘资源 - ' + this._contentStr;
       } else {
-        this.meta.description.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
-        this.meta.keywords.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
-        this.meta.ogtitle.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
-        this.meta.ogdescription.content =
-          this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+        this.meta.description.content = this.item.title + ' - 阿里云盘，网盘资源';
+        this.meta.ogdescription.content = this.item.title + ' - 阿里云盘，网盘资源';
       }
     }
 
-    this.meta.ogurl.content = 'https://www.hjdang.com/p/' + this.$route.params.id;
+    this.meta.ogurl.content = 'https://www.hjdang.com/d/' + this.$route.params.id;
+
     this.meta.weibocreate.content = new Date();
     this.meta.weiboupdate.content = new Date();
   },
+
   mounted() {
-    //解决iphone移动端的延迟
-    // FastClick.attach(document.body);
-    console.log('yunpan item share mounted');
+    console.log('yunpanArticle mounted');
+
     let windowWidth = window.screen.width;
     if (windowWidth > 1023.99) {
       this.isBigScreen = true;
@@ -465,12 +420,11 @@ export default {
       }
       // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
     }
-
     if (Object.keys(this.item).length === 0) {
       this.$q.loading.show({
         delay: 400, // ms
       });
-      this.getYunpanItemContent(this.$route.params.id);
+      this.getYunpanArticleContent(this.$route.params.id);
     }
   },
   methods: {
@@ -482,6 +436,7 @@ export default {
         .post(`${global.config.domain}/yunpan/reply/list`, {
           page: this.current,
           itemId: this.item.id,
+          isInvalid: this.isInvalid,
         })
         .then((res) => {
           // console.log(res.data.data);
@@ -503,8 +458,8 @@ export default {
           this.$q.loading.hide();
         });
     },
-    getYunpanItemContent(id) {
-      this.$axios.post(`${global.config.domain}/yunpan/item/public/${id}`).then((res) => {
+    getYunpanArticleContent(id) {
+      return this.$axios.post(`${global.config.domain}/yunpan/article/${id}`).then((res) => {
         if (res.data.code < 0) {
           this.$q.loading.hide();
           this.$q.notify({
@@ -514,42 +469,34 @@ export default {
           });
           this.$router.push({ path: '/list' });
         } else {
-          this.item = res.data.data.item;
-          this._contentStr = res.data.data.contentStr;
-          this.isInvalid = res.data.data.invalid;
+          this.item = res.data.data.article;
           this.listData = res.data.data.firstReplyPage.records;
+          this._contentStr = res.data.data.contentStr;
           this.max = Math.ceil(
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
           );
-          // console.log(this.item);
           if (this.item == null) {
-            this.$router.push({ path: '/error' });
+            this.$router.push({ path: '/error/404S' });
           }
-          this.setAnotherTitle(this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘');
+          this.setAnotherTitle(this.item.title + ' - 阿里云盘 - 好家当');
           // this.title = this._detail.title;
+          this.meta.keywords.content = this.item.title + ' - 阿里云盘 网盘资源';
+          this.meta.ogtitle.content = this.item.title + ' - 阿里云盘 - 好家当';
           if (this._contentStr) {
             this.meta.description.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
-            this.meta.keywords.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
-            this.meta.ogtitle.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title + ' - 阿里云盘，网盘资源 - ' + this._contentStr;
             this.meta.ogdescription.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘' + this._contentStr;
+              this.item.title + ' - 阿里云盘，网盘资源 - ' + this._contentStr;
           } else {
-            this.meta.description.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
-            this.meta.keywords.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
-            this.meta.ogtitle.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
-            this.meta.ogdescription.content =
-              this.item.title + ' 下载 资源 百度云 阿里云盘 百度网盘 夸克云盘';
+            this.meta.description.content = this.item.title + ' - 阿里云盘，网盘资源';
+            this.meta.ogdescription.content = this.item.title + ' - 阿里云盘，网盘资源';
           }
+
           this.$q.loading.hide();
         }
       });
     },
+
     isWeixin() {
       let ua;
       if (process.env.CLIENT) {
@@ -557,6 +504,7 @@ export default {
       } else {
         ua = this._userAgent.toLowerCase();
       }
+      console.log(ua);
       if (ua.match(/MicroMessenger/i) == 'micromessenger') {
         return true;
       } else {
@@ -573,7 +521,7 @@ export default {
           if (res.data.code < 0) {
             if (!this.$q.localStorage.has('userInfo')) {
               if (this.isWeixin()) {
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.item.id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.item.id}&response_type=code&scope=snsapi_userinfo&state=yunpanArticle#wechat_redirect`;
               } else {
                 this.$router.push({ path: 'login' });
               }
@@ -600,6 +548,7 @@ export default {
           .post(`${global.config.domain}/yunpan/reply/list`, {
             page: index,
             itemId: this.item.id,
+            isInvalid: this.isInvalid,
           })
           .then((res) => {
             console.log(res.data.data.records);
@@ -645,7 +594,7 @@ export default {
       if (!caseSensitive) {
         str = str.toLowerCase();
       }
-      var hash = 1315423917,
+      var hash = 1315423911,
         i,
         ch;
       for (i = str.length - 1; i >= 0; i--) {
@@ -661,6 +610,7 @@ export default {
         .post(`${global.config.domain}/yunpan/reply/list`, {
           page: this.current,
           itemId: this.item.id,
+          isInvalid: this.isInvalid,
         })
         .then((res) => {
           console.log(res.data.data.records);
@@ -673,13 +623,16 @@ export default {
 </script>
 
 <style lang="sass">
+.Post-body
+  position: relative
+  overflow: auto
+  overflow-wrap: break-word
+  max-width: 100%
 .break-all
   word-break: break-all
   word-wrap: break-word
-.message img
-  width: 100%
-  height: 50%
+.Post-body img
+  max-width: 100%
 .break-all img
-  width: 100%
-  height: 50%
+  max-width: 100%
 </style>
