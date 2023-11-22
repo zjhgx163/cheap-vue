@@ -664,7 +664,7 @@ export default {
               this.pageNavigateHidden = false;
               this.stopLoading = true;
             }
-            axios.post(`${global.config.domain}/yunpan/top/article/list`, {}).then((res) => {
+            this.$axios.post(`${global.config.domain}/yunpan/top/article/list`, {}).then((res) => {
               this.topArticleList = res.data.data;
             });
             //只有点击‘搜索’才记录关键词
