@@ -235,17 +235,15 @@
               </q-card-section>
             </q-card>
 
-            <!-- <div class="adsenseunit q-pa-xs"> -->
-            <!-- in-article-aqure -->
-            <!-- <ins
+            <div class="adsenseunit q-pa-xs">
+              <!-- in-article-aqure -->
+              <ins
                 class="adsbygoogle"
-                style="display: block"
+                style="display: inline-block; width: 728px; height: 50px"
                 data-ad-client="ca-pub-3935005489954231"
                 data-ad-slot="4387276146"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins> -->
-            <!-- </div> -->
+              ></ins>
+            </div>
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
               <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
