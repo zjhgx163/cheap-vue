@@ -47,14 +47,6 @@
         <q-separator color="primary" class="gt-sm" />
       </div>
     </q-list>
-    <!-- <ins
-      class="adsbygoogle"
-      style="display: block"
-      data-ad-format="fluid"
-      data-ad-layout-key="-ho-l+13-3s+9g"
-      data-ad-client="ca-pub-3935005489954231"
-      data-ad-slot="2761528811"
-    ></ins> -->
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
         <q-img
@@ -158,6 +150,14 @@
             </div>
           </q-list>
         </q-pull-to-refresh>
+        <ins
+          class="adsbygoogle"
+          style="display: block"
+          data-ad-format="fluid"
+          data-ad-layout-key="-ho-l+13-3s+9g"
+          data-ad-client="ca-pub-3935005489954231"
+          data-ad-slot="2761528811"
+        ></ins>
 
         <template v-slot:loading>
           <div v-bind:class="{ hidden: !pageNavigateHidden }" class="row justify-center q-my-md">
@@ -546,14 +546,14 @@ export default {
     }
 
     //启动谷歌unit广告
-    // if (window.adsbygoogle == undefined) {
-    //   setTimeout(function () {
-    //     console.log('adsbygoogle delay 1s');
-    //     (adsbygoogle = window.adsbygoogle || []).push({});
-    //   }, 1000);
-    // } else {
-    //   (adsbygoogle = window.adsbygoogle || []).push({});
-    // }
+    if (window.adsbygoogle == undefined) {
+      setTimeout(function () {
+        console.log('adsbygoogle delay 1s');
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }, 1000);
+    } else {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    }
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
     // 如果不是搜索结果播放模版广告
