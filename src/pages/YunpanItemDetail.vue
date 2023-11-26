@@ -186,7 +186,7 @@
                   <q-item dense class="q-pt-none">
                     <q-item-section>
                       <q-item-label class="column flex-center">
-                        <span class="text-caption text-deep-purple-14 text-weight-medium"
+                        <span class="text-caption text-pink-7 text-weight-medium"
                           >精打细算，做聪明网购人。下单前先查优惠券，还有大额返利，比自己去平台买省下一个亿！教程请看：
                           <a
                             href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483916&idx=1&sn=2e36901033e066c96d44990b4b338e2f&chksm=c24e8f17f5390601ee49beb7e6f6eeba01ecfbe136e632bcc62bb40132d7ca8d595c8e91c56d&token=1769763799&lang=zh_CN#rd"
