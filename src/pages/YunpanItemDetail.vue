@@ -42,7 +42,7 @@
                 </router-link>
               </q-item-label>
             </q-item>
-            <div v-if="weixin" class="q-pa-md">
+            <div class="q-pa-md">
               <q-card dark bordered class="flex-center text-white bg-grey-9">
                 <q-card-section>
                   <q-item dense class="q-pt-none">
