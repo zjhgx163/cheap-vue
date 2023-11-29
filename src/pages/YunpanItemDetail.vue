@@ -42,6 +42,35 @@
                 </router-link>
               </q-item-label>
             </q-item>
+            <div v-if="weixin" class="q-pa-md">
+              <q-card dark bordered class="flex-center text-white bg-grey-9">
+                <q-card-section>
+                  <q-item dense class="q-pt-none">
+                    <q-item-section>
+                      <q-item-label class="column flex-center">
+                        <span class="text-caption text-bold"
+                          >精打细算，做聪明网购人。下单前先查优惠券，还有大额返利，比自己去平台买省下一个亿！教程请看：
+                          <a
+                            href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483916&idx=1&sn=2e36901033e066c96d44990b4b338e2f&chksm=c24e8f17f5390601ee49beb7e6f6eeba01ecfbe136e632bcc62bb40132d7ca8d595c8e91c56d&token=1769763799&lang=zh_CN#rd"
+                            style="text-decoration: underline"
+                            class="text-yellow text-subtitle2 text-bold"
+                          >
+                            领券返利 </a
+                          >,提醒大家
+                          <a
+                            href="https://shop.hjdang.com"
+                            style="text-decoration: underline"
+                            class="text-yellow text-subtitle2 text-bold"
+                          >
+                            手慢无 </a
+                          >里都是挑选过的当天最优惠商品，折扣转瞬即逝，性价比全网最高，京东同样有返利。<br />
+                        </span>
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-card-section>
+              </q-card>
+            </div>
             <div v-if="$q.platform.is.mobile" class="adsenseunit q-pa-xs">
               <!-- in-article-aquare2 -->
               <ins
@@ -174,11 +203,7 @@
                 <!-- <q-card-section> <div class="flex-center">==></div> </q-card-section> -->
 
                 <q-card-section class="flex justif-start">
-                  <img
-                    class="YL__wechat_img"
-                    src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
-                    alt="wechat_code"
-                  />
+                  <img class="YL__wechat_img" src="laohuweinifuwu.jpeg" alt="wechat_code" />
                 </q-card-section>
               </q-card-section>
               <q-card-section v-else>
@@ -186,22 +211,7 @@
                   <q-item dense class="q-pt-none">
                     <q-item-section>
                       <q-item-label class="column flex-center">
-                        <span class="text-caption text-pink-7 text-weight-medium"
-                          >精打细算，做聪明网购人。下单前先查优惠券，还有大额返利，比自己去平台买省下一个亿！教程请看：
-                          <a
-                            href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483916&idx=1&sn=2e36901033e066c96d44990b4b338e2f&chksm=c24e8f17f5390601ee49beb7e6f6eeba01ecfbe136e632bcc62bb40132d7ca8d595c8e91c56d&token=1769763799&lang=zh_CN#rd"
-                            style="text-decoration: underline"
-                            class="text-indigo-7 text-bold"
-                          >
-                            领券返利 </a
-                          >,提醒大家
-                          <a
-                            href="https://shop.hjdang.com"
-                            style="text-decoration: underline"
-                            class="text-indigo-7 text-bold"
-                          >
-                            手慢无 </a
-                          >里都是挑选过的当天最优惠商品，折扣转瞬即逝，性价比全网最高，京东同样有返利。<br />
+                        <span class="text-caption text-pink-7 text-weight-medium">
                           经费告急，不差钱的大佬可以长按下方二维码赞赏下，好心人的名字将会定期出现在小站的感谢名单中。🙏
                         </span>
                       </q-item-label>
@@ -235,7 +245,7 @@
                   <q-item class="flex-center">
                     <img
                       style="width: 40%; height: 50%"
-                      src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+                      src="laohuweinifuwu.jpeg"
                       alt="wechat_code"
                     />
                   </q-item>
