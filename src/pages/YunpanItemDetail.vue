@@ -796,7 +796,7 @@ export default {
           );
           // console.log(this.item);
           if (this.item == null) {
-            this.$router.push({ path: '/error/404S' });
+            this.$router.push({ path: '/error/404' });
           }
           this.setAnotherTitle(this.item.title + ' - 阿里云盘 - 好家当');
           // this.title = this._detail.title;
@@ -842,7 +842,7 @@ export default {
               if (this.isWeixin()) {
                 window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.item.id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
               } else {
-                this.$router.push({ path: 'login' });
+                this.$emit('need-login');
               }
             } else {
               this.$q.notify({
