@@ -1,7 +1,7 @@
 <template>
   <q-page class="bg-primary" :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
-    <q-list dense separator class="bg-primary" padding bordered>
+    <q-list dense class="bg-secondary" bordered>
       <div v-bind:key="item.id" v-for="item in topArticleList" class="q-pb-xs">
         <q-item
           dense
@@ -40,7 +40,7 @@
           <!-- <q-item-section side top> </q-item-section> -->
         </q-item>
 
-        <q-separator dark inset />
+        <q-separator color="orange" inset />
       </div>
     </q-list>
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
