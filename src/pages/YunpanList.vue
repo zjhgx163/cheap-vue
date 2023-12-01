@@ -2,11 +2,7 @@
   <q-page class="bg-primary" :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
     <q-list dense separator class="bg-primary" padding bordered>
-      <div
-        v-bind:key="item.id"
-        v-for="item in topArticleList"
-        v-bind:class="{ 'q-pb-xs': !isBigScreen }"
-      >
+      <div v-bind:key="item.id" v-for="item in topArticleList" class="q-pb-xs">
         <q-item
           dense
           v-ripple
@@ -17,7 +13,7 @@
           class="bg-light-green-1 q-py-sm"
         >
           <q-item-section avatar top>
-            <q-avatar>
+            <q-avatar size="2.1em">
               <img src="david_avatar.png" alt="站长" />
             </q-avatar>
           </q-item-section>
@@ -678,6 +674,9 @@ export default {
                 .then((res) => {
                   console.log(res.data.data);
                 });
+            }
+            if (this.$route.query.x) {
+              this.$emit('searchDone');
             }
           }
 
