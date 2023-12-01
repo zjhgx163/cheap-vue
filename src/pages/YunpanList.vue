@@ -40,7 +40,7 @@
           <!-- <q-item-section side top> </q-item-section> -->
         </q-item>
 
-        <q-separator color="primary" class="gt-sm" />
+        <q-separator dark inset />
       </div>
     </q-list>
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
