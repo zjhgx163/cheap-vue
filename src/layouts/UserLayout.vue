@@ -3,15 +3,15 @@
     <div class="flex-center bg-primary row">
       <q-banner inline-actions class="text-white bg-brown YL__750w">
         <div class="row q-pa-xs items-center">
-          <div class="col-2">
-            <q-avatar size="4.0em">
+          <div :class="avatarCol">
+            <q-avatar size="3.2em">
               <img :src="avatar" />
             </q-avatar>
           </div>
 
           <div class="col">
             <!-- <div class="text-secondary text-overline text-bold">{{ user }}</div> -->
-            <div class="row justify-between items-center">
+            <div class="row justify-between items-center q-mr-lg">
               <div>
                 <div class="text-secondary YL__user_draw_text">可提现金额</div>
 
@@ -29,7 +29,7 @@
                   color="accent text-bold"
                   text-color="white"
                   icon="account_balance_wallet"
-                  size="0.75rem"
+                  size="0.7rem"
                   clickable
                   @click="goWithdraw"
                 >
@@ -84,14 +84,23 @@ export default {
       isLoadingQr: false,
       loginCard: false,
       wechatQr: '',
+      isBigScreen: false,
     };
   },
-
+  computed: {
+    avatarCol: function () {
+      return this.isBigScreen ? 'col-2' : 'col-3';
+    },
+  },
   props: ['code', 'state'],
 
   mounted() {
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
+    let windowWidth = window.screen.width;
+    if (windowWidth > 1023.99) {
+      this.isBigScreen = true;
+    }
     if (this.code) {
       this.wechatLogin(this.code, this.state);
     } else {
