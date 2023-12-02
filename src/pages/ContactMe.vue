@@ -1,9 +1,8 @@
 <template>
-  <div class="items-center">
-    <div class="q-pa-md">
+  <div class="column flex-center">
+    <div class="q-pa-md flex-center">
       <img
-        class="flex-center"
-        style="width: 100%; height: 100%"
+        style="width: 100%; height: 100%; max-width: 300px"
         src="https://private-david.oss-cn-beijing.aliyuncs.com/Wechat_hugaoxiang.jpeg"
       />
     </div>

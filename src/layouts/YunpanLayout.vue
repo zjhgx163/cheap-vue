@@ -47,7 +47,12 @@
         </div>
         <div class="col-sm-3 gt-sm row items-center justify-end">
           <q-btn unelevated flat @click="clickUser">
-            <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a>
+            <a
+              class="text-grey-9 text-weight-bold text-subtitle2"
+              style="text-decoration: underline"
+            >
+              {{ userName }}</a
+            >
           </q-btn>
           <q-avatar size="2.5em">
             <img :src="avatar" />
