@@ -3,7 +3,7 @@
     <div class="flex-center bg-primary row">
       <q-banner inline-actions class="text-white bg-brown YL__750w">
         <div class="row q-pa-xs items-center">
-          <div class="col-3">
+          <div class="col-2">
             <q-avatar size="4.0em">
               <img :src="avatar" />
             </q-avatar>
@@ -13,9 +13,7 @@
             <!-- <div class="text-secondary text-overline text-bold">{{ user }}</div> -->
             <div class="row justify-between items-center">
               <div>
-                <div class="text-secondary YL__user_draw_text text-weight-thin YL__user_money">
-                  可提现金额
-                </div>
+                <div class="text-secondary YL__user_draw_text">可提现金额</div>
 
                 <div class="text-amber-11 YL__user_money text-bold">
                   {{
@@ -94,7 +92,6 @@ export default {
   mounted() {
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
-    console.log();
     if (this.code) {
       this.wechatLogin(this.code, this.state);
     } else {
@@ -109,16 +106,31 @@ export default {
             this.user = userInfo.nickname;
           }
           // 设置给传给子组件的对象
-          this.userInfo = userInfo;
+          // this.userInfo = userInfo;
         }
       }
+      this.getUserAccountInfo();
     }
   },
 
   methods: {
+    getUserAccountInfo() {
+      this.$q.loading.show({
+        delay: 200, // ms
+      });
+      this.$axios.post(`${global.config.domain}/user/account/get`, {}).then((res) => {
+        console.log(res.data);
+        this.userInfo = res.data.data;
+        //登陆成功
+
+        this.$q.loading.hide();
+
+        // console.log(this.isBigSc = reen);
+      });
+    },
     wechatLogin(code, state) {
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 200, // ms
       });
       this.$axios
         .post(`${global.config.domain}/wechat/accesstokenlogin`, {
