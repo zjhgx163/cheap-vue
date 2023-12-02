@@ -9,24 +9,44 @@
         </div>
         <div class="col col-sm-6 justify-center">
           <q-input
+            ref="searchInput"
             dense
+            clearable
             filled
             standout="text-white"
             square
             v-model="searchKey"
             placeholder="搜索"
             type="search"
-            class="YL__toolbar-input-container"
             v-on:keyup.enter="search"
             hide-bottom-space
           >
-            <template v-slot:append>
-              <q-btn name="search" icon="search" unelevated @click="search" />
+            <!-- <template v-if="searchKey" v-slot:append>
+              <q-icon
+                v-bind:class="{ hidden: isSearching }"
+                name="cancel"
+                @click.stop.prevent="searchKey = null"
+                class="cursor-pointer"
+              />
+            </template> -->
+            <template v-slot:after>
+              <q-btn
+                name="search"
+                icon="search"
+                :loading="isSearching"
+                type="submit"
+                unelevated
+                @click="search"
+              >
+                <template v-slot:loading>
+                  <q-spinner-facebook color="accent" />
+                </template>
+              </q-btn>
             </template>
           </q-input>
         </div>
         <div class="col-sm-3 gt-sm row items-center justify-end">
-          <q-btn unelevated flat :disable="isLogin" @click="needLogin">
+          <q-btn unelevated flat @click="clickUser">
             <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a>
           </q-btn>
           <q-avatar size="2.5em">
@@ -104,7 +124,13 @@
     <q-page-container class="bg-primary YL__750w">
       <router-view v-slot="{ Component }">
         <keep-alive include="YunpanList">
-          <component :is="Component" @need-login="needLogin" ref="child" :key="$route.fullPath" />
+          <component
+            :is="Component"
+            @searchDone="searchDone"
+            @need-login="needLogin"
+            ref="child"
+            :key="$route.fullPath"
+          />
         </keep-alive>
       </router-view>
     </q-page-container>
@@ -208,6 +234,7 @@ export default {
   data() {
     return {
       searchKey: '',
+      isSearching: false,
       host: global.config.domain,
       isBigScreen: false,
       // itemPadding: Screen.gt.sm ? 'q-py-lg' : 'q-py-xs',
@@ -422,6 +449,11 @@ export default {
     next();
   },
   methods: {
+    logined(avatar, userName) {
+      this.userName = userName;
+      this.avatar = avatar;
+      this.isLogin = true;
+    },
     search() {
       //只有点击‘搜索’才展现插屏广告
       // setTimeout(function () {
@@ -446,6 +478,7 @@ export default {
       //   }, 1000);
       // }
       //搜素停顿500ms后展现
+      this.isSearching = true;
       let that = this;
       setTimeout(function () {
         let randomNum = Math.random();
@@ -458,6 +491,16 @@ export default {
             err;
           });
       }, 1000);
+    },
+    clickUser() {
+      if (this.isLogin) {
+        this.$router.push({ path: '/user' });
+      } else {
+        this.needLogin();
+      }
+    },
+    searchDone() {
+      this.isSearching = false;
     },
     addYunpanItem() {
       this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {

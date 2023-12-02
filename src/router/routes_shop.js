@@ -101,6 +101,7 @@ const routes = [
           { path: ':tabId', component: () => import('src/pages/CouponPage.vue') },
         ],
       },
+      { path: 'mock/login', name: 'mocklogin', component: () => import('pages/MockLogin.vue') },
     ],
   },
 
@@ -114,29 +115,29 @@ const routes = [
         name: 'account',
         component: () => import('pages/UserM.vue'),
       },
+      {
+        path: 'orderlist',
+        component: () => import('src/layouts/OrderLayout.vue'),
+        children: [
+          {
+            path: 'all',
+            component: () => import('pages/OrderList.vue'),
+            props: (route) => ({ userId: route.query.userId, status: route.query.status }),
+          },
+          {
+            path: 'unbalanced',
+            component: () => import('pages/OrderList.vue'),
+            props: (route) => ({ userId: route.query.userId, status: route.query.status }),
+          },
+          {
+            path: 'balanced',
+            component: () => import('pages/OrderList.vue'),
+            props: (route) => ({ userId: route.query.userId, status: route.query.status }),
+          },
+        ],
+      },
+      { path: 'converturl', name: 'converturl', component: () => import('pages/Tool.vue') },
       { path: 'withdraw', name: 'withdraw', component: () => import('pages/WithdrawFund.vue') },
-    ],
-  },
-
-  {
-    path: '/my/orderlist',
-    component: () => import('src/layouts/OrderLayout.vue'),
-    children: [
-      {
-        path: 'all',
-        component: () => import('pages/OrderList.vue'),
-        props: (route) => ({ userId: route.query.userId, status: route.query.status }),
-      },
-      {
-        path: 'unbalanced',
-        component: () => import('pages/OrderList.vue'),
-        props: (route) => ({ userId: route.query.userId, status: route.query.status }),
-      },
-      {
-        path: 'balanced',
-        component: () => import('pages/OrderList.vue'),
-        props: (route) => ({ userId: route.query.userId, status: route.query.status }),
-      },
     ],
   },
 

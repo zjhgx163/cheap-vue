@@ -12,7 +12,7 @@
         </div>
         <div class="col-3"></div>
       </div>
-      <div v-else ref="scrollTargetRef" class="bg-primary absolute-full">
+      <div v-else ref="scrollTargetRef" class="bg-primary YL__750w">
         <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
         <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
           <q-pull-to-refresh @refresh="refresh" no-mouse>
@@ -175,6 +175,7 @@ export default {
     };
   },
   props: ['userId', 'status'],
+  emits: ['need-login'],
   computed: {
     itemPadding: function () {
       return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
@@ -242,6 +243,22 @@ export default {
   },
 
   mounted() {
+    console.log('orderList mounted');
+    if (this.$q.localStorage.has('userInfo')) {
+      let userInfo = this.$q.localStorage.getItem('userInfo');
+      console.log(userInfo);
+      if (userInfo !== undefined && userInfo !== null) {
+        this.userName = userInfo.nickname;
+        this.isLogin = true;
+        if (userInfo.avatar != null && userInfo.avatar != '') {
+          this.avatar = userInfo.avatar;
+          this.user = userInfo.nickname;
+        }
+      }
+    }
+
+    console.log('userId = ' + this.userId);
+
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
     // this.selectedTab = 'main';
@@ -253,7 +270,7 @@ export default {
     // };
   },
   activated() {
-    console.log('Index activated');
+    console.log('orderList activated');
     console.log('this.isListEnd =' + this.isListEnd);
 
     this.isListEnd = false;
@@ -274,10 +291,8 @@ export default {
           if (res.data.code < 0) {
             if (/(http|https):\S*/.test(res.data.data)) {
               window.location.href = res.data.data;
-            } else if (/redirect:\S*/.test(res.data.message)) {
-              //redirect其他页面
-              let redirectPath = res.data.message.slice(9);
-              this.$router.push({ path: redirectPath });
+            } else if (/redirect:\S*/.test(res.data.msg)) {
+              this.$emit('need-login');
             }
           } else {
             this.listData = res.data.data.records;

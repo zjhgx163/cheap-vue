@@ -21,21 +21,38 @@
               class="col-12 col-sm-8 q-px-xs q-pt-xs column justify-center"
               v-bind:class="{ hidden: isSearchHidden }"
             >
-              <q-input
-                dense
-                filled
-                standout="text-white"
-                square
-                v-model="searchKey"
-                placeholder="搜索"
-                type="search"
-                class="YL__toolbar-input-container col-12 col-sm-9"
-                v-on:keyup.enter="search"
-              >
-                <template v-slot:append>
-                  <q-btn name="search" icon="search" unelevated @click="search" />
-                </template>
-              </q-input>
+              <form @submit.prevent="search">
+                <q-input
+                  ref="searchInput"
+                  item-aligned
+                  clearable
+                  dense
+                  filled
+                  standout="text-white"
+                  square
+                  v-model="searchKey"
+                  placeholder="搜索"
+                  type="search"
+                  v-on:keyup.enter="search"
+                >
+                  <template v-slot:after>
+                    <q-btn
+                      name="search"
+                      icon="search"
+                      :loading="isSearching"
+                      type="submit"
+                      unelevated
+                      @click="onClick"
+                    >
+                      <template v-slot:loading>
+                        <q-spinner-facebook color="accent" />
+                      </template>
+                    </q-btn>
+                  </template>
+                </q-input>
+
+                <!-- <q-btn name="search" icon="search" type="submit" unelevated> </q-btn> -->
+              </form>
             </div>
           </div>
 
@@ -46,7 +63,7 @@
           <!-- <div class="bg-white YL__toolbar-input-container"> -->
 
           <div class="col-sm-3 gt-sm row items-center justify-end">
-            <q-btn unelevated flat :disable="isLogin" @click="createWechatQr">
+            <q-btn unelevated flat @click="clickUser">
               <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a>
             </q-btn>
 
@@ -103,6 +120,8 @@
           <router-view v-slot="{ Component }">
             <KeepAlive>
               <component
+                @logined="logined"
+                @searchDone="searchDone"
                 :is="Component"
                 :key="$route.fullPath"
                 :sort="sortIndex"
@@ -218,6 +237,7 @@ export default {
   data() {
     return {
       searchKey: '',
+      isSearching: false,
       drawer: false,
       logoWidth: '110px',
       host: global.config.domain,
@@ -296,13 +316,36 @@ export default {
   //   next();
   // },
   methods: {
+    logined(avatar, userName) {
+      this.userName = userName;
+      this.avatar = avatar;
+      this.isLogin = true;
+    },
+    clickUser() {
+      if (this.isLogin) {
+        this.$router.push({ path: '/user' });
+      } else {
+        this.createWechatQr();
+      }
+    },
+    onClick() {
+      // this.$refs.searchInput.validate();
+      // if (this.$refs.searchInput.hasError) {
+      //   return;
+      // }
+      this.search();
+    },
     search() {
+      this.isSearching = true;
       let randomNum = Math.random();
       this.$router
         .push({ path: 'search', name: 'search', query: { q: this.searchKey, x: randomNum } })
         .catch((err) => {
           err;
         });
+    },
+    searchDone() {
+      this.isSearching = false;
     },
 
     createWechatQr() {
@@ -429,10 +472,10 @@ export default {
   &__coupon_text_effect
     text-decoration: underline black from-font
     text-transform: uppercase
-    letter-spacing: 6px
     display: inline-block
     position: relative
     font-family: 'Merriweather', serif
+    font-weight: bold
     -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%)
     -webkit-mask-size: 200%
     animation: shine 2s linear infinite

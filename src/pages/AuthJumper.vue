@@ -26,7 +26,7 @@ export default {
   methods: {
     wechatLogin(code, state) {
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 200, // ms
       });
       // let that = this;
       this.$axios
@@ -40,6 +40,7 @@ export default {
             return;
           }
           //登陆成功
+          this.$q.loading.hide();
           this.$q.localStorage.set('userInfo', res.data);
           if (this.state == 'buy') {
             //代表购买商品,跳转到购买页面
@@ -50,27 +51,23 @@ export default {
             console.log('coupon_index = ' + coupon_index);
             this.takeCouponClick(this.$route.params.urlCode, coupon_index);
           } else if (this.state == 'yunpanItem') {
-            this.$q.loading.hide();
-
             this.$router.push({
               path: '/d/' + this.$route.params.urlCode,
             });
           } else if (this.state == 'yunpanArticle') {
-            this.$q.loading.hide();
-
             this.$router.push({
               path: '/article/' + this.$route.params.urlCode,
             });
+          } else if (this.state == 'tool') {
+            this.$router.push({
+              path: '/user/converturl',
+            });
           } else if (this.state == 'yunpanList') {
-            this.$q.loading.hide();
-
             this.$router.push({
               path: '/list?q=',
             });
           } else {
             console.log('order list' + this.state);
-            this.$q.loading.hide();
-
             this.$router.push({
               path: '/my/orderlist/all',
               query: { userId: this.$route.params.urlCode, status: this.state },

@@ -640,7 +640,7 @@ export default {
     getItemList(sortIndex) {
       // console.log('$$$$$$' + this.query);
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 200, // ms
       });
       this.$axios
         .post(`${global.config.domain}/goods/list`, {
@@ -658,7 +658,11 @@ export default {
             this.isListEnd = true;
           }
           this.max = Math.ceil(res.data.data.total / res.data.data.size);
+
           this.$q.loading.hide();
+          if (this.$route.query.x) {
+            this.$emit('searchDone');
+          }
         });
     },
     //向下划动load页面

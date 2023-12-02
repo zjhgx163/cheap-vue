@@ -23,7 +23,7 @@
               {{ item.title }}
             </q-item-label>
             <div class="row q-mt-sm" v-if="isBigScreen">
-              <q-badge color="pink-4" label="置顶" class="col-auto" />
+              <q-badge color="pink-4" transparent label="置顶" class="col-auto" />
               <div class="col"></div>
             </div>
           </q-item-section>

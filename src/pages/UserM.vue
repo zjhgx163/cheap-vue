@@ -1,5 +1,5 @@
 <template>
-  <div class="column items-center bg-primary">
+  <q-page class="column items-center bg-primary">
     <div class="YL__750w">
       <q-list class="q-px-sm q-my-xs bg-secondary" dense>
         <q-item dense>
@@ -56,71 +56,214 @@
           </q-item-section>
         </q-item>
       </q-list>
+      <div v-if="!isBigScreen">
+        <q-list class="q-px-sm q-mb-xs bg-secondary" dense>
+          <q-item
+            dense
+            :to="{
+              path: '/user/converturl',
+            }"
+          >
+            <q-item-section avatar top class="q-py-xs">
+              <q-avatar icon="savings" color="accent" text-color="white" size="2em" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label lines="1" class="YL__menu_text">领券返利</q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-icon name="chevron_right" />
+            </q-item-section>
+          </q-item>
+          <q-separator />
+          <q-item
+            dense
+            :to="{
+              path: '/user/orderlist/all',
+              query: { userId: this.userInfo.userId, status: '' },
+            }"
+          >
+            <q-item-section avatar top class="q-py-xs">
+              <q-avatar icon="shopping_bag" color="accent" text-color="white" size="2em" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label lines="1" class="YL__menu_text">商品订单</q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-icon name="chevron_right" />
+            </q-item-section>
+          </q-item>
 
-      <q-list class="q-px-sm q-mb-xs bg-secondary" dense>
-        <q-item
-          dense
-          :to="{ path: '/my/orderlist/all', query: { userId: this.userInfo.userId, status: '' } }"
-        >
-          <q-item-section avatar top class="q-py-xs">
-            <q-avatar icon="shopping_bag" color="accent" text-color="white" size="2em" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label lines="1" class="YL__menu_text">商品订单</q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-icon name="chevron_right" />
-          </q-item-section>
-        </q-item>
+          <q-separator />
 
-        <q-separator />
+          <q-item dense disable>
+            <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+              <strong>敬请期待</strong>
+            </q-tooltip>
+            <q-item-section avatar top class="q-py-xs">
+              <q-avatar icon="delivery_dining" color="accent" text-color="white" size="2em" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label lines="1" class="YL__menu_text"> 外卖订单</q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-icon name="chevron_right" />
+            </q-item-section>
+          </q-item>
 
-        <q-item dense disable>
-          <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
-            <strong>敬请期待</strong>
-          </q-tooltip>
-          <q-item-section avatar top class="q-py-xs">
-            <q-avatar icon="delivery_dining" color="accent" text-color="white" size="2em" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label lines="1" class="YL__menu_text"> 外卖订单</q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-icon name="chevron_right" />
-          </q-item-section>
-        </q-item>
+          <q-separator />
 
-        <q-separator />
+          <q-item dense disable>
+            <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+              <strong>敬请期待</strong>
+            </q-tooltip>
+            <q-item-section avatar top class="q-py-xs">
+              <q-avatar icon="article" color="accent" text-color="white" size="2em" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label lines="1" class="YL__menu_text">我的发帖 </q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-icon name="chevron_right" />
+            </q-item-section>
+          </q-item>
 
-        <q-item dense disable>
-          <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
-            <strong>敬请期待</strong>
-          </q-tooltip>
-          <q-item-section avatar top class="q-py-xs">
-            <q-avatar icon="favorite" color="accent" text-color="white" size="2em" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label lines="1" class="YL__menu_text">我的收藏 </q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-icon name="chevron_right" />
-          </q-item-section>
-        </q-item>
+          <q-separator />
 
-        <q-separator />
+          <q-item dense disable>
+            <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+              <strong>敬请期待</strong>
+            </q-tooltip>
+            <q-item-section avatar top class="q-py-xs">
+              <q-avatar icon="favorite" color="accent" text-color="white" size="2em" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label lines="1" class="YL__menu_text">我的收藏 </q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-icon name="chevron_right" />
+            </q-item-section>
+          </q-item>
 
-        <q-item dense :to="{ path: '/contact' }">
-          <q-item-section avatar top class="q-py-xs">
-            <q-avatar icon="support_agent" color="accent" text-color="white" size="2em" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label lines="1" class="YL__menu_text">联系客服</q-item-label>
-          </q-item-section>
-          <q-item-section side>
-            <q-icon name="chevron_right" />
-          </q-item-section>
-        </q-item>
-      </q-list>
+          <q-separator />
+
+          <q-item dense :to="{ path: '/contact' }">
+            <q-item-section avatar top class="q-py-xs">
+              <q-avatar icon="support_agent" color="accent" text-color="white" size="2em" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label lines="1" class="YL__menu_text">联系客服</q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-icon name="chevron_right" />
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </div>
+      <div v-else class="row">
+        <div class="col-6">
+          <q-list class="q-px-sm q-mb-xs bg-secondary" dense>
+            <q-item
+              dense
+              :to="{
+                path: '/user/converturl',
+              }"
+            >
+              <q-item-section avatar top class="q-py-xs">
+                <q-avatar icon="savings" color="accent" text-color="white" size="2em" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label lines="1" class="YL__menu_text">领券返利</q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="chevron_right" />
+              </q-item-section>
+            </q-item>
+            <q-separator />
+            <q-item
+              dense
+              :to="{
+                path: '/user/orderlist/all',
+                query: { userId: this.userInfo.userId, status: '' },
+              }"
+            >
+              <q-item-section avatar top class="q-py-xs">
+                <q-avatar icon="shopping_bag" color="accent" text-color="white" size="2em" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label lines="1" class="YL__menu_text">商品订单</q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="chevron_right" />
+              </q-item-section>
+            </q-item>
+
+            <q-separator />
+
+            <q-item dense disable>
+              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                <strong>敬请期待</strong>
+              </q-tooltip>
+              <q-item-section avatar top class="q-py-xs">
+                <q-avatar icon="delivery_dining" color="accent" text-color="white" size="2em" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label lines="1" class="YL__menu_text"> 外卖订单</q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="chevron_right" />
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+
+        <div class="col-6">
+          <q-list class="q-px-sm q-mb-xs bg-secondary" dense>
+            <q-item dense disable>
+              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                <strong>敬请期待</strong>
+              </q-tooltip>
+              <q-item-section avatar top class="q-py-xs">
+                <q-avatar icon="article" color="accent" text-color="white" size="2em" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label lines="1" class="YL__menu_text">我的发帖 </q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="chevron_right" />
+              </q-item-section>
+            </q-item>
+
+            <q-separator />
+
+            <q-item dense disable>
+              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                <strong>敬请期待</strong>
+              </q-tooltip>
+              <q-item-section avatar top class="q-py-xs">
+                <q-avatar icon="favorite" color="accent" text-color="white" size="2em" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label lines="1" class="YL__menu_text">我的收藏 </q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="chevron_right" />
+              </q-item-section>
+            </q-item>
+
+            <q-item dense :to="{ path: '/contact' }">
+              <q-item-section avatar top class="q-py-xs">
+                <q-avatar icon="support_agent" color="accent" text-color="white" size="2em" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label lines="1" class="YL__menu_text">联系客服</q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="chevron_right" />
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </div>
+      </div>
 
       <q-list dense class="q-px-sm q-pb-none bg-secondary">
         <q-item-label header class="text-black">注意事项</q-item-label>
@@ -151,11 +294,23 @@
         <q-separator spaced />
       </q-list>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
 export default {
   props: ['userInfo'],
+  data() {
+    return {
+      isBigScreen: false,
+    };
+  },
+  mounted() {
+    console.log('UserM mounted');
+    let windowWidth = window.screen.width;
+    if (windowWidth > 1023.99) {
+      this.isBigScreen = true;
+    }
+  },
 };
 </script>
