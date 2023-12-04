@@ -284,6 +284,7 @@ export default {
       pageParams: null,
       adverPlay: null, //防止信息流广告重复播放
       category: this.$route.params.category,
+      timer: null,
       // category: '',
       // to: false,
     };

@@ -436,6 +436,7 @@ export default {
       isBigScreen: false,
       // mobileBroswer: false,
       isInvalid: false,
+      timer: null,
     };
   },
   emits: ['need-login', 'logined'],
@@ -716,11 +717,10 @@ export default {
     //启动谷歌unit广告
     if (window.adsbygoogle == undefined) {
       setInterval(function () {
-        console.log('adsbygoogle delay 400ms - detail');
         this.timer = setInterval(() => {
+          console.log('adsbygoogle delay 400ms - detail');
           if (window.adsbygoogle) {
             window.clearInterval(this.timer); //清除定时器
-
             let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
             for (let i = 0; i < adsenseUnitLength.length; i++) {
               (adsbygoogle = window.adsbygoogle || []).push({});
