@@ -206,23 +206,34 @@
         <q-btn
           flat
           v-bind:size="shopButtionSize"
-          color="pink-4"
+          color="blue-5"
           label="手慢无"
-          stack
           dense
           icon="o_shopping_cart"
           href="https://shop.hjdang.com"
         />
         <q-btn
+          flat
           color="pink-4"
           rounded
           :size="addButtonSize"
+          label="发布"
           dense
+          outline
           icon="o_add"
           @click="addYunpanItem"
           class="absolute-center"
         />
-        <q-btn flat :size="shopButtionSize" icon="shop" text-color="white" dense />
+        <q-btn
+          flat
+          :size="shopButtionSize"
+          color="orange-5"
+          dense
+          label="查券返利"
+          icon="o_savings"
+          outline
+          href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483916&idx=1&sn=2e36901033e066c96d44990b4b338e2f&chksm=c24e8f17f5390601ee49beb7e6f6eeba01ecfbe136e632bcc62bb40132d7ca8d595c8e91c56d&token=361369276&lang=zh_CN#rd"
+        />
       </q-toolbar>
       <q-item v-if="!$route.meta.isList" class="q-pb-xs">
         <q-item-section top side class="text-bold"> 声明：</q-item-section>
@@ -604,7 +615,11 @@ export default {
           this.$router.push({ name: 'converturl' });
         } else {
           //未登陆的话
-          this.needLogin();
+          if (this.$refs.child.isWeixin()) {
+            window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
+          } else {
+            this.needLogin();
+          }
         }
       });
     },
