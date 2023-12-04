@@ -1,13 +1,13 @@
 <template>
   <q-layout view="hHh lpR fFf" style="min-height: 100vh">
-    <q-header reveal class="bg-primary text-grey-8 YL__750w q-pb-xs">
+    <q-header reveal class="bg-primary text-grey-8 YL__1000w q-pb-xs">
       <q-toolbar class="bg-secondary justify-between" v-bind:class="[itemPadding]">
         <div class="col-auto col-sm-auto q-pa-xs">
           <router-link :to="{ path: '/' }">
             <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
           </router-link>
         </div>
-        <div class="col col-sm-6 justify-center">
+        <div class="col col-sm-5 justify-center">
           <q-input
             ref="searchInput"
             dense
@@ -45,7 +45,7 @@
             </template>
           </q-input>
         </div>
-        <div class="col-sm-3 gt-sm row items-center justify-end">
+        <div class="col-sm-4 gt-sm row flex-center">
           <q-btn unelevated flat @click="clickUser">
             <a
               class="text-grey-9 text-weight-bold text-subtitle2"
@@ -126,22 +126,83 @@
       </q-toolbar>
     </q-header>
 
-    <q-page-container class="bg-primary YL__750w">
-      <router-view v-slot="{ Component }">
-        <keep-alive include="YunpanList">
-          <component
-            :is="Component"
-            @searchDone="searchDone"
-            @need-login="needLogin"
-            ref="child"
-            :key="$route.fullPath"
-          />
-        </keep-alive>
-      </router-view>
+    <q-page-container class="bg-primary">
+      <div class="row YL__1000w justify-between q-mr-sm">
+        <div class="YL__750w">
+          <router-view v-slot="{ Component }">
+            <keep-alive include="YunpanList">
+              <component
+                :is="Component"
+                @searchDone="searchDone"
+                @need-login="needLogin"
+                ref="child"
+                :key="$route.fullPath"
+              />
+            </keep-alive>
+          </router-view>
+        </div>
+        <div v-if="isBigScreen" dark class="col bg-primary">
+          <div>
+            <q-card flat bordered class="column bg-secondary items-start q-ml-sm">
+              <q-card-section>
+                <q-card-actions vertical align="left" class="justify-around">
+                  <q-btn
+                    class="text-bold"
+                    flat
+                    outline
+                    color="pink-4"
+                    :size="addButtonSize"
+                    label="发布资源"
+                    icon="o_article"
+                    @click="addYunpanItem"
+                  />
+                  <q-btn
+                    class="text-bold"
+                    outline
+                    color="blue-5"
+                    :size="addButtonSize"
+                    flat
+                    label="手慢无"
+                    icon="o_shopping_cart"
+                    href="https://shop.hjdang.com"
+                  />
+                  <q-btn
+                    class="text-bold"
+                    outline
+                    color="orange-5"
+                    :size="addButtonSize"
+                    label="查券返利"
+                    flat
+                    icon="o_savings"
+                    @click="goGetReward"
+                  />
+                </q-card-actions>
+              </q-card-section>
+
+              <q-separator inset />
+            </q-card>
+          </div>
+          <div>
+            <div class="adsenseunitlayout">
+              <ins
+                class="adsbygoogle"
+                style="display: block"
+                data-ad-client="ca-pub-3935005489954231"
+                data-ad-slot="4387276146"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+            </div>
+          </div>
+        </div>
+      </div>
     </q-page-container>
 
-    <q-footer class="bg-secondary q-pt-none q-pb-xs YL__750w">
-      <q-toolbar class="items-center justify-between q-px-lg q-py-xs" v-if="$route.meta.isList">
+    <q-footer class="bg-secondary q-pt-none q-pb-xs YL__1000w">
+      <q-toolbar
+        class="items-center justify-between q-px-lg q-py-xs"
+        v-if="$route.meta.isList && !isBigScreen"
+      >
         <q-btn
           flat
           v-bind:size="shopButtionSize"
@@ -202,6 +263,13 @@
   &__750w
     @media(min-width: $breakpoint-sm-min)
       width: 750px
+      margin: 0px auto
+      font-size: 14px
+    @media(max-width: $breakpoint-xs-max)
+      width: 100%
+  &__1000w
+    @media(min-width: $breakpoint-sm-min)
+      width: 1000px
       margin: 0px auto
       font-size: 14px
     @media(max-width: $breakpoint-xs-max)
@@ -442,6 +510,28 @@ export default {
         }
       }
     }
+    //启动谷歌unit广告
+    if (window.adsbygoogle == undefined) {
+      this.timer = window.setInterval(() => {
+        console.log('adsbygoogle delay 400ms - layout');
+
+        if (window.adsbygoogle) {
+          window.clearInterval(this.timer); //清除定时器
+          let adsenseUnitLength = document.getElementsByClassName('adsenseunitlayout');
+          for (let i = 0; i < adsenseUnitLength.length; i++) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          }
+          console.log('layout adsense loaded');
+        }
+      }, 400);
+    } else {
+      let adsenseUnitLength = document.getElementsByClassName('adsenseunitlayout');
+
+      for (let i = 0; i < adsenseUnitLength.length; i++) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+      console.log('layout adsense loaded');
+    }
   },
   beforeUnmount() {
     console.log('beforeUnmount');
@@ -506,6 +596,17 @@ export default {
     },
     searchDone() {
       this.isSearching = false;
+    },
+    goGetReward() {
+      this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
+        console.log(res.data.data);
+        if (res.data.data == true) {
+          this.$router.push({ name: 'converturl' });
+        } else {
+          //未登陆的话
+          this.needLogin();
+        }
+      });
     },
     addYunpanItem() {
       this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
