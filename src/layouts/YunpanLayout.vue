@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf" style="min-height: 100vh">
     <q-header reveal class="bg-primary text-grey-8 YL__1000w q-pb-xs">
-      <q-toolbar class="bg-secondary justify-between" v-bind:class="[itemPadding]">
+      <q-toolbar class="bg-secondary justify-around" v-bind:class="[itemPadding]">
         <div class="col-auto col-sm-auto q-pa-xs">
           <router-link :to="{ path: '/' }">
             <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
@@ -334,7 +334,7 @@ export default {
   },
   computed: {
     itemPadding() {
-      return this.isBigScreen ? 'q-py-lg' : 'q-py-sm';
+      return this.isBigScreen ? 'q-py-xs' : 'q-py-xs';
     },
     logoWidth() {
       return this.isBigScreen ? '110px' : '90px';
