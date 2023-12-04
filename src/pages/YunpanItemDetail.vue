@@ -716,18 +716,17 @@ export default {
     }
     //启动谷歌unit广告
     if (window.adsbygoogle == undefined) {
-
-        this.timer = setInterval(() => {
-          console.log('adsbygoogle delay 400ms - detail');
-          if (window.adsbygoogle) {
-            window.clearInterval(this.timer); //清除定时器
-            let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
-            for (let i = 0; i < adsenseUnitLength.length; i++) {
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            }
-            console.log('detail adsense loaded');
+      this.timer = setInterval(() => {
+        console.log('adsbygoogle delay 400ms - detail');
+        if (window.adsbygoogle) {
+          window.clearInterval(this.timer); //清除定时器
+          let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
+          for (let i = 0; i < adsenseUnitLength.length; i++) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
           }
-        },400);
+          console.log('detail adsense loaded');
+        }
+      }, 400);
     } else {
       let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
       for (let i = 0; i < adsenseUnitLength.length; i++) {
@@ -835,7 +834,6 @@ export default {
         return false;
       }
     },
-,
   },
 };
 </script>
