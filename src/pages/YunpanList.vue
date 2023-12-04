@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-primary" :style-fn="myTweak">
+  <q-page class="bg-secondary" :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
     <q-list dense class="bg-secondary" bordered>
       <div v-bind:key="item.id" v-for="item in topArticleList" class="q-pb-xs">
@@ -146,14 +146,16 @@
             </div>
           </q-list>
         </q-pull-to-refresh>
-        <ins
-          class="adsbygoogle"
-          style="display: block"
-          data-ad-format="fluid"
-          data-ad-layout-key="-ho-l+13-3s+9g"
-          data-ad-client="ca-pub-3935005489954231"
-          data-ad-slot="2761528811"
-        ></ins>
+        <div class="adsenseunitlist">
+          <ins
+            class="adsbygoogle"
+            style="display: block"
+            data-ad-format="fluid"
+            data-ad-layout-key="-ho-l+13-3s+9g"
+            data-ad-client="ca-pub-3935005489954231"
+            data-ad-slot="2761528811"
+          ></ins>
+        </div>
 
         <template v-slot:loading>
           <div v-bind:class="{ hidden: !pageNavigateHidden }" class="row justify-center q-my-md">
@@ -543,12 +545,25 @@ export default {
 
     //启动谷歌unit广告
     if (window.adsbygoogle == undefined) {
-      setTimeout(function () {
-        console.log('adsbygoogle delay 1s');
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      }, 1000);
+      this.timer = window.setInterval(() => {
+        console.log('adsbygoogle delay 400ms - list');
+
+        if (window.adsbygoogle) {
+          window.clearInterval(this.timer); //清除定时器
+          let adsenseUnitLength = document.getElementsByClassName('adsenseunitlist');
+          for (let i = 0; i < adsenseUnitLength.length; i++) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          }
+          console.log('list adsense loaded');
+        }
+      }, 400);
     } else {
-      (adsbygoogle = window.adsbygoogle || []).push({});
+      let adsenseUnitLength = document.getElementsByClassName('adsenseunitlist');
+
+      for (let i = 0; i < adsenseUnitLength.length; i++) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+      console.log('list adsense loaded');
     }
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);

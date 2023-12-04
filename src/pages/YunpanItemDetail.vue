@@ -71,7 +71,7 @@
                 </q-card-section>
               </q-card>
             </div>
-            <div v-if="$q.platform.is.mobile" class="adsenseunit q-pa-xs">
+            <div v-if="$q.platform.is.mobile" class="adsenseunitdetail q-pa-xs">
               <!-- in-article-aquare2 -->
               <ins
                 class="adsbygoogle"
@@ -149,7 +149,7 @@
                 </q-item-label>
               </q-item-section>
             </q-item>
-            <div v-if="$q.platform.is.desktop" class="adsenseunit q-pa-xs">
+            <div v-if="$q.platform.is.desktop" class="adsenseunitdetail q-pa-xs">
               <!-- in-article-aquare2 -->
               <ins
                 class="adsbygoogle"
@@ -715,20 +715,26 @@ export default {
     }
     //启动谷歌unit广告
     if (window.adsbygoogle == undefined) {
-      setTimeout(function () {
-        console.log('adsbygoogle delay 1s');
-        let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
+      setInterval(function () {
+        console.log('adsbygoogle delay 400ms - detail');
+        this.timer = setInterval(() => {
+          window.clearInterval(this.timer); //清除定时器
 
-        for (let i = 0; i < adsenseUnitLength.length; i++) {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-      }, 1000);
+          if (window.adsbygoogle) {
+            let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
+            for (let i = 0; i < adsenseUnitLength.length; i++) {
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+            console.log('detail adsense loaded');
+          }
+        });
+      }, 400);
     } else {
-      let adsenseUnitLength = document.getElementsByClassName('adsenseunit');
-
+      let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
       for (let i = 0; i < adsenseUnitLength.length; i++) {
         (adsbygoogle = window.adsbygoogle || []).push({});
       }
+      console.log('detail adsense loaded');
     }
 
     // if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
