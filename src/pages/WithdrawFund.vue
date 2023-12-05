@@ -89,6 +89,7 @@
               :url="`${host}/user/wechatqr/upload?userId=${userInfo.userId}`"
               color="green"
               label="请上传微信收款码"
+              with-credentials
               flat
               auto-upload
               fieldName="file"
