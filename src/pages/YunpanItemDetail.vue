@@ -834,6 +834,113 @@ export default {
         return false;
       }
     },
+    onSubmit() {
+      this.$axios
+        .post(`${global.config.domain}/yunpan/resource/reply`, {
+          itemId: this.item.id,
+          reply: this.replyContent,
+        })
+        .then((res) => {
+          if (res.data.code < 0) {
+            if (!this.$q.localStorage.has('userInfo')) {
+              if (this.isWeixin()) {
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.item.id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
+              } else {
+                this.$emit('need-login');
+              }
+            } else {
+              this.$q.notify({
+                type: 'negative',
+                icon: 'warning',
+                message: `${res.data.msg}`,
+              });
+            }
+          } else {
+            this.getReplyList();
+          }
+        });
+    },
+    //向下划动load页面
+    onLoad(index, done) {
+      if (this.isBigScreen) {
+        return;
+      }
+      setTimeout(() => {
+        console.log('page = .....' + index);
+        this.$axios
+          .post(`${global.config.domain}/yunpan/reply/list`, {
+            page: index,
+            itemId: this.item.id,
+            isInvalid: this.isInvalid,
+          })
+          .then((res) => {
+            console.log(res.data.data.records);
+            if (res.data.data.records.length < 20) {
+              this.isListEnd = true;
+            }
+            //过滤页面上重复的
+            const filters = res.data.data.records.filter((item) => {
+              let isDupliate = false;
+              for (let key in this.listData) {
+                if (this.listData[key].id == item.id) {
+                  console.log('this id is duplicate,' + item.id);
+                  isDupliate = true;
+                  break;
+                }
+              }
+              if (isDupliate) {
+                return false;
+              } else {
+                return true;
+              }
+            });
+            filters.forEach((item) => {
+              this.listData.push(item);
+            });
+
+            console.log(this.listData);
+            done();
+          });
+      }, 1000);
+    },
+    //列表下拉刷新
+    refresh(done) {
+      setTimeout(() => {
+        this.getReplyList();
+        done();
+      }, 1000);
+    },
+    getHashCode(str, caseSensitive) {
+      if (str == null || str == undefined) {
+        return;
+      }
+      if (!caseSensitive) {
+        str = str.toLowerCase();
+      }
+      var hash = 1315423911,
+        i,
+        ch;
+      for (i = str.length - 1; i >= 0; i--) {
+        ch = str.charCodeAt(i);
+        hash ^= (hash << 5) + ch + (hash >> 2);
+      }
+      return hash & 0x7fffffff;
+    },
+    //桌面端的分页
+    pageNavigate() {
+      console.log('reply pageNavigate');
+      this.$axios
+        .post(`${global.config.domain}/yunpan/reply/list`, {
+          page: this.current,
+          itemId: this.item.id,
+          isInvalid: this.isInvalid,
+        })
+        .then((res) => {
+          console.log(res.data.data.records);
+          this.listData = res.data.data.records;
+          this.max = Math.ceil(res.data.data.total / res.data.data.size);
+        });
+    },
   },
 };
 </script>
