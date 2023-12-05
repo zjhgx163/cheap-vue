@@ -58,9 +58,7 @@
           <q-item
             dense
             class="row items-center"
-            v-if="
-              userInfo.userWechatReceiveMoneyQr != null && userInfo.userWechatReceiveMoneyQr != ''
-            "
+            v-if="user.userWechatReceiveMoneyQr != null && user.userWechatReceiveMoneyQr != ''"
           >
             <q-item-section>
               <q-item-label caption>
@@ -86,7 +84,7 @@
               请上传微信收款码<strong>(注意不是付款码,请点击最下面操作提示)</strong>
             </div>
             <q-uploader
-              :url="`${host}/user/wechatqr/upload?userId=${userInfo.userId}`"
+              :url="`${host}/user/wechatqr/upload?userId=${user.userId}`"
               color="green"
               label="请上传微信收款码"
               with-credentials
@@ -176,21 +174,26 @@
 // inside of a Vue file
 
 export default {
+  props: ['userInfo'],
+
   data() {
     return {
       model: '1',
       withdrawAmount: '',
       host: global.config.domain,
-      userInfo: {},
     };
   },
+
   computed: {
     overMaxNumber: function () {
-      if (this.withdrawAmount != '' && this.withdrawAmount > this.userInfo.withdrawableAmount) {
+      if (this.withdrawAmount != '' && this.withdrawAmount > this.user.withdrawableAmount) {
         return true;
       } else {
         return false;
       }
+    },
+    user: function () {
+      return this.userInfo;
     },
   },
   methods: {
@@ -200,7 +203,7 @@ export default {
     onUploaded(info) {
       let response = JSON.parse(info.xhr.response);
       console.log(response.data.accessPath);
-      this.userInfo.userWechatReceiveMoneyQr = response.data.accessPath;
+      this.user.userWechatReceiveMoneyQr = response.data.accessPath;
       // Notify plugin needs to be installed
       // https://quasar.dev/quasar-plugins/notify#Installation
       this.$q.notify({
@@ -227,8 +230,7 @@ export default {
     withdraw() {
       if (
         this.model == 1 &&
-        (this.userInfo.userWechatReceiveMoneyQr == '' ||
-          this.userInfo.userWechatReceiveMoneyQr == null)
+        (this.user.userWechatReceiveMoneyQr == '' || this.user.userWechatReceiveMoneyQr == null)
       ) {
         this.$q.notify({
           type: 'negative',
@@ -248,7 +250,7 @@ export default {
           message: '请输入正确的金额',
         });
         return;
-      } else if (this.withdrawAmount > this.userInfo.withdrawableAmount) {
+      } else if (this.withdrawAmount > this.user.withdrawableAmount) {
         this.$q.notify({
           type: 'negative',
           message: '金额超过了可提现金额',
@@ -260,7 +262,7 @@ export default {
       });
       this.$axios
         .post(`${global.config.domain}/user/withdraw/apply`, {
-          userId: this.userInfo.userId,
+          userId: this.user.userId,
           amount: this.withdrawAmount,
           type: this.model,
         })
@@ -282,7 +284,7 @@ export default {
     },
 
     reUpload() {
-      this.userInfo.userWechatReceiveMoneyQr = '';
+      this.user.userWechatReceiveMoneyQr = '';
     },
   },
 };
