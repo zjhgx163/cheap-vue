@@ -18,30 +18,29 @@
 
           <div class="col">
             <!-- <div class="text-secondary text-overline text-bold">{{ user }}</div> -->
-            <div class="row justify-start q-gutter-sm items-center">
-              <div>
-                <div class="text-secondary text-bold YL__user_draw_text">可提现金额</div>
+            <div>
+              <div class="text-secondary text-bold YL__user_draw_text">可提现金额</div>
 
-                <div class="text-amber-11 YL__user_money text-bold">
+              <div class="row justify-between q-gutter-sm">
+                <div class="text-amber-11 col-auto YL__user_money text-bold">
                   {{
                     userInfo.withdrawableAmount != undefined
                       ? userInfo.withdrawableAmount.toFixed(2)
                       : userInfo.withdrawableAmount
                   }}
                 </div>
-              </div>
-
-              <div v-if="$route.name == 'account'">
-                <q-chip
-                  color="accent text-bold"
-                  text-color="white"
-                  icon="account_balance_wallet"
-                  size="0.6rem"
-                  clickable
-                  @click="goWithdraw"
-                >
-                  去提现
-                </q-chip>
+                <div class="col q-mr-sm column items-center" v-if="$route.name == 'account'">
+                  <q-chip
+                    color="accent text-bold"
+                    text-color="white"
+                    icon="account_balance_wallet"
+                    size="0.65rem"
+                    clickable
+                    @click="goWithdraw"
+                  >
+                    去提现
+                  </q-chip>
+                </div>
               </div>
             </div>
           </div>
