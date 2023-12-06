@@ -171,7 +171,7 @@
                     outline
                     color="orange-5"
                     :size="addButtonSize"
-                    label="查券返利"
+                    label="购物查券/返利"
                     flat
                     icon="o_savings"
                     @click="goGetReward"
