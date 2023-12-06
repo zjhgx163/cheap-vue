@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <q-list class="q-px-sm q-pt-sm dense bg-secondary">
+  <div class="items-center column">
+    <q-list class="q-px-sm q-pt-sm dense bg-secondary YL__750w">
       <q-item-label header class="q-pt-sm q-pb-none text-black">
         <q-icon name="attach_money" class="text-green" />提现金额</q-item-label
       >

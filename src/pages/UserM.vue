@@ -117,6 +117,40 @@
               <strong>敬请期待</strong>
             </q-tooltip>
             <q-item-section avatar top class="q-py-xs">
+              <q-avatar icon="approval" color="accent" text-color="white" size="2em" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label lines="1" class="YL__menu_text">结算记录 </q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-icon name="chevron_right" />
+            </q-item-section>
+          </q-item>
+
+          <q-separator />
+
+          <q-item dense disable>
+            <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+              <strong>敬请期待</strong>
+            </q-tooltip>
+            <q-item-section avatar top class="q-py-xs">
+              <q-avatar icon="paid" color="accent" text-color="white" size="2em" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label lines="1" class="YL__menu_text">提现记录 </q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-icon name="chevron_right" />
+            </q-item-section>
+          </q-item>
+
+          <q-separator />
+
+          <q-item dense disable>
+            <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+              <strong>敬请期待</strong>
+            </q-tooltip>
+            <q-item-section avatar top class="q-py-xs">
               <q-avatar icon="article" color="accent" text-color="white" size="2em" />
             </q-item-section>
             <q-item-section>
@@ -196,9 +230,7 @@
                 <q-icon name="chevron_right" />
               </q-item-section>
             </q-item>
-
             <q-separator />
-
             <q-item dense disable>
               <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                 <strong>敬请期待</strong>
@@ -213,11 +245,42 @@
                 <q-icon name="chevron_right" />
               </q-item-section>
             </q-item>
+            <q-separator />
+            <q-item dense disable>
+              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                <strong>敬请期待</strong>
+              </q-tooltip>
+              <q-item-section avatar top class="q-py-xs">
+                <q-avatar icon="approval" color="accent" text-color="white" size="2em" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label lines="1" class="YL__menu_text">结算记录 </q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="chevron_right" />
+              </q-item-section>
+            </q-item>
           </q-list>
         </div>
 
         <div class="col-6">
           <q-list class="q-px-sm q-mb-xs bg-secondary" dense>
+            <q-item dense disable>
+              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                <strong>敬请期待</strong>
+              </q-tooltip>
+              <q-item-section avatar top class="q-py-xs">
+                <q-avatar icon="paid" color="accent" text-color="white" size="2em" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label lines="1" class="YL__menu_text">提现记录 </q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="chevron_right" />
+              </q-item-section>
+            </q-item>
+            <q-separator />
+
             <q-item dense disable>
               <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                 <strong>敬请期待</strong>
@@ -261,6 +324,7 @@
                 <q-icon name="chevron_right" />
               </q-item-section>
             </q-item>
+            <q-separator />
           </q-list>
         </div>
       </div>

@@ -229,7 +229,7 @@
           :size="shopButtionSize"
           color="orange-5"
           dense
-          label="查券返利"
+          label="购物查券/返利"
           icon="o_savings"
           outline
           href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483916&idx=1&sn=2e36901033e066c96d44990b4b338e2f&chksm=c24e8f17f5390601ee49beb7e6f6eeba01ecfbe136e632bcc62bb40132d7ca8d595c8e91c56d&token=361369276&lang=zh_CN#rd"

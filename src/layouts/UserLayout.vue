@@ -2,18 +2,25 @@
   <q-layout>
     <div class="flex-center bg-primary row">
       <q-banner inline-actions class="text-white bg-brown YL__750w">
-        <div class="row q-pa-xs items-center">
-          <div :class="avatarCol">
+        <div class="row q-pa-xs items-center justify-between">
+          <div :class="avatarCol" class="row justify-around">
             <q-avatar size="3.2em">
               <img :src="avatar" />
             </q-avatar>
+            <div>
+              <div class="text-secondary text-bold YL__user_draw_text">{{ userInfo.username }}</div>
+              <div class="text-secondary text-bold YL__user_draw_text">
+                ID: {{ userInfo.inviteCode }}
+              </div>
+            </div>
           </div>
+          <div :class="blankCol"></div>
 
           <div class="col">
             <!-- <div class="text-secondary text-overline text-bold">{{ user }}</div> -->
-            <div class="row justify-between items-center q-mr-lg">
+            <div class="row justify-start q-gutter-sm items-center">
               <div>
-                <div class="text-secondary YL__user_draw_text">可提现金额</div>
+                <div class="text-secondary text-bold YL__user_draw_text">可提现金额</div>
 
                 <div class="text-amber-11 YL__user_money text-bold">
                   {{
@@ -29,7 +36,7 @@
                   color="accent text-bold"
                   text-color="white"
                   icon="account_balance_wallet"
-                  size="0.7rem"
+                  size="0.6rem"
                   clickable
                   @click="goWithdraw"
                 >
@@ -89,7 +96,10 @@ export default {
   },
   computed: {
     avatarCol: function () {
-      return this.isBigScreen ? 'col-2' : 'col-3';
+      return this.isBigScreen ? 'col-3' : 'col-5';
+    },
+    blankCol: function () {
+      return this.isBigScreen ? 'col-5' : 'col-2';
     },
   },
   props: ['code', 'state'],
@@ -249,7 +259,7 @@ export default {
     min-width: 320px
   &__user
     &_money
-      line-height: 1.8em !important
+      line-height: 1.4em !important
       font-size: 1.4em
     &_draw_text
       font-size: 0.8em
