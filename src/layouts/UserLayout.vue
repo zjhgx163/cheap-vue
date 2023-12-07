@@ -56,7 +56,7 @@
       </q-banner>
     </div>
     <q-page-container class="bg-primary flex-center">
-      <router-view v-slot="{ Component }">
+      <!-- <router-view v-slot="{ Component }">
         <keep-alive>
           <component
             :is="Component"
@@ -66,8 +66,14 @@
             :userInfo="this.userInfo"
           />
         </keep-alive>
+      </router-view> -->
+      <router-view
+        :key="$route.fullPath"
+        :userInfo="this.userInfo"
+        @need-login="needLogin"
+        ref="order-list"
+      >
       </router-view>
-      <!-- <router-view :key="$route.fullPath" :userInfo="this.userInfo"> </router-view> -->
     </q-page-container>
     <login-qr
       :is-loading-qr="isLoadingQr"

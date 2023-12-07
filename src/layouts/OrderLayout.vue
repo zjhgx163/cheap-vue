@@ -1,10 +1,13 @@
 <template>
   <q-layout>
     <q-tabs
+      v-model="selectedTab"
       align="center"
       active-color="accent"
       indicator-color="accent"
       content-class="text-grey-10"
+      narrow-indicator
+      shrink
     >
       <q-route-tab
         :to="{
@@ -42,7 +45,13 @@
           />
         </keep-alive>
       </router-view>
-      <!-- <router-view :key="$route.fullPath" ref="order-list"> </router-view> -->
+      <!-- <router-view
+        :key="$route.fullPath"
+        @need-login="needLogin"
+        ref="order-list"
+        class="bg-primary items-center column"
+      >
+      </router-view> -->
     </q-page-container>
     <login-qr
       :is-loading-qr="isLoadingQr"
@@ -65,6 +74,7 @@ export default {
       isLoadingQr: false,
       loginCard: false,
       wechatQr: '',
+      selectedTab: 'all',
     };
   },
   mounted() {

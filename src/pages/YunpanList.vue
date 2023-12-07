@@ -540,9 +540,9 @@ export default {
       yunpanStore.prefetchFlag = 0; //还原是否call到prefetch标志
     }
 
-    if (this.topArticleList.length === 0) {
-      this.getTopArticleList();
-    }
+    // if (this.topArticleList.length === 0) {
+    //   this.getTopArticleList();
+    // }
 
     //启动谷歌unit广告
     if (window.adsbygoogle == undefined) {
