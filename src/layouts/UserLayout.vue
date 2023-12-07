@@ -9,7 +9,10 @@
             </q-avatar>
             <div>
               <div class="text-secondary text-bold YL__user_draw_text">{{ userInfo.username }}</div>
-              <div class="text-secondary text-bold YL__user_draw_text">
+              <div
+                class="text-secondary text-bold YL__user_draw_text"
+                style="line-height: 2.4em !important"
+              >
                 ID: {{ userInfo.inviteCode }}
               </div>
             </div>
@@ -253,9 +256,12 @@ export default {
 <style lang="sass">
 .YL
   &__750w
-    width: 100%
-    max-width: 750px
-    min-width: 320px
+    @media(min-width: $breakpoint-sm-min)
+      width: 750px
+      margin: 0px auto
+      font-size: 14px
+    @media(max-width: $breakpoint-xs-max)
+      width: 100%
   &__user
     &_money
       line-height: 1.4em !important
