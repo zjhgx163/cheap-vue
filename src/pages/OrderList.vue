@@ -1,6 +1,6 @@
 <template>
-  <q-page class="bg-primary">
-    <div>
+  <q-page class="bg-primary column items-center" style="width: 100%">
+    <div class="YL__750w">
       <div v-if="listData.length === 0" class="column items-center justify-start absolute-full">
         <div class="clo-4 YL__no_data">
           <q-img
@@ -12,7 +12,7 @@
         </div>
         <div class="col-3"></div>
       </div>
-      <div v-else ref="scrollTargetRef" class="bg-primary YL__750w">
+      <div v-else ref="scrollTargetRef" class="bg-primary">
         <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
         <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
           <q-pull-to-refresh @refresh="refresh" no-mouse>
