@@ -146,7 +146,7 @@
             </div>
           </q-list>
         </q-pull-to-refresh>
-        <div class="adsenseunitlist">
+        <!-- <div class="adsenseunitlist">
           <ins
             class="adsbygoogle"
             style="display: block"
@@ -155,7 +155,7 @@
             data-ad-client="ca-pub-3935005489954231"
             data-ad-slot="2761528811"
           ></ins>
-        </div>
+        </div> -->
 
         <template v-slot:loading>
           <div v-bind:class="{ hidden: !pageNavigateHidden }" class="row justify-center q-my-md">
@@ -545,27 +545,27 @@ export default {
     // }
 
     //启动谷歌unit广告
-    if (window.adsbygoogle == undefined) {
-      this.timer = window.setInterval(() => {
-        console.log('adsbygoogle delay 400ms - list');
+    // if (window.adsbygoogle == undefined) {
+    //   this.timer = window.setInterval(() => {
+    //     console.log('adsbygoogle delay 400ms - list');
 
-        if (window.adsbygoogle) {
-          window.clearInterval(this.timer); //清除定时器
-          let adsenseUnitLength = document.getElementsByClassName('adsenseunitlist');
-          for (let i = 0; i < adsenseUnitLength.length; i++) {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-          }
-          console.log('list adsense loaded');
-        }
-      }, 400);
-    } else {
-      let adsenseUnitLength = document.getElementsByClassName('adsenseunitlist');
+    //     if (window.adsbygoogle) {
+    //       window.clearInterval(this.timer); //清除定时器
+    //       let adsenseUnitLength = document.getElementsByClassName('adsenseunitlist');
+    //       for (let i = 0; i < adsenseUnitLength.length; i++) {
+    //         (adsbygoogle = window.adsbygoogle || []).push({});
+    //       }
+    //       console.log('list adsense loaded');
+    //     }
+    //   }, 400);
+    // } else {
+    //   let adsenseUnitLength = document.getElementsByClassName('adsenseunitlist');
 
-      for (let i = 0; i < adsenseUnitLength.length; i++) {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      }
-      console.log('list adsense loaded');
-    }
+    //   for (let i = 0; i < adsenseUnitLength.length; i++) {
+    //     (adsbygoogle = window.adsbygoogle || []).push({});
+    //   }
+    //   console.log('list adsense loaded');
+    // }
     // let container = document.getElementById('flowAdverYunpanId');
     // console.log('container = ' + container);
     // 如果不是搜索结果播放模版广告
