@@ -13,7 +13,7 @@
           class="bg-light-green-1 q-py-sm"
         >
           <q-item-section avatar top>
-            <q-avatar size="2.1em">
+            <q-avatar size="2.0em">
               <img src="david_avatar.png" alt="站长" />
             </q-avatar>
           </q-item-section>
