@@ -257,6 +257,7 @@ import { Loading } from 'quasar';
 import { useMeta } from 'quasar';
 import { ref } from 'vue';
 import { reactive } from 'vue';
+import { useQuasar } from 'quasar';
 
 export default {
   name: 'YunpanList',
@@ -405,17 +406,28 @@ export default {
     },
   },
   setup() {
-    console.log('Yun setup');
-    const title = ref('好家当 - 最新阿里云盘资源发布');
+    console.log('Yunpan List setup');
+    const $q = useQuasar();
+    let platform = '';
+    if ($q.platform.is.mobile) {
+      platform = 'mobile';
+    } else {
+      platform = 'pc';
+    }
+    const title = ref('好家当 - 最新阿里云盘,夸克网盘资源发布');
     const meta = reactive({
       description: {
         name: 'description',
         content:
-          '最新阿里云盘资源发布，包括影视，动漫，综艺节目，游戏，软件，音乐，学习资源，图片，电子书等应有尽有，视频大多是4k，1080p高清，高达万T资料',
+          '最新阿里云盘,夸克网盘,迅雷云盘资源发布.4k,1080p高清影视,动漫,综艺节目,游戏,软件,音乐,学习资料,电子书,图片等应有尽有,实现你的网盘自由',
       },
       keywords: {
         name: 'keywords',
-        content: '阿里云盘 网盘资源 影视 动漫 游戏 学习资源 软件 音乐 图片 电子书 4k 1080p',
+        content: '阿里云盘,夸克网盘,迅雷云盘,资源下载,高清影视,动漫,4k,1080p',
+      },
+      applicationdevice: {
+        name: 'applicable-device',
+        content: platform,
       },
       ogtype: {
         property: 'og:type',
@@ -427,12 +439,12 @@ export default {
       },
       ogtitle: {
         property: 'og:title',
-        content: '好家当 - 最新阿里云盘资源发布',
+        content: '好家当 -  最新阿里云盘,夸克网盘资源发布',
       },
       ogdescription: {
         property: 'og:description',
         content:
-          '最新阿里云盘资源发布，包括影视，动漫，综艺节目，游戏，软件，音乐，学习资源，图片，电子书等应有尽有，视频大多是4k，1080p高清，高达万T资料',
+          '最新阿里云盘,夸克网盘,迅雷云盘资源发布.4k,1080p高清影视,动漫,综艺节目,游戏,软件,音乐,学习资料,电子书,图片等应有尽有,实现你的网盘自由',
       },
       ogimage: {
         property: 'og:image',

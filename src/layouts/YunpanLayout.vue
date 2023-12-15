@@ -182,7 +182,7 @@
               <q-separator inset />
             </q-card>
           </div>
-          <div class="q-mt-sm">
+          <div class="q-mt-lg">
             <div class="adsenseunitlayout">
               <ins
                 class="adsbygoogle"
