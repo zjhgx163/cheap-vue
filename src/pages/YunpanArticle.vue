@@ -292,7 +292,7 @@ export default {
     } else {
       platform = 'pc';
     }
-    ref('好家当 - 最新阿里云盘资源发布');
+    const title = ref('好家当 - 最新阿里云盘,夸克网盘资源发布');
     const meta = reactive({
       description: {
         name: 'description',
