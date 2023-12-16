@@ -198,7 +198,7 @@
       </div>
     </q-page-container>
 
-    <q-footer class="bg-secondary q-pt-none q-pb-xs YL__1000w">
+    <q-footer reveal class="bg-secondary q-pt-none q-pb-xs YL__1000w">
       <q-toolbar
         class="items-center justify-between q-px-lg q-py-xs"
         v-if="$route.meta.isList && !isBigScreen"
