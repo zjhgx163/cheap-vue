@@ -130,9 +130,16 @@
           target="_blank"
         >
           <q-img
+            v-if="isBigScreen"
             src="/advertisment/tencent_cloud_1200X90.jpg"
             spinner-color="white"
-            height="45px"
+            height="3.0em"
+          />
+          <q-img
+            v-else
+            src="/advertisment/tencent_cloud_1200X90.jpg"
+            spinner-color="white"
+            width="100%"
           />
         </a>
       </div>
