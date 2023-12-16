@@ -137,7 +137,7 @@
           />
           <q-img
             v-else
-            src="/advertisment/tencent_cloud_1200X90.jpg"
+            src="/advertisment/tencent_cloud_1040X100.jpg"
             spinner-color="white"
             width="100%"
           />
