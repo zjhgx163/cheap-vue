@@ -124,6 +124,18 @@
           />
         </q-tabs>
       </q-toolbar>
+      <div class="q-mt-sm">
+        <a
+          href="https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=bf392d7b57b18de6b92053e1c62293b2&from=console"
+          target="_blank"
+        >
+          <q-img
+            src="/advertisment/tencent_cloud_1200X90.jpg"
+            spinner-color="white"
+            height="45px"
+          />
+        </a>
+      </div>
     </q-header>
 
     <q-page-container class="bg-primary">
@@ -182,24 +194,6 @@
               <q-separator inset />
             </q-card>
           </div>
-          <div class="q-mt-md q-ml-sm q-pl-xs q-pr-sm">
-            <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
-              <q-img src="/advertisment/aliyun.jpeg" spinner-color="white" width="100%" />
-            </a>
-          </div>
-          <div class="q-mt-md q-ml-sm q-pl-xs q-pr-sm">
-            <a
-              href="https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=bf392d7b57b18de6b92053e1c62293b2&from=console"
-              target="_blank"
-            >
-              <q-img
-                src="/advertisment/tencent_cloud_345X200.jpg"
-                spinner-color="white"
-                width="100%"
-              />
-            </a>
-          </div>
-
           <div class="q-mt-md q-mx-sm">
             <div class="adsenseunitlayout">
               <ins
@@ -211,6 +205,13 @@
                 data-full-width-responsive="true"
               ></ins>
             </div>
+          </div>
+          <div style="height: 200px"></div>
+
+          <div class="q-mt-md q-ml-md q-pr-sm">
+            <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
+              <q-img src="/advertisment/aliyun.jpeg" spinner-color="white" width="100%" />
+            </a>
           </div>
         </div>
       </div>
@@ -298,7 +299,7 @@
       width: 100%
   &__1000w
     @media(min-width: $breakpoint-sm-min)
-      width: 1050px
+      width: 1000px
       margin: 0px auto
       font-size: 14px
     @media(max-width: $breakpoint-xs-max)
