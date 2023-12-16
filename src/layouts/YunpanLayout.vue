@@ -124,7 +124,7 @@
           />
         </q-tabs>
       </q-toolbar>
-      <div class="q-mt-sm">
+      <div v-if="$route.meta.isList" class="q-mt-sm">
         <a
           href="https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=bf392d7b57b18de6b92053e1c62293b2&from=console"
           target="_blank"
@@ -266,7 +266,7 @@
         <q-item-section>
           <q-item-label caption class="YL__notice">
             本站所有资源均由网友自发提供，本站不缓存、储存、下载、播放等，所列内容仅做学习和带宽测试，请于保存后24小时内自行删除。
-            如有侵权请根据内容页信息自行联系 阿里云盘官方 网站 进行处理。
+            如有侵权请根据内容页信息自行联系 阿里云盘官方网站 进行处理。
           </q-item-label>
         </q-item-section>
       </q-item>
