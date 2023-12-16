@@ -158,7 +158,7 @@
       <div v-if="$q.platform.is.desktop" class="YL__footer row justify-evenly YL__1200w q-pt-md">
         <div class="col-2 flex-center q-py-sm">
           <q-img
-            src="/qrcode_for_laohuweinifuwu.jpeg"
+            src="/laohuweinifuwu.jpeg"
             class="items-center justify-center"
             width="100px"
             height="100px"
