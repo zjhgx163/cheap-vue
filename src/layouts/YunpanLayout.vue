@@ -182,7 +182,25 @@
               <q-separator inset />
             </q-card>
           </div>
-          <div class="q-mt-lg">
+          <div class="q-mt-md q-ml-sm q-pl-sm q-pr-sm">
+            <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
+              <q-img src="/advertisment/aliyun.jpeg" spinner-color="white" width="100%" />
+            </a>
+          </div>
+          <div class="q-mt-md q-ml-sm q-pl-sm q-pr-sm">
+            <a
+              href="https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=bf392d7b57b18de6b92053e1c62293b2&from=console"
+              target="_blank"
+            >
+              <q-img
+                src="/advertisment/tencent_cloud_345X200.jpg"
+                spinner-color="white"
+                width="100%"
+              />
+            </a>
+          </div>
+
+          <div class="q-mt-md">
             <div class="adsenseunitlayout">
               <ins
                 class="adsbygoogle"
@@ -280,7 +298,7 @@
       width: 100%
   &__1000w
     @media(min-width: $breakpoint-sm-min)
-      width: 1000px
+      width: 1050px
       margin: 0px auto
       font-size: 14px
     @media(max-width: $breakpoint-xs-max)
