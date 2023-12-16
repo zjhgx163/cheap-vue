@@ -158,7 +158,7 @@
       <div v-if="$q.platform.is.desktop" class="YL__footer row justify-evenly YL__1200w q-pt-md">
         <div class="col-2 flex-center q-py-sm">
           <q-img
-            src="https://private-david.oss-cn-beijing.aliyuncs.com/qrcode_for_laohuweinifuwu.jpeg"
+            src="/qrcode_for_laohuweinifuwu.jpeg"
             class="items-center justify-center"
             width="100px"
             height="100px"
@@ -250,7 +250,7 @@ export default {
       timer: null,
       isLoadingQr: false,
       isLogin: false,
-      avatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
+      avatar: '/static/not_login_user.png',
       selectedTab: 'main',
       sort: '时间排序',
       sortIndex: 2,
@@ -413,8 +413,7 @@ export default {
         if (this.$q.localStorage.has('userInfo')) {
           this.$q.localStorage.remove('userInfo');
           this.userName = '注册/登陆';
-          this.avatar =
-            'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png';
+          this.avatar = '/static/not_login_user.png';
           this.isLogin = false;
         }
       });

@@ -432,7 +432,7 @@ export default {
       // maxPage: Screen.gt.sm ? 6 : 4,
       // paginationSize: Screen.gt.sm ? '12px' : '9px',
       isListEnd: false,
-      userAvatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
+      userAvatar: '/static/not_login_user.png',
       isBigScreen: false,
       // mobileBroswer: false,
       isInvalid: false,

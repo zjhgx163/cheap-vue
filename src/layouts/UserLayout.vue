@@ -94,7 +94,7 @@ export default {
   data() {
     return {
       user: '登陆/注册',
-      avatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
+      avatar: '/static/not_login_user.png',
       userInfo: {}, //传给子组件的对象
       isLoadingQr: false,
       loginCard: false,

@@ -2,12 +2,7 @@
   <q-page class="bg-primary" :style-fn="myTweak">
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
-        <q-img
-          src="https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/no-data.png"
-          spinner-color="white"
-          alt="空空如也～"
-        >
-        </q-img>
+        <q-img src="/static/no-data.png" spinner-color="white" alt="空空如也～"> </q-img>
 
         <div class="text-subtitle2 text-center text-grey">~空空如也~</div>
       </div>

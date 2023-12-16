@@ -328,7 +328,7 @@ export default {
       loginCard: false,
       wechatQr: '',
       timer: null,
-      avatar: 'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png',
+      avatar: '/static/not_login_user.png',
       isEditorShowing: false,
     };
   },
@@ -711,8 +711,7 @@ export default {
         if (this.$q.localStorage.has('userInfo')) {
           this.$q.localStorage.remove('userInfo');
           this.userName = '注册/登陆';
-          this.avatar =
-            'https://cheap-david.oss-cn-hangzhou.aliyuncs.com/static/not_login_user.png';
+          this.avatar = '/static/not_login_user.png';
           this.isLogin = false;
         }
       });
