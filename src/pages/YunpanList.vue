@@ -795,32 +795,32 @@ export default {
     },
     //桌面端的分页
     pageNavigate() {
-      if (this.isBigScreen) {
-        this.$axios
-          .post(`${global.config.domain}/yunpan/resource/list`, {
-            page: this.current,
-            tag: this.$route.params.category,
-            query: this.query,
-            sort: this.sort,
-          })
-          .then((res) => {
-            // console.log(res.data.data.records);
-            this.listData = res.data.data.records;
-            this.max = Math.ceil(res.data.data.total / res.data.data.size);
-          });
+      // if (this.isBigScreen) {
+      //   this.$axios
+      //     .post(`${global.config.domain}/yunpan/resource/list`, {
+      //       page: this.current,
+      //       tag: this.$route.params.category,
+      //       query: this.query,
+      //       sort: this.sort,
+      //     })
+      //     .then((res) => {
+      //       // console.log(res.data.data.records);
+      //       this.listData = res.data.data.records;
+      //       this.max = Math.ceil(res.data.data.total / res.data.data.size);
+      //     });
+      // } else {
+      if (this.$route.params.category != undefined && this.$route.params.category != null) {
+        this.$router.push({
+          path: this.$route.path,
+          query: { q: this.query, page: this.current },
+        });
       } else {
-        if (this.$route.params.category != undefined && this.$route.params.category != null) {
-          this.$router.push({
-            path: this.$route.path,
-            query: { q: this.query, page: this.current },
-          });
-        } else {
-          this.$router.push({
-            path: '/list/' + this.current,
-            query: { q: this.query },
-          });
-        }
+        this.$router.push({
+          path: '/list/' + this.current,
+          query: { q: this.query },
+        });
       }
+      // }
     },
 
     // itemClick(itemId) {
