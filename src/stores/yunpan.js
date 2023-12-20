@@ -91,7 +91,7 @@ export const useYunpanStore = defineStore('yunpan', {
           this.replyMax = Math.ceil(
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
           );
-          if (res.data.data.firstReplyPage.length < 30) {
+          if (this.replyList.length < 30) {
             this.isReplyListEnd = true;
           }
 
