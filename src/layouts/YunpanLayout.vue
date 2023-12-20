@@ -542,8 +542,8 @@ export default {
       if (userInfo !== undefined && userInfo !== null) {
         this.userName = userInfo.nickname;
         this.isLogin = true;
-        if (userInfo.avatar != null && userInfo.avatar != '') {
-          this.avatar = userInfo.avatar;
+        if (userInfo.headimgurl != null && userInfo.headimgurl != '') {
+          this.avatar = userInfo.headimgurl;
         }
       }
     }

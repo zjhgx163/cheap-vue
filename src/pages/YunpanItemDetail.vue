@@ -718,8 +718,8 @@ export default {
       let userInfo = this.$q.localStorage.getItem('userInfo');
 
       if (userInfo !== undefined && userInfo !== null) {
-        if (userInfo.avatar != null && userInfo.avatar != '') {
-          this.userAvatar = userInfo.avatar;
+        if (userInfo.headimgurl != null && userInfo.headimgurl != '') {
+          this.userAvatar = userInfo.headimgurl;
         }
       }
       // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
