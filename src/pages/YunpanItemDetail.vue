@@ -180,7 +180,7 @@
                   <q-list dense separator class="bg-secondary">
                     <div v-bind:key="reply.id" v-for="reply in listData" class="bg-primary">
                       <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
-                      <q-item dense v-ripple class="bg-secondary q-py-sm">
+                      <q-item dense v-ripple class="bg-secondary q-pb-sm">
                         <q-item-section avatar top>
                           <q-avatar
                             v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
@@ -249,7 +249,7 @@
             </div>
             <q-scroll-area style="height: 180px; width: 100%">
               <div>
-                <q-item dense class="q-py-sm">
+                <q-item dense class="q-pb-sm">
                   <q-item-section avatar top style="min-width: 30px">
                     <q-avatar size="1.9em">
                       <img :src="userAvatar" :alt="item.auther" />
@@ -450,6 +450,7 @@ export default {
       _contentStr: 'contentStr',
       _isInvalid: 'isInvalid',
       _userAgent: 'userAgent',
+      _isReplyListEnd: 'isReplyListEnd',
     }),
     maxPage() {
       return this.isBigScreen ? 6 : 4;
@@ -635,6 +636,7 @@ export default {
     this.item = this._detail;
     this.listData = this._replyList;
     this.max = this._replyMax;
+    this.isListEnd = this._isReplyListEnd;
     this.isInvalid = this._isInvalid;
 
     if (Object.keys(this.item).length > 0) {
@@ -815,6 +817,9 @@ export default {
           // console.log(this.item);
           if (this.item == null) {
             this.$router.push({ path: '/error/404' });
+          }
+          if (this.listData.length < 30) {
+            this.isListEnd = true;
           }
           this.setAnotherTitle(this.item.title + ' - 阿里云盘 - 好家当');
           // this.title = this._detail.title;

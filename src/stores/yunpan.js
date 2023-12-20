@@ -16,6 +16,8 @@ export const useYunpanStore = defineStore('yunpan', {
     itemDetail: {},
     replyList: [],
     replyMax: 0,
+    isReplyListEnd: false,
+
     contentStr: '',
     isInvalid: false,
     userAgent: '',
@@ -89,12 +91,15 @@ export const useYunpanStore = defineStore('yunpan', {
           this.replyMax = Math.ceil(
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
           );
+          if (res.data.data.firstReplyPage.length < 30) {
+            this.isReplyListEnd = true;
+          }
 
           if (this.itemDetail == null) {
             redirect({ path: '/list' }, 301);
           }
           if (res.data.data.redirectId != null && res.data.data.redirectId > 0) {
-            redirect({ path: '/d/' + res.data.data.redirectId }, 302);
+            redirect({ path: '/d/' + res.data.data.redirectId }, 301);
           }
 
           Loading.hide();
