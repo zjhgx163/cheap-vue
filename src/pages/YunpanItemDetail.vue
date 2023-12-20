@@ -174,13 +174,13 @@
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
               <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
                 <q-pull-to-refresh @refresh="refresh" no-mouse>
-                  <q-item>
+                  <q-item class="q-pb-none">
                     <div class="text-bold text-body2">最新回复</div>
                   </q-item>
-                  <q-list dense separator class="bg-secondary">
+                  <q-list dense class="bg-secondary">
                     <div v-bind:key="reply.id" v-for="reply in listData" class="bg-primary">
                       <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
-                      <q-item dense v-ripple class="bg-secondary q-pb-sm">
+                      <q-item dense v-ripple class="bg-secondary q-py-sm">
                         <q-item-section avatar top>
                           <q-avatar
                             v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
@@ -249,7 +249,7 @@
             </div>
             <q-scroll-area style="height: 180px; width: 100%">
               <div>
-                <q-item dense class="q-pb-sm">
+                <q-item dense class="q-py-sm">
                   <q-item-section avatar top style="min-width: 30px">
                     <q-avatar size="1.9em">
                       <img :src="userAvatar" :alt="item.auther" />
