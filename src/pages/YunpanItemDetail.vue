@@ -119,11 +119,11 @@
             </q-item>
             <q-item class="items-center">
               <q-item-section avatar style="min-width: 30px">
-                <q-avatar size="1.9em" v-if="item.avatar != '' && item.avatar != null">
+                <q-avatar :size="avatarSize" v-if="item.avatar != '' && item.avatar != null">
                   <img :src="item.avatar" :alt="item.auther" />
                 </q-avatar>
                 <q-avatar
-                  size="1.9em"
+                  :size="avatarSize"
                   :style="getAvatarColor(item.auther)"
                   text-color="white"
                   v-else
@@ -131,7 +131,7 @@
                   {{ getAvatarText(item.auther) }}</q-avatar
                 >
               </q-item-section>
-              <q-item-section class="YL__auther">
+              <q-item-section class="YL__auther text-bold text-black">
                 {{ item.auther }}
               </q-item-section>
               <q-item-section class="YL__auther">
@@ -142,7 +142,7 @@
               <q-item-section>
                 <q-item-label>
                   <div
-                    class="text-body2 Post-body break-all"
+                    class="text-body2 Post-body break-all q-mt-sm"
                     v-bind:class="{ 'text-grey': isInvalid }"
                     v-html="item.content"
                   ></div>
@@ -161,97 +161,6 @@
               ></ins>
             </div>
             <q-separator inset />
-            <q-card class="my-card flex-center" flat>
-              <q-item class="q-pt-sm justify-start items-center">
-                <q-item-section avatar class="q-pr-sm">
-                  <!-- <q-icon name="o_info" color="indigo-7" /> -->
-                  <q-avatar size="1.9em">
-                    <img src="david_avatar.png" alt="notice" />
-                  </q-avatar>
-                </q-item-section>
-
-                <q-item-section>
-                  <q-item-label class="text-caption text-weight-bold text-indigo-7"
-                    ><span class="text-pink-4 text-weight-bolder text-subtitle1">好家当 </span
-                    >已经汇聚上万T网友分享的资源，如果主贴和回复里的链接失效，请尝试在站内搜索框搜索</q-item-label
-                  >
-                </q-item-section>
-              </q-item>
-              <!-- <q-card-section horizontal>
-                <q-card-section> </q-card-section>
-              </q-card-section> -->
-              <q-separator inset />
-              <q-card-section
-                v-if="$q.platform.is.desktop"
-                horizontal
-                v-bind:class="{ hidden: weixin }"
-                class="flex items-center justify-start"
-              >
-                <q-card-section class="q-mr-md">
-                  <div class="text-h6 text-indigo-7 text-bold q-mt-xs text-no-wrap">
-                    更多最新资源，扫描右侧二维码
-                  </div>
-                  <!-- <div class="text-h6 text-pink-4 text-bold "></div> -->
-                  <div class="text-h6 text-pink-4 text-bold q-mt-xs">关注微信公众号</div>
-                  <div class="text-h5 text-grey-10 text-bold q-mt-xs">“老胡为你服务”</div>
-
-                  <div class="text-h6 text-indigo-7 text-bold q-mt-xs q-mb-xs">
-                    &#9996;&#9996;实现看片自由
-                  </div>
-                </q-card-section>
-
-                <!-- <q-card-section> <div class="flex-center">==></div> </q-card-section> -->
-
-                <q-card-section class="flex justif-start">
-                  <img class="YL__wechat_img" src="laohuweinifuwu.jpeg" alt="wechat_code" />
-                </q-card-section>
-              </q-card-section>
-              <q-card-section v-else>
-                <div v-if="weixin">
-                  <q-item dense class="q-pt-none">
-                    <q-item-section>
-                      <q-item-label class="column flex-center">
-                        <span class="text-caption text-pink-7 text-weight-medium">
-                          经费告急，不差钱的大佬可以长按下方二维码赞赏下，好心人的名字将会定期出现在小站的感谢名单中。🙏
-                        </span>
-                      </q-item-label>
-                    </q-item-section>
-                  </q-item>
-                  <q-item class="flex-center">
-                    <img style="max-width: 85%; height: 40%" src="donate.jpg" alt="wechat_donate" />
-                  </q-item>
-                </div>
-                <div v-else>
-                  <q-item dense class="q-pt-none">
-                    <q-item-section>
-                      <q-item-label class="column flex-center">
-                        <span class="text-h6 text-indigo-7 text-bold"
-                          >更多最新资源，扫描二维码
-                        </span>
-                      </q-item-label>
-                      <q-item-label class="column flex-center">
-                        <span class="text-h6 text-pink-4 text-bold">关注微信公众号 </span>
-                      </q-item-label>
-                      <q-item-label class="column flex-center">
-                        <span class="text-h5 text-grey-10 text-bold"> “老胡为你服务”</span>
-                      </q-item-label>
-                      <q-item-label class="column flex-center">
-                        <span class="text-h6 text-indigo-7 text-bold text-italic"
-                          >&#9996;&#9996;实现看片自由
-                        </span>
-                      </q-item-label>
-                    </q-item-section>
-                  </q-item>
-                  <q-item class="flex-center">
-                    <img
-                      style="width: 40%; height: 50%"
-                      src="laohuweinifuwu.jpeg"
-                      alt="wechat_code"
-                    />
-                  </q-item>
-                </div>
-              </q-card-section>
-            </q-card>
 
             <!-- <div class="adsenseunit q-pa-xs">
               <ins
@@ -275,12 +184,12 @@
                         <q-item-section avatar top>
                           <q-avatar
                             v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
-                            size="1.9em"
+                            :size="avatarSize"
                           >
                             <img :src="reply.replyAvatar" :alt="reply.replyAuther" />
                           </q-avatar>
                           <q-avatar
-                            size="1.9em"
+                            :size="avatarSize"
                             :style="getAvatarColor(reply.replyAuther)"
                             text-color="white"
                             v-else
@@ -302,7 +211,7 @@
                             class="YL__title_font_family YL__list_line_height text-body2"
                           >
                             <div
-                              class="text-body2 Post-body break-all"
+                              class="text-body2 Post-body break-all q-mt-sm"
                               v-html="reply.content"
                             ></div>
 
@@ -311,7 +220,7 @@
                         </q-item-section>
                         <!-- <q-item-section side top> </q-item-section> -->
                       </q-item>
-                      <q-separator />
+                      <q-separator inset />
                     </div>
                   </q-list>
                 </q-pull-to-refresh>
@@ -360,6 +269,7 @@
                             placeholder="说点什么吧"
                             hide-bottom-space
                             type="textarea"
+                            style="max-width: 350px"
                           />
                         </div>
 
@@ -373,6 +283,97 @@
               </div>
             </q-scroll-area>
           </div>
+          <q-separator inset />
+
+          <q-card class="my-card flex-center" flat>
+            <q-item class="q-pt-sm justify-start items-center">
+              <q-item-section avatar class="q-pr-sm">
+                <!-- <q-icon name="o_info" color="indigo-7" /> -->
+                <q-avatar size="1.9em">
+                  <img src="david_avatar.png" alt="notice" />
+                </q-avatar>
+              </q-item-section>
+
+              <q-item-section>
+                <q-item-label class="text-caption text-weight-bold text-indigo-7"
+                  ><span class="text-pink-4 text-weight-bolder text-subtitle1">好家当 </span
+                  >已经汇聚上万T网友分享的资源，如果主贴和回复里的链接失效，请尝试在站内搜索框搜索</q-item-label
+                >
+              </q-item-section>
+            </q-item>
+            <!-- <q-card-section horizontal>
+                <q-card-section> </q-card-section>
+              </q-card-section> -->
+            <q-separator inset />
+            <q-card-section
+              v-if="$q.platform.is.desktop"
+              horizontal
+              v-bind:class="{ hidden: weixin }"
+              class="flex items-center justify-start"
+            >
+              <q-card-section class="q-mr-md">
+                <div class="text-h6 text-indigo-7 text-bold q-mt-xs text-no-wrap">
+                  更多最新资源，扫描右侧二维码
+                </div>
+                <!-- <div class="text-h6 text-pink-4 text-bold "></div> -->
+                <div class="text-h6 text-pink-4 text-bold q-mt-xs">关注微信公众号</div>
+                <div class="text-h5 text-grey-10 text-bold q-mt-xs">“老胡为你服务”</div>
+
+                <div class="text-h6 text-indigo-7 text-bold q-mt-xs q-mb-xs">
+                  &#9996;&#9996;实现看片自由
+                </div>
+              </q-card-section>
+
+              <!-- <q-card-section> <div class="flex-center">==></div> </q-card-section> -->
+
+              <q-card-section class="flex justif-start">
+                <img class="YL__wechat_img" src="laohuweinifuwu.jpeg" alt="wechat_code" />
+              </q-card-section>
+            </q-card-section>
+            <q-card-section v-else>
+              <div v-if="weixin">
+                <q-item dense class="q-pt-none">
+                  <q-item-section>
+                    <q-item-label class="column flex-center">
+                      <span class="text-caption text-pink-7 text-weight-medium">
+                        经费告急，不差钱的大佬可以长按下方二维码赞赏下，好心人的名字将会定期出现在小站的感谢名单中。🙏
+                      </span>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item class="flex-center">
+                  <img style="max-width: 85%; height: 40%" src="donate.jpg" alt="wechat_donate" />
+                </q-item>
+              </div>
+              <div v-else>
+                <q-item dense class="q-pt-none">
+                  <q-item-section>
+                    <q-item-label class="column flex-center">
+                      <span class="text-h6 text-indigo-7 text-bold">更多最新资源，扫描二维码 </span>
+                    </q-item-label>
+                    <q-item-label class="column flex-center">
+                      <span class="text-h6 text-pink-4 text-bold">关注微信公众号 </span>
+                    </q-item-label>
+                    <q-item-label class="column flex-center">
+                      <span class="text-h5 text-grey-10 text-bold"> “老胡为你服务”</span>
+                    </q-item-label>
+                    <q-item-label class="column flex-center">
+                      <span class="text-h6 text-indigo-7 text-bold text-italic"
+                        >&#9996;&#9996;实现看片自由
+                      </span>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item class="flex-center">
+                  <img
+                    style="width: 40%; height: 50%"
+                    src="laohuweinifuwu.jpeg"
+                    alt="wechat_code"
+                  />
+                </q-item>
+              </div>
+            </q-card-section>
+          </q-card>
         </div>
       </div>
       <!-- 右边栏 -->
@@ -387,7 +388,7 @@
       font-size: 0.8em
       height: 2.1em
     @media(min-width: $breakpoint-xs-max)
-      font-size: 0.9em
+      font-size: 1.0em
       height: 2.6em
     color: rgba(0, 0, 0, 0.54)
     line-height: 1.2em
@@ -520,6 +521,9 @@ export default {
     },
     noticefont: function () {
       return this.isBigScreen ? 'text-subtitle1' : 'text-subtitle2';
+    },
+    avatarSize: function () {
+      return this.isBigScreen ? '2.7em' : '1.9em';
     },
   },
   setup() {
