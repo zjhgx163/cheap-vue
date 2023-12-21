@@ -251,7 +251,7 @@
               <div>
                 <q-item dense class="q-py-sm">
                   <q-item-section avatar top style="min-width: 30px">
-                    <q-avatar size="1.9em">
+                    <q-avatar :src="item.avatar">
                       <img :src="userAvatar" :alt="item.auther" />
                     </q-avatar>
                   </q-item-section>
@@ -269,7 +269,7 @@
                             placeholder="说点什么吧"
                             hide-bottom-space
                             type="textarea"
-                            style="max-width: 350px"
+                            style="max-width: 380px"
                           />
                         </div>
 
@@ -285,7 +285,7 @@
           </div>
           <q-separator inset />
 
-          <q-card class="my-card flex-center" flat>
+          <q-card class="q-px-md flex-center" flat>
             <q-item class="q-pt-sm justify-start items-center">
               <q-item-section avatar class="q-pr-sm">
                 <!-- <q-icon name="o_info" color="indigo-7" /> -->
@@ -304,7 +304,7 @@
             <!-- <q-card-section horizontal>
                 <q-card-section> </q-card-section>
               </q-card-section> -->
-            <q-separator inset />
+            <q-separator />
             <q-card-section
               v-if="$q.platform.is.desktop"
               horizontal

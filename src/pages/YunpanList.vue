@@ -414,11 +414,11 @@ export default {
       description: {
         name: 'description',
         content:
-          '最新阿里云盘,夸克网盘,迅雷云盘资源发布.4k,1080p高清影视,动漫,综艺节目,游戏,软件,音乐,学习资料,电子书,图片等应有尽有,实现你的网盘自由',
+          '最新阿里云盘,夸克网盘,迅雷云盘资源发布,4k,1080p高清影视,动漫,综艺节目,游戏,软件,音乐,学习资料,电子书,图片等应有尽有,实现你的网盘自由',
       },
       keywords: {
         name: 'keywords',
-        content: '阿里云盘,夸克网盘,迅雷云盘,资源下载,高清影视,动漫,4k,1080p',
+        content: '阿里云盘,夸克网盘,迅雷云盘,资源下载,4k,1080p,高清影视,动漫,学习资源',
       },
       applicationdevice: {
         name: 'applicable-device',
@@ -434,7 +434,7 @@ export default {
       },
       ogtitle: {
         property: 'og:title',
-        content: '好家当 -  最新阿里云盘,夸克网盘资源发布',
+        content: '好家当 - 最新阿里云盘,夸克网盘资源发布',
       },
       ogdescription: {
         property: 'og:description',
