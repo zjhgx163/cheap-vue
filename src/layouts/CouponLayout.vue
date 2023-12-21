@@ -57,7 +57,10 @@
 </style>
 
 <script>
+import LoginQr from 'src/components/LoginQr.vue';
+
 export default {
+  components: { LoginQr },
   name: 'CouponLayout',
   data() {
     return {
