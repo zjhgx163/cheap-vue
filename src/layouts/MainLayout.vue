@@ -13,9 +13,9 @@
               class="col-2 lt-sm col-sm-auto text-overline text-italic items-center self-center text-bold YL__coupon_text_effect"
               v-bind:class="{ hidden: isCouponHidden }"
             >
-              <router-link :to="{ path: '/coupon/0' }" class="text-deep-purple-10">
+              <!-- <router-link :to="{ path: '/coupon/0' }" class="text-deep-purple-10">
                 外卖券
-              </router-link>
+              </router-link> -->
             </div>
             <div
               class="col-12 col-sm-8 q-px-xs q-pt-xs column justify-center"
