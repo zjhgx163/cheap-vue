@@ -62,6 +62,11 @@ export default {
             this.$router.push({
               path: '/user/converturl',
             });
+          } else if (this.state == 'waimai') {
+            this.$router.push({
+              path: '/coupon',
+              query: { actId: this.$route.params.urlCode },
+            });
           } else if (this.state == 'yunpanList') {
             this.$router.push({
               path: '/list?q=',
