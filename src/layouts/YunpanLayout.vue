@@ -734,11 +734,18 @@ export default {
     },
     logout() {
       this.$axios.post(`${global.config.domain}/user/logout`, {}).then((res) => {
-        if (this.$q.localStorage.has('userInfo')) {
-          this.$q.localStorage.remove('userInfo');
-          this.userName = '注册/登陆';
-          this.avatar = '/static/not_login_user.png';
-          this.isLogin = false;
+        if (res.data.code == 0) {
+          if (this.$q.localStorage.has('userInfo')) {
+            this.$q.localStorage.remove('userInfo');
+            this.userName = '注册/登陆';
+            this.avatar = '/static/not_login_user.png';
+            this.isLogin = false;
+          }
+        } else {
+          this.$q.notify({
+            type: 'negative',
+            message: res.data.msg,
+          });
         }
       });
     },
