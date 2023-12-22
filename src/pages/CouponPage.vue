@@ -1,7 +1,11 @@
 <template>
   <q-page>
-    <div class="row justify-start" v-for="item in _topCoupons" v-bind:key="item.id">
-      <div class="q-pa-lg column q-gutter-sm flex-center">
+    <div class="row justify-start">
+      <div
+        v-for="item in _topCoupons"
+        v-bind:key="item.id"
+        class="q-pa-lg column q-gutter-sm flex-center"
+      >
         <div v-if="item.hasCommission === 1">
           <q-btn round flat @click="onClick(item.actId)">
             <q-avatar size="4.0em">
@@ -10,17 +14,22 @@
           </q-btn>
         </div>
         <div v-else>
-          <q-btn round flat :href="item.url">
-            <q-avatar size="4.0em">
+          <q-btn round flat>
+            <q-avatar size="4.0em" @click="miniCodeImg = item.url">
               <img :src="item.picSmall" :alt="item.name" />
             </q-avatar>
           </q-btn>
         </div>
-        <div>
+        <div class="column items-center">
           <q-item-label>{{ item.name }}</q-item-label>
           <q-item-label caption>{{ item.description }}</q-item-label>
         </div>
       </div>
+    </div>
+    <div v-if="miniCodeImg != ''" class="column items-center q-mt-lg">
+      <q-img :src="miniCodeImg" spinner-color="white" width="200px"> </q-img>
+      <div v-if="isWeixin()" class="q-mt-md text-subtitle1 text-center text-bold">长按二维码</div>
+      <div v-else class="q-mt-md text-subtitle1 text-center text-bold">微信扫码</div>
     </div>
   </q-page>
 </template>
@@ -40,6 +49,7 @@ export default {
   data() {
     return {
       uid: 0,
+      miniCodeImg: '',
       // topCoupons: [],
       // coupons: [],
     };
@@ -191,20 +201,19 @@ export default {
           return;
         }
       }
-      let linkType = 1;
-      if (this.isWeixin()) {
-        linkType = 3;
-      } else if (this.$q.platform.is.mobile) {
-        linkType = 3;
-      } else {
-        linkType = 1;
-      }
+      // let linkType = 1;
+      // if (this.isWeixin()) {
+      //   linkType = 3;
+      // } else if (this.$q.platform.is.mobile) {
+      //   linkType = 3;
+      // } else {
+      //   linkType = 1;
+      // }
       this.$q.loading.show({
         delay: 200, // ms
       });
       this.$axios
-        .post(`${global.config.domain}/coupon/meituan/generate/link`, {
-          linkType: linkType,
+        .post(`${global.config.domain}/coupon/meituan/minicode`, {
           actId: actId,
           sid: this.uid,
         })
@@ -227,8 +236,8 @@ export default {
             }
           } else {
             console.log(res.data.data.data);
-            window.location.href = res.data.data.data;
-            //  = res.data.data.records;
+            // window.location.href = res.data.data.data;
+            this.miniCodeImg = res.data.data.data;
           }
 
           this.$q.loading.hide();
