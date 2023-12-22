@@ -67,12 +67,7 @@
           />
         </keep-alive>
       </router-view> -->
-      <router-view
-        :key="$route.fullPath"
-        :userInfo="this.userInfo"
-        @need-login="needLogin"
-        ref="order-list"
-      >
+      <router-view :key="$route.fullPath" @need-login="needLogin" :userInfo="userInfo" ref="child">
       </router-view>
     </q-page-container>
     <login-qr
@@ -146,8 +141,25 @@ export default {
         delay: 200, // ms
       });
       this.$axios.post(`${global.config.domain}/user/account/get`, {}).then((res) => {
-        console.log(res.data);
-        this.userInfo = res.data.data;
+        if (res.data.code < 0) {
+          // 未登陆
+          if (res.data.code == -102) {
+            if (this.isWeixin()) {
+              window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/user&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
+            } else {
+              console.log('emit need-login');
+              this.$refs.child.$emit('need-login');
+            }
+          } else {
+            this.$q.notify({
+              type: 'negative',
+              icon: 'warning',
+              message: `${res.data.msg}`,
+            });
+          }
+        } else {
+          this.userInfo = res.data.data;
+        }
         //登陆成功
 
         this.$q.loading.hide();
@@ -205,9 +217,6 @@ export default {
                     this.$q.localStorage.set('userInfo', res.data.data);
                     window.clearInterval(this.timer); //清除定时器
                     this.loginCard = false;
-                    if (itemId != undefined) {
-                      this.$refs.child.$emit('logined', itemId);
-                    }
                   } else {
                     let now = new Date();
                     if (now.getTime() - beginTime.getTime() > 10 * 60 * 1000) {
@@ -254,6 +263,20 @@ export default {
       this.isLoadingQr = false;
       this.wechatQr = '';
       clearInterval(this.timer);
+    },
+    isWeixin() {
+      let ua;
+      if (process.env.CLIENT) {
+        ua = window.navigator.userAgent.toLowerCase();
+      } else {
+        ua = this._userAgent.toLowerCase();
+      }
+      console.log(ua);
+      if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };
