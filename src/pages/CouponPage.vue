@@ -169,7 +169,7 @@ export default {
 
     console.log('actId = ', this.actId);
     if (this.actId > 0) {
-      this.onClick(actId);
+      this.onClick(this.actId);
     }
   },
   methods: {
@@ -183,9 +183,17 @@ export default {
       //   }
       // }
       this.uid = this.userInfo.id;
+      if (this.uid == undefined || this.uid == null) {
+        if (this.isWeixin()) {
+          window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
+        } else {
+          this.$emit('need-login');
+          return;
+        }
+      }
       let linkType = 1;
       if (this.isWeixin()) {
-        linkType = 4;
+        linkType = 3;
       } else if (this.$q.platform.is.mobile) {
         linkType = 3;
       } else {
@@ -206,7 +214,7 @@ export default {
             // 未登陆
             if (res.data.code == -102) {
               if (this.isWeixin()) {
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
               } else {
                 this.$emit('need-login');
               }
@@ -218,10 +226,9 @@ export default {
               });
             }
           } else {
-            this.listData = res.data.data.records;
-            if (res.data.data.records.length < 20) {
-              this.isListEnd = true;
-            }
+            console.log(res.data.data.data);
+            window.location.href = res.data.data.data;
+            //  = res.data.data.records;
           }
 
           this.$q.loading.hide();
