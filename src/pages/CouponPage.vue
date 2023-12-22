@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div class="row justify-start" v-for="item in this._topCoupons" v-bind:key="item.id">
+    <div class="row justify-start" v-for="item in _topCoupons" v-bind:key="item.id">
       <div class="q-pa-lg column q-gutter-sm flex-center">
         <div v-if="item.hasCommission === 1">
           <q-btn round flat @click="onClick(item.actId)">
@@ -203,7 +203,8 @@ export default {
         .then((res) => {
           console.log(res.data);
           if (res.data.code < 0) {
-            if (!this.$q.localStorage.has('userInfo')) {
+            // 未登陆
+            if (res.data.code == -102) {
               if (this.isWeixin()) {
                 window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
               } else {
