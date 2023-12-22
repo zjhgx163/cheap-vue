@@ -174,14 +174,14 @@ export default {
   },
   methods: {
     onClick(actId) {
-      if (!this.userInfo || this.userInfo.id == undefined || this.userInfo.id == null) {
-        if (this.isWeixin()) {
-          window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth//${this.actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
-        } else {
-          this.$emit('need-login');
-          return;
-        }
-      }
+      // if (!this.userInfo || this.userInfo.id == undefined || this.userInfo.id == null) {
+      //   if (this.isWeixin()) {
+      //     window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth//${this.actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
+      //   } else {
+      //     this.$emit('need-login');
+      //     return;
+      //   }
+      // }
       this.uid = this.userInfo.id;
       let linkType = 1;
       if (this.isWeixin()) {
