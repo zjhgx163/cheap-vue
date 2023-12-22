@@ -233,10 +233,10 @@
           flat
           v-bind:size="shopButtionSize"
           color="blue-5"
-          label="手慢无"
+          label="外卖红包"
           dense
-          icon="o_shopping_cart"
-          href="https://shop.hjdang.com"
+          icon="o_delivery_dining"
+          to="/coupon"
         />
         <q-btn
           flat
