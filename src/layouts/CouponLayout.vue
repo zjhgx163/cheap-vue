@@ -25,11 +25,7 @@
       </q-header>
       <div class="YL__750w bg-secondary">
         <q-page-container>
-          <router-view
-            :key="$route.params.tabId"
-            :userInfo="this.userInfo"
-            @need-login="needLogin"
-          ></router-view>
+          <router-view :userInfo="userInfo" @need-login="needLogin"></router-view>
         </q-page-container>
       </div>
     </div>
@@ -108,11 +104,7 @@ export default {
       this.wechatQr = '';
       clearInterval(this.timer);
     },
-    logined(avatar, userName) {
-      this.userName = userName;
-      this.avatar = avatar;
-      this.isLogin = true;
-    },
+
     needLogin() {
       let userInfo = this.$q.localStorage.getItem('userInfo');
       if (userInfo !== undefined && userInfo !== null) {
@@ -140,9 +132,6 @@ export default {
                     this.$q.localStorage.set('userInfo', res.data.data);
                     window.clearInterval(this.timer); //清除定时器
                     this.loginCard = false;
-                    if (itemId != undefined) {
-                      this.$refs.child.$emit('logined', itemId);
-                    }
                   } else {
                     let now = new Date();
                     if (now.getTime() - beginTime.getTime() > 10 * 60 * 1000) {
