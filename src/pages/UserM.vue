@@ -6,7 +6,7 @@
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text text-caption">
               <q-item-label class="text-weight-medium"
-                >¥{{ this.userInfo.todayEstimateCommissionAmount }}</q-item-label
+                >¥{{ userInfo.todayEstimateCommissionAmount }}</q-item-label
               >
               <q-item-label caption>今日预估</q-item-label>
             </div>
@@ -14,7 +14,7 @@
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
               <q-item-label class="text-weight-medium"
-                >¥{{ this.userInfo.monthEstimateCommissionAmount }}</q-item-label
+                >¥{{ userInfo.monthEstimateCommissionAmount }}</q-item-label
               >
               <q-item-label caption>本月预估</q-item-label>
             </div>
@@ -22,7 +22,7 @@
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
               <q-item-label class="text-weight-medium"
-                >¥{{ this.userInfo.accumulativeEstimateCommissionAmount }}</q-item-label
+                >¥{{ userInfo.accumulativeEstimateCommissionAmount }}</q-item-label
               >
               <q-item-label caption>累计收入</q-item-label>
             </div>
@@ -33,7 +33,7 @@
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
               <q-item-label class="text-weight-medium"
-                >¥{{ this.userInfo.waitEstimateCommissionAmount }}</q-item-label
+                >¥{{ userInfo.waitEstimateCommissionAmount }}</q-item-label
               >
               <q-item-label caption>待结算</q-item-label>
             </div>
@@ -41,7 +41,7 @@
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
               <q-item-label class="text-weight-medium"
-                >¥{{ this.userInfo.waitActualCommissionAmount }}</q-item-label
+                >¥{{ userInfo.waitActualCommissionAmount }}</q-item-label
               >
               <q-item-label caption>待审批</q-item-label>
             </div>
@@ -49,7 +49,7 @@
           <q-item-section class="q-py-sm">
             <div class="column items-center YL__menu_text">
               <q-item-label class="text-weight-medium"
-                >¥{{ this.userInfo.withdrawedAmount }}</q-item-label
+                >¥{{ userInfo.withdrawedAmount }}</q-item-label
               >
               <q-item-label caption>已提现</q-item-label>
             </div>
@@ -79,7 +79,7 @@
             dense
             :to="{
               path: '/user/orderlist/all',
-              query: { userId: this.userInfo.userId, status: '' },
+              query: { userId: userInfo.userId, status: '' },
             }"
           >
             <q-item-section avatar top class="q-py-xs">
@@ -217,7 +217,7 @@
               dense
               :to="{
                 path: '/user/orderlist/all',
-                query: { userId: this.userInfo.userId, status: '' },
+                query: { userId: userInfo.userId, status: '' },
               }"
             >
               <q-item-section avatar top class="q-py-xs">
