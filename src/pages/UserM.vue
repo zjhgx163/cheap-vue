@@ -367,8 +367,9 @@
               >
             </q-item-label>
             <q-item-label class="q-py-md">
-              <strong>如有订单未及时结算和其他问题请直接添加客服微信 </strong></q-item-label
-            >
+              如有订单未及时结算和其他问题请直接
+              <router-link to="/contact"> <strong>添加客服微信</strong></router-link>
+            </q-item-label>
           </q-item-section>
         </q-item>
         <q-separator spaced />
