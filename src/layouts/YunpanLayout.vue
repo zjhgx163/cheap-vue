@@ -162,19 +162,22 @@
         </div>
         <div v-if="isBigScreen" dark class="col bg-primary">
           <div>
-            <q-card flat bordered class="column bg-secondary items-start q-ml-sm">
+            <q-card bordered class="column bg-secondary items-start q-ml-sm">
+              <q-card-section>
+                <q-btn
+                  class="text-bold"
+                  flat
+                  outline
+                  color="pink-4"
+                  size="1.3em"
+                  label="发布资源"
+                  icon="o_article"
+                  @click="addYunpanItem"
+              /></q-card-section>
+            </q-card>
+            <q-card bordered class="column bg-secondary items-start q-ml-sm q-mt-sm">
               <q-card-section>
                 <q-card-actions vertical align="left" class="justify-around">
-                  <q-btn
-                    class="text-bold"
-                    flat
-                    outline
-                    color="pink-4"
-                    :size="addButtonSize"
-                    label="发布资源"
-                    icon="o_article"
-                    @click="addYunpanItem"
-                  />
                   <q-btn
                     class="text-bold"
                     flat
