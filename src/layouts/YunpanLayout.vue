@@ -177,8 +177,18 @@
                   />
                   <q-btn
                     class="text-bold"
+                    flat
                     outline
                     color="blue-5"
+                    :size="addButtonSize"
+                    label="外卖红包"
+                    icon="o_delivery_dining"
+                    to="/coupon"
+                  />
+                  <q-btn
+                    class="text-bold"
+                    outline
+                    color="purple-4"
                     :size="addButtonSize"
                     flat
                     label="手慢无"
