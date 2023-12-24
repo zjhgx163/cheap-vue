@@ -187,7 +187,9 @@
                     label="外卖红包"
                     icon="o_delivery_dining"
                     to="/coupon"
-                  />
+                  >
+                    <q-badge transparent rounded align="top" color="pink-4"> 返利 </q-badge></q-btn
+                  >
                   <q-btn
                     class="text-bold"
                     outline
@@ -197,7 +199,9 @@
                     label="手慢无"
                     icon="o_shopping_cart"
                     href="https://shop.hjdang.com"
-                  />
+                  >
+                    <q-badge transparent rounded align="top" color="pink-4"> 返利 </q-badge></q-btn
+                  >
                   <q-btn
                     class="text-bold"
                     outline
@@ -250,7 +254,9 @@
           dense
           icon="o_delivery_dining"
           to="/coupon"
-        />
+        >
+          <q-badge transparent rounded align="top" color="pink-4"> 返利 </q-badge></q-btn
+        >
         <q-btn
           flat
           color="pink-4"

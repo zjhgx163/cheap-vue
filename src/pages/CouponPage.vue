@@ -22,7 +22,13 @@
         </div>
         <div class="column items-center">
           <q-item-label>{{ item.name }}</q-item-label>
-          <q-item-label caption>{{ item.description }}</q-item-label>
+          <q-item-label caption
+            >{{ item.description }}
+
+            <q-badge v-if="item.hasCommission === 1" transparent align="middle" color="pink-4">
+              返利
+            </q-badge></q-item-label
+          >
         </div>
       </div>
     </div>
