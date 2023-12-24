@@ -46,14 +46,14 @@
           </q-input>
         </div>
         <div class="col-sm-4 gt-sm row flex-center">
-          <q-btn unelevated flat @click="clickUser">
-            <a
+          <q-btn-dropdown unelevated flat :label="userName" @click="clickUser">
+            <!-- <a
               class="text-grey-9 text-weight-bold text-subtitle2"
               style="text-decoration: underline"
             >
               {{ userName }}</a
-            >
-          </q-btn>
+            > -->
+          </q-btn-dropdown>
           <q-avatar size="2.5em">
             <img :src="avatar" />
           </q-avatar>
@@ -403,7 +403,6 @@ export default {
   },
   mounted() {
     console.log('YunpanLayout mounted');
-
     console.log('isProEnv = ' + global.config.isProEnv);
 
     let script = document.createElement('script');

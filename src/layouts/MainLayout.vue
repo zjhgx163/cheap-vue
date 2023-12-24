@@ -1,5 +1,18 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-primary" style="min-height: 100vh">
+    <q-dialog auto-close v-model="dialog">
+      <q-card class="bg-blue text-white">
+        <q-card-section class="row items-center q-pb-none q-pt-xs">
+          <div class="text-h6">返利提醒</div>
+          <q-space />
+          <q-btn icon="close" flat round dense v-close-popup />
+        </q-card-section>
+        <q-card-section>
+          &#9996;&#9996;
+          京东，拼多多商品均有返利，登陆购买后请在<strong>个人中心</strong>下面的<strong>商品订单</strong>里查看
+        </q-card-section>
+      </q-card>
+    </q-dialog>
     <q-header class="bg-primary text-grey-8 q-pb-xs">
       <q-toolbar class="bg-secondary column q-mb-xs" v-bind:class="[itemPadding]">
         <div class="row justify-between YL__1200w">
@@ -254,6 +267,7 @@ export default {
       selectedTab: 'main',
       sort: '时间排序',
       sortIndex: 2,
+      dialog: false,
     };
   },
   computed: {
@@ -279,6 +293,7 @@ export default {
 
   mounted() {
     console.log('MainLayout mounted');
+    this.dialog = true;
 
     if (this.$q.localStorage.has('userInfo')) {
       let userInfo = this.$q.localStorage.getItem('userInfo');
