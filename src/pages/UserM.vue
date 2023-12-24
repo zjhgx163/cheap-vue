@@ -329,7 +329,7 @@
         </div>
       </div>
 
-      <q-list dense class="q-px-sm q-pb-none bg-secondary">
+      <q-list dense class="q-px-sm q-pt-xs bg-secondary">
         <q-item-label header class="text-black">注意事项</q-item-label>
         <q-item dense class="q-pt-none">
           <q-item-section>
@@ -362,7 +362,7 @@
               京东的返利请<strong>不要</strong>在购买过程中使用<strong>红包和礼金</strong>，否则返利对象会变成发放红包和礼金的人。
             </q-item-label>
             <q-item-label caption class="q-py-xs">
-              拼多多<strong>禁止比价行为</strong>，就是说不能用相同的账号先在APP里浏览商品然后再在公众号/网站里购买，规避方法请看<a
+              拼多多<strong>禁止比价行为</strong>，就是说不能用相同的账号先在APP/小程序里浏览商品然后再在公众号/网站里购买，佣金直接判为0.01。规避方法请看<a
                 href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483954&idx=1&sn=0b5c8a54802d73d4da3b369d27ba151b&chksm=c24e8f29f539063fe9970ade98efe90af02b4dccf2f6f84a19576c029f6eadce6646d93abe33&token=1826758436&lang=zh_CN#rd"
                 ><strong>任意拼多多商品返利</strong></a
               >
