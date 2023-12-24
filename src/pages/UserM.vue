@@ -343,7 +343,8 @@
             </q-item-label>
 
             <q-item-label caption class="q-py-xs"
-              >如果你想购买<a href="https://shop.hjdang.com">好慢无</a>外的商品，操作方法京东请看<a
+              >如果你想购买<a href="https://shop.hjdang.com"><strong>好慢无</strong></a
+              >以外的商品，操作方法京东请看<a
                 href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483916&idx=1&sn=2e36901033e066c96d44990b4b338e2f&chksm=c24e8f17f5390601ee49beb7e6f6eeba01ecfbe136e632bcc62bb40132d7ca8d595c8e91c56d&token=1826758436&lang=zh_CN#rd"
                 ><strong>任意京东商品返利</strong></a
               >，拼多多请看<a
@@ -352,7 +353,7 @@
               ></q-item-label
             >
             <q-item-label caption class="q-py-xs">
-              正常订单返利结算周期一般在确认收货订单完成后14天左右
+              正常订单返利结算周期一般在确认收货订单完成后20天左右
             </q-item-label>
             <!-- <q-item-label caption class="q-py-xs">
               在本站第一次购买淘宝天猫商品时，如果跳出加入会员的页面，要点“是”，否则没有返利
@@ -361,7 +362,7 @@
               京东的返利请<strong>不要</strong>在购买过程中使用<strong>红包和礼金</strong>，否则返利对象会变成发放红包和礼金的人。
             </q-item-label>
             <q-item-label caption class="q-py-xs">
-              拼多多<strong>禁止比价行为</strong>，规避方法请看<a
+              拼多多<strong>禁止比价行为</strong>，就是说不能用相同的账号先在APP里浏览商品然后再在公众号/网站里购买，规避方法请看<a
                 href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483954&idx=1&sn=0b5c8a54802d73d4da3b369d27ba151b&chksm=c24e8f29f539063fe9970ade98efe90af02b4dccf2f6f84a19576c029f6eadce6646d93abe33&token=1826758436&lang=zh_CN#rd"
                 ><strong>任意拼多多商品返利</strong></a
               >
