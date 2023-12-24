@@ -7,9 +7,12 @@
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
-        <q-card-section>
+        <q-card-section v-if="isWeixin()">
           &#9996;&#9996;
-          京东，拼多多商品均有返利，登陆购买后请在<strong>个人中心</strong>下面的<strong>商品订单</strong>里查看
+          京东，拼多多商品均有返利，购买前请先点击<strong>公众号个人中心菜单</strong>阅读注意事项。购买后请在<strong>个人中心菜单</strong>下面的<strong>商品订单</strong>里查看订单。
+        </q-card-section>
+        <q-card-section v-else>
+          京东，拼多多商品均有返利，购买前请先点击用户名登陆进入用户中心查阅注意事项，购买后在用户中心下面的<strong>商品订单</strong>里查看订单
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -76,9 +79,9 @@
           <!-- <div class="bg-white YL__toolbar-input-container"> -->
 
           <div class="col-sm-3 gt-sm row items-center justify-end">
-            <q-btn unelevated flat @click="clickUser">
-              <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a>
-            </q-btn>
+            <q-btn-dropdown unelevated flat :label="userName" @click="clickUser">
+              <!-- <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a> -->
+            </q-btn-dropdown>
 
             <q-avatar size="2.5em">
               <img :src="avatar" />
@@ -455,6 +458,9 @@ export default {
       this.sortIndex = event.currentTarget.getAttribute('tabindex');
       // 用$refs是非reactive,sortIndex变了但：sort="sortIndex"这里不会改变getItemList里的参数sort的值，所以只能加一个参数this.sortIndex传过去
       this.$refs['goods-list'].getItemList(this.sortIndex);
+    },
+    isWeixin() {
+      return this.$refs['goods-list'].isWeixin();
     },
   },
 };

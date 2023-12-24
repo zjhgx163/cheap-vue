@@ -386,6 +386,7 @@ export default {
       _listData: 'items',
       _isListEnd: 'isListEnd',
       _max: 'maxPage',
+      _userAgent: 'userAgent',
     }),
 
     paginationSize: function () {
@@ -543,6 +544,8 @@ export default {
       // Return a Promise if you are running an async job
       // Example:
       const myStore = useGoodsStore();
+      myStore.userAgent = ssrContext.req.headers['user-agent'];
+
       console.log(myStore.prefetchFlag);
 
       myStore.prefetchFlag = 1;
@@ -829,6 +832,20 @@ export default {
             }
             this.$q.loading.hide();
           });
+      }
+    },
+    isWeixin() {
+      let ua;
+      if (process.env.CLIENT) {
+        ua = window.navigator.userAgent.toLowerCase();
+      } else {
+        ua = this._userAgent.toLowerCase();
+      }
+      console.log('userAgent = ' + ua);
+      if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        return true;
+      } else {
+        return false;
       }
     },
     transferLabel(label) {
