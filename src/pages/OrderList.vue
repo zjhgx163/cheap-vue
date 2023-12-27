@@ -285,10 +285,18 @@ export default {
         .then((res) => {
           console.log(res.data);
           if (res.data.code < 0) {
-            if (/(http|https):\S*/.test(res.data.data)) {
-              window.location.href = res.data.data;
-            } else if (/redirect:\S*/.test(res.data.msg)) {
-              this.$emit('need-login');
+            if (res.data.code == -102) {
+              if (this.isWeixin()) {
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/xxx&response_type=code&scope=snsapi_userinfo&state=tool#wechat_redirect`;
+              } else {
+                this.$emit('need-login');
+              }
+            } else {
+              this.$q.notify({
+                type: 'negative',
+                icon: 'warning',
+                message: `${res.data.msg}`,
+              });
             }
           } else {
             this.listData = res.data.data.records;
@@ -341,6 +349,20 @@ export default {
             done();
           });
       }, 1000);
+    },
+    isWeixin() {
+      let ua;
+      if (process.env.CLIENT) {
+        ua = window.navigator.userAgent.toLowerCase();
+      } else {
+        ua = this._userAgent.toLowerCase();
+      }
+      console.log(ua);
+      if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        return true;
+      } else {
+        return false;
+      }
     },
     //列表下拉刷新
     refresh(done) {

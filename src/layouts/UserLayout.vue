@@ -145,7 +145,7 @@ export default {
           // 未登陆
           if (res.data.code == -102) {
             if (this.isWeixin()) {
-              window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/user&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
+              window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/user&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
             } else {
               console.log('emit need-login');
               this.$refs.child.$emit('need-login');

@@ -87,19 +87,7 @@ const routes = [
         // 在router之间传递参数用下面配置
         // props: (route) => ({ title: route.query.title, detail: route.query.detail }),
       },
-      {
-        path: '/coupon',
-        component: () => import('layouts/CouponLayout.vue'),
-        children: [
-          {
-            path: '',
-            name: 'coupon',
 
-            component: () => import('src/pages/CouponPage.vue'),
-            props: (route) => ({ actId: route.query.actId }),
-          },
-        ],
-      },
       // {
       //   path: 'coupon',
       //   components: {
@@ -115,6 +103,19 @@ const routes = [
       //   ],
       // },
       { path: 'mock/login', name: 'mocklogin', component: () => import('pages/MockLogin.vue') },
+    ],
+  },
+  {
+    path: '/coupon',
+    component: () => import('layouts/CouponLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'coupon',
+
+        component: () => import('src/pages/CouponPage.vue'),
+        props: (route) => ({ actId: route.query.actId }),
+      },
     ],
   },
 

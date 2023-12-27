@@ -201,7 +201,7 @@ export default {
       this.uid = this.userInfo.id;
       if (this.uid == undefined || this.uid == null) {
         if (this.isWeixin()) {
-          window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
+          window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/${actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
         } else {
           this.$emit('need-login');
           return;
@@ -229,7 +229,7 @@ export default {
             // 未登陆
             if (res.data.code == -102) {
               if (this.isWeixin()) {
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/${actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
               } else {
                 this.$emit('need-login');
               }
