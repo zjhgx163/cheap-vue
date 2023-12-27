@@ -193,7 +193,7 @@
                   <q-btn
                     class="text-bold"
                     outline
-                    color="purple-4"
+                    color="blue-5"
                     :size="addButtonSize"
                     flat
                     label="手慢无"
