@@ -33,6 +33,7 @@ global.config = {
   mutiLanguage: true, // 是否开启多语言
   defaultLanguage: 'en', // 默认语言 cn en id 只有在开启mutiLanguage下有效
   domain,
+  domainPro,
   isProEnv,
 };
 
