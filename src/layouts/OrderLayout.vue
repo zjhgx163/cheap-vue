@@ -12,7 +12,7 @@
       <q-route-tab
         :to="{
           path: '/user/orderlist/all',
-          query: { userId: $route.query.userId, status: '' },
+          query: { userId: $route.query.userId, status: '', type: $route.query.type },
         }"
         label="全部订单"
         name="all"
@@ -20,7 +20,7 @@
       <q-route-tab
         :to="{
           path: '/user/orderlist/unbalanced',
-          query: { userId: $route.query.userId, status: 0 },
+          query: { userId: $route.query.userId, status: 0, type: $route.query.type },
         }"
         label="未结算"
         name="unbalanced"
@@ -28,7 +28,7 @@
       <q-route-tab
         :to="{
           path: '/user/orderlist/balanced',
-          query: { userId: $route.query.userId, status: 1 },
+          query: { userId: $route.query.userId, status: 1, type: $route.query.type },
         }"
         label="已结算"
         name="balanced"

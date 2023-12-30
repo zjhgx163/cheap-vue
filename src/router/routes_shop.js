@@ -136,17 +136,29 @@ const routes = [
           {
             path: 'all',
             component: () => import('pages/OrderList.vue'),
-            props: (route) => ({ userId: route.query.userId, status: route.query.status }),
+            props: (route) => ({
+              userId: route.query.userId,
+              status: route.query.status,
+              type: route.query.type,
+            }),
           },
           {
             path: 'unbalanced',
             component: () => import('pages/OrderList.vue'),
-            props: (route) => ({ userId: route.query.userId, status: route.query.status }),
+            props: (route) => ({
+              userId: route.query.userId,
+              status: route.query.status,
+              type: route.query.type,
+            }),
           },
           {
             path: 'balanced',
             component: () => import('pages/OrderList.vue'),
-            props: (route) => ({ userId: route.query.userId, status: route.query.status }),
+            props: (route) => ({
+              userId: route.query.userId,
+              status: route.query.status,
+              type: route.query.type,
+            }),
           },
         ],
       },

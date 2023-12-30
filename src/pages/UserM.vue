@@ -79,7 +79,7 @@
             dense
             :to="{
               path: '/user/orderlist/all',
-              query: { userId: userInfo.userId, status: '' },
+              query: { userId: userInfo.userId, status: '', type: 1 },
             }"
           >
             <q-item-section avatar top class="q-py-xs">
@@ -95,10 +95,13 @@
 
           <q-separator />
 
-          <q-item dense disable>
-            <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
-              <strong>敬请期待</strong>
-            </q-tooltip>
+          <q-item
+            dense
+            :to="{
+              path: '/user/orderlist/all',
+              query: { userId: userInfo.userId, status: '', type: 2 },
+            }"
+          >
             <q-item-section avatar top class="q-py-xs">
               <q-avatar icon="delivery_dining" color="accent" text-color="white" size="2em" />
             </q-item-section>
@@ -217,7 +220,7 @@
               dense
               :to="{
                 path: '/user/orderlist/all',
-                query: { userId: userInfo.userId, status: '' },
+                query: { userId: userInfo.userId, status: '', type: 1 },
               }"
             >
               <q-item-section avatar top class="q-py-xs">
@@ -231,10 +234,13 @@
               </q-item-section>
             </q-item>
             <q-separator />
-            <q-item dense disable>
-              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
-                <strong>敬请期待</strong>
-              </q-tooltip>
+            <q-item
+              dense
+              :to="{
+                path: '/user/orderlist/all',
+                query: { userId: userInfo.userId, status: '', type: 2 },
+              }"
+            >
               <q-item-section avatar top class="q-py-xs">
                 <q-avatar icon="delivery_dining" color="accent" text-color="white" size="2em" />
               </q-item-section>

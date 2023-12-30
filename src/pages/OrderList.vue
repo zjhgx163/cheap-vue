@@ -17,7 +17,10 @@
                 <!-- 这里q-item 不加to，因为加上to会导致pc端整个变成可点击 -->
                 <q-item v-ripple v-bind:class="[itemPadding]" class="bg-secondary" dense>
                   <q-item-section side no-wrap>
-                    <img v-bind:src="item.itemImg" class="YL__order_img" />
+                    <img
+                      v-bind:src="item.itemImg == null ? '/static/no-data.png' : item.itemImg"
+                      class="YL__order_img"
+                    />
                   </q-item-section>
                   <q-item-section>
                     <q-item-label :lines="1" v-bind:class="[textSize, fontFamily, titleHeight]">
@@ -170,7 +173,7 @@ export default {
       // to: false,
     };
   },
-  props: ['userId', 'status'],
+  props: ['userId', 'status', 'type'],
   emits: ['need-login'],
   computed: {
     itemPadding: function () {
@@ -222,8 +225,10 @@ export default {
           return '淘宝';
         } else if (parameter == 2) {
           return '京东';
-        } else {
+        } else if (parameter == 3) {
           return '拼多多';
+        } else if (parameter == 4) {
+          return '美团';
         }
       };
     },
@@ -258,7 +263,7 @@ export default {
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
     // this.selectedTab = 'main';
-    this.getOrderList(this.userId, this.status);
+    this.getOrderList(this.userId, this.status, this.type);
 
     // this.windowWidth = window.innerWidth;
     // window.onresize = () => {
@@ -272,7 +277,7 @@ export default {
     this.isListEnd = false;
   },
   methods: {
-    getOrderList(userId, status) {
+    getOrderList(userId, status, type) {
       this.$q.loading.show({
         delay: 400, // ms
       });
@@ -280,6 +285,7 @@ export default {
         .post(`${global.config.domain}/order/list`, {
           userId: userId,
           status: status,
+          type: type,
           page: this.page,
         })
         .then((res) => {
@@ -318,6 +324,7 @@ export default {
           .post(`${global.config.domain}/order/list`, {
             userId: this.userId,
             status: this.status,
+            type: this.type,
             page: index,
           })
           .then((res) => {
