@@ -198,7 +198,7 @@ export default {
       //     return;
       //   }
       // }
-      this.uid = this.userInfo.id;
+      this.uid = this.userInfo.userId;
       if (this.uid == undefined || this.uid == null) {
         if (this.isWeixin()) {
           window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/${actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
