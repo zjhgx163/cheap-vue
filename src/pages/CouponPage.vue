@@ -185,7 +185,9 @@ export default {
 
     console.log('actId = ', this.actId);
     if (this.actId > 0) {
-      this.onClick(this.actId);
+      setTimeout(() => {
+        this.onClick(this.actId);
+      }, 500);
     }
   },
   methods: {
