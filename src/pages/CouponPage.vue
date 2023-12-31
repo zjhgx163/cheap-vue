@@ -201,6 +201,13 @@ export default {
       //   }
       // }
       this.uid = this.userInfo.userId;
+      // 加个保险
+      if (this.uid == null || this.uid == '') {
+        if (this.$q.localStorage.has('userInfo')) {
+          let userInfo = this.$q.localStorage.getItem('userInfo');
+          this.uid = userInfo.userId;
+        }
+      }
       if (this.uid == undefined || this.uid == null) {
         if (this.isWeixin()) {
           window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/${actId}&response_type=code&scope=snsapi_userinfo&state=waimai#wechat_redirect`;
