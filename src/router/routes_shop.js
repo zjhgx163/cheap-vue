@@ -192,11 +192,14 @@ const routes = [
   //     { path: 'cheap', component: () => import('pages/Index.vue') },
   //   ],
   // },
-
   {
-    path: '/:catchAll(.*)*',
+    path: '/404',
     component: () => import('pages/Error404.vue'),
   },
+  // {
+  //   path: '/:catchAll(.*)*',
+  //   component: () => import('pages/Error404.vue'),
+  // },
 ];
 
 export default routes;
