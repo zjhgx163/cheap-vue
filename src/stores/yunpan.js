@@ -76,13 +76,18 @@ export const useYunpanStore = defineStore('yunpan', {
     getYunpanItemContent(id, redirect) {
       return axios.post(`${global.config.domain}/yunpan/item/public/${id}`).then((res) => {
         if (res.data.code < 0) {
+          Loading.hide();
+
           Notify.create({
             type: 'negative',
             icon: 'warning',
             message: `${res.data.msg}`,
           });
-          Loading.hide();
-          redirect({ path: '/list' }, 301);
+          if (res.data.code == -210) {
+            redirect({ path: '/404' }, 404);
+          } else {
+            redirect({ path: '/list' }, 301);
+          }
         } else {
           this.itemDetail = res.data.data.item;
           this.isInvalid = res.data.data.invalid;

@@ -17,7 +17,7 @@ export default ssrMiddleware(({ app, resolve, render, serve }) => {
       })
       .catch((err) => {
         // oops, we had an error while rendering the page
-
+        console.log(err);
         // we were told to redirect to another URL
         if (err.url) {
           if (err.code) {
@@ -31,6 +31,7 @@ export default ssrMiddleware(({ app, resolve, render, serve }) => {
           // Should reach here only if no "catch-all" route
           // is defined in /src/routes
           res.status(404).send('404 | Page Not Found');
+          // res.status(404).redirect(resolve.urlPath('404'));
         } else if (process.env.DEV) {
           console.log(err.code);
           // well, we treat any other code as error;

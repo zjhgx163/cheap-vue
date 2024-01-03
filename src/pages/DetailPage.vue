@@ -468,7 +468,7 @@ export default {
       this.meta.ogimage.content = this.detail.mainImageUrl;
     }
 
-    this.meta.ogurl.content = 'https://www.hjdang.com/item/detail/' + this.$route.params.urlCode;
+    this.meta.ogurl.content = 'https://shop.hjdang.com/item/detail/' + this.$route.params.urlCode;
     this.meta.weibocreate.content = new Date();
     this.meta.weiboupdate.content = new Date();
     // if (process.env.CLIENT) {

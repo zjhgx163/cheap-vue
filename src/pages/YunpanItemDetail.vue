@@ -816,7 +816,7 @@ export default {
           );
           // console.log(this.item);
           if (this.item == null) {
-            this.$router.push({ path: '/error/404' });
+            this.$router.push({ path: '/404' });
           }
           if (this.listData.length < 30) {
             this.isListEnd = true;

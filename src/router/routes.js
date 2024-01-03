@@ -174,11 +174,15 @@ const routes = [
   //     { path: 'cheap', component: () => import('pages/Index.vue') },
   //   ],
   // },
-
   {
-    path: '/:catchAll(.*)*',
+    path: '/404',
     component: () => import('pages/Error404.vue'),
   },
+  // 这里为了能返回404的http status，不能把所有url都catch住。否则只会返回200的状态码
+  // {
+  //   path: '/:catchAll(.*)*',
+  //   component: () => import('pages/Error404.vue'),
+  // },
 ];
 
 export default routes;
