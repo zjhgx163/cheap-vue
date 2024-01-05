@@ -203,7 +203,7 @@
     @media(min-width: $breakpoint-xs-max)
       height: 3.2em
   &__list_line_height
-    line-height: 22px !important
+    line-height: 1.6em !important
   &__no_data
     @media(max-width: $breakpoint-xs-max)
       height: 5em
@@ -239,6 +239,8 @@
     color: #999999
     padding: 0 0.5em
     font-size: 0.8em
+  &__title_font_family
+    font-family: PingFangSC-Medium,Dosis,Open Sans,helvetica neue,-apple-system,arial,hiragino sans gb,microsoft yahei ui,microsoft yahei,simsun,sans-serif
 ins.adsbygoogle[data-ad-status="unfilled"]
   display: none !important
 </style>
@@ -321,7 +323,7 @@ export default {
       return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
     },
     textSize: function () {
-      return this.isBigScreen ? 'text-h8' : 'text-body2';
+      return this.isBigScreen ? 'text-subtitle2' : 'text-body2';
     },
     topArticleSize: function () {
       return this.isBigScreen ? 'text-body2' : 'text-overline';
