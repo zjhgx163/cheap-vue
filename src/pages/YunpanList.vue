@@ -96,8 +96,8 @@
                 <q-item-section class="q-pb-xs">
                   <q-item-label
                     :lines="2"
-                    v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
-                    class="text-black"
+                    v-bind:class="[fontFamily, lineHeight, titleHeight]"
+                    class="text-black text-subtitle2"
                   >
                     {{ item.title }}
                   </q-item-label>
@@ -327,7 +327,7 @@ export default {
       return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
     },
     textSize: function () {
-      return this.isBigScreen ? 'text-subtitle2' : 'text-body2';
+      return this.isBigScreen ? 'text-subtitle2' : 'text-subtitle2';
     },
     topArticleSize: function () {
       return this.isBigScreen ? 'text-body2' : 'text-overline';
