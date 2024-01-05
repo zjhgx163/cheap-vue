@@ -19,7 +19,11 @@
           </q-item-section>
 
           <q-item-section class="q-pb-xs">
-            <q-item-label :lines="2" class="text-black text-bold text-overline">
+            <q-item-label
+              :lines="2"
+              class="text-black text-bold text-overline"
+              v-bind:class="[lineHeight]"
+            >
               {{ item.title }}
             </q-item-label>
             <div class="row q-mt-sm" v-if="isBigScreen">
@@ -93,7 +97,7 @@
                   <q-item-label
                     :lines="2"
                     v-bind:class="[textSize, fontFamily, lineHeight, titleHeight]"
-                    class="text-black text-bold"
+                    class="text-black"
                   >
                     {{ item.title }}
                   </q-item-label>
