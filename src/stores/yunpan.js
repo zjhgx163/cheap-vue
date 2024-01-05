@@ -84,7 +84,7 @@ export const useYunpanStore = defineStore('yunpan', {
             message: `${res.data.msg}`,
           });
           if (res.data.code == -210) {
-            redirect({ path: '/404' }, 404);
+            redirect({ path: '/list' }, 404);
           } else {
             redirect({ path: '/list' }, 301);
           }
