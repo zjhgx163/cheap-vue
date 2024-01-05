@@ -97,7 +97,7 @@
                   <q-item-label
                     :lines="2"
                     v-bind:class="[fontFamily, lineHeight, titleHeight]"
-                    class="text-black text-subtitle2"
+                    class="text-black text-subtitle2 text-weight-medium"
                   >
                     {{ item.title }}
                   </q-item-label>
