@@ -42,7 +42,7 @@
                 </router-link>
               </q-item-label>
             </q-item>
-            <div class="q-pa-md">
+            <div class="q-pa-md" v-if="$q.platform.is.desktop">
               <q-card dark bordered class="flex-center text-white bg-grey-9">
                 <q-card-section>
                   <q-item dense class="q-pt-none">
@@ -71,6 +71,7 @@
                 </q-card-section>
               </q-card>
             </div>
+
             <div
               v-if="$q.platform.is.mobile"
               class="adsenseunitdetail q-pa-xs column flex-center"
@@ -84,6 +85,35 @@
                 data-ad-slot="6650477400"
                 data-ad-format="auto"
                 data-full-width-responsive="true"
+              >
+                <div class="q-pa-md">
+                  <q-card dark bordered class="flex-center text-white bg-grey-9">
+                    <q-card-section>
+                      <q-item dense class="q-pt-none">
+                        <q-item-section>
+                          <q-item-label class="column flex-center">
+                            <span class="text-caption text-bold"
+                              >精打细算，做聪明网购人。下单前先查优惠券，还有大额返利，比自己去平台买省下一个亿！：
+                              <a
+                                href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483916&idx=1&sn=2e36901033e066c96d44990b4b338e2f&chksm=c24e8f17f5390601ee49beb7e6f6eeba01ecfbe136e632bcc62bb40132d7ca8d595c8e91c56d&token=1769763799&lang=zh_CN#rd"
+                                style="text-decoration: underline"
+                                class="text-yellow text-subtitle2 text-bold"
+                              >
+                                领券返利 </a
+                              >,
+                              <a
+                                href="https://shop.hjdang.com"
+                                style="text-decoration: underline"
+                                class="text-yellow text-subtitle2 text-bold"
+                              >
+                                手慢无 </a
+                              >里都是挑选过的当天最优惠商品，折扣转瞬即逝，性价比全网最高，京东同样有返利。<br />
+                            </span>
+                          </q-item-label>
+                        </q-item-section>
+                      </q-item>
+                    </q-card-section>
+                  </q-card></div
               ></ins>
             </div>
             <q-item dense>
@@ -990,6 +1020,10 @@ export default {
   max-width: 100%
 .break-all img
   max-width: 100%
-ins.adsbygoogle[data-ad-status="unfilled"]
+ins.adsbygoogle div
   display: none !important
+ins.adsbygoogle[data-ad-status="unfilled"] div
+  display: block
 </style>
+<!-- ins.adsbygoogle[data-ad-status="unfilled"]
+  display: none !important -->
