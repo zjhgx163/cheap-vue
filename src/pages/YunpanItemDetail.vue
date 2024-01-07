@@ -261,7 +261,7 @@
                   :boundary-numbers="false"
                   :direction-links="true"
                   @update:model-value="pageNavigate"
-                  :disable="!isBigScreen"
+                  :disable="$q.platform.is.mobile"
                 >
                 </q-pagination>
               </div>
@@ -483,10 +483,10 @@ export default {
       _isReplyListEnd: 'isReplyListEnd',
     }),
     maxPage() {
-      return this.isBigScreen ? 6 : 4;
+      return this.$q.platform.is.desktop ? 6 : 4;
     },
     paginationSize() {
-      return this.isBigScreen ? '12px' : '9px';
+      return this.$q.platform.is.desktop ? '12px' : '9px';
     },
     // imagefullwidth: function () {
     //   return {
@@ -494,7 +494,7 @@ export default {
     //   };
     // },
     disable: function () {
-      return this.isBigScreen || this.isListEnd ? true : false;
+      return this.$q.platform.is.desktop || this.isListEnd ? true : false;
     },
 
     getTagColor: function () {
@@ -551,10 +551,10 @@ export default {
       return this.isWeixin();
     },
     noticefont: function () {
-      return this.isBigScreen ? 'text-subtitle1' : 'text-subtitle2';
+      return this.$q.platform.is.desktop ? 'text-subtitle1' : 'text-subtitle2';
     },
     avatarSize: function () {
-      return this.isBigScreen ? '2.7em' : '2.3em';
+      return this.$q.platform.is.desktop ? '2.7em' : '2.3em';
     },
   },
   setup() {

@@ -4,7 +4,7 @@
       <q-toolbar class="bg-secondary justify-around" v-bind:class="[itemPadding]">
         <div class="col-auto col-sm-auto q-pa-xs">
           <router-link :to="{ path: '/' }">
-            <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
+            <img src="hjd.png" spinner-color="white" :width="logoWidth" :height="logoHeight" />
           </router-link>
         </div>
         <div class="col col-sm-5 justify-center">
@@ -129,11 +129,12 @@
           href="https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=bf392d7b57b18de6b92053e1c62293b2&from=console"
           target="_blank"
         >
-          <q-img
-            v-if="isBigScreen"
+          <img
+            v-if="$q.platform.is.desktop"
             src="/advertisment/tencent_cloud_1200X90.jpg"
-            spinner-color="white"
-            height="3.0em"
+            height="42px"
+            width="1000px"
+            style="object-fit: cover; object-position: 50% 50%"
           />
           <q-img
             v-else
@@ -160,7 +161,7 @@
             </keep-alive>
           </router-view>
         </div>
-        <div v-if="isBigScreen" dark class="col bg-primary">
+        <div v-if="$q.platform.is.desktop" dark class="col bg-primary">
           <div>
             <q-card bordered class="column bg-secondary items-start q-ml-sm">
               <q-card-section>
@@ -244,7 +245,7 @@
     <q-footer reveal class="bg-secondary q-pt-none q-pb-xs YL__1000w">
       <q-toolbar
         class="items-center justify-between q-px-lg q-py-xs"
-        v-if="$route.meta.isList && !isBigScreen"
+        v-if="$route.meta.isList && $q.platform.is.mobile"
       >
         <q-btn
           flat
@@ -379,16 +380,19 @@ export default {
   },
   computed: {
     itemPadding() {
-      return this.isBigScreen ? 'q-py-xs' : 'q-py-xs';
+      return this.$q.platform.is.desktop ? 'q-py-xs' : 'q-py-xs';
     },
     logoWidth() {
-      return this.isBigScreen ? '110px' : '90px';
+      return this.$q.platform.is.desktop ? '110px' : '90px';
+    },
+    logoHeight() {
+      return this.$q.platform.is.desktop ? '46.3px' : '37.9px';
     },
     shopButtionSize() {
-      return this.isBigScreen ? '1.0em' : '0.7em';
+      return this.$q.platform.is.desktop ? '1.0em' : '0.7em';
     },
     addButtonSize() {
-      return this.isBigScreen ? '1.0em' : '0.8em';
+      return this.$q.platform.is.desktop ? '1.0em' : '0.8em';
     },
 
     // categoryTab: function () {

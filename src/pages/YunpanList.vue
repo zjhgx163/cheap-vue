@@ -26,13 +26,16 @@
             >
               {{ item.title }}
             </q-item-label>
-            <div class="row q-mt-sm" v-if="isBigScreen">
+            <div class="row q-mt-sm" v-if="$q.platform.is.desktop">
               <q-badge color="pink-4" transparent label="置顶" class="col-auto" />
               <div class="col"></div>
             </div>
           </q-item-section>
           <q-item-section class="q-pb-xs" side>
-            <q-item-label v-if="isBigScreen" class="row q-pt-sm q-pb-xs q-pr-xs YL__auther">
+            <q-item-label
+              v-if="$q.platform.is.desktop"
+              class="row q-pt-sm q-pb-xs q-pr-xs YL__auther"
+            >
               <q-btn outline class="text-black" label="点击查看" />
             </q-item-label>
             <div v-else class="row">
@@ -67,7 +70,7 @@
               v-bind:key="item.id"
               v-for="item in listData"
               class="bg-primary"
-              v-bind:class="{ 'q-pb-xs': !isBigScreen }"
+              v-bind:class="{ 'q-pb-xs': $q.platform.is.mobile }"
             >
               <!--               
                 clickable
@@ -312,25 +315,25 @@ export default {
       }
     },
     paginationSize() {
-      return this.isBigScreen ? '18px' : '15px';
+      return this.$q.platform.is.desktop ? '18px' : '15px';
     },
     maxPage() {
-      return this.isBigScreen ? 6 : 4;
+      return this.$q.platform.is.desktop ? 6 : 4;
     },
     pricePading() {
-      return this.isBigScreen ? 'q-pt-xs q-pb-sm' : 'q-pt-xs';
+      return this.$q.platform.is.desktop ? 'q-pt-xs q-pb-sm' : 'q-pt-xs';
     },
     // pageNavigateHidden() {
     //   return !this.isBigScreen;
     // },
     itemPadding: function () {
-      return this.isBigScreen ? 'q-py-md' : 'q-py-sm';
+      return this.$q.platform.is.desktop ? 'q-py-md' : 'q-py-sm';
     },
     textSize: function () {
-      return this.isBigScreen ? 'text-subtitle2' : 'text-subtitle2';
+      return this.$q.platform.is.desktop ? 'text-subtitle2' : 'text-subtitle2';
     },
     topArticleSize: function () {
-      return this.isBigScreen ? 'text-body2' : 'text-overline';
+      return this.$q.platform.is.desktop ? 'text-body2' : 'text-overline';
     },
 
     host: function () {
@@ -340,7 +343,7 @@ export default {
     //   return this.isBigScreen ? false : true;
     // },
     disable: function () {
-      return this.isBigScreen || this.isListEnd || this.stopLoading;
+      return this.$q.platform.is.desktop || this.isListEnd || this.stopLoading;
     },
 
     getTagColor: function () {
