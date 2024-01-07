@@ -434,9 +434,9 @@
   max-width: 100%
 .break-all img
   max-width: 100%
-ins.adsbygoogle[data-ad-status="unfilled"]
-  display: none !important
 </style>
+<!-- ins.adsbygoogle[data-ad-status="unfilled"]
+  display: none !important -->
 
 <script>
 import 'src/config';
