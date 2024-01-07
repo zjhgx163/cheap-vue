@@ -251,7 +251,7 @@
               <div>
                 <q-item dense class="q-py-sm">
                   <q-item-section avatar top style="min-width: 30px">
-                    <q-avatar :src="item.avatar">
+                    <q-avatar :src="item.avatar" :size="avatarSize">
                       <img :src="userAvatar" :alt="item.auther" />
                     </q-avatar>
                   </q-item-section>
@@ -524,7 +524,7 @@ export default {
       return this.isBigScreen ? 'text-subtitle1' : 'text-subtitle2';
     },
     avatarSize: function () {
-      return this.isBigScreen ? '2.7em' : '1.9em';
+      return this.isBigScreen ? '2.7em' : '2.3em';
     },
   },
   setup() {
