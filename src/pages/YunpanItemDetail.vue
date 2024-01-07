@@ -120,7 +120,12 @@
             <q-item class="items-center">
               <q-item-section avatar style="min-width: 30px">
                 <q-avatar :size="avatarSize" v-if="item.avatar != '' && item.avatar != null">
-                  <img :src="item.avatar" :alt="item.auther" />
+                  <img
+                    :src="item.avatar"
+                    :alt="item.auther"
+                    :width="avatarSize"
+                    :height="avatarSize"
+                  />
                 </q-avatar>
                 <q-avatar
                   :size="avatarSize"
@@ -186,7 +191,12 @@
                             v-if="reply.replyAvatar != '' && reply.replyAvatar != null"
                             :size="avatarSize"
                           >
-                            <img :src="reply.replyAvatar" :alt="reply.replyAuther" />
+                            <img
+                              :src="reply.replyAvatar"
+                              :alt="reply.replyAuther"
+                              :width="avatarSize"
+                              :height="avatarSize"
+                            />
                           </q-avatar>
                           <q-avatar
                             :size="avatarSize"
@@ -252,7 +262,7 @@
                 <q-item dense class="q-py-sm">
                   <q-item-section avatar top style="min-width: 30px">
                     <q-avatar :src="item.avatar" size="2.0em">
-                      <img :src="userAvatar" :alt="item.auther" />
+                      <img :src="userAvatar" :alt="item.auther" width="2.0em" height="2.0em" />
                     </q-avatar>
                   </q-item-section>
                   <!-- <q-item-section class="YL__auther">
@@ -289,8 +299,8 @@
             <q-item class="q-pt-sm justify-start items-center">
               <q-item-section avatar class="q-pr-sm">
                 <!-- <q-icon name="o_info" color="indigo-7" /> -->
-                <q-avatar size="1.9em">
-                  <img src="david_avatar.png" alt="notice" />
+                <q-avatar size="2.0em">
+                  <img src="david_avatar.png" alt="notice" width="2.0em" height="2.0em" />
                 </q-avatar>
               </q-item-section>
 
