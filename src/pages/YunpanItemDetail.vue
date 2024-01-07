@@ -251,7 +251,7 @@
               <div>
                 <q-item dense class="q-py-sm">
                   <q-item-section avatar top style="min-width: 30px">
-                    <q-avatar :src="item.avatar" :size="avatarSize">
+                    <q-avatar :src="item.avatar" size="2.0em">
                       <img :src="userAvatar" :alt="item.auther" />
                     </q-avatar>
                   </q-item-section>
