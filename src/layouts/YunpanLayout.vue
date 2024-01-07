@@ -218,8 +218,8 @@
               <q-separator inset />
             </q-card>
           </div>
-          <div class="q-mt-md q-mx-sm">
-            <div class="adsenseunitlayout">
+          <div class="q-mt-md q-mx-sm" style="min-height: 600px">
+            <div class="adsenseunitlayout column flex-center">
               <ins
                 class="adsbygoogle"
                 style="display: block"

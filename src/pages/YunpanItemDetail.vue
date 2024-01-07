@@ -71,7 +71,11 @@
                 </q-card-section>
               </q-card>
             </div>
-            <div v-if="$q.platform.is.mobile" class="adsenseunitdetail q-pa-xs">
+            <div
+              v-if="$q.platform.is.mobile"
+              class="adsenseunitdetail q-pa-xs column flex-center"
+              style="min-height: 325px"
+            >
               <!-- in-article-aquare2 -->
               <ins
                 class="adsbygoogle"
@@ -154,7 +158,11 @@
                 </q-item-label>
               </q-item-section>
             </q-item>
-            <div v-if="$q.platform.is.desktop" class="adsenseunitdetail q-pa-xs">
+            <div
+              v-if="$q.platform.is.desktop"
+              class="adsenseunitdetail q-pa-xs column flex-center"
+              style="min-height: 280px"
+            >
               <!-- in-article-aquare2 -->
               <ins
                 class="adsbygoogle"
