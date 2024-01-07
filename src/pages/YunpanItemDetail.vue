@@ -74,7 +74,7 @@
 
             <div
               v-if="$q.platform.is.mobile"
-              class="adsenseunitdetail q-pa-xs column flex-center"
+              class="adsenseunitdetail q-pa-xs"
               style="min-height: 325px"
             >
               <!-- in-article-aquare2 -->
@@ -161,7 +161,7 @@
             </q-item>
             <div
               v-if="$q.platform.is.desktop"
-              class="adsenseunitdetail q-pa-xs column flex-center"
+              class="adsenseunitdetail q-pa-xs"
               style="min-height: 280px"
             >
               <!-- in-article-aquare2 -->
