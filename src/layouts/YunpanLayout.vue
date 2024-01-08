@@ -61,7 +61,7 @@
             > -->
           </q-btn-dropdown>
           <q-avatar size="2.5em">
-            <img :src="avatar" alt="avatar" />
+            <img :src="avatar" alt="avatar" width="35px" height="35px" />
           </q-avatar>
 
           <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
