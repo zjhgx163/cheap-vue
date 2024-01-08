@@ -346,7 +346,12 @@
               <!-- <q-card-section> <div class="flex-center">==></div> </q-card-section> -->
 
               <q-card-section class="flex justif-start">
-                <img src="laohuweinifuwu.jpeg" alt="wechat_code" width="154.8px" height="154.8px" />
+                <q-img
+                  src="laohuweinifuwu.jpeg"
+                  alt="wechat_code"
+                  width="154.8px"
+                  height="154.8px"
+                />
               </q-card-section>
             </q-card-section>
             <q-card-section v-else>
@@ -361,7 +366,7 @@
                   </q-item-section>
                 </q-item>
                 <q-item class="flex-center">
-                  <img src="donate.jpg" alt="wechat_donate" width="265px" height="265px" />
+                  <q-img src="donate.jpg" alt="wechat_donate" width="265px" height="265px" />
                 </q-item>
               </div>
               <div v-else>
@@ -384,7 +389,7 @@
                   </q-item-section>
                 </q-item>
                 <q-item class="flex-center">
-                  <img src="laohuweinifuwu.jpeg" alt="wechat_code" width="119px" height="119px" />
+                  <q-img src="laohuweinifuwu.jpeg" alt="wechat_code" width="120px" height="120px" />
                 </q-item>
               </div>
             </q-card-section>

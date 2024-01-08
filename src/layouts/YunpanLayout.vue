@@ -4,7 +4,13 @@
       <q-toolbar class="bg-secondary justify-around" v-bind:class="[itemPadding]">
         <div class="col-auto col-sm-auto q-pa-xs">
           <router-link :to="{ path: '/' }">
-            <img src="hjd.png" spinner-color="white" :width="logoWidth" :height="logoHeight" />
+            <img
+              src="hjd.png"
+              spinner-color="white"
+              :width="logoWidth"
+              :height="logoHeight"
+              alt="logo"
+            />
           </router-link>
         </div>
         <div class="col col-sm-5 justify-center">
@@ -55,7 +61,7 @@
             > -->
           </q-btn-dropdown>
           <q-avatar size="2.5em">
-            <img :src="avatar" />
+            <img :src="avatar" alt="avatar" />
           </q-avatar>
 
           <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
@@ -129,18 +135,19 @@
           href="https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=bf392d7b57b18de6b92053e1c62293b2&from=console"
           target="_blank"
         >
-          <img
+          <q-img
             v-if="$q.platform.is.desktop"
             src="/advertisment/tencent_cloud_1200X90.jpg"
             height="42px"
             width="1000px"
-            style="object-fit: cover; object-position: 50% 50%"
+            alt="tentent_adver"
           />
-          <img
+          <q-img
             v-else
             src="/advertisment/tencent_cloud_1040X100.jpg"
             height="40.38px"
             width="100%"
+            alt="tentent_adver"
           />
         </a>
       </div>
@@ -235,7 +242,12 @@
 
           <div class="q-mt-md q-ml-md q-pr-sm">
             <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
-              <q-img src="/advertisment/aliyun.jpeg" spinner-color="white" width="100%" />
+              <q-img
+                src="/advertisment/aliyun.jpeg"
+                spinner-color="white"
+                width="226px"
+                height="188.3px"
+              />
             </a>
           </div>
         </div>
