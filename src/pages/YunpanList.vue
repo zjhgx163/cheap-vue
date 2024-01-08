@@ -14,7 +14,7 @@
         >
           <q-item-section avatar top>
             <q-avatar size="2.0em">
-              <img src="david_avatar.png" alt="站长" />
+              <img src="david_avatar.png" alt="站长" width="2.0em" height="2.0em" />
             </q-avatar>
           </q-item-section>
 
@@ -88,7 +88,7 @@
               >
                 <q-item-section avatar top>
                   <q-avatar v-if="item.avatar != '' && item.avatar != null">
-                    <img :src="item.avatar" alt="头像" />
+                    <img :src="item.avatar" alt="头像" :width="avatarSize" :height="avatarSize" />
                   </q-avatar>
 
                   <q-avatar :style="getAvatarColor(item.auther)" text-color="white" v-else>
@@ -407,6 +407,9 @@ export default {
       return (parameter) => {
         return parameter.slice(0, 1);
       };
+    },
+    avatarSize: function () {
+      return this.$q.platform.is.desktop ? '2.7em' : '2.3em';
     },
   },
   setup() {

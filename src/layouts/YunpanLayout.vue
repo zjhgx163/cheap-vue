@@ -136,10 +136,10 @@
             width="1000px"
             style="object-fit: cover; object-position: 50% 50%"
           />
-          <q-img
+          <img
             v-else
             src="/advertisment/tencent_cloud_1040X100.jpg"
-            spinner-color="white"
+            height="40.38px"
             width="100%"
           />
         </a>
