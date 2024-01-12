@@ -71,22 +71,20 @@
                 </q-card-section>
               </q-card>
             </div>
-
-            <div
-              v-if="$q.platform.is.mobile"
-              class="adsenseunitdetail q-pa-xs"
-              style="min-height: 325px"
-            >
-              <!-- in-article-aquare2 -->
-              <ins
-                class="adsbygoogle"
-                style="display: block"
-                data-ad-client="ca-pub-3935005489954231"
-                data-ad-slot="6650477400"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
+            <div style="min-height: 349px">
+              <div v-if="$q.platform.is.mobile" class="adsenseunitdetail q-pa-xs">
+                <!-- in-article-aquare2 -->
+                <ins
+                  class="adsbygoogle"
+                  style="display: block"
+                  data-ad-client="ca-pub-3935005489954231"
+                  data-ad-slot="6650477400"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                ></ins>
+              </div>
             </div>
+
             <q-item dense>
               <q-item-section>
                 <!-- <q-item-label class="column flex-center"> </q-item-label> -->
