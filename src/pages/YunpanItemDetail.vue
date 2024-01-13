@@ -73,8 +73,7 @@
             </div>
             <div
               v-if="$q.platform.is.mobile"
-              class="adsenseunitdetail q-pa-xs"
-              style="height: 345px"
+              class="adsenseunitdetail q-pa-xs mobile_adsense_dimension"
             >
               <!-- in-article-aquare2 -->
               <ins
@@ -161,8 +160,7 @@
             </q-item>
             <div
               v-if="$q.platform.is.desktop"
-              class="adsenseunitdetail q-pa-xs"
-              style="height: 280px"
+              class="adsenseunitdetail q-pa-xs pc_adsense_dimension"
             >
               <!-- in-article-aquare2 -->
               <ins
