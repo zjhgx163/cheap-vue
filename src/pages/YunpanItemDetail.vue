@@ -73,12 +73,11 @@
             </div>
             <div
               v-if="$q.platform.is.mobile"
-              class="adsenseunitdetail q-pa-xs"
-              style="min-height: 340px !important"
+              class="adsenseunitdetail q-pa-xs mobile_adsense_dimension"
             >
               <!-- in-article-aquare2 -->
               <ins
-                class="adsbygoogle"
+                class="adsbygoogle mobile_adsense_dimension"
                 style="display: block"
                 data-ad-client="ca-pub-3935005489954231"
                 data-ad-slot="6650477400"
@@ -161,12 +160,11 @@
             </q-item>
             <div
               v-if="$q.platform.is.desktop"
-              class="adsenseunitdetail q-pa-xs"
-              style="min-height: 280px !important"
+              class="adsenseunitdetail q-pa-xs pc_adsense_dimension"
             >
               <!-- in-article-aquare2 -->
               <ins
-                class="adsbygoogle"
+                class="adsbygoogle pc_adsense_dimension"
                 style="display: block"
                 data-ad-client="ca-pub-3935005489954231"
                 data-ad-slot="6650477400"
@@ -439,6 +437,14 @@
   max-width: 100%
 .break-all img
   max-width: 100%
+.mobile_adsense_dimension
+  height: 345px
+  @media(min-width: 429px)
+    height: 358px
+  @media(max-width: 380px)
+    height: 312px
+.pc_adsense_dimension
+  height: 280px
 </style>
 <!-- ins.adsbygoogle[data-ad-status="unfilled"]
   display: none !important -->
