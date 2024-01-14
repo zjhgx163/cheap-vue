@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf" style="min-height: 100vh">
-    <q-header reveal class="bg-primary text-grey-8 YL__1000w q-pb-xs">
+    <q-header reveal height-hint="120" class="bg-primary text-grey-8 YL__1000w q-pb-xs">
       <q-toolbar class="bg-secondary justify-around" v-bind:class="[itemPadding]">
         <div class="col-auto col-sm-auto q-pa-xs">
           <router-link :to="{ path: '/' }">
@@ -27,14 +27,6 @@
             v-on:keyup.enter="search"
             hide-bottom-space
           >
-            <!-- <template v-if="searchKey" v-slot:append>
-              <q-icon
-                v-bind:class="{ hidden: isSearching }"
-                name="cancel"
-                @click.stop.prevent="searchKey = null"
-                class="cursor-pointer"
-              />
-            </template> -->
             <template v-slot:after>
               <q-btn
                 name="search"
@@ -52,14 +44,7 @@
           </q-input>
         </div>
         <div class="col-sm-4 gt-sm row flex-center">
-          <q-btn-dropdown unelevated flat :label="userName" @click="clickUser">
-            <!-- <a
-              class="text-grey-9 text-weight-bold text-subtitle2"
-              style="text-decoration: underline"
-            >
-              {{ userName }}</a
-            > -->
-          </q-btn-dropdown>
+          <q-btn-dropdown unelevated flat :label="userName" @click="clickUser"> </q-btn-dropdown>
           <q-avatar size="2.5em">
             <img :src="avatar" alt="avatar" width="35px" height="35px" />
           </q-avatar>
