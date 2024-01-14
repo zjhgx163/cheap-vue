@@ -129,7 +129,7 @@
                     <div class="col items-center justify-end row">
                       <q-chip
                         outline
-                        size="sm"
+                        size="xs"
                         :color="getTagColor(item.tag)"
                         :icon="getTagIcon(item.tag)"
                         text-color="white"
@@ -197,7 +197,7 @@
 .YL
   &__auther
     @media(max-width: $breakpoint-xs-max)
-      font-size: 0.8em
+      font-size: 0.7em
       height: 2.1em
     @media(min-width: $breakpoint-xs-max)
       font-size: 0.9em
