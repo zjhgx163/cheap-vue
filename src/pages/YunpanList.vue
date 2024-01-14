@@ -1,7 +1,7 @@
 <template>
   <q-page class="bg-secondary" :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
-    <q-list dense class="bg-secondary" bordered>
+    <q-list dense separator class="bg-secondary">
       <div v-bind:key="item.id" v-for="item in topArticleList" class="q-pb-xs">
         <q-item
           dense
