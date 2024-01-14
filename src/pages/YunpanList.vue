@@ -129,7 +129,7 @@
                     <div class="col items-center justify-end row">
                       <q-chip
                         outline
-                        size="xs"
+                        :size="chipSize"
                         :color="getTagColor(item.tag)"
                         :icon="getTagIcon(item.tag)"
                         text-color="white"
@@ -410,6 +410,9 @@ export default {
     },
     avatarSize: function () {
       return this.$q.platform.is.desktop ? '2.7em' : '2.3em';
+    },
+    chipSize: function () {
+      return this.$q.platform.is.desktop ? 'sm' : 'xs';
     },
   },
   setup() {
