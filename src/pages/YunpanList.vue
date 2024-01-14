@@ -412,7 +412,7 @@ export default {
       return this.$q.platform.is.desktop ? '2.7em' : '2.3em';
     },
     chipSize: function () {
-      return this.$q.platform.is.desktop ? 'sm' : '0.75em';
+      return this.$q.platform.is.desktop ? 'sm' : '0.70em';
     },
   },
   setup() {
