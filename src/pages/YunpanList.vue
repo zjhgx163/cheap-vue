@@ -197,7 +197,7 @@
 .YL
   &__auther
     @media(max-width: $breakpoint-xs-max)
-      font-size: 0.7em
+      font-size: 0.75em
       height: 2.1em
     @media(min-width: $breakpoint-xs-max)
       font-size: 0.9em
@@ -412,7 +412,7 @@ export default {
       return this.$q.platform.is.desktop ? '2.7em' : '2.3em';
     },
     chipSize: function () {
-      return this.$q.platform.is.desktop ? 'sm' : 'xs';
+      return this.$q.platform.is.desktop ? 'sm' : '0.8em';
     },
   },
   setup() {
