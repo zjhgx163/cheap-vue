@@ -763,6 +763,14 @@ export default {
     this.item = this._detail;
     this.previousItem = this._previousItem;
     this.nextItem = this._nextItem;
+    if (this.$q.platform.is.mobile) {
+      if (this.previousItem.title.length > 8) {
+        this.previousItem.title = this.previousItem.title.substr(0, 7) + '..';
+      }
+      if (this.nextItem.title.length > 8) {
+        this.nextItem.title = this.nextItem.title.substr(0, 7) + '..';
+      }
+    }
     this.listData = this._replyList;
     this.max = this._replyMax;
     this.isListEnd = this._isReplyListEnd;
@@ -946,6 +954,14 @@ export default {
           this._contentStr = res.data.data.contentStr;
           this.previousItem = res.data.data.previousItem;
           this.nextItem = res.data.data.nextItem;
+          if (this.$q.platform.is.mobile) {
+            if (this.previousItem.title.length > 8) {
+              this.previousItem.title = this.previousItem.title.substr(0, 7) + '..';
+            }
+            if (this.nextItem.title.length > 8) {
+              this.nextItem.title = this.nextItem.title.substr(0, 7) + '..';
+            }
+          }
           this.listData = res.data.data.firstReplyPage.records;
           this.max = Math.ceil(
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
