@@ -180,7 +180,7 @@
                   <q-item-label>
                     <q-btn
                       no-caps
-                      text-color="dark"
+                      :text-color="previousItem == null ? 'grey-4' : 'dark'"
                       fab-mini
                       icon="keyboard_arrow_left"
                       flat
@@ -198,7 +198,7 @@
                   <q-item-label>
                     <q-btn
                       no-caps
-                      text-color="dark"
+                      :text-color="nextItem == null ? 'grey-4' : 'dark'"
                       fab-mini
                       icon-right="keyboard_arrow_right"
                       flat
