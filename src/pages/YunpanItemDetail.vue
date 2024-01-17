@@ -213,8 +213,50 @@
                   </q-item-label>
                 </q-item-section>
               </q-item>
-              <q-separator inset />
             </div>
+            <div v-else>
+              <q-item>
+                <q-item-section>
+                  <q-item-label>
+                    <q-btn
+                      no-caps
+                      :text-color="previousItem == null ? 'grey-4' : 'dark'"
+                      fab-mini
+                      icon="keyboard_arrow_left"
+                      flat
+                      :disable="previousItem == null"
+                      :color="previousItem == null ? 'grey-4' : 'dark'"
+                      dense
+                      stack
+                      label-position="left"
+                      :label="previousItem == null ? '' : previousItem.title"
+                      :to="previousItem == null ? '' : `/d/${previousItem.id}`"
+                      style="font-size: 0.9em"
+                    />
+                  </q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-item-label>
+                    <q-btn
+                      no-caps
+                      :text-color="nextItem == null ? 'grey-4' : 'dark'"
+                      flat
+                      fab-mini
+                      icon="keyboard_arrow_right"
+                      stack
+                      :disable="nextItem == null"
+                      :color="nextItem == null ? 'grey-4' : ''"
+                      dense
+                      label-position="right"
+                      :label="nextItem == null ? '' : nextItem.title"
+                      :to="nextItem == null ? '' : `/d/${nextItem.id}`"
+                      style="font-size: 0.9em"
+                    />
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+            </div>
+            <q-separator inset />
 
             <!-- <div class="adsenseunit q-pa-xs">
               <ins
