@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf" style="min-height: 100vh">
+  <q-layout view="hHh lpR fFf">
     <q-header reveal height-hint="120" class="bg-primary text-grey-8 YL__1000w q-pb-xs">
       <q-toolbar class="bg-secondary justify-around" v-bind:class="[itemPadding]">
         <div class="col-auto col-sm-auto q-pa-xs">
