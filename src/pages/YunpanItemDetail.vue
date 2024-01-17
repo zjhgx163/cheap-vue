@@ -227,7 +227,6 @@
                       :disable="previousItem == null"
                       :color="previousItem == null ? 'grey-4' : 'dark'"
                       dense
-                      stack
                       label-position="left"
                       :label="previousItem == null ? '' : previousItem.title"
                       :to="previousItem == null ? '' : `/d/${previousItem.id}`"
@@ -240,12 +239,11 @@
                     <q-btn
                       no-caps
                       :text-color="nextItem == null ? 'grey-4' : 'dark'"
-                      flat
                       fab-mini
-                      icon="keyboard_arrow_right"
-                      stack
+                      icon-right="keyboard_arrow_right"
+                      flat
                       :disable="nextItem == null"
-                      :color="nextItem == null ? 'grey-4' : ''"
+                      :color="nextItem == null ? 'grey-4' : 'dark'"
                       dense
                       label-position="right"
                       :label="nextItem == null ? '' : nextItem.title"
@@ -855,7 +853,6 @@ export default {
       }
       // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
     }
-    console.log('ffff', Object.keys(this.item).length);
     if (Object.keys(this.item).length === 0) {
       console.log(this.$route.params.id);
       this.$q.loading.show({
