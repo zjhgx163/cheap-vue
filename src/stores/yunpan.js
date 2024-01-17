@@ -14,6 +14,8 @@ export const useYunpanStore = defineStore('yunpan', {
     max: 0,
     prefetchFlag: 0,
     itemDetail: {},
+    previousItem: {},
+    nextItem: {},
     replyList: [],
     replyMax: 0,
     isReplyListEnd: false,
@@ -90,6 +92,8 @@ export const useYunpanStore = defineStore('yunpan', {
           }
         } else {
           this.itemDetail = res.data.data.item;
+          this.previousItem = res.data.data.previousItem;
+          this.nextItem = res.data.data.nextItem;
           this.isInvalid = res.data.data.invalid;
           this.contentStr = res.data.data.contentStr;
           this.replyList = res.data.data.firstReplyPage.records;

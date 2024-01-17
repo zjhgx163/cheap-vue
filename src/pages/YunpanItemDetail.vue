@@ -172,7 +172,49 @@
                 data-full-width-responsive="true"
               ></ins>
             </div>
+
             <q-separator inset />
+            <div v-if="$q.platform.is.desktop">
+              <q-item>
+                <q-item-section>
+                  <q-item-label>
+                    <q-btn
+                      no-caps
+                      text-color="dark"
+                      fab-mini
+                      icon="keyboard_arrow_left"
+                      flat
+                      :disable="previousItem == null"
+                      :color="previousItem == null ? 'grey-4' : 'dark'"
+                      dense
+                      label-position="left"
+                      :label="previousItem == null ? '' : previousItem.title"
+                      :to="previousItem == null ? '' : `/d/${previousItem.id}`"
+                      style="font-size: 0.9em"
+                    />
+                  </q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-item-label>
+                    <q-btn
+                      no-caps
+                      text-color="dark"
+                      fab-mini
+                      icon-right="keyboard_arrow_right"
+                      flat
+                      :disable="nextItem == null"
+                      :color="nextItem == null ? 'grey-4' : 'dark'"
+                      dense
+                      label-position="right"
+                      :label="nextItem == null ? '' : nextItem.title"
+                      :to="nextItem == null ? '' : `/d/${nextItem.id}`"
+                      style="font-size: 0.9em"
+                    />
+                  </q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-separator inset />
+            </div>
 
             <!-- <div class="adsenseunit q-pa-xs">
               <ins
@@ -466,6 +508,8 @@ export default {
   data() {
     return {
       item: {},
+      previousItem: {},
+      nextItem: {},
       listData: [],
       host: global.config.domain,
       current: 1,
@@ -486,6 +530,8 @@ export default {
   computed: {
     ...mapState(useYunpanStore, {
       _detail: 'itemDetail',
+      _previousItem: 'previousItem',
+      _nextItem: 'nextItem',
       _replyList: 'replyList',
       _replyMax: 'replyMax',
       _contentStr: 'contentStr',
@@ -675,6 +721,8 @@ export default {
   created() {
     console.log('yunpanItemDetail created');
     this.item = this._detail;
+    this.previousItem = this._previousItem;
+    this.nextItem = this._nextItem;
     this.listData = this._replyList;
     this.max = this._replyMax;
     this.isListEnd = this._isReplyListEnd;
@@ -765,7 +813,9 @@ export default {
       }
       // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
     }
+    console.log('ffff', Object.keys(this.item).length);
     if (Object.keys(this.item).length === 0) {
+      console.log(this.$route.params.id);
       this.$q.loading.show({
         delay: 400, // ms
       });
@@ -805,6 +855,10 @@ export default {
     //   }, 1000);
     //   console.log('wait 1s AdverDetailInsert');
     // }
+  },
+
+  unmounted() {
+    console.log('yunpanItemDetail unmounted');
   },
   methods: {
     getReplyList() {
@@ -851,6 +905,8 @@ export default {
           this.item = res.data.data.item;
           this.isInvalid = res.data.data.invalid;
           this._contentStr = res.data.data.contentStr;
+          this.previousItem = res.data.data.previousItem;
+          this.nextItem = res.data.data.nextItem;
           this.listData = res.data.data.firstReplyPage.records;
           this.max = Math.ceil(
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
