@@ -215,7 +215,7 @@
               </q-item>
             </div>
             <div v-else>
-              <q-item>
+              <q-item class="q-pa-xs">
                 <q-item-section>
                   <q-item-label>
                     <q-btn
@@ -231,7 +231,7 @@
                       label-position="left"
                       :label="previousItem == null ? '' : previousItem.title"
                       :to="previousItem == null ? '' : `/d/${previousItem.id}`"
-                      style="font-size: 0.9em"
+                      class="text-caption"
                     />
                   </q-item-label>
                 </q-item-section>
@@ -250,7 +250,7 @@
                       label-position="right"
                       :label="nextItem == null ? '' : nextItem.title"
                       :to="nextItem == null ? '' : `/d/${nextItem.id}`"
-                      style="font-size: 0.9em"
+                      class="text-caption"
                     />
                   </q-item-label>
                 </q-item-section>
