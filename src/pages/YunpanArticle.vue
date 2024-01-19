@@ -446,7 +446,7 @@ export default {
           page: this.current,
           itemId: this.item.id,
           isInvalid: this.isInvalid,
-          isArticle: true,
+          article: true,
         })
         .then((res) => {
           // console.log(res.data.data);
