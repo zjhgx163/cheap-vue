@@ -211,7 +211,7 @@ import { reactive } from 'vue';
 import { useQuasar } from 'quasar';
 
 export default {
-  name: 'YunpanItemDetail',
+  name: 'YunpanArticle',
   data() {
     return {
       item: {},
@@ -446,6 +446,7 @@ export default {
           page: this.current,
           itemId: this.item.id,
           isInvalid: this.isInvalid,
+          isArticle: true,
         })
         .then((res) => {
           // console.log(res.data.data);
@@ -485,7 +486,7 @@ export default {
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
           );
           if (this.item == null) {
-            this.$router.push({ path: '/error/404S' });
+            this.$router.push({ path: '/error/404' });
           }
           this.setAnotherTitle(this.item.title + ' - 阿里云盘 - 好家当');
           // this.title = this._detail.title;

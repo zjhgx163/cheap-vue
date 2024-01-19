@@ -125,7 +125,11 @@ export const useYunpanStore = defineStore('yunpan', {
             message: `${res.data.msg}`,
           });
           Loading.hide();
-          redirect({ path: '/list' }, 301);
+          if (res.data.code == -210) {
+            redirect({ path: '/list' }, 404);
+          } else {
+            redirect({ path: '/list' }, 301);
+          }
         } else {
           this.itemDetail = res.data.data.article;
           this.replyList = res.data.data.firstReplyPage.records;
