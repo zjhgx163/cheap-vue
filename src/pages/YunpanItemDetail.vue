@@ -306,11 +306,9 @@
                             </div></q-item-label
                           >
 
-                          <q-item-label
-                            class="YL__title_font_family YL__list_line_height text-body2"
-                          >
+                          <q-item-label class="YL__list_line_height">
                             <div
-                              class="text-caption Post-body break-all q-mt-sm"
+                              class="text-body2 Post-body break-all q-mt-sm"
                               v-html="reply.content"
                             ></div>
 
