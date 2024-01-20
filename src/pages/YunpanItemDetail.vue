@@ -310,7 +310,7 @@
                             class="YL__title_font_family YL__list_line_height text-body2"
                           >
                             <div
-                              class="text-body2 Post-body break-all q-mt-sm"
+                              class="text-caption Post-body break-all q-mt-sm"
                               v-html="reply.content"
                             ></div>
 
