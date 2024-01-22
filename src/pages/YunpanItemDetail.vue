@@ -762,10 +762,18 @@ export default {
     this.previousItem = this._previousItem;
     this.nextItem = this._nextItem;
     if (this.$q.platform.is.mobile) {
-      if (this.previousItem.title.length > 8) {
+      if (
+        this.previousItem != null &&
+        this.previousItem.title != undefined &&
+        this.previousItem.title.length > 8
+      ) {
         this.previousItem.title = this.previousItem.title.substr(0, 7) + '..';
       }
-      if (this.nextItem.title.length > 8) {
+      if (
+        this.nextItem != null &&
+        this.nextItem.title != undefined &&
+        this.nextItem.title.length > 8
+      ) {
         this.nextItem.title = this.nextItem.title.substr(0, 7) + '..';
       }
     }
@@ -953,10 +961,18 @@ export default {
           this.previousItem = res.data.data.previousItem;
           this.nextItem = res.data.data.nextItem;
           if (this.$q.platform.is.mobile) {
-            if (this.previousItem.title.length > 8) {
+            if (
+              this.previousItem != null &&
+              this.previousItem.title != undefined &&
+              this.previousItem.title.length > 8
+            ) {
               this.previousItem.title = this.previousItem.title.substr(0, 7) + '..';
             }
-            if (this.nextItem.title.length > 8) {
+            if (
+              this.nextItem != null &&
+              this.nextItem.title != undefined &&
+              this.nextItem.title.length > 8
+            ) {
               this.nextItem.title = this.nextItem.title.substr(0, 7) + '..';
             }
           }
