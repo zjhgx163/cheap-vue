@@ -57,7 +57,11 @@
           />
 
           <div class="q-mt-sm">
-            <q-btn label="提交" type="submit" color="light-green" size="xs" />
+            <q-btn label="提交" type="submit" color="light-green" size="xs" :loading="isSubmiting">
+              <template v-slot:loading>
+                <q-spinner-facebook color="pink-4" />
+              </template>
+            </q-btn>
           </div>
         </q-form>
       </q-card-section>
@@ -85,6 +89,7 @@ export default {
       tag: '',
       maxized: Screen.gt.sm ? false : true,
       filesSizeTotal: 0,
+      isSubmiting: false,
     };
   },
   computed: {
@@ -176,6 +181,7 @@ export default {
         });
         return;
       }
+      this.isSubmiting = true;
       this.$q.loading.show({
         delay: 200, // ms
       });
@@ -188,6 +194,7 @@ export default {
         .then((res) => {
           this.$q.loading.hide();
           if (res.data.code < 0) {
+            this.isSubmiting = false;
             if (res.data.code == -102) {
               if (this.isWeixin()) {
                 window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
@@ -202,6 +209,7 @@ export default {
               });
             }
           } else {
+            this.isSubmiting = false;
             this.post = '';
             this.title = '';
             this.tag = '';

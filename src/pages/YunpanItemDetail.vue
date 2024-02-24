@@ -371,7 +371,17 @@
                         </div>
 
                         <div class="q-mt-sm">
-                          <q-btn label="提交" type="submit" color="light-green" size="xs" />
+                          <q-btn
+                            label="提交"
+                            type="submit"
+                            color="light-green"
+                            size="xs"
+                            :loading="isSubmiting"
+                          >
+                            <template v-slot:loading>
+                              <q-spinner-facebook color="pink-4" />
+                            </template>
+                          </q-btn>
                         </div>
                       </q-form>
                     </q-item-label>
@@ -561,6 +571,7 @@ export default {
       // mobileBroswer: false,
       isInvalid: false,
       timer: null,
+      isSubmiting: false,
     };
   },
   emits: ['need-login', 'logined'],
@@ -1023,6 +1034,7 @@ export default {
       }
     },
     onSubmit() {
+      this.isSubmiting = true;
       this.$axios
         .post(`${global.config.domain}/yunpan/resource/reply`, {
           itemId: this.item.id,
@@ -1030,6 +1042,8 @@ export default {
         })
         .then((res) => {
           if (res.data.code < 0) {
+            this.isSubmiting = false;
+
             if (res.data.code == -102) {
               if (this.isWeixin()) {
                 window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.item.id}&response_type=code&scope=snsapi_userinfo&state=yunpanItem#wechat_redirect`;
@@ -1045,7 +1059,9 @@ export default {
             }
           } else {
             this.replyContent = '';
-            this.onLoad(this.current);
+            this.onLoad(this.current, function () {
+              this.isSubmiting = false;
+            });
           }
         });
     },
@@ -1095,7 +1111,7 @@ export default {
               done();
             }
           });
-      }, 1000);
+      }, 100);
     },
     //列表下拉刷新
     refresh(done) {

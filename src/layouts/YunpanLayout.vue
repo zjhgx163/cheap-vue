@@ -37,7 +37,7 @@
                 @click="search"
               >
                 <template v-slot:loading>
-                  <q-spinner-facebook color="accent" />
+                  <q-spinner-facebook color="pink-4" />
                 </template>
               </q-btn>
             </template>
@@ -641,7 +641,7 @@ export default {
           .catch((err) => {
             err;
           });
-      }, 1000);
+      }, 200);
     },
     clickUser() {
       if (this.isLogin) {
