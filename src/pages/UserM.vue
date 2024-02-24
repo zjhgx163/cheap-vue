@@ -355,7 +355,7 @@
               >如果你想购买<a
                 href="https://shop.hjdang.com"
                 class="text-overline"
-                style="text-decoration: underline; line-height: 1.2em !important; font-size: 0.8rem"
+                style="text-decoration: underline; line-height: 1.2em !important"
                 ><strong>好慢无</strong></a
               >以外的商品拿返利，操作方法京东请看<a
                 class="text-overline"
