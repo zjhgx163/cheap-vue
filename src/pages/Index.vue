@@ -266,8 +266,8 @@
 .YL
   &__index_img
     @media(max-width: $breakpoint-xs-max)
-      width: 110px
-      height: 110px
+      width: 120px
+      height: 120px
     @media(min-width: $breakpoint-xs-max)
       width: 170px
       height: 170px
