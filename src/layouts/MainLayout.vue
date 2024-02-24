@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-primary" style="min-height: 100vh">
     <q-dialog auto-close v-model="dialog">
-      <q-card class="bg-blue text-white">
+      <q-card class="bg-light-green-5 text-white">
         <q-card-section class="row items-center q-pb-none q-pt-xs">
           <div class="text-h6">返利提醒</div>
           <q-space />
@@ -9,7 +9,7 @@
         </q-card-section>
         <q-card-section v-if="isWeixin()">
           &#9996;&#9996;
-          京东，拼多多商品均有返利，购买前请先点击<strong>公众号个人中心菜单</strong>阅读注意事项。购买后请在<strong>个人中心菜单</strong>下面的<strong>商品订单</strong>里查看订单。
+          此页面京东，拼多多商品<strong>均有返利</strong>，购买前请先点击<strong>公众号个人中心菜单</strong>阅读注意事项。购买后请在<strong>个人中心菜单</strong>下面的<strong>商品订单</strong>里查看订单。
         </q-card-section>
         <q-card-section v-else>
           京东，拼多多商品均有返利，购买前请先点击用户名登陆进入用户中心查阅注意事项，购买后在用户中心下面的<strong>商品订单</strong>里查看订单
