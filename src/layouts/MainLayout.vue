@@ -19,24 +19,19 @@
     <q-header class="bg-primary text-grey-8 q-pb-xs">
       <q-toolbar class="bg-secondary column q-mb-xs" v-bind:class="[itemPadding]">
         <div class="row justify-between YL__1200w">
-          <div class="col-12 col-sm-6 row items-center justify-between q-pa-xs">
-            <div class="col-4 col-sm-3 q-pa-xs">
-              <router-link :to="{ path: '/' }">
-                <q-img src="hjd.png" spinner-color="white" :width="logoWidth" />
-              </router-link>
-            </div>
-            <div
+          <div class="col-auto col-sm-auto q-pa-xs">
+            <router-link :to="{ path: '/' }">
+              <q-img src="hjd.png" spinner-color="white" :width="logoWidth" :height="logoHeight" />
+            </router-link>
+            <!-- <div
               class="col-2 lt-sm col-sm-auto text-overline text-italic items-center self-center text-bold YL__coupon_text_effect"
               v-bind:class="{ hidden: isCouponHidden }"
             >
               <router-link :to="{ path: '/coupon' }" class="text-deep-purple-10">
                 外卖红包
               </router-link>
-            </div>
-            <div
-              class="col-12 col-sm-8 q-px-xs q-pt-xs column justify-center"
-              v-bind:class="{ hidden: isSearchHidden }"
-            >
+            </div> -->
+            <div class="col col-sm-5 justify-center" v-bind:class="{ hidden: isSearchHidden }">
               <form @submit.prevent="search">
                 <q-input
                   ref="searchInput"
@@ -78,7 +73,7 @@
 
           <!-- <div class="bg-white YL__toolbar-input-container"> -->
 
-          <div class="col-sm-3 gt-sm row items-center justify-end">
+          <div class="col-sm-4 gt-sm row flex-center">
             <q-btn-dropdown unelevated flat :label="userName" @click="clickUser">
               <!-- <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a> -->
             </q-btn-dropdown>
@@ -255,7 +250,6 @@ export default {
       searchKey: '',
       isSearching: false,
       drawer: false,
-      logoWidth: '110px',
       host: global.config.domain,
       isBigScreen: false,
       isSearchHidden: false,
@@ -276,6 +270,12 @@ export default {
   computed: {
     itemPadding: function () {
       return this.$q.platform.is.desktop || this.isBigScreen ? 'q-py-none' : 'q-py-xs';
+    },
+    logoWidth() {
+      return this.$q.platform.is.desktop ? '110px' : '90px';
+    },
+    logoHeight() {
+      return this.$q.platform.is.desktop ? '46.3px' : '37.9px';
     },
   },
   created() {
