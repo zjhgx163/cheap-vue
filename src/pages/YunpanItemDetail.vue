@@ -939,6 +939,8 @@ export default {
             this.listData = res.data.data.records;
             if (res.data.data.records.length < 30) {
               this.isListEnd = true;
+            } else {
+              this.isListEnd = false;
             }
           }
           this.$q.loading.hide();
@@ -986,6 +988,8 @@ export default {
           }
           if (this.listData.length < 30) {
             this.isListEnd = true;
+          } else {
+            this.isListEnd = false;
           }
           this.setAnotherTitle(this.item.title + ' - 阿里云盘 - 好家当');
           // this.title = this._detail.title;
@@ -1040,7 +1044,8 @@ export default {
               });
             }
           } else {
-            this.getReplyList();
+            this.replyContent = '';
+            this.onLoad(this.current);
           }
         });
     },
@@ -1051,6 +1056,7 @@ export default {
       }
       setTimeout(() => {
         console.log('page = .....' + index);
+        this.current = index;
         this.$axios
           .post(`${global.config.domain}/yunpan/reply/list`, {
             page: index,
@@ -1061,6 +1067,8 @@ export default {
             console.log(res.data.data.records);
             if (res.data.data.records.length < 30) {
               this.isListEnd = true;
+            } else {
+              this.isListEnd = false;
             }
             //过滤页面上重复的
             const filters = res.data.data.records.filter((item) => {
@@ -1083,7 +1091,9 @@ export default {
             });
 
             console.log(this.listData);
-            done();
+            if (done != null) {
+              done();
+            }
           });
       }, 1000);
     },
