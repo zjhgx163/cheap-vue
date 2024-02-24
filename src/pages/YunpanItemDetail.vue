@@ -266,7 +266,7 @@
             </div> -->
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
-              <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
+              <q-infinite-scroll @load="onLoad" :offset="350" :initial-index="1" :disable="disable">
                 <q-pull-to-refresh @refresh="refresh" no-mouse>
                   <q-item class="q-pb-none">
                     <div class="text-bold text-body2">最新回复</div>
@@ -1059,7 +1059,7 @@ export default {
           })
           .then((res) => {
             console.log(res.data.data.records);
-            if (res.data.data.records.length < 20) {
+            if (res.data.data.records.length < 30) {
               this.isListEnd = true;
             }
             //过滤页面上重复的
