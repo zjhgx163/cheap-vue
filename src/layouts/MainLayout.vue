@@ -16,14 +16,14 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-    <q-header class="bg-primary text-grey-8 q-pb-xs">
-      <q-toolbar class="bg-secondary column q-mb-xs" v-bind:class="[itemPadding]">
-        <div class="row justify-between YL__1200w">
-          <div class="col-auto col-sm-auto q-pa-xs">
-            <router-link :to="{ path: '/' }">
-              <q-img src="hjd.png" spinner-color="white" :width="logoWidth" :height="logoHeight" />
-            </router-link>
-            <!-- <div
+    <q-header class="bg-primary text-grey-8 q-pb-xs YL__1200w">
+      <q-toolbar class="bg-secondary justify-around q-mb-xs" v-bind:class="[itemPadding]">
+        <div class="col-auto col-sm-auto q-pa-xs">
+          <router-link :to="{ path: '/' }">
+            <q-img src="hjd.png" spinner-color="white" :width="logoWidth" :height="logoHeight" />
+          </router-link>
+        </div>
+        <!-- <div
               class="col-2 lt-sm col-sm-auto text-overline text-italic items-center self-center text-bold YL__coupon_text_effect"
               v-bind:class="{ hidden: isCouponHidden }"
             >
@@ -31,61 +31,59 @@
                 外卖红包
               </router-link>
             </div> -->
-            <div class="col col-sm-5 justify-center" v-bind:class="{ hidden: isSearchHidden }">
-              <form @submit.prevent="search">
-                <q-input
-                  ref="searchInput"
-                  item-aligned
-                  clearable
-                  dense
-                  filled
-                  standout="text-white"
-                  square
-                  v-model="searchKey"
-                  placeholder="搜索"
-                  type="search"
-                  v-on:keyup.enter="search"
+        <div class="col col-sm-5 justify-center" v-bind:class="{ hidden: isSearchHidden }">
+          <form @submit.prevent="search">
+            <q-input
+              ref="searchInput"
+              item-aligned
+              clearable
+              dense
+              filled
+              standout="text-white"
+              square
+              v-model="searchKey"
+              placeholder="搜索"
+              type="search"
+              v-on:keyup.enter="search"
+            >
+              <template v-slot:after>
+                <q-btn
+                  name="search"
+                  icon="search"
+                  :loading="isSearching"
+                  type="submit"
+                  unelevated
+                  @click="onClick"
                 >
-                  <template v-slot:after>
-                    <q-btn
-                      name="search"
-                      icon="search"
-                      :loading="isSearching"
-                      type="submit"
-                      unelevated
-                      @click="onClick"
-                    >
-                      <template v-slot:loading>
-                        <q-spinner-facebook color="accent" />
-                      </template>
-                    </q-btn>
+                  <template v-slot:loading>
+                    <q-spinner-facebook color="accent" />
                   </template>
-                </q-input>
+                </q-btn>
+              </template>
+            </q-input>
 
-                <!-- <q-btn name="search" icon="search" type="submit" unelevated> </q-btn> -->
-              </form>
-            </div>
-          </div>
+            <!-- <q-btn name="search" icon="search" type="submit" unelevated> </q-btn> -->
+          </form>
+        </div>
 
-          <!-- <q-toolbar-title shrink class="text-weight-bold"> 好价党 </q-toolbar-title> -->
+        <!-- <q-toolbar-title shrink class="text-weight-bold"> 好价党 </q-toolbar-title> -->
 
-          <!-- <q-space /> -->
+        <!-- <q-space /> -->
 
-          <!-- <div class="bg-white YL__toolbar-input-container"> -->
+        <!-- <div class="bg-white YL__toolbar-input-container"> -->
 
-          <div class="col-sm-4 gt-sm row flex-center">
-            <q-btn-dropdown unelevated flat :label="userName" @click="clickUser">
-              <!-- <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a> -->
-            </q-btn-dropdown>
+        <div class="col-sm-4 gt-sm row flex-center">
+          <q-btn-dropdown unelevated flat :label="userName" @click="clickUser">
+            <!-- <a class="text-grey-9 text-weight-bold text-subtitle2"> {{ userName }}</a> -->
+          </q-btn-dropdown>
 
-            <q-avatar size="2.5em">
-              <img :src="avatar" />
-            </q-avatar>
+          <q-avatar size="2.5em">
+            <img :src="avatar" />
+          </q-avatar>
 
-            <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
-              <a class="text-grey-9 text-weight-bold text-subtitle2"> 登出</a>
-            </q-btn>
-          </div>
+          <q-btn unelevated flat v-bind:class="{ hidden: !isLogin }" @click="logout">
+            <a class="text-grey-9 text-weight-bold text-subtitle2"> 登出</a>
+          </q-btn>
         </div>
       </q-toolbar>
 
