@@ -1035,6 +1035,7 @@ export default {
     },
     onSubmit() {
       this.isSubmiting = true;
+
       this.$axios
         .post(`${global.config.domain}/yunpan/resource/reply`, {
           itemId: this.item.id,
@@ -1059,8 +1060,8 @@ export default {
             }
           } else {
             this.replyContent = '';
-            this.onLoad(this.current, function () {
-              this.isSubmiting = false;
+            this.onLoad(this.current, function (a) {
+              a.isSubmiting = false;
             });
           }
         });
@@ -1080,7 +1081,6 @@ export default {
             isInvalid: this.isInvalid,
           })
           .then((res) => {
-            console.log(res.data.data.records);
             if (res.data.data.records.length < 30) {
               this.isListEnd = true;
             } else {
@@ -1108,7 +1108,7 @@ export default {
 
             console.log(this.listData);
             if (done != null) {
-              done();
+              done(this);
             }
           });
       }, 100);
