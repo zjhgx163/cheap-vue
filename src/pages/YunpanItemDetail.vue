@@ -266,7 +266,7 @@
             </div> -->
             <div class="q-pt-sm" ref="scrollYunpanDetailtRef">
               <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
-              <q-infinite-scroll @load="onLoad" :offset="550" :initial-index="1" :disable="disable">
+              <q-infinite-scroll @load="onLoad" :offset="700" :initial-index="1" :disable="disable">
                 <q-pull-to-refresh @refresh="refresh" no-mouse>
                   <q-item class="q-pb-none">
                     <div class="text-bold text-body2">最新回复</div>
@@ -916,7 +916,7 @@ export default {
   methods: {
     getReplyList() {
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 100, // ms
       });
       this.$axios
         .post(`${global.config.domain}/yunpan/reply/list`, {
@@ -1092,7 +1092,7 @@ export default {
       setTimeout(() => {
         this.getReplyList();
         done();
-      }, 1000);
+      }, 100);
     },
     getHashCode(str, caseSensitive) {
       if (str == null || str == undefined) {
