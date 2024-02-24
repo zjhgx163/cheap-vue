@@ -343,39 +343,80 @@
               在下单后有一定延迟，大约5分钟后会显示
             </q-item-label>
             <q-item-label caption class="q-py-xs">
-              目前支持京东，拼多多返利，其他商城暂不支持。在<a href="https://shop.hjdang.com"
+              目前支持京东，拼多多返利，其他商城暂不支持。在<a
+                class="text-overline"
+                style="text-decoration: underline; line-height: 1.2em !important"
+                href="https://shop.hjdang.com"
                 ><strong>好慢无</strong></a
               >里京东和拼多多的商品均有返利
             </q-item-label>
 
             <q-item-label caption class="q-py-xs"
-              >如果你想购买<a href="https://shop.hjdang.com"><strong>好慢无</strong></a
+              >如果你想购买<a
+                href="https://shop.hjdang.com"
+                class="text-overline"
+                style="text-decoration: underline; line-height: 1.2em !important; font-size: 0.8rem"
+                ><strong>好慢无</strong></a
               >以外的商品拿返利，操作方法京东请看<a
+                class="text-overline"
+                style="text-decoration: underline; line-height: 1.2em !important"
                 href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483916&idx=1&sn=2e36901033e066c96d44990b4b338e2f&chksm=c24e8f17f5390601ee49beb7e6f6eeba01ecfbe136e632bcc62bb40132d7ca8d595c8e91c56d&token=1826758436&lang=zh_CN#rd"
                 ><strong>任意京东商品返利</strong></a
               >，拼多多请看<a
+                class="text-overline"
+                style="text-decoration: underline; line-height: 1.2em !important"
                 href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483954&idx=1&sn=0b5c8a54802d73d4da3b369d27ba151b&chksm=c24e8f29f539063fe9970ade98efe90af02b4dccf2f6f84a19576c029f6eadce6646d93abe33&token=1826758436&lang=zh_CN#rd"
                 ><strong>任意拼多多商品返利</strong></a
               ></q-item-label
             >
             <q-item-label caption class="q-py-xs">
-              正常订单返利结算周期一般在确认收货<strong>订单完成后20天左右确定没有退货</strong>
+              正常订单返利结算周期一般在确认收货<span
+                class="text-overline"
+                style="line-height: 1.2em !important; font-size: 0.8rem"
+                ><strong>订单完成后20天左右确定没有退货</strong></span
+              >
             </q-item-label>
             <!-- <q-item-label caption class="q-py-xs">
               在本站第一次购买淘宝天猫商品时，如果跳出加入会员的页面，要点“是”，否则没有返利
             </q-item-label> -->
             <q-item-label caption class="q-py-xs">
-              京东的返利请<strong>不要</strong>在购买过程中使用<strong>红包和礼金</strong>，否则返利对象会变成发放红包和礼金的人。
+              京东的返利请<span
+                class="text-overline"
+                style="line-height: 1.2em !important; font-size: 0.8rem"
+                ><strong>不要</strong></span
+              >在购买过程中使用<span
+                class="text-overline"
+                style="line-height: 1.2em !important; font-size: 0.8rem"
+                ><strong>红包和礼金</strong></span
+              >，否则返利对象会变成发放红包和礼金的人。
             </q-item-label>
             <q-item-label caption class="q-py-xs">
-              拼多多<strong>禁止比价行为</strong>，就是说<strong>同一个账号在点击有返利的链接购买前浏览过商品会被判为比价，所以浏览的账号和用返利链接购买的账号不能同一个</strong>，佣金直接判为0.01。规避方法请看<a
+              拼多多<span
+                class="text-overline"
+                style="line-height: 1.2em !important; font-size: 0.8rem"
+                ><strong>禁止比价行为</strong></span
+              >，就是说<span
+                class="text-overline"
+                style="line-height: 1.2em !important; font-size: 0.8rem"
+                ><strong
+                  >同一个账号在点击有返利的链接购买前浏览过商品会被判为比价，所以浏览的账号和用返利链接购买的账号不能同一个</strong
+                ></span
+              >，佣金直接判为0.01。规避方法请看<a
+                class="text-overline"
+                style="text-decoration: underline; line-height: 1.2em !important"
                 href="https://mp.weixin.qq.com/s?__biz=MzkzMzIyMzU0MA==&mid=2247483954&idx=1&sn=0b5c8a54802d73d4da3b369d27ba151b&chksm=c24e8f29f539063fe9970ade98efe90af02b4dccf2f6f84a19576c029f6eadce6646d93abe33&token=1826758436&lang=zh_CN#rd"
                 ><strong>任意拼多多商品返利</strong></a
               >
             </q-item-label>
             <q-item-label class="q-py-md">
               如有订单未及时结算和其他问题请直接
-              <router-link to="/contact"> <strong>添加客服微信</strong></router-link>
+              <router-link
+                class="text-overline"
+                style="text-decoration: underline; line-height: 1.2em !important; font-size: 0.8rem"
+                to="/contact"
+              >
+                <strong>添加客服微信</strong></router-link
+              >
             </q-item-label>
           </q-item-section>
         </q-item>
