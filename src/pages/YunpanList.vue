@@ -1,8 +1,8 @@
 <template>
   <q-page :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
-    <q-list separator class="q-pt-sm">
-      <div v-bind:key="item.id" v-for="item in topArticleList" class="q-py-sm">
+    <q-list separator class="q-pt-xs">
+      <div v-bind:key="item.id" v-for="item in topArticleList" class="q-pb-sm">
         <q-item
           dense
           v-ripple
