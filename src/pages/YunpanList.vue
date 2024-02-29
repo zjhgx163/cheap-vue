@@ -1,8 +1,8 @@
 <template>
-  <q-page class="bg-secondary" :style-fn="myTweak">
+  <q-page class="bg-primary" :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
-    <q-list dense separator class="bg-secondary">
-      <div v-bind:key="item.id" v-for="item in topArticleList" class="q-pb-xs">
+    <q-list separator class="bg-secondary q-pb-lg q-pt-sm">
+      <div v-bind:key="item.id" v-for="item in topArticleList" class="q-py-sm">
         <q-item
           dense
           v-ripple
@@ -10,7 +10,7 @@
             name: 'articleDetail',
             params: { id: item.id },
           }"
-          class="bg-light-green-1 q-py-sm"
+          class="q-py-sm"
         >
           <q-item-section avatar top>
             <q-avatar size="2.0em">
@@ -50,6 +50,7 @@
         <q-separator dark inset />
       </div>
     </q-list>
+    <q-separator dark />
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
         <q-img src="/static/no-data.png" spinner-color="white" alt="空空如也～"> </q-img>

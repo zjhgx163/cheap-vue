@@ -153,10 +153,10 @@
             </keep-alive>
           </router-view>
         </div>
-        <div v-if="$q.platform.is.desktop" dark class="col bg-primary">
+        <div v-if="$q.platform.is.desktop" dark class="col bg-secondary q-pl-lg">
           <div>
-            <q-card bordered class="column bg-secondary items-start q-ml-sm">
-              <q-card-section>
+            <q-card flat class="column bg-secondary items-center q-pl-sm q-pt-md">
+              <q-card-section horizontal>
                 <q-btn
                   class="text-bold"
                   flat
@@ -168,9 +168,9 @@
                   @click="addYunpanItem"
               /></q-card-section>
             </q-card>
-            <q-card bordered class="column bg-secondary items-start q-ml-sm q-mt-sm">
-              <q-card-section>
-                <q-card-actions vertical align="left" class="justify-around">
+            <q-card flat class="column bg-secondary items-center q-pt-none q-pl-lg">
+              <q-card-section horizontal>
+                <q-card-actions vertical align="left" class="justify-between">
                   <q-btn
                     class="text-bold"
                     flat
@@ -225,7 +225,7 @@
           </div>
           <div style="height: 300px"></div>
 
-          <div class="q-mt-md q-ml-md q-pr-sm">
+          <div class="q-mt-md q-pr-sm">
             <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
               <q-img
                 src="/advertisment/aliyun.jpeg"
