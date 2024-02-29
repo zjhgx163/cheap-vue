@@ -66,8 +66,12 @@
 
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
-          <q-list dense separator>
-            <div v-bind:key="item.id" v-for="item in listData">
+          <q-list dense>
+            <div
+              v-bind:key="item.id"
+              v-for="item in listData"
+              v-bind:class="{ 'q-pb-xs': $q.platform.is.mobile }"
+            >
               <!--               
                 clickable
                 @click="itemClick(item.id)"
@@ -80,7 +84,7 @@
                   name: 'yunpanDetail',
                   params: { id: item.id },
                 }"
-                class="q-pb-sm"
+                class="q-pb-md"
               >
                 <q-item-section avatar top>
                   <q-avatar v-if="item.avatar != '' && item.avatar != null">
@@ -95,7 +99,7 @@
                 <q-item-section class="q-pb-xs">
                   <q-item-label
                     :lines="2"
-                    v-bind:class="[fontFamily, lineHeight, titleHeight]"
+                    v-bind:class="[fontFamily, lineHeight]"
                     class="text-black text-subtitle2 text-weight-bold"
                   >
                     {{ item.title }}
@@ -140,7 +144,7 @@
                 <!-- <q-item-section side top> </q-item-section> -->
               </q-item>
 
-              <q-separator spaced />
+              <!-- <q-separator spaced /> -->
             </div>
           </q-list>
         </q-pull-to-refresh>
