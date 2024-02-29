@@ -1,7 +1,7 @@
 <template>
   <q-page :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
-    <q-list separator class="q-pb-lg q-pt-sm">
+    <q-list separator class="q-py-sm">
       <div v-bind:key="item.id" v-for="item in topArticleList" class="q-py-sm">
         <q-item
           dense
@@ -67,11 +67,7 @@
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
           <q-list dense separator>
-            <div
-              v-bind:key="item.id"
-              v-for="item in listData"
-              v-bind:class="{ 'q-pb-xs': $q.platform.is.mobile }"
-            >
+            <div v-bind:key="item.id" v-for="item in listData">
               <!--               
                 clickable
                 @click="itemClick(item.id)"
@@ -84,7 +80,7 @@
                   name: 'yunpanDetail',
                   params: { id: item.id },
                 }"
-                class="q-py-sm"
+                class="q-pb-sm"
               >
                 <q-item-section avatar top>
                   <q-avatar v-if="item.avatar != '' && item.avatar != null">
