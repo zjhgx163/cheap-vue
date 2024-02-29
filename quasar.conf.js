@@ -96,7 +96,7 @@ module.exports = function (/* ctx */) {
       lang: 'en-US', // Quasar language pack
       config: {
         brand: {
-          primary: '#f3f3f3',
+          primary: process.env.PROD_SHOP ? '#f3f3f3' : '#fff',
           // ...
         },
         loading: {},

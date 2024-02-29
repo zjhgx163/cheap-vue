@@ -1,7 +1,7 @@
 <template>
-  <q-page class="bg-primary" :style-fn="myTweak">
+  <q-page :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
-    <q-list separator class="bg-secondary q-pb-lg q-pt-sm">
+    <q-list separator class="q-pb-lg q-pt-sm">
       <div v-bind:key="item.id" v-for="item in topArticleList" class="q-py-sm">
         <q-item
           dense
@@ -47,10 +47,10 @@
           <!-- <q-item-section side top> </q-item-section> -->
         </q-item>
 
-        <q-separator dark inset />
+        <q-separator inset />
       </div>
     </q-list>
-    <q-separator dark />
+
     <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
       <div class="clo-4 YL__no_data">
         <q-img src="/static/no-data.png" spinner-color="white" alt="空空如也～"> </q-img>
@@ -66,11 +66,10 @@
 
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
-          <q-list dense separator class="bg-secondary">
+          <q-list dense separator>
             <div
               v-bind:key="item.id"
               v-for="item in listData"
-              class="bg-primary"
               v-bind:class="{ 'q-pb-xs': $q.platform.is.mobile }"
             >
               <!--               
@@ -85,7 +84,7 @@
                   name: 'yunpanDetail',
                   params: { id: item.id },
                 }"
-                class="bg-secondary q-py-sm"
+                class="q-py-sm"
               >
                 <q-item-section avatar top>
                   <q-avatar v-if="item.avatar != '' && item.avatar != null">
@@ -145,7 +144,7 @@
                 <!-- <q-item-section side top> </q-item-section> -->
               </q-item>
 
-              <q-separator color="primary" class="gt-sm" />
+              <q-separator spaced />
             </div>
           </q-list>
         </q-pull-to-refresh>
@@ -178,7 +177,7 @@
         <q-pagination
           gutter="sm"
           input
-          :input-class="'bg-secondary text-dark'"
+          :input-class="'text-dark'"
           v-model="current"
           :size="paginationSize"
           color="purple"
