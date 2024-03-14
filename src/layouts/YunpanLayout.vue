@@ -153,12 +153,12 @@
             </keep-alive>
           </router-view>
         </div>
-        <div v-if="$q.platform.is.desktop" dark class="col bg-secondary q-pl-lg">
+        <div v-if="$q.platform.is.desktop" dark class="col bg-secondary q-pl-lg q-ml-lg">
           <div>
-            <q-card flat class="column bg-secondary items-center q-pl-sm q-pt-md">
+            <q-card flat class="column bg-secondary items-center q-pl-lg q-pt-md">
               <q-card-section horizontal>
                 <q-btn
-                  class="text-bold"
+                  class="text-bold q-pr-none"
                   flat
                   outline
                   color="pink-4"
@@ -168,9 +168,9 @@
                   @click="addYunpanItem"
               /></q-card-section>
             </q-card>
-            <q-card flat class="column bg-secondary items-center q-pt-none q-pl-lg">
+            <q-card flat class="column bg-secondary items-center q-pt-none q-pl-lg q-ml-sm">
               <q-card-section horizontal>
-                <q-card-actions vertical align="left" class="justify-between">
+                <q-card-actions vertical align="left" class="justify-between q-pr-none">
                   <q-btn
                     class="text-bold"
                     flat
