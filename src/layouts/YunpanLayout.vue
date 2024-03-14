@@ -629,6 +629,9 @@ export default {
       //   }, 1000);
       // }
       //搜素停顿500ms后展现
+      if (this.searchKey == '' || this.searchKey == null) {
+        return;
+      }
       this.isSearching = true;
       let that = this;
       setTimeout(function () {
