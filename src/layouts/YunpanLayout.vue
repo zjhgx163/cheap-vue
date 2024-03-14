@@ -211,7 +211,7 @@
               <q-separator inset />
             </q-card>
           </div>
-          <div class="q-mt-md q-mx-sm" style="min-height: 600px">
+          <div class="q-mt-md q-ml-lg q-mr-sm" style="min-height: 600px">
             <div class="adsenseunitlayout">
               <ins
                 class="adsbygoogle"
@@ -225,7 +225,7 @@
           </div>
           <div style="height: 300px"></div>
 
-          <div class="q-mt-md q-pr-sm">
+          <div class="q-mt-md q-ml-lg q-pr-sm">
             <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
               <q-img
                 src="/advertisment/aliyun.jpeg"
