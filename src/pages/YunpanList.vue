@@ -51,7 +51,7 @@
       </div>
     </q-list>
 
-    <div v-if="listData.length === 0" class="column items-center justify-center absolute-full">
+    <div v-if="listData.length === 0" class="column items-center justify-center absolute-center">
       <div class="clo-4 YL__no_data">
         <q-img src="/static/no-data.png" spinner-color="white" alt="空空如也～"> </q-img>
 
@@ -66,7 +66,7 @@
 
       <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
         <q-pull-to-refresh @refresh="refresh" no-mouse>
-          <q-list dense>
+          <q-list dense class="q-pt-md">
             <div
               v-bind:key="item.id"
               v-for="item in listData"
