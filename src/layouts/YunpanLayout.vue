@@ -155,10 +155,10 @@
         </div>
         <div v-if="$q.platform.is.desktop" dark class="col bg-secondary q-pl-lg q-ml-lg">
           <div>
-            <q-card flat class="column bg-secondary items-center q-pl-lg q-pt-md">
-              <q-card-section horizontal>
+            <q-card flat class="column bg-secondary items-center q-pl-sm q-pt-lg">
+              <q-card-section>
                 <q-btn
-                  class="text-bold q-pr-none"
+                  class="q-pr-none"
                   flat
                   outline
                   color="pink-4"
@@ -172,10 +172,9 @@
               <q-card-section horizontal>
                 <q-card-actions vertical align="left" class="justify-between q-pr-none">
                   <q-btn
-                    class="text-bold"
                     flat
                     outline
-                    color="blue-5"
+                    color="indigo-5"
                     :size="addButtonSize"
                     label="外卖红包"
                     icon="o_delivery_dining"
@@ -184,9 +183,8 @@
                     <q-badge transparent rounded align="top" color="pink-4"> 返利 </q-badge></q-btn
                   >
                   <q-btn
-                    class="text-bold"
                     outline
-                    color="blue-5"
+                    color="indigo-5"
                     :size="addButtonSize"
                     flat
                     label="手慢无"
@@ -196,9 +194,8 @@
                     <q-badge transparent rounded align="top" color="pink-4"> 返利 </q-badge></q-btn
                   >
                   <q-btn
-                    class="text-bold"
                     outline
-                    color="orange-5"
+                    color="indigo-5"
                     :size="addButtonSize"
                     label="购物查券/返利"
                     flat
@@ -247,7 +244,7 @@
         <q-btn
           flat
           v-bind:size="shopButtionSize"
-          color="blue-5"
+          color="indigo-5"
           label="外卖红包"
           dense
           icon="o_delivery_dining"
@@ -270,7 +267,7 @@
         <q-btn
           flat
           :size="shopButtionSize"
-          color="orange-5"
+          color="indigo-5"
           dense
           label="购物返利"
           icon="o_savings"
