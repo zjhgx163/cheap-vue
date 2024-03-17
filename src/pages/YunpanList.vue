@@ -51,14 +51,14 @@
       </div>
     </q-list>
 
-    <div v-if="listData.length === 0" class="column items-center justify-center absolute-center">
-      <div class="clo-4 YL__no_data">
+    <div v-if="listData.length === 0" class="column items-center justify-center">
+      <div class="column YL__no_data flex-center">
         <q-img src="/static/no-data.png" spinner-color="white" alt="空空如也～"> </q-img>
 
         <div class="text-subtitle2 text-center text-grey">~空空如也~</div>
       </div>
 
-      <div class="col-3"></div>
+      <!-- <div class="col-3"></div> -->
     </div>
 
     <div v-else ref="scrollTargetRef">
@@ -210,12 +210,12 @@
   &__list_line_height
     line-height: 1.6em !important
   &__no_data
+    min-height: 500px
     @media(max-width: $breakpoint-xs-max)
-      height: 5em
       width: 6em
     @media(min-width: $breakpoint-xs-max)
-      width: 10em
       width: 12em
+
   &__list_end
     display: flex
     align-items: center
