@@ -220,7 +220,7 @@
               ></ins>
             </div>
           </div>
-          <div style="height: 300px"></div>
+          <div style="height: 150px"></div>
 
           <div class="q-mt-md q-ml-lg q-pr-sm">
             <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
