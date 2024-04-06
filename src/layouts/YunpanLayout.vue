@@ -231,6 +231,7 @@
                 spinner-color="white"
                 width="226px"
                 height="188.3px"
+                class="q-ml-lg"
               />
             </a>
           </div>
