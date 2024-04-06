@@ -224,7 +224,7 @@
           </div>
           <div style="height: 40px"></div>
 
-          <div class="q-mt-md q-ml-lg q-pl-lg q-pr-sm">
+          <div class="q-mt-lg q-ml-lg q-pl-lg q-pr-sm">
             <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
               <q-img
                 src="/advertisment/aliyun.jpeg"
