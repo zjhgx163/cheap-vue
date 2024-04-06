@@ -210,7 +210,7 @@
           </div>
           <div style="height: 40px"></div>
 
-          <div class="q-mt-md q-ml-md" style="min-height: 600px">
+          <div class="q-mt-md q-ml-lg q-pl-lg" style="min-height: 600px">
             <div class="adsenseunitlayout">
               <ins
                 class="adsbygoogle"
@@ -224,7 +224,7 @@
           </div>
           <div style="height: 40px"></div>
 
-          <div class="q-mt-md q-ml-lg q-pr-sm">
+          <div class="q-mt-md q-ml-lg q-pl-lg q-pr-sm">
             <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
               <q-img
                 src="/advertisment/aliyun.jpeg"
