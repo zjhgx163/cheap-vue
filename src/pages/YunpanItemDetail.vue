@@ -1068,7 +1068,7 @@ export default {
     },
     //向下划动load页面
     onLoad(index, done) {
-      if (this.isBigScreen) {
+      if (this.isBigScreen && done == null) {
         return;
       }
       setTimeout(() => {
