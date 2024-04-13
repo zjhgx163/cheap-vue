@@ -794,17 +794,17 @@ export default {
     this.isInvalid = this._isInvalid;
 
     if (Object.keys(this.item).length > 0) {
-      this.setAnotherTitle(this.item.title + ' - 阿里云盘 - 好家当');
+      this.setAnotherTitle(this.item.title + ' - 阿里云盘夸克网盘 - 好家当');
       // this.title = this._detail.title;
       console.log(this._contentStr);
-      this.meta.keywords.content = this.item.title + ',阿里云盘,网盘资源,下载';
-      this.meta.ogtitle.content = this.item.title + ' - 阿里云盘 - 好家当';
+      this.meta.keywords.content = this.item.title + ',阿里云盘,夸克网盘,资源,下载';
+      this.meta.ogtitle.content = this.item.title + ' - 阿里云盘夸克网盘 - 好家当';
       if (this._contentStr) {
-        this.meta.description.content = this._contentStr + ' - 阿里云盘,网盘资源下载 - 好家当';
-        this.meta.ogdescription.content = this._contentStr + ' - 阿里云盘,网盘资源下载 - 好家当';
+        this.meta.description.content = this._contentStr + ' - 阿里云盘,夸克网盘,资源,下载';
+        this.meta.ogdescription.content = this._contentStr + ' - 阿里云盘,夸克网盘,资源,下载';
       } else {
-        this.meta.description.content = this.item.title + ' - 阿里云盘,网盘资源下载 - 好家当';
-        this.meta.ogdescription.content = this.item.title + ' - 阿里云盘,网盘资源下载 - 好家当';
+        this.meta.description.content = this.item.title + ' - 阿里云盘,夸克网盘,资源,下载';
+        this.meta.ogdescription.content = this.item.title + ' - 阿里云盘,夸克网盘,资源,下载';
       }
     }
 
@@ -1002,17 +1002,16 @@ export default {
           } else {
             this.isListEnd = false;
           }
-          this.setAnotherTitle(this.item.title + ' - 阿里云盘 - 好家当');
+          this.setAnotherTitle(this.item.title + ' - 阿里云盘夸克网盘 - 好家当');
           // this.title = this._detail.title;
-          this.meta.keywords.content = this.item.title + ',阿里云盘,网盘资源,下载';
-          this.meta.ogtitle.content = this.item.title + ' - 阿里云盘 - 好家当';
+          this.meta.keywords.content = this.item.title + ',阿里云盘,夸克网盘,资源,下载';
+          this.meta.ogtitle.content = this.item.title + ' - 阿里云盘夸克网盘';
           if (this._contentStr) {
-            this.meta.description.content = this._contentStr + ' - 阿里云盘,网盘资源下载 - 好家当';
-            this.meta.ogdescription.content =
-              this._contentStr + ' - 阿里云盘,网盘资源下载 - 好家当';
+            this.meta.description.content = this._contentStr + ' - 阿里云盘,夸克网盘,资源,下载';
+            this.meta.ogdescription.content = this._contentStr + ' - 阿里云盘,夸克网盘,资源,下载';
           } else {
-            this.meta.description.content = this.item.title + ' - 阿里云盘,网盘资源下载 - 好家当';
-            this.meta.ogdescription.content = this.item.title + ' - 阿里云盘,网盘资源下载 - 好家当';
+            this.meta.description.content = this.item.title + ' - 阿里云盘,夸克网盘,资源,下载';
+            this.meta.ogdescription.content = this.item.title + ' - 阿里云盘,夸克网盘,资源,下载';
           }
 
           this.$q.loading.hide();
