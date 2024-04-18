@@ -355,7 +355,7 @@
                   <!-- <q-item-section class="YL__auther">
                   {{ auther }}
                 </q-item-section> -->
-                  <q-item-section top class="YL__auther">
+                  <q-item-section top class="YL__auther" style="max-width: 400px">
                     <q-item-label>
                       <q-form @submit="onSubmit" class="q-gutter-sm">
                         <div>
@@ -366,7 +366,7 @@
                             placeholder="说点什么吧"
                             hide-bottom-space
                             type="textarea"
-                            style="max-width: 380px"
+                            style="max-width: 310px; min-width: 300px"
                           />
                         </div>
 
@@ -385,6 +385,24 @@
                         </div>
                       </q-form>
                     </q-item-label>
+                  </q-item-section>
+                  <q-item-section side v-if="$q.platform.is.desktop">
+                    <div class="row">
+                      <div class="justify-start q-mr-lg">
+                        <q-item-label class="text-caption column items-start"
+                          >夸克最新资源腾讯文档</q-item-label
+                        >
+                        <q-item-label class="text-caption column items-start"
+                          >扫右边二维码查看</q-item-label
+                        >
+                        <q-item-label class="text-caption column items-start"
+                          >持续更新，建议收藏</q-item-label
+                        >
+                      </div>
+                      <div>
+                        <q-img src="quark_doc.png" alt="quark_doc" width="120px" height="120px" />
+                      </div>
+                    </div>
                   </q-item-section>
                 </q-item>
               </div>
