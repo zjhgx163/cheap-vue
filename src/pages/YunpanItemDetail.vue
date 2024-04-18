@@ -388,7 +388,7 @@
                   </q-item-section>
                   <q-item-section side v-if="$q.platform.is.desktop">
                     <div class="row">
-                      <div class="justify-start q-mr-lg">
+                      <div class="justify-start q-mr-lg q-pt-xs">
                         <q-item-label class="text-caption column items-start"
                           >夸克最新资源腾讯文档</q-item-label
                         >
@@ -400,7 +400,7 @@
                         >
                       </div>
                       <div>
-                        <q-img src="quark_doc.png" alt="quark_doc" width="120px" height="120px" />
+                        <q-img src="quark_doc.png" alt="quark_doc" width="130px" height="130px" />
                       </div>
                     </div>
                   </q-item-section>
