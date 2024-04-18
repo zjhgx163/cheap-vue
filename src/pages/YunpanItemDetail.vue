@@ -366,7 +366,7 @@
                             placeholder="说点什么吧"
                             hide-bottom-space
                             type="textarea"
-                            style="max-width: 310px; min-width: 300px"
+                            style="max-width: 300px"
                           />
                         </div>
 
@@ -388,7 +388,7 @@
                   </q-item-section>
                   <q-item-section side v-if="$q.platform.is.desktop">
                     <div class="row">
-                      <div class="justify-start q-mr-lg q-pt-xs">
+                      <div class="justify-start q-mr-sm q-pt-xs">
                         <q-item-label class="text-caption column items-start"
                           >夸克最新资源腾讯文档</q-item-label
                         >
