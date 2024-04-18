@@ -444,7 +444,7 @@
             </q-card-section>
             <q-card-section v-else>
               <div v-if="weixin">
-                <q-item dense class="q-pt-none">
+                <!-- <q-item dense class="q-pt-none">
                   <q-item-section>
                     <q-item-label class="column flex-center">
                       <span class="text-caption text-pink-7 text-weight-medium">
@@ -455,6 +455,18 @@
                 </q-item>
                 <q-item class="flex-center">
                   <q-img src="donate.jpg" alt="wechat_donate" width="265px" height="265px" />
+                </q-item> -->
+                <q-item dense class="q-pt-none">
+                  <q-item-section>
+                    <q-item-label class="column flex-center">
+                      <span class="text-caption text-pink-7 text-weight-medium">
+                        为您整理出了最新夸克资源，长按二维码查看腾讯文档，持续更新，建议收藏。🙏
+                      </span>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item class="flex-center">
+                  <q-img src="quark_doc.png" alt="quark_doc" width="265px" height="265px" />
                 </q-item>
               </div>
               <div v-else>
