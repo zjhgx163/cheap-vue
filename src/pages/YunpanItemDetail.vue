@@ -105,38 +105,40 @@
 
             <q-item dense>
               <!-- <q-item-label class="column flex-center"> </q-item-label> -->
-              <q-item-label :lines="2">
-                <header>
-                  <h1
-                    class="text-h6 text-bold q-mt-none q-mb-sm"
-                    v-bind:class="{ 'text-grey': isInvalid }"
-                  >
-                    <!-- , YL__invalid_item: isInvalid -->
-                    {{ item.title }}
-
-                    <q-badge
-                      transparent
-                      align="middle"
-                      :color="getTagColor(item.tag)"
-                      :label="item.tag"
+              <q-item-section>
+                <q-item-label :lines="2">
+                  <header>
+                    <h1
+                      class="text-h6 text-bold q-mt-none q-mb-sm"
+                      v-bind:class="{ 'text-grey': isInvalid }"
                     >
-                    </q-badge>
-                  </h1>
-                </header>
-              </q-item-label>
-              <q-item-label
-                :lines="2"
-                class="text-black text-bold"
-                v-bind:class="{ hidden: !isInvalid, 'text-body2': $q.platform.is.mobile }"
-              >
-                链接已失效，<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
-                  >站内有相同资源</span
-                >，请在搜索框内<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
-                  >搜索</span
-                >或关注微信公众号<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
-                  >老胡为你服务</span
+                      <!-- , YL__invalid_item: isInvalid -->
+                      {{ item.title }}
+
+                      <q-badge
+                        transparent
+                        align="middle"
+                        :color="getTagColor(item.tag)"
+                        :label="item.tag"
+                      >
+                      </q-badge>
+                    </h1>
+                  </header>
+                </q-item-label>
+                <q-item-label
+                  :lines="2"
+                  class="text-black text-bold"
+                  v-bind:class="{ hidden: !isInvalid, 'text-body2': $q.platform.is.mobile }"
                 >
-              </q-item-label>
+                  链接已失效，<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
+                    >站内有相同资源</span
+                  >，请在搜索框内<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
+                    >搜索</span
+                  >或关注微信公众号<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
+                    >老胡为你服务</span
+                  >
+                </q-item-label>
+              </q-item-section>
             </q-item>
             <q-item class="items-center">
               <q-item-section avatar style="min-width: 30px">
