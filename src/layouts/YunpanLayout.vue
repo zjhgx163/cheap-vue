@@ -155,10 +155,10 @@
         </div>
         <div v-if="$q.platform.is.desktop" dark class="col bg-secondary q-pl-lg q-ml-lg">
           <div>
-            <q-card flat class="column bg-secondary items-center q-pl-sm q-pt-lg">
+            <q-card flat class="column bg-secondary items-center q-pl-sm q-pt-lg q-mt-md">
               <q-card-section>
                 <q-btn
-                  class="q-pr-none"
+                  class="q-pl-sm q-ml-xs q-mb-md"
                   flat
                   outline
                   color="pink-4"
@@ -166,11 +166,8 @@
                   label="发布资源"
                   icon="o_article"
                   @click="addYunpanItem"
-              /></q-card-section>
-            </q-card>
-            <q-card flat class="column bg-secondary items-center q-pt-none q-pl-lg q-ml-sm">
-              <q-card-section horizontal>
-                <q-card-actions vertical align="left" class="justify-between q-pr-none">
+                />
+                <q-card-actions vertical align="left" class="justify-between q-pr-none q-pt-lg">
                   <q-btn
                     flat
                     outline
@@ -193,7 +190,7 @@
                   >
                     <q-badge transparent rounded align="top" color="pink-4"> 返利 </q-badge></q-btn
                   >
-                  <q-btn
+                  <!-- <q-btn
                     outline
                     color="indigo-5"
                     :size="addButtonSize"
@@ -201,11 +198,9 @@
                     flat
                     icon="o_savings"
                     @click="goGetReward"
-                  />
+                  /> -->
                 </q-card-actions>
               </q-card-section>
-
-              <q-separator inset />
             </q-card>
           </div>
           <div style="height: 40px"></div>

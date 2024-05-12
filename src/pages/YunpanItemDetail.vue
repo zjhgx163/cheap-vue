@@ -27,7 +27,24 @@
       <div class="col row bg-primary">
         <div class="col column">
           <div class="col q-pa-sm bg-secondary">
-            <q-item dense class="YL__return q-pt-none q-mt-xs">
+            <q-item dense class="q-pb-lg">
+              <q-item-label class="flex-center row">
+                <q-breadcrumbs class="text-dark">
+                  <template v-slot:separator>
+                    <q-icon size="1.1em" name="chevron_right" color="dark" />
+                  </template>
+                  <q-breadcrumbs-el icon="home" to="/" class="text-dark text-caption" />
+                  <q-breadcrumbs-el
+                    :label="breadcrumb"
+                    class="text-dark text-caption"
+                    :to="categoryTo"
+                  />
+                  <q-breadcrumbs-el label="正文" class="text-dark text-caption" />
+                </q-breadcrumbs>
+              </q-item-label>
+            </q-item>
+
+            <!-- <q-item dense class="YL__return q-pt-none q-mt-xs">
               <q-item-label class="flex-center row">
                 <q-icon name="keyboard_return" color="pink-4" />
                 <span> &nbsp;&nbsp;</span>
@@ -41,8 +58,8 @@
                   返回资源列表
                 </router-link>
               </q-item-label>
-            </q-item>
-            <div class="q-pa-md">
+            </q-item> -->
+            <!-- <div class="q-pa-md">
               <q-card dark bordered class="flex-center text-white bg-grey-9">
                 <q-card-section>
                   <q-item dense class="q-pt-none">
@@ -70,7 +87,7 @@
                   </q-item>
                 </q-card-section>
               </q-card>
-            </div>
+            </div> -->
             <div
               v-if="$q.platform.is.mobile"
               class="adsenseunitdetail q-pa-xs mobile_adsense_dimension"
@@ -87,9 +104,9 @@
             </div>
 
             <q-item dense>
-              <q-item-section>
-                <!-- <q-item-label class="column flex-center"> </q-item-label> -->
-                <q-item-label :lines="2">
+              <!-- <q-item-label class="column flex-center"> </q-item-label> -->
+              <q-item-label :lines="2">
+                <header>
                   <h1
                     class="text-h6 text-bold q-mt-none q-mb-sm"
                     v-bind:class="{ 'text-grey': isInvalid }"
@@ -105,21 +122,21 @@
                     >
                     </q-badge>
                   </h1>
-                </q-item-label>
-                <q-item-label
-                  :lines="2"
-                  class="text-black text-bold"
-                  v-bind:class="{ hidden: !isInvalid, 'text-body2': $q.platform.is.mobile }"
+                </header>
+              </q-item-label>
+              <q-item-label
+                :lines="2"
+                class="text-black text-bold"
+                v-bind:class="{ hidden: !isInvalid, 'text-body2': $q.platform.is.mobile }"
+              >
+                链接已失效，<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
+                  >站内有相同资源</span
+                >，请在搜索框内<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
+                  >搜索</span
+                >或关注微信公众号<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
+                  >老胡为你服务</span
                 >
-                  链接已失效，<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
-                    >站内有相同资源</span
-                  >，请在搜索框内<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
-                    >搜索</span
-                  >或关注微信公众号<span v-bind:class="[noticefont]" class="text-red-13 text-bold"
-                    >老胡为你服务</span
-                  >
-                </q-item-label>
-              </q-item-section>
+              </q-item-label>
             </q-item>
             <q-item class="items-center">
               <q-item-section avatar style="min-width: 30px">
@@ -150,11 +167,11 @@
             <q-item dense>
               <q-item-section>
                 <q-item-label>
-                  <div
+                  <article
                     class="text-body2 Post-body break-all q-mt-sm"
                     v-bind:class="{ 'text-grey': isInvalid }"
                     v-html="item.content"
-                  ></div>
+                  ></article>
                 </q-item-label>
               </q-item-section>
             </q-item>
@@ -602,6 +619,8 @@ export default {
       isInvalid: false,
       timer: null,
       isSubmiting: false,
+      breadcrumb: '影视',
+      categoryTo: '/category/影视',
     };
   },
   emits: ['need-login', 'logined'],
@@ -800,6 +819,8 @@ export default {
   created() {
     console.log('yunpanItemDetail created');
     this.item = this._detail;
+    this.breadcrumb = this.item.tag;
+    this.categoryTo = '/category/' + this.breadcrumb;
     this.previousItem = this._previousItem;
     this.nextItem = this._nextItem;
     if (this.$q.platform.is.mobile) {
@@ -999,6 +1020,8 @@ export default {
           this.$router.push({ path: '/list' });
         } else {
           this.item = res.data.data.item;
+          this.breadcrumb = this.item.tag;
+          this.categoryTo = '/category/' + this.breadcrumb;
           this.isInvalid = res.data.data.invalid;
           this._contentStr = res.data.data.contentStr;
           this.previousItem = res.data.data.previousItem;
