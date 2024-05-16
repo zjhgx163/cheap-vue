@@ -8,7 +8,7 @@ let isProEnv = false;
 // const fullCurrentDomain = window.location.href;
 
 domain = 'http://localhost:8238';
-
+local = 'http://127.0.0.1:8238';
 // if (fullCurrentDomain.indexOf(domainDev) > -1) {
 if (process.env.DEV) {
   // 测试环境
@@ -35,6 +35,7 @@ global.config = {
   domain,
   domainPro,
   isProEnv,
+  local,
 };
 
 // console.log('+++++++');

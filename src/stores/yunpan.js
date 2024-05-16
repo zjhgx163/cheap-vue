@@ -77,7 +77,7 @@ export const useYunpanStore = defineStore('yunpan', {
     },
     getYunpanItemContent(id, redirect) {
       const start = Date.now();
-      return axios.post(`${global.config.domain}/yunpan/item/public/${id}`).then((res) => {
+      return axios.post(`${global.config.local}/yunpan/item/public/${id}`).then((res) => {
         const end = Date.now() - start;
         console.log(`cost   ${end}ms`);
         if (res.data.code < 0) {
