@@ -37,13 +37,16 @@ export const useYunpanStore = defineStore('yunpan', {
       axios.post(`${global.config.local}/yunpan/top/article/list`, {}).then((res) => {
         this.topArticleList = res.data.data;
       });
+      const start = Date.now();
       return axios
-        .post(`${global.config.domain}/yunpan/resource/list`, {
+        .post(`${global.config.local}/yunpan/resource/list`, {
           page: page === undefined ? 1 : page,
           tag: tag,
           query: query,
         })
         .then((res) => {
+          const end = Date.now() - start;
+          console.log(`list cost ${end}ms`);
           if (res.data.code < 0) {
             redirect({ path: '/error/404' }, 301);
           } else {
@@ -58,7 +61,7 @@ export const useYunpanStore = defineStore('yunpan', {
             //只有点击‘搜索’才记录关键词
             if (x !== undefined && x != null) {
               axios
-                .post(`${global.config.domain}/yunpan/search/log`, {
+                .post(`${global.config.local}/yunpan/search/log`, {
                   searchKeyword: query,
                   total: res.data.data.total,
                   x: x,
@@ -79,7 +82,7 @@ export const useYunpanStore = defineStore('yunpan', {
       const start = Date.now();
       return axios.post(`${global.config.local}/yunpan/item/public/${id}`).then((res) => {
         const end = Date.now() - start;
-        console.log(`cost   ${end}ms`);
+        console.log(`detail cost ${end}ms`);
         if (res.data.code < 0) {
           Loading.hide();
 
