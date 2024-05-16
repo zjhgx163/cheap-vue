@@ -15,7 +15,7 @@ export const useCouponStore = defineStore('coupons', {
 
   actions: {
     getTopCoupons() {
-      return axios.post(`${global.config.domain}/coupon/top`, {}).then((res) => {
+      return axios.post(`${global.config.local}/coupon/top`, {}).then((res) => {
         // console.log(res.data.data);
         console.log('getTopCoupons  return');
         console.log(res.data.data);
@@ -28,7 +28,7 @@ export const useCouponStore = defineStore('coupons', {
     },
 
     getCouponPage(page, path, q, sortIndex) {
-      return axios.post(`${global.config.domain}/coupon/page`, {}).then((res) => {
+      return axios.post(`${global.config.local}/coupon/page`, {}).then((res) => {
         this.coupons = res.data.data.records;
         console.log();
 

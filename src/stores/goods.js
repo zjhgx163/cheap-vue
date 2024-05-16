@@ -30,7 +30,7 @@ export const useGoodsStore = defineStore('goods', {
       // console.log('sortIndex =' + sortIndex);
 
       return axios
-        .post(`${global.config.domain}/goods/list`, {
+        .post(`${global.config.local}/goods/list`, {
           page: page === undefined ? 1 : page,
           path: path === undefined ? null : path,
           query: q === undefined ? null : q,
@@ -52,7 +52,7 @@ export const useGoodsStore = defineStore('goods', {
         });
     },
     getGoodDetail(urlCode, redirect) {
-      return axios.post(`${global.config.domain}/goods/detail`, { code: urlCode }).then((res) => {
+      return axios.post(`${global.config.local}/goods/detail`, { code: urlCode }).then((res) => {
         this.detail = res.data.data;
         // console.log(this.detail);
         if (this.detail == null) {

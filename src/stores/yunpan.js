@@ -34,7 +34,7 @@ export const useYunpanStore = defineStore('yunpan', {
   actions: {
     getItemList(page, query, tag, x, redirect) {
       // 取top article
-      axios.post(`${global.config.domain}/yunpan/top/article/list`, {}).then((res) => {
+      axios.post(`${global.config.local}/yunpan/top/article/list`, {}).then((res) => {
         this.topArticleList = res.data.data;
       });
       return axios
@@ -120,7 +120,7 @@ export const useYunpanStore = defineStore('yunpan', {
     },
 
     getYunpanArticleContent(id, redirect) {
-      return axios.post(`${global.config.domain}/yunpan/article/${id}`).then((res) => {
+      return axios.post(`${global.config.local}/yunpan/article/${id}`).then((res) => {
         if (res.data.code < 0) {
           Notify.create({
             type: 'negative',
@@ -155,7 +155,7 @@ export const useYunpanStore = defineStore('yunpan', {
       //   delay: 400, // ms
       // });
       return axios
-        .post(`${global.config.domain}/yunpan/resource/list`, {
+        .post(`${global.config.local}/yunpan/resource/list`, {
           page: 1,
         })
         .then((res) => {
