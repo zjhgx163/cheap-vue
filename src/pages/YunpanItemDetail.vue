@@ -429,7 +429,7 @@
           </div>
           <q-separator inset />
 
-          <q-card class="q-px-md flex-center" flat>
+          <q-card class="q-px-sm flex-center q-ml-xs" flat>
             <q-item class="q-pt-sm justify-start items-center">
               <q-item-section avatar class="q-pr-sm">
                 <!-- <q-icon name="o_info" color="indigo-7" /> -->
@@ -531,6 +531,72 @@
               </div>
             </q-card-section>
           </q-card>
+          <!-- <q-separator />
+          <q-card flat>
+            <q-card-section horizontal>
+              <q-card-section class="col-4 flex flex-center">
+                <q-img
+                  width="175px"
+                  class="rounded-borders"
+                  src="https://cdn.quasar.dev/img/parallax2.jpg"
+                />
+                <q-card-section>
+                  <div class="text-h6">Our Changing Planet</div>
+                  <div class="text-subtitle2">by John Doe</div>
+                </q-card-section>
+              </q-card-section>
+              <q-card-section class="col-4 flex flex-center">
+                <q-img
+                  width="175px"
+                  class="rounded-borders"
+                  src="https://cdn.quasar.dev/img/parallax2.jpg"
+                />
+                <q-card-section>
+                  <div class="text-h6">Our Changing Planet</div>
+                  <div class="text-subtitle2">by John Doe</div>
+                </q-card-section>
+              </q-card-section>
+              <q-card-section class="col-4 flex flex-center">
+                <q-img
+                  width="175px"
+                  class="rounded-borders"
+                  src="https://cdn.quasar.dev/img/parallax2.jpg"
+                />
+                <q-card-section>
+                  <div class="text-h6">Our Changing Planet</div>
+                  <div class="text-subtitle2">by John Doe</div>
+                </q-card-section>
+              </q-card-section>
+            </q-card-section>
+            <q-card-section horizontal>
+              <q-card-section class="col-4 flex flex-center">
+                <div>SAFRYEHFHJKOPPPP</div>
+                <div>PPPPPPPPPPPPPPPMMMMMMMMMM</div>
+              </q-card-section>
+              <q-card-section class="col-4 flex flex-center">
+                <q-img
+                  width="175px"
+                  class="rounded-borders"
+                  src="https://cdn.quasar.dev/img/parallax2.jpg"
+                />
+                <q-card-section>
+                  <div class="text-h6">Our Changing Planet</div>
+                  <div class="text-subtitle2">by John Doe</div>
+                </q-card-section>
+              </q-card-section>
+              <q-card-section class="col-4 flex flex-center">
+                <q-img
+                  width="175px"
+                  class="rounded-borders"
+                  src="https://cdn.quasar.dev/img/parallax2.jpg"
+                />
+                <q-card-section>
+                  <div class="text-h6">Our Changing Planet</div>
+                  <div class="text-subtitle2">by John Doe</div>
+                </q-card-section>
+              </q-card-section>
+            </q-card-section>
+          </q-card> -->
         </div>
       </div>
       <!-- 右边栏 -->
@@ -849,7 +915,7 @@ export default {
     if (Object.keys(this.item).length > 0) {
       this.setAnotherTitle(this.item.title + ' - 阿里云盘夸克网盘 - 好家当');
       // this.title = this._detail.title;
-      console.log(this._contentStr);
+      // console.log(this._contentStr);
       this.meta.keywords.content = this.item.title + ',阿里云盘,夸克网盘,资源,下载';
       this.meta.ogtitle.content = this.item.title + ' - 阿里云盘夸克网盘 - 好家当';
       if (this._contentStr) {
