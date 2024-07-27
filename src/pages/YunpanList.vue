@@ -468,10 +468,23 @@ export default {
       },
     });
 
-    useMeta({
-      title: title.value,
-      meta: meta,
+    useMeta(() => {
+      return {
+        // whenever "title" from above changes, your meta will automatically update
+        title: title,
+        titleTemplate: (title) => `${title.value}`,
+
+        meta: meta,
+      };
     });
+    function setAnotherTitle(value) {
+      title.value = value; // will automatically trigger a Meta update due to the binding
+    }
+    return {
+      setAnotherTitle,
+      meta,
+      title,
+    };
   },
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
@@ -504,12 +517,26 @@ export default {
 
   created() {
     console.log('YunpanList created');
+    console.log('category is ' + this.category);
+
     this.listData = this._listData;
     this.isListEnd = this._isListEnd;
     this.topArticleList = this._topArticleList;
     this.max = this._max;
     this.pageNavigateHidden = this._pageNavigateHidden;
     this.stopLoading = this._stopLoading;
+    if (this.category != undefined) {
+      this.setAnotherTitle(this.title + ' - ' + this.category);
+      // this.title = this._detail.title;
+      // console.log(this._contentStr);
+      this.meta.keywords.content =
+        '阿里云盘,夸克网盘,迅雷云盘,资源下载,4k,1080p - ' + this.category;
+      this.meta.ogtitle.content = this.meta.ogtitle.content + ' - ' + this.category;
+      this.meta.description.content =
+        '最新阿里云盘,夸克网盘,迅雷云盘资源发布,4k,1080p,实现你的网盘自由' + ' - ' + this.category;
+      this.meta.ogdescription.content =
+        '最新阿里云盘,夸克网盘,迅雷云盘资源发布,4k,1080p,实现你的网盘自由' + ' - ' + this.category;
+    }
   },
 
   mounted() {
