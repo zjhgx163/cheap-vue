@@ -491,6 +491,16 @@ export default {
     console.log('YunpanList prefetch');
     // fetch data, validate route and optionally redirect to some other route...
     if (process.env.SERVER) {
+      // to resolve duplicate content issues /list redirect to /list?q=  /category/xx redirect to /category/xx?q=
+      if (currentRoute.path == '/list') {
+        if (currentRoute.query.q == undefined) {
+          redirect({ path: '/list', query: { q: '' } }, 301);
+        }
+      } else if (currentRoute.name == 'category') {
+        if (currentRoute.query.q == undefined) {
+          redirect({ path: currentRoute.path, query: { q: '' } }, 301);
+        }
+      }
       Loading.show();
 
       // ssrContext is available only server-side in SSR mode

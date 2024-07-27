@@ -92,9 +92,9 @@ export const useYunpanStore = defineStore('yunpan', {
             message: `${res.data.msg}`,
           });
           if (res.data.code == -210) {
-            redirect({ path: '/list' }, 404);
+            redirect({ path: '/list', query: { q: '' } }, 404);
           } else {
-            redirect({ path: '/list' }, 301);
+            redirect({ path: '/list', query: { q: '' } }, 301);
           }
         } else {
           this.itemDetail = res.data.data.item;
@@ -111,7 +111,7 @@ export const useYunpanStore = defineStore('yunpan', {
           }
 
           if (this.itemDetail == null) {
-            redirect({ path: '/list' }, 404);
+            redirect({ path: '/list', query: { q: '' } }, 404);
           }
           if (res.data.data.redirectId != null && res.data.data.redirectId > 0) {
             redirect({ path: '/d/' + res.data.data.redirectId }, 301);
@@ -132,9 +132,9 @@ export const useYunpanStore = defineStore('yunpan', {
           });
           Loading.hide();
           if (res.data.code == -210) {
-            redirect({ path: '/list' }, 404);
+            redirect({ path: '/list', query: { q: '' } }, 404);
           } else {
-            redirect({ path: '/list' }, 301);
+            redirect({ path: '/list', query: { q: '' } }, 301);
           }
         } else {
           this.itemDetail = res.data.data.article;
@@ -145,7 +145,7 @@ export const useYunpanStore = defineStore('yunpan', {
           );
 
           if (this.itemDetail == null) {
-            redirect({ path: '/list' }, 301);
+            redirect({ path: '/list', query: { q: '' } }, 301);
           }
 
           Loading.hide();

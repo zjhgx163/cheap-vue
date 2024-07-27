@@ -31,6 +31,7 @@ const routes = [
       },
       {
         path: 'category/:category',
+        name: 'category',
         meta: { isList: true },
         component: () => import('pages/YunpanList.vue'),
         props: (route) => ({ query: route.query.q, page: route.query.page }),

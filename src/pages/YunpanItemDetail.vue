@@ -1085,7 +1085,7 @@ export default {
             icon: 'warning',
             message: `${res.data.msg}`,
           });
-          this.$router.push({ path: '/list' });
+          this.$router.push({ path: '/list', query: { q: '' } });
         } else {
           this.item = res.data.data.item;
           this.breadcrumb = this.item.tag;
