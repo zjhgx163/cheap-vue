@@ -536,6 +536,16 @@ export default {
         '最新阿里云盘,夸克网盘,迅雷云盘资源发布,4k,1080p,实现你的网盘自由' + ' - ' + this.category;
       this.meta.ogdescription.content =
         '最新阿里云盘,夸克网盘,迅雷云盘资源发布,4k,1080p,实现你的网盘自由' + ' - ' + this.category;
+    } else {
+      if (this.$route.path == '/list') {
+        this.setAnotherTitle(this.title + ' - 列表');
+        // this.title = this._detail.title;
+        // console.log(this._contentStr);
+        this.meta.keywords.content = this.meta.keywords.content + ' - 列表';
+        this.meta.ogtitle.content = this.meta.ogtitle.content + ' - 列表';
+        this.meta.description.content = this.meta.description.content + ' - 列表';
+        this.meta.ogdescription.content = this.meta.ogdescription.content + ' - 列表';
+      }
     }
   },
 
