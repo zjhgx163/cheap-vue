@@ -158,6 +158,7 @@ const routes = [
       state: route.query.state,
     }),
   },
+  { path: '/notice', component: () => import('pages/Notice.vue') },
 
   { path: '/contact', component: () => import('src/pages/ContactMe.vue') },
   { path: '/help', component: () => import('pages/UploadWechatqrHelp.vue') },

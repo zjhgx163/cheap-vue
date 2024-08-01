@@ -178,6 +178,7 @@ const routes = [
 
   { path: '/contact', component: () => import('src/pages/ContactMe.vue') },
   { path: '/help', component: () => import('pages/UploadWechatqrHelp.vue') },
+  { path: '/notice', component: () => import('pages/Notice.vue') },
 
   // Always leave this as last one,
   // but you can also remove it
