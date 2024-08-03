@@ -545,7 +545,7 @@
                   </q-item-section>
                 </q-item>
                 <q-item class="flex-center">
-                  <q-img src="laohuweinifuwu.jpeg" alt="wechat_code" width="160px" height="160px" />
+                  <q-img src="laohuweinifuwu.jpeg" alt="wechat_code" width="150px" height="150px" />
                 </q-item>
               </div>
             </q-card-section>
