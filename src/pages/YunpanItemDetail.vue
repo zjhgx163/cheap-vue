@@ -510,6 +510,25 @@
                 <q-item dense class="q-pt-none">
                   <q-item-section>
                     <q-item-label class="column flex-center">
+                      <span class="text-caption text-pink-7 text-weight-medium">
+                        为您整理出了最新夸克资源，微信扫一扫下面二维码查看腾讯文档或点击
+                        <a
+                          href="https://docs.qq.com/aio/DZVRuRE9xbXNyTnRZ?_t=1720519370146&p=bRhTesqRg6muumFvTXk3UO"
+                          style="text-decoration: underline"
+                          >最新网盘资源</a
+                        >
+                        。支持搜索，持续更新，建议收藏。🙏
+                      </span>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item class="flex-center">
+                  <q-img src="quark_doc.png" alt="quark_doc" width="200px" height="200px" />
+                </q-item>
+                <q-separator inset />
+                <q-item dense class="q-pt-sm">
+                  <q-item-section>
+                    <q-item-label class="column flex-center">
                       <span class="text-h6 text-indigo-7 text-bold">更多最新资源，扫描二维码 </span>
                     </q-item-label>
                     <q-item-label class="column flex-center">
@@ -526,7 +545,7 @@
                   </q-item-section>
                 </q-item>
                 <q-item class="flex-center">
-                  <q-img src="laohuweinifuwu.jpeg" alt="wechat_code" width="120px" height="120px" />
+                  <q-img src="laohuweinifuwu.jpeg" alt="wechat_code" width="160px" height="160px" />
                 </q-item>
               </div>
             </q-card-section>
