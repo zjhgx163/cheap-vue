@@ -217,7 +217,7 @@
               ></ins>
             </div>
           </div>
-          <div style="height: 40px"></div>
+          <!-- <div style="height: 40px"></div>
 
           <div class="q-mt-lg q-ml-lg q-pl-lg q-pr-sm">
             <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank">
@@ -229,7 +229,7 @@
                 class="q-ml-lg"
               />
             </a>
-          </div>
+          </div> -->
         </div>
       </div>
     </q-page-container>
