@@ -193,15 +193,6 @@
 
 <style lang="sass">
 .YL
-  &__auther
-    @media(max-width: $breakpoint-xs-max)
-      font-size: 0.7em
-      height: 2.1em
-    @media(min-width: $breakpoint-xs-max)
-      font-size: 0.9em
-      height: 2.6em
-    color: rgba(0, 0, 0, 0.54)
-    line-height: 1.2em
   &__title_height
     @media(max-width: $breakpoint-xs-max)
       height: 2.9em
