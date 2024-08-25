@@ -625,15 +625,6 @@
 </template>
 <style lang="sass">
 .YL
-  &__auther
-    @media(max-width: $breakpoint-xs-max)
-      font-size: 0.8em
-      height: 2.1em
-    @media(min-width: $breakpoint-xs-max)
-      font-size: 1.0em
-      height: 2.6em
-    color: rgba(0, 0, 0, 0.54)
-    line-height: 1.2em
   &__return
     @media(max-width: $breakpoint-xs-max)
       font-size: 0.7em
