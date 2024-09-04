@@ -410,13 +410,13 @@ export default {
     console.log('YunpanLayout mounted');
     console.log('isProEnv = ' + global.config.isProEnv);
 
-    // let script = document.createElement('script');
-    // script.src =
-    //   'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3935005489954231';
-    // script.setAttribute('async', '');
-    // script.setAttribute('crossorigin', 'anonymous');
-    // var s = document.getElementsByTagName('script')[0];
-    // s.parentNode.insertBefore(script, s);
+    let script = document.createElement('script');
+    script.src =
+      'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3935005489954231';
+    script.setAttribute('async', '');
+    script.setAttribute('crossorigin', 'anonymous');
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(script, s);
 
     // if (global.config.isProEnv) {
     //   // 优量汇 H5 SDK 在线文档地址：http://developers.adnet.qq.com/doc/web/js_develop
@@ -571,27 +571,27 @@ export default {
       }
     }
     //启动谷歌unit广告
-    // if (window.adsbygoogle == undefined) {
-    //   this.timer = window.setInterval(() => {
-    //     console.log('adsbygoogle delay 400ms - layout');
+    if (window.adsbygoogle == undefined) {
+      this.timer = window.setInterval(() => {
+        console.log('adsbygoogle delay 400ms - layout');
 
-    //     if (window.adsbygoogle) {
-    //       window.clearInterval(this.timer); //清除定时器
-    //       let adsenseUnitLength = document.getElementsByClassName('adsenseunitlayout');
-    //       for (let i = 0; i < adsenseUnitLength.length; i++) {
-    //         (adsbygoogle = window.adsbygoogle || []).push({});
-    //       }
-    //       console.log('layout adsense loaded');
-    //     }
-    //   }, 400);
-    // } else {
-    //   let adsenseUnitLength = document.getElementsByClassName('adsenseunitlayout');
+        if (window.adsbygoogle) {
+          window.clearInterval(this.timer); //清除定时器
+          let adsenseUnitLength = document.getElementsByClassName('adsenseunitlayout');
+          for (let i = 0; i < adsenseUnitLength.length; i++) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          }
+          console.log('layout adsense loaded');
+        }
+      }, 400);
+    } else {
+      let adsenseUnitLength = document.getElementsByClassName('adsenseunitlayout');
 
-    //   for (let i = 0; i < adsenseUnitLength.length; i++) {
-    //     (adsbygoogle = window.adsbygoogle || []).push({});
-    //   }
-    //   console.log('layout adsense loaded');
-    // }
+      for (let i = 0; i < adsenseUnitLength.length; i++) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+      console.log('layout adsense loaded');
+    }
   },
   beforeUnmount() {
     console.log('beforeUnmount');

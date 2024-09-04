@@ -1015,25 +1015,25 @@ export default {
       this.getYunpanItemContent(this.$route.params.id);
     }
     //启动谷歌unit广告
-    // if (window.adsbygoogle == undefined) {
-    //   this.timer = setInterval(() => {
-    //     console.log('adsbygoogle delay 400ms - detail');
-    //     if (window.adsbygoogle) {
-    //       window.clearInterval(this.timer); //清除定时器
-    //       let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
-    //       for (let i = 0; i < adsenseUnitLength.length; i++) {
-    //         (adsbygoogle = window.adsbygoogle || []).push({});
-    //       }
-    //       console.log('detail adsense loaded');
-    //     }
-    //   }, 400);
-    // } else {
-    //   let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
-    //   for (let i = 0; i < adsenseUnitLength.length; i++) {
-    //     (adsbygoogle = window.adsbygoogle || []).push({});
-    //   }
-    //   console.log('detail adsense loaded');
-    // }
+    if (window.adsbygoogle == undefined) {
+      this.timer = setInterval(() => {
+        console.log('adsbygoogle delay 400ms - detail');
+        if (window.adsbygoogle) {
+          window.clearInterval(this.timer); //清除定时器
+          let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
+          for (let i = 0; i < adsenseUnitLength.length; i++) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          }
+          console.log('detail adsense loaded');
+        }
+      }, 400);
+    } else {
+      let adsenseUnitLength = document.getElementsByClassName('adsenseunitdetail');
+      for (let i = 0; i < adsenseUnitLength.length; i++) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }
+      console.log('detail adsense loaded');
+    }
 
     // if (window.AdverDetailInsert != undefined && window.AdverDetailInsert != null) {
     //   window.TencentGDT.NATIVE.renderAd(window.AdverDetailInsert, 'yunpanDetailAdvert');
