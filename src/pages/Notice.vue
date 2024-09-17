@@ -4,7 +4,7 @@
     <p>
       可以在电脑或手机上的浏览器打开 <span class="text-bold text-h6">hjdang.com</span>
       访问, 最好在
-      <span class="text-bold">谷歌浏览器或者edge浏览器</span> 上打开。
+      <span class="text-bold">谷歌/Edge/Safiri/Firefox浏览器</span> 上打开。
     </p>
     <p>如能恢复会在公众号上通知。</p>
   </div>
