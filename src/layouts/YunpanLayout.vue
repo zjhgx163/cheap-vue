@@ -223,8 +223,8 @@
             <q-img
               src="/advertisment/didi.jpg"
               spinner-color="white"
-              width="226px"
-              height="450px"
+              width="180px"
+              height="400px"
               class="q-ml-lg"
               fit="contain"
             />
