@@ -224,7 +224,7 @@
               src="/advertisment/didi.jpg"
               spinner-color="white"
               width="226px"
-              height="188.3px"
+              height="450px"
               class="q-ml-lg"
             />
             <!-- <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank"> </a> -->
