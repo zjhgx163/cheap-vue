@@ -226,6 +226,7 @@
               width="226px"
               height="450px"
               class="q-ml-lg"
+              fit="contain"
             />
             <!-- <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank"> </a> -->
           </div>
