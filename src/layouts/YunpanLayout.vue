@@ -203,21 +203,7 @@
               </q-card-section>
             </q-card>
           </div>
-          <div style="height: 40px"></div>
-
-          <div class="q-mt-md q-ml-lg q-pl-lg" style="min-height: 600px">
-            <div class="adsenseunitlayout">
-              <ins
-                class="adsbygoogle"
-                style="display: block"
-                data-ad-client="ca-pub-3935005489954231"
-                data-ad-slot="4387276146"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-            </div>
-          </div>
-          <div style="height: 40px"></div>
+          <div style="height: 30px"></div>
 
           <div class="q-mt-lg q-ml-lg q-pl-lg q-pr-sm">
             <q-img
@@ -229,6 +215,19 @@
               fit="contain"
             />
             <!-- <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank"> </a> -->
+          </div>
+          <div style="height: 30px"></div>
+          <div class="q-mt-md q-ml-lg q-pl-lg" style="min-height: 600px">
+            <div class="adsenseunitlayout">
+              <ins
+                class="adsbygoogle"
+                style="display: block"
+                data-ad-client="ca-pub-3935005489954231"
+                data-ad-slot="4387276146"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+            </div>
           </div>
         </div>
       </div>
