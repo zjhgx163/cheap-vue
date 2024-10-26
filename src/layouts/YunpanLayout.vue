@@ -205,7 +205,7 @@
           </div>
           <div style="height: 30px"></div>
 
-          <div class="q-mt-lg q-ml-lg q-pl-lg q-pr-sm">
+          <div class="q-mt-sm q-ml-sm q-pl-sm q-pr-sm">
             <q-img
               src="/advertisment/didi.jpg"
               spinner-color="white"
