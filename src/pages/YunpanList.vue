@@ -133,7 +133,8 @@
                         text-color="white"
                         class="text-bold"
                       >
-                        {{ item.tag }}
+                        <!-- {{ item.tag }} -->
+                        网盘
                       </q-chip>
                     </div>
                   </q-item-label>
@@ -342,11 +343,11 @@ export default {
         } else if (parameter == '动漫') {
           return 'blue-5';
         } else if (parameter == '图片') {
-          return 'orange-5';
+          return 'deep-orange-4';
         } else if (parameter == '游戏/软件') {
           return 'purple-4';
         } else if (parameter == '学习') {
-          return 'teal-5';
+          return 'lime-9';
         } else if (parameter == '音乐/音频') {
           return 'indigo-5';
         } else if (parameter == '日常') {
@@ -356,7 +357,7 @@ export default {
         } else if (parameter == '书籍') {
           return 'brown-5';
         } else {
-          return 'lime-8';
+          return 'teal-5';
         }
       };
     },
@@ -364,25 +365,25 @@ export default {
     getTagIcon: function () {
       return (parameter) => {
         if (parameter == '影视') {
-          return 'movie';
+          return 'o_movie';
         } else if (parameter == '动漫') {
           return 'tv';
         } else if (parameter == '图片') {
-          return 'image';
+          return 'o_image';
         } else if (parameter == '游戏/软件') {
-          return 'sports_esports';
+          return 'o_sports_esports';
         } else if (parameter == '学习') {
-          return 'book';
+          return 'o_school';
         } else if (parameter == '音乐/音频') {
-          return 'music_note';
+          return 'o_music_note';
         } else if (parameter == '日常') {
           return 'nightlife';
         } else if (parameter == '求资源') {
-          return 'help';
+          return 'help_outline';
         } else if (parameter == '书籍') {
-          return 'book';
+          return 'o_book';
         } else {
-          return 'eco';
+          return 'o_eco';
         }
       };
     },

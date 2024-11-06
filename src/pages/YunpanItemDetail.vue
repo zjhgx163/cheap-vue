@@ -114,14 +114,15 @@
                     >
                       <!-- , YL__invalid_item: isInvalid -->
                       {{ item.title }}
+                      <q-icon :name="getTagIcon(item.tag)" :color="getTagColor(item.tag)" />
 
-                      <q-badge
+                      <!-- <q-badge
                         transparent
                         align="middle"
                         :color="getTagColor(item.tag)"
                         :label="item.tag"
                       >
-                      </q-badge>
+                      </q-badge> -->
                     </h1>
                   </header>
                 </q-item-label>
@@ -752,6 +753,31 @@ export default {
           return 'brown-5';
         } else {
           return 'lime-8';
+        }
+      };
+    },
+    getTagIcon: function () {
+      return (parameter) => {
+        if (parameter == '影视') {
+          return 'o_movie';
+        } else if (parameter == '动漫') {
+          return 'tv';
+        } else if (parameter == '图片') {
+          return 'o_image';
+        } else if (parameter == '游戏/软件') {
+          return 'o_sports_esports';
+        } else if (parameter == '学习') {
+          return 'o_school';
+        } else if (parameter == '音乐/音频') {
+          return 'o_music_note';
+        } else if (parameter == '日常') {
+          return 'nightlife';
+        } else if (parameter == '求资源') {
+          return 'help_outline';
+        } else if (parameter == '书籍') {
+          return 'o_book';
+        } else {
+          return 'o_eco';
         }
       };
     },

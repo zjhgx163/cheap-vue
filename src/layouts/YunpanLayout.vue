@@ -60,57 +60,67 @@
           dense
           align="left"
           active-color="pink-4"
-          indicator-color="pink-4"
+          :indicator-color="getTagColor"
           content-class="text-grey-10"
           narrow-indicator
           outside-arrows
           mobile-arrows
+          v-model="tab"
           shrink
         >
           <q-route-tab :to="{ path: '/list', query: { q: searchKey } }" label="全部" name="all" />
           <q-route-tab
             :to="{ path: '/category/影视', query: { q: searchKey } }"
-            label="影视"
+            icon="o_movie"
             name="movie"
+            class="text-pink-4"
           />
           <q-route-tab
             :to="{ path: '/category/动漫', query: { q: searchKey } }"
-            label="动漫"
+            icon="tv"
             name="anime"
+            class="text-blue-5"
           />
           <q-route-tab
             :to="{ path: '/category/学习', query: { q: searchKey } }"
-            label="学习"
             name="learn"
+            icon="o_school"
+            class="text-lime-9"
           />
           <q-route-tab
             :to="{ path: '/category/游戏%2F软件', query: { q: searchKey } }"
-            label="游戏/软件"
+            icon="o_sports_esports"
+            class="text-purple-4"
             name="game/software"
           />
           <q-route-tab
             :to="{ path: '/category/音乐%2F音频', query: { q: searchKey } }"
-            label="音乐/音频"
+            icon="o_music_note"
+            class="text-indigo-5"
             name="music"
           />
           <q-route-tab
             :to="{ path: '/category/图片', query: { q: searchKey } }"
-            label="图片"
+            icon="o_image"
+            class="text-deep-orange-4"
             name="picture"
           />
           <q-route-tab
             :to="{ path: '/category/书籍', query: { q: searchKey } }"
-            label="书籍"
+            icon="o_book"
+            class="text-brown-5"
             name="books"
           />
           <q-route-tab
             :to="{ path: '/category/求资源', query: { q: searchKey } }"
-            label="求资源"
+            icon="help_outline"
+            class="text-blue-grey-6"
             name="help"
           />
           <q-route-tab
             :to="{ path: '/category/other', query: { q: searchKey } }"
-            label="其他"
+            icon="o_eco"
+            class="text-teal-5"
             name="other"
           />
         </q-tabs>
@@ -233,7 +243,7 @@
       </div>
     </q-page-container>
 
-    <q-footer reveal class="bg-secondary q-pt-none q-pb-xs YL__1000w">
+    <q-footer class="bg-secondary q-pt-none q-pb-xs YL__1000w">
       <q-toolbar
         class="items-center justify-between q-px-lg q-py-xs"
         v-if="$route.meta.isList && $q.platform.is.mobile"
@@ -281,19 +291,19 @@
           </q-item-label>
         </q-item-section>
       </q-item>
-      <div v-if="$q.platform.is.desktop" class="row flex-center YL__notice">
-        <a target="_blank" class="text-grey-6 q-px-sm text-caption" href="https://beian.miit.gov.cn"
+      <div class="row flex-center YL__notice">
+        <a target="_blank" class="text-dark q-px-sm text-caption" href="https://beian.miit.gov.cn"
           >浙ICP备2020040769号-1</a
         >
 
-        <!-- <a
-          class="text-grey-5 q-px-sm text-caption"
+        <a
+          class="text-dark q-px-sm text-caption"
           target="_blank"
           href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33012702000426"
           ><img src="备案图标.png" style="width: 12px; height: 12px" />
 
           浙公网安备 33012702000426号
-        </a> -->
+        </a>
       </div>
     </q-footer>
     <login-qr
@@ -376,6 +386,7 @@ export default {
       timer: null,
       avatar: '/static/not_login_user.png',
       isEditorShowing: false,
+      tab: 'all',
     };
   },
   computed: {
@@ -394,7 +405,29 @@ export default {
     addButtonSize() {
       return this.$q.platform.is.desktop ? '1.0em' : '0.8em';
     },
-
+    getTagColor() {
+      if (this.tab == 'all') {
+        return 'pink-4';
+      } else if (this.tab == 'movie') {
+        return 'pink-4';
+      } else if (this.tab == 'anime') {
+        return 'blue-5';
+      } else if (this.tab == 'picture') {
+        return 'deep-orange-4';
+      } else if (this.tab == 'game/software') {
+        return 'purple-4';
+      } else if (this.tab == 'learn') {
+        return 'lime-9';
+      } else if (this.tab == 'music') {
+        return 'indigo-5';
+      } else if (this.tab == 'help') {
+        return 'blue-grey-6';
+      } else if (this.tab == 'books') {
+        return 'brown-5';
+      } else {
+        return 'teal-5';
+      }
+    },
     // categoryTab: function () {
     //   return this.$refs.child.category;
     // },
