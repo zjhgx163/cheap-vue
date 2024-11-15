@@ -71,21 +71,18 @@
           <q-route-tab :to="{ path: '/list', query: { q: searchKey } }" label="全部" name="all" />
           <q-route-tab
             :to="{ path: '/category/影视', query: { q: searchKey } }"
-            icon="o_movie"
+            label="影视"
             name="movie"
-            class="text-pink-4"
           />
           <q-route-tab
             :to="{ path: '/category/动漫', query: { q: searchKey } }"
-            icon="tv"
+            label="动漫"
             name="anime"
-            class="text-blue-5"
           />
           <q-route-tab
             :to="{ path: '/category/学习', query: { q: searchKey } }"
+            label="学习"
             name="learn"
-            icon="o_school"
-            class="text-lime-9"
           />
           <q-route-tab
             :to="{ path: '/category/游戏%2F软件', query: { q: searchKey } }"
@@ -95,20 +92,17 @@
           />
           <q-route-tab
             :to="{ path: '/category/音乐%2F音频', query: { q: searchKey } }"
-            icon="o_music_note"
-            class="text-indigo-5"
+            label="音乐/音频"
             name="music"
           />
           <q-route-tab
             :to="{ path: '/category/图片', query: { q: searchKey } }"
-            icon="o_image"
-            class="text-deep-orange-4"
+            label="图片"
             name="picture"
           />
           <q-route-tab
             :to="{ path: '/category/书籍', query: { q: searchKey } }"
-            icon="o_book"
-            class="text-brown-5"
+            label="书籍"
             name="books"
           />
           <q-route-tab
@@ -119,8 +113,7 @@
           />
           <q-route-tab
             :to="{ path: '/category/other', query: { q: searchKey } }"
-            icon="o_eco"
-            class="text-teal-5"
+            label="其他"
             name="other"
           />
         </q-tabs>
@@ -243,7 +236,7 @@
       </div>
     </q-page-container>
 
-    <q-footer class="bg-secondary q-pt-none q-pb-xs YL__1000w">
+    <q-footer reveal class="bg-secondary q-pt-none q-pb-xs YL__1000w">
       <q-toolbar
         class="items-center justify-between q-px-lg q-py-xs"
         v-if="$route.meta.isList && $q.platform.is.mobile"
@@ -291,7 +284,7 @@
           </q-item-label>
         </q-item-section>
       </q-item>
-      <div class="row flex-center YL__notice">
+      <div v-if="$q.platform.is.desktop" class="row flex-center YL__notice">
         <a target="_blank" class="text-dark q-px-sm text-caption" href="https://beian.miit.gov.cn"
           >浙ICP备2020040769号-1</a
         >

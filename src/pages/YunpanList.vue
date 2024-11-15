@@ -133,8 +133,7 @@
                         text-color="white"
                         class="text-bold"
                       >
-                        <!-- {{ item.tag }} -->
-                        网盘
+                        {{ item.tag }}
                       </q-chip>
                     </div>
                   </q-item-label>

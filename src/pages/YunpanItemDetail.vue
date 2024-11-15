@@ -114,15 +114,15 @@
                     >
                       <!-- , YL__invalid_item: isInvalid -->
                       {{ item.title }}
-                      <q-icon :name="getTagIcon(item.tag)" :color="getTagColor(item.tag)" />
+                      <!-- <q-icon :name="getTagIcon(item.tag)" :color="getTagColor(item.tag)" /> -->
 
-                      <!-- <q-badge
+                      <q-badge
                         transparent
                         align="middle"
                         :color="getTagColor(item.tag)"
                         :label="item.tag"
                       >
-                      </q-badge> -->
+                      </q-badge>
                     </h1>
                   </header>
                 </q-item-label>
@@ -738,11 +738,11 @@ export default {
         } else if (parameter == '动漫') {
           return 'blue-5';
         } else if (parameter == '图片') {
-          return 'orange-5';
+          return 'deep-orange-4';
         } else if (parameter == '游戏/软件') {
           return 'purple-4';
-        } else if (parameter == '学习区') {
-          return 'teal-5';
+        } else if (parameter == '学习') {
+          return 'lime-9';
         } else if (parameter == '音乐/音频') {
           return 'indigo-5';
         } else if (parameter == '日常') {
@@ -752,7 +752,7 @@ export default {
         } else if (parameter == '书籍') {
           return 'brown-5';
         } else {
-          return 'lime-8';
+          return 'teal-5';
         }
       };
     },
