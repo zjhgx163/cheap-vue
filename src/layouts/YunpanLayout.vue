@@ -59,7 +59,7 @@
         <q-tabs
           dense
           align="left"
-          active-color="pink-4"
+          :active-color="getTagColor"
           :indicator-color="getTagColor"
           content-class="text-grey-10"
           narrow-indicator
