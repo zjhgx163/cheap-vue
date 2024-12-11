@@ -420,7 +420,12 @@
                         >
                       </div>
                       <div>
-                        <q-img src="quark_doc.png" alt="quark_doc" width="130px" height="130px" />
+                        <q-img
+                          src="yunpan_doc.png"
+                          alt="云盘资源文档实时更新"
+                          width="130px"
+                          height="130px"
+                        />
                       </div>
                     </div>
                   </q-item-section>
