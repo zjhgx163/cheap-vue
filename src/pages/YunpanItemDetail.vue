@@ -509,7 +509,12 @@
                   </q-item-section>
                 </q-item>
                 <q-item class="flex-center">
-                  <q-img src="quark_doc.png" alt="quark_doc" width="265px" height="265px" />
+                  <q-img
+                    src="yunpan_doc.png"
+                    alt="云盘资源文档实时更新"
+                    width="265px"
+                    height="265px"
+                  />
                 </q-item>
               </div>
               <div v-else>
@@ -529,7 +534,12 @@
                   </q-item-section>
                 </q-item>
                 <q-item class="flex-center">
-                  <q-img src="quark_doc.png" alt="quark_doc" width="200px" height="200px" />
+                  <q-img
+                    src="yunpan_doc.png"
+                    alt="云盘资源文档实时更新"
+                    width="200px"
+                    height="200px"
+                  />
                 </q-item>
                 <q-separator inset />
                 <q-item dense class="q-pt-sm">
