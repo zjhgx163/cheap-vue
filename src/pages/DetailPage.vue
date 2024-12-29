@@ -274,7 +274,7 @@
       </div>
       <!-- 右边栏 -->
       <div v-if="isBigScreen" class="col-4 gt-md">
-        <ResoureSideList />
+        <HotList />
       </div>
     </div>
   </q-page>
@@ -282,7 +282,8 @@
 
 <script>
 import 'src/config';
-import ResoureSideList from '../components/ResourceSideList.vue';
+// import ResoureSideList from '../components/ResourceSideList.vue';
+import HotList from 'src/components/HotList.vue';
 // import { Screen } from 'quasar';
 // import FastClick from 'fastclick';
 // if (process.env.SerCLIENTver) {
@@ -339,7 +340,7 @@ export default {
   props: ['taobaoCode'], // 微信auth code
 
   components: {
-    ResoureSideList,
+    HotList,
   },
   setup() {
     console.log('DetailPage setup');
