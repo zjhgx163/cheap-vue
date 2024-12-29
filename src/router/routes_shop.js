@@ -25,8 +25,8 @@ const routes = [
 
         components: {
           default: () => import('pages/Index.vue'),
-          // hot: () => import('components/HotList.vue'),
-          hot: () => import('components/ResourceSideList.vue'),
+          hot: () => import('components/HotList.vue'),
+          // hot: () => import('components/ResourceSideList.vue'),
         },
         props: {
           default: (route) => ({ query: route.query.q, sort: route.query.sort }),
