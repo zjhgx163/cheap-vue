@@ -9,8 +9,8 @@ const routes = [
 
         components: {
           default: () => import('pages/Index.vue'),
-          // hot: () => import('components/HotList.vue'),
-          hot: () => import('components/ResourceSideList.vue'),
+          hot: () => import('components/HotList.vue'),
+          // hot: () => import('components/ResourceSideList.vue'),
         },
         props: {
           default: (route) => ({
@@ -39,7 +39,9 @@ const routes = [
 
         components: {
           default: () => import('pages/Index.vue'),
-          hot: () => import('components/ResourceSideList.vue'),
+          hot: () => import('components/HotList.vue'),
+
+          // hot: () => import('components/ResourceSideList.vue'),
         },
         props: {
           default: (route) => ({
@@ -56,7 +58,9 @@ const routes = [
         meta: { isGoodsList: true },
         components: {
           default: () => import('pages/Index.vue'),
-          hot: () => import('components/ResourceSideList.vue'),
+          hot: () => import('components/HotList.vue'),
+
+          // hot: () => import('components/ResourceSideList.vue'),
         },
         props: {
           default: (route) => ({ query: route.query.q, x: route.query.x, sort: route.query.sort }),
