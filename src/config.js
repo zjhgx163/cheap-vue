@@ -1,5 +1,5 @@
 const domainDev = 'localhost'; // 测试环境
-const domainPro = process.env.ROUTE_SHOP == true ? 'shop.hjdang.com' : 'www.hjdang.com'; // 生产环境
+const domainPro = process.env.ROUTE_SHOP == true ? 'mall.hjdang.com' : 'yunpan.hjdang.com'; // 生产环境微信端
 let mobileSite = '';
 let domain = '';
 let shareDomain = '';

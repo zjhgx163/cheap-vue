@@ -189,7 +189,7 @@
                     flat
                     label="手慢无"
                     icon="o_shopping_cart"
-                    href="https://shop.hjdang.com"
+                    href="https://mall.hjdang.com"
                   >
                     <q-badge transparent rounded align="top" color="pink-4"> 返利 </q-badge></q-btn
                   >
@@ -693,7 +693,7 @@ export default {
         } else {
           //未登陆的话
           if (this.$refs.child.isWeixin()) {
-            window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
+            window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
           } else {
             this.needLogin();
           }
@@ -708,7 +708,7 @@ export default {
         } else {
           //未登陆的话
           if (this.$refs.child.isWeixin()) {
-            window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
+            window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
           } else {
             this.needLogin();
           }

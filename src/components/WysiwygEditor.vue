@@ -78,6 +78,7 @@
 </style>
 <script>
 import { Screen } from 'quasar';
+import 'src/config';
 
 export default {
   name: 'WysisygEditor',
@@ -197,7 +198,7 @@ export default {
             this.isSubmiting = false;
             if (res.data.code == -102) {
               if (this.isWeixin()) {
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
               } else {
                 this.$router.push({ path: 'login' });
               }

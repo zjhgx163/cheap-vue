@@ -346,14 +346,14 @@
               目前支持京东，拼多多返利，其他商城暂不支持。在<a
                 class="text-overline"
                 style="text-decoration: underline; line-height: 1.2em !important"
-                href="https://shop.hjdang.com"
+                href="https://mall.hjdang.com"
                 ><strong>好慢无</strong></a
               >里京东和拼多多的商品均有返利
             </q-item-label>
 
             <q-item-label caption class="q-py-xs"
               >如果你想购买<a
-                href="https://shop.hjdang.com"
+                href="https://mall.hjdang.com"
                 class="text-overline"
                 style="text-decoration: underline; line-height: 1.2em !important"
                 ><strong>好慢无</strong></a

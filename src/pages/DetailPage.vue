@@ -378,7 +378,7 @@ export default {
       },
       ogimage: {
         property: 'og:image',
-        content: 'https://www.hjdang.com/hjd.png',
+        content: 'https://mall.hjdang.com/hjd.png',
       },
       weibocreate: {
         name: 'weibo:webpage:create_at',
@@ -469,7 +469,7 @@ export default {
       this.meta.ogimage.content = this.detail.mainImageUrl;
     }
 
-    this.meta.ogurl.content = 'https://shop.hjdang.com/item/detail/' + this.$route.params.urlCode;
+    this.meta.ogurl.content = 'https://mall.hjdang.com/item/detail/' + this.$route.params.urlCode;
     this.meta.weibocreate.content = new Date();
     this.meta.weiboupdate.content = new Date();
     // if (process.env.CLIENT) {

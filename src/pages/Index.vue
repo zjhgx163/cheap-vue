@@ -476,7 +476,7 @@ export default {
       },
       ogurl: {
         property: 'og:url',
-        content: 'https://www.hjdang.com/',
+        content: 'https://mall.hjdang.com/',
       },
       ogtitle: {
         property: 'og:title',
@@ -490,7 +490,7 @@ export default {
       },
       ogimage: {
         property: 'og:image',
-        content: 'https://www.hjdang.com/hjd.png',
+        content: 'https://mall.hjdang.com/hjd.png',
       },
       weibocreate: {
         name: 'weibo:webpage:create_at',

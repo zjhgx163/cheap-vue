@@ -529,7 +529,7 @@ export default {
           if (res.data.code < 0) {
             if (res.data.code == -102) {
               if (this.isWeixin()) {
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://www.hjdang.com/auth/${this.item.id}&response_type=code&scope=snsapi_userinfo&state=yunpanArticle#wechat_redirect`;
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/${this.item.id}&response_type=code&scope=snsapi_userinfo&state=yunpanArticle#wechat_redirect`;
               } else {
                 this.$emit('need-login');
               }

@@ -97,7 +97,7 @@ export default {
       },
       ogurl: {
         property: 'og:url',
-        content: 'https://www.hjdang.com/coupon',
+        content: 'https://mall.hjdang.com/coupon',
       },
       ogtitle: {
         property: 'og:title',
@@ -110,7 +110,7 @@ export default {
       },
       ogimage: {
         property: 'og:image',
-        content: 'https://www.hjdang.com/hjd.png',
+        content: 'https://mall.hjdang.com/hjd.png',
       },
       weibocreate: {
         name: 'weibo:webpage:create_at',
