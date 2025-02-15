@@ -287,7 +287,7 @@ export default {
 .YL
   &__750w
     @media(min-width: $breakpoint-sm-min)
-      width: 750px
+      width: 675px
       margin: 0px auto
       font-size: 14px
     @media(max-width: $breakpoint-xs-max)

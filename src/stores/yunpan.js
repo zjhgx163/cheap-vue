@@ -23,6 +23,8 @@ export const useYunpanStore = defineStore('yunpan', {
     contentStr: '',
     isInvalid: false,
     userAgent: '',
+
+    recommendItems: [],
   }),
 
   getters: {
@@ -97,6 +99,7 @@ export const useYunpanStore = defineStore('yunpan', {
             redirect({ path: '/list', query: { q: '' } }, 301);
           }
         } else {
+          // console.log(res.data.data.item);
           this.itemDetail = res.data.data.item;
           this.previousItem = res.data.data.previousItem;
           this.nextItem = res.data.data.nextItem;
@@ -166,6 +169,14 @@ export const useYunpanStore = defineStore('yunpan', {
 
           // this.$q.loading.hide();
         });
+    },
+    getYunpanRecommendList() {
+      return axios.post(`${global.config.local}/yunpan/recommend/list`, {}).then((res) => {
+        // console.log(res.data.data);
+        this.recommendItems = res.data.data;
+
+        Loading.hide();
+      });
     },
   },
 });

@@ -5,7 +5,10 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('pages/YunpanList.vue'),
+        components: {
+          default: () => import('pages/YunpanList.vue'),
+          recommend: () => import('components/YunpanRecommendList.vue'),
+        },
         meta: { isList: true },
         props: (route) => ({
           query: route.query.q,
@@ -15,7 +18,10 @@ const routes = [
       },
       {
         path: 'list',
-        component: () => import('pages/YunpanList.vue'),
+        components: {
+          default: () => import('pages/YunpanList.vue'),
+          recommend: () => import('components/YunpanRecommendList.vue'),
+        },
         meta: { isList: true },
         props: (route) => ({
           query: route.query.q,
@@ -25,7 +31,10 @@ const routes = [
       },
       {
         path: 'list/:page',
-        component: () => import('pages/YunpanList.vue'),
+        components: {
+          default: () => import('pages/YunpanList.vue'),
+          recommend: () => import('components/YunpanRecommendList.vue'),
+        },
         meta: { isList: true },
         props: (route) => ({ query: route.query.q }),
       },
@@ -33,13 +42,19 @@ const routes = [
         path: 'category/:category',
         name: 'category',
         meta: { isList: true },
-        component: () => import('pages/YunpanList.vue'),
+        components: {
+          default: () => import('pages/YunpanList.vue'),
+          recommend: () => import('components/YunpanRecommendList.vue'),
+        },
         props: (route) => ({ query: route.query.q, page: route.query.page }),
       },
       {
         path: 'd/:id',
         name: 'yunpanDetail',
-        component: () => import('pages/YunpanItemDetail.vue'),
+        components: {
+          default: () => import('pages/YunpanItemDetail.vue'),
+          recommend: () => import('components/YunpanRecommendList.vue'),
+        },
       },
       {
         path: 'article/:id',

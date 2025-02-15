@@ -156,16 +156,16 @@
             </keep-alive>
           </router-view>
         </div>
-        <div v-if="$q.platform.is.desktop" dark class="col bg-secondary q-pl-lg q-ml-lg">
+        <div v-if="$q.platform.is.desktop" class="col bg-secondary q-pl-lg q-ml-lg">
           <div>
-            <q-card flat class="column bg-secondary items-center q-pl-sm q-pt-lg q-mt-md">
+            <q-card flat class="column bg-secondary q-pl-md q-ml-md q-pt-lg q-mt-md">
               <q-card-section>
                 <q-btn
                   class="q-pl-sm q-ml-xs q-mb-md"
                   flat
                   outline
                   color="pink-4"
-                  size="1.3em"
+                  size="1.1em"
                   label="发布资源"
                   icon="o_article"
                   @click="addYunpanItem"
@@ -206,9 +206,8 @@
               </q-card-section>
             </q-card>
           </div>
-          <div style="height: 30px"></div>
 
-          <div class="q-mt-sm q-ml-md q-pl-md q-pr-sm">
+          <!-- <div class="q-mt-sm q-ml-md q-pl-md q-pr-sm">
             <q-img
               src="/advertisment/didi.jpg"
               spinner-color="white"
@@ -217,10 +216,10 @@
               class="q-ml-lg"
               fit="contain"
             />
-            <!-- <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank"> </a> -->
+            <a href="https://www.aliyun.com/minisite/goods?userCode=sga9o0uh" target="_blank"> </a>
           </div>
-          <div style="height: 30px"></div>
-          <div class="q-mt-md q-ml-lg q-pl-lg" style="min-height: 600px">
+          <div style="height: 30px"></div> -->
+          <div class="q-mt-md q-ml-lg q-pl-lg" style="min-height: 450px">
             <div class="adsenseunitlayout">
               <ins
                 class="adsbygoogle"
@@ -232,6 +231,8 @@
               ></ins>
             </div>
           </div>
+          <div style="height: 30px"></div>
+          <router-view name="recommend"></router-view>
         </div>
       </div>
     </q-page-container>
@@ -322,14 +323,14 @@
     line-height: 1.2em
   &__750w
     @media(min-width: $breakpoint-sm-min)
-      width: 750px
+      width: 675px
       margin: 0px auto
       font-size: 14px
     @media(max-width: $breakpoint-xs-max)
       width: 100%
   &__1000w
     @media(min-width: $breakpoint-sm-min)
-      width: 1000px
+      width: 1040px
       margin: 0px auto
       font-size: 14px
     @media(max-width: $breakpoint-xs-max)
