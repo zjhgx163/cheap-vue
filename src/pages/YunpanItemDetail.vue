@@ -173,8 +173,35 @@
                   <article
                     class="text-body2 Post-body break-all q-mt-sm"
                     v-bind:class="{ 'text-grey': isInvalid }"
-                    v-html="item.content"
-                  ></article>
+                  >
+                    <div v-html="item.content"></div>
+                    <div
+                      class="q-mt-md"
+                      v-if="item.resourceTree != null && item.resourceTree != ''"
+                    >
+                      <q-separator />
+                      <h2 class="text-h7">
+                        <q-chip
+                          outline
+                          square
+                          color="dark"
+                          text-color="white"
+                          icon="find_in_page"
+                          label="资源内容"
+                        />
+                      </h2>
+                      <div class="q-pa-md bg-grey-9 text-white">
+                        <q-tree
+                          dense
+                          :nodes="item.resourceTree"
+                          node-key="id"
+                          label-key="name"
+                          default-expand-all
+                          :dark="!isInvalid"
+                        />
+                      </div>
+                    </div>
+                  </article>
                 </q-item-label>
               </q-item-section>
             </q-item>
