@@ -24,7 +24,7 @@
                 <q-item-label
                   lines="2"
                   v-bind:class="[fontFamily]"
-                  class="text-caption text-weight-light"
+                  class="text-caption"
                   style="color: #37a"
                 >
                   {{ item.title }}</q-item-label
