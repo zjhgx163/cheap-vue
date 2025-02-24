@@ -232,7 +232,7 @@
             </div>
           </div>
           <div style="height: 30px"></div>
-          <router-view name="recommend"></router-view>
+          <router-view name="recommend" v-if="$q.platform.is.desktop"></router-view>
         </div>
       </div>
     </q-page-container>

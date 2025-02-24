@@ -27,7 +27,7 @@
                   class="text-caption"
                   style="color: #37a"
                 >
-                  {{ item.title }}</q-item-label
+                  {{ item.titleGpt == null ? item.title : item.titleGpt }}</q-item-label
                 >
               </q-item-section>
               <!-- <q-item-section side top> </q-item-section> -->
@@ -61,6 +61,7 @@
 <script>
 import { useYunpanStore } from 'src/stores/yunpan';
 import { mapWritableState } from 'pinia';
+import { Platform } from 'quasar';
 export default {
   name: 'YunpanRecommendList',
   data() {
@@ -159,8 +160,11 @@ export default {
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('YunpanRecommendList prefetch');
-    const yunpanStore = useYunpanStore(store);
-    return yunpanStore.getYunpanRecommendList();
+    const platform = process.env.SERVER ? Platform.parseSSR(ssrContext) : Platform; // otherwise we're on client
+    if (platform.is.desktop) {
+      const yunpanStore = useYunpanStore(store);
+      return yunpanStore.getYunpanRecommendList();
+    }
   },
 
   methods: {

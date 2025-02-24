@@ -196,6 +196,7 @@
                           :nodes="item.resourceTree"
                           node-key="id"
                           label-key="name"
+                          no-transition
                           default-expand-all
                           :dark="!isInvalid"
                         />
@@ -593,72 +594,49 @@
               </div>
             </q-card-section>
           </q-card>
-          <!-- <q-separator />
-          <q-card flat>
-            <q-card-section horizontal>
-              <q-card-section class="col-4 flex flex-center">
-                <q-img
-                  width="175px"
-                  class="rounded-borders"
-                  src="https://cdn.quasar.dev/img/parallax2.jpg"
-                />
-                <q-card-section>
-                  <div class="text-h6">Our Changing Planet</div>
-                  <div class="text-subtitle2">by John Doe</div>
-                </q-card-section>
-              </q-card-section>
-              <q-card-section class="col-4 flex flex-center">
-                <q-img
-                  width="175px"
-                  class="rounded-borders"
-                  src="https://cdn.quasar.dev/img/parallax2.jpg"
-                />
-                <q-card-section>
-                  <div class="text-h6">Our Changing Planet</div>
-                  <div class="text-subtitle2">by John Doe</div>
-                </q-card-section>
-              </q-card-section>
-              <q-card-section class="col-4 flex flex-center">
-                <q-img
-                  width="175px"
-                  class="rounded-borders"
-                  src="https://cdn.quasar.dev/img/parallax2.jpg"
-                />
-                <q-card-section>
-                  <div class="text-h6">Our Changing Planet</div>
-                  <div class="text-subtitle2">by John Doe</div>
-                </q-card-section>
-              </q-card-section>
-            </q-card-section>
-            <q-card-section horizontal>
-              <q-card-section class="col-4 flex flex-center">
-                <div>SAFRYEHFHJKOPPPP</div>
-                <div>PPPPPPPPPPPPPPPMMMMMMMMMM</div>
-              </q-card-section>
-              <q-card-section class="col-4 flex flex-center">
-                <q-img
-                  width="175px"
-                  class="rounded-borders"
-                  src="https://cdn.quasar.dev/img/parallax2.jpg"
-                />
-                <q-card-section>
-                  <div class="text-h6">Our Changing Planet</div>
-                  <div class="text-subtitle2">by John Doe</div>
-                </q-card-section>
-              </q-card-section>
-              <q-card-section class="col-4 flex flex-center">
-                <q-img
-                  width="175px"
-                  class="rounded-borders"
-                  src="https://cdn.quasar.dev/img/parallax2.jpg"
-                />
-                <q-card-section>
-                  <div class="text-h6">Our Changing Planet</div>
-                  <div class="text-subtitle2">by John Doe</div>
-                </q-card-section>
-              </q-card-section>
-            </q-card-section>
-          </q-card> -->
+          <q-separator inset />
+          <div v-if="$q.platform.is.mobile" class="q-pa-sm q-mb-sm">
+            <div class="q-px-sm">猜你喜欢：</div>
+
+            <q-carousel
+              v-model="slide"
+              transition-prev="slide-right"
+              transition-next="slide-left"
+              swipeable
+              animated
+              height="210px"
+              class="rounded-borders"
+            >
+              <q-carousel-slide :name="1" class="column no-wrap q-pa-sm">
+                <q-scroll-area class="fit" visible="false">
+                  <div class="row justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+                    <div
+                      class="full-height col-2"
+                      v-for="recommend in recommendYunpanItems"
+                      v-bind:key="recommend.id"
+                    >
+                      <router-link
+                        :to="{
+                          name: 'yunpanDetail',
+                          params: { id: recommend.id },
+                        }"
+                      >
+                        <q-img
+                          class="rounded-borders"
+                          fit="contain"
+                          :src="recommend.thumbnaiImgs[0] != null ? recommend.thumbnaiImgs[0] : ''"
+                        />
+                      </router-link>
+
+                      <q-item-label class="text-caption q-pt-sm" :lines="2">
+                        {{ recommend.titleGpt == null ? recommend.title : recommend.titleGpt }}
+                      </q-item-label>
+                    </div>
+                  </div>
+                </q-scroll-area>
+              </q-carousel-slide>
+            </q-carousel>
+          </div>
         </div>
       </div>
       <!-- 右边栏 -->
@@ -742,6 +720,7 @@ export default {
       isSubmiting: false,
       breadcrumb: '影视',
       categoryTo: '/category/影视',
+      recommendYunpanItems: [],
     };
   },
   emits: ['need-login', 'logined'],
@@ -757,6 +736,7 @@ export default {
       _isInvalid: 'isInvalid',
       _userAgent: 'userAgent',
       _isReplyListEnd: 'isReplyListEnd',
+      _recommendYunpanItems: 'recommendItemsWithThumbnails',
     }),
     maxPage() {
       return this.$q.platform.is.desktop ? 6 : 4;
@@ -867,6 +847,7 @@ export default {
     } else {
       platform = 'pc';
     }
+    // console.log('platform = ' + platform);
     const title = ref('好家当 - 最新阿里云盘,夸克网盘资源发布');
     const meta = reactive({
       description: {
@@ -931,6 +912,7 @@ export default {
     return {
       setAnotherTitle,
       meta,
+      slide: ref(1),
     };
   },
   // our hook here
@@ -969,6 +951,7 @@ export default {
     this.categoryTo = '/category/' + this.breadcrumb;
     this.previousItem = this._previousItem;
     this.nextItem = this._nextItem;
+    this.recommendYunpanItems = this._recommendYunpanItems;
     if (this.$q.platform.is.mobile) {
       if (
         this.previousItem != null &&
@@ -1172,6 +1155,7 @@ export default {
           this._contentStr = res.data.data.contentStr;
           this.previousItem = res.data.data.previousItem;
           this.nextItem = res.data.data.nextItem;
+          this.recommendYunpanItems = res.data.data.recommendYunpanItems;
           if (this.$q.platform.is.mobile) {
             if (
               this.previousItem != null &&

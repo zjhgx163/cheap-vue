@@ -25,6 +25,7 @@ export const useYunpanStore = defineStore('yunpan', {
     userAgent: '',
 
     recommendItems: [],
+    recommendItemsWithThumbnails: [],
   }),
 
   getters: {
@@ -103,6 +104,7 @@ export const useYunpanStore = defineStore('yunpan', {
           this.itemDetail = res.data.data.item;
           this.previousItem = res.data.data.previousItem;
           this.nextItem = res.data.data.nextItem;
+          this.recommendItemsWithThumbnails = res.data.data.recommendYunpanItems;
           this.isInvalid = res.data.data.invalid;
           this.contentStr = res.data.data.contentStr;
           this.replyList = res.data.data.firstReplyPage.records;
