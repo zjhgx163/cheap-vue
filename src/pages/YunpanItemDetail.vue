@@ -602,13 +602,12 @@
               v-model="slide"
               transition-prev="slide-right"
               transition-next="slide-left"
-              swipeable
               animated
               height="210px"
               class="rounded-borders"
             >
               <q-carousel-slide :name="1" class="column no-wrap q-pa-sm">
-                <q-scroll-area class="fit" visible="false">
+                <q-scroll-area class="fit">
                   <div class="row justify-start items-center q-gutter-xs q-col-gutter no-wrap">
                     <div
                       class="full-height col-2"
