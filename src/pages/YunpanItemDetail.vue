@@ -175,7 +175,7 @@
                     v-bind:class="{ 'text-grey': isInvalid }"
                   >
                     <div v-html="item.content"></div>
-                    <div
+                    <!-- <div
                       class="q-mt-md"
                       v-if="item.resourceTree != null && item.resourceTree != ''"
                     >
@@ -201,7 +201,7 @@
                           :dark="!isInvalid"
                         />
                       </div>
-                    </div>
+                    </div> -->
                   </article>
                 </q-item-label>
               </q-item-section>
