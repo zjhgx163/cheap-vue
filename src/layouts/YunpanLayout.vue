@@ -315,10 +315,10 @@
   &__auther
     @media(max-width: $breakpoint-xs-max)
       font-size: 0.82em
-      height: 2.1em
+      height: 2.3em
     @media(min-width: $breakpoint-xs-max)
       font-size: 0.9em
-      height: 2.6em
+      height: 2.7em
     color: rgba(0, 0, 0, 0.54)
     line-height: 1.2em
   &__750w
