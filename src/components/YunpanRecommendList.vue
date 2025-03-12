@@ -39,7 +39,7 @@
     </q-card>
   </div>
 </template>
-<style lang="sass">
+<style scoped lang="sass">
 .YL
   &__auther
     font-size: 0.9em
