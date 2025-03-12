@@ -462,7 +462,7 @@
             </q-scroll-area>
           </div>
           <q-separator inset />
-          <div v-if="$q.platform.is.mobile" class="q-pa-sm q-mb-sm">
+          <div v-if="$q.platform.is.mobile" class="q-pa-sm q-my-xs">
             <div class="q-px-sm">猜你喜欢：</div>
 
             <q-carousel
