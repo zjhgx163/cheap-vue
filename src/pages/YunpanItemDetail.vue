@@ -462,6 +462,48 @@
             </q-scroll-area>
           </div>
           <q-separator inset />
+          <div v-if="$q.platform.is.mobile" class="q-pa-sm q-mb-sm">
+            <div class="q-px-sm">猜你喜欢：</div>
+
+            <q-carousel
+              v-model="slide"
+              transition-prev="slide-right"
+              transition-next="slide-left"
+              animated
+              height="210px"
+              class="rounded-borders"
+            >
+              <q-carousel-slide :name="1" class="column no-wrap q-pa-sm">
+                <q-scroll-area class="fit">
+                  <div class="row justify-start items-center q-gutter-xs q-col-gutter no-wrap">
+                    <div
+                      class="full-height col-2"
+                      v-for="recommend in recommendYunpanItems"
+                      v-bind:key="recommend.id"
+                    >
+                      <router-link
+                        :to="{
+                          name: 'yunpanDetail',
+                          params: { id: recommend.id },
+                        }"
+                      >
+                        <q-img
+                          class="rounded-borders"
+                          fit="contain"
+                          :src="recommend.thumbnaiImgs[0] != null ? recommend.thumbnaiImgs[0] : ''"
+                        />
+                      </router-link>
+
+                      <q-item-label class="text-caption q-pt-sm" :lines="2">
+                        {{ recommend.titleGpt == null ? recommend.title : recommend.titleGpt }}
+                      </q-item-label>
+                    </div>
+                  </div>
+                </q-scroll-area>
+              </q-carousel-slide>
+            </q-carousel>
+          </div>
+          <q-separator inset />
 
           <q-card class="q-px-sm flex-center q-ml-xs" flat>
             <q-item class="q-pt-sm justify-start items-center">
@@ -594,48 +636,6 @@
               </div>
             </q-card-section>
           </q-card>
-          <q-separator inset />
-          <div v-if="$q.platform.is.mobile" class="q-pa-sm q-mb-sm">
-            <div class="q-px-sm">猜你喜欢：</div>
-
-            <q-carousel
-              v-model="slide"
-              transition-prev="slide-right"
-              transition-next="slide-left"
-              animated
-              height="210px"
-              class="rounded-borders"
-            >
-              <q-carousel-slide :name="1" class="column no-wrap q-pa-sm">
-                <q-scroll-area class="fit">
-                  <div class="row justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-                    <div
-                      class="full-height col-2"
-                      v-for="recommend in recommendYunpanItems"
-                      v-bind:key="recommend.id"
-                    >
-                      <router-link
-                        :to="{
-                          name: 'yunpanDetail',
-                          params: { id: recommend.id },
-                        }"
-                      >
-                        <q-img
-                          class="rounded-borders"
-                          fit="contain"
-                          :src="recommend.thumbnaiImgs[0] != null ? recommend.thumbnaiImgs[0] : ''"
-                        />
-                      </router-link>
-
-                      <q-item-label class="text-caption q-pt-sm" :lines="2">
-                        {{ recommend.titleGpt == null ? recommend.title : recommend.titleGpt }}
-                      </q-item-label>
-                    </div>
-                  </div>
-                </q-scroll-area>
-              </q-carousel-slide>
-            </q-carousel>
-          </div>
         </div>
       </div>
       <!-- 右边栏 -->
