@@ -953,9 +953,9 @@ export default {
     console.log('this.$route.params.id = ' + this.$route.params.id);
 
     var id = this.$route.params.id.match(/\d+/i);
-    if (id != this.$route.params.id) {
-      this.$router.push({ path: '/d/' + id });
-    }
+    // if (id != this.$route.params.id) {
+    //   this.$router.push({ path: '/d/' + id });
+    // }
 
     this.item = this._detail;
     this.breadcrumb = this.item.tag;
@@ -999,7 +999,7 @@ export default {
       }
     }
 
-    this.meta.ogurl.content = 'https://www.hjdang.com/d/' + this.$route.params.id;
+    this.meta.ogurl.content = 'https://www.hjdang.com/d/' + id;
 
     this.meta.weibocreate.content = new Date();
     this.meta.weiboupdate.content = new Date();
