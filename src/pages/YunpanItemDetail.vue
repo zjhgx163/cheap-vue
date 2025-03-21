@@ -917,6 +917,11 @@ export default {
   // our hook here
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('yunpanItemDetail page prefetch');
+    var id = currentRoute.params.id.match(/\d+/i);
+    console.log('id = ' + id);
+    // if (currentRoute.params.id != id) {
+    // }
+
     // 先把旧数据重置
     const myStore = useYunpanStore();
     myStore.itemDetail = {};
@@ -934,7 +939,7 @@ export default {
       // Example:
       myStore.userAgent = ssrContext.req.headers['user-agent'];
 
-      return myStore.getYunpanItemContent(currentRoute.params.id, redirect);
+      return myStore.getYunpanItemContent(id, redirect);
     }
     // const $q = useQuasar();
     // fetch data, validate route and optionally redirect to some other route...
@@ -945,6 +950,13 @@ export default {
   },
   created() {
     console.log('yunpanItemDetail created');
+    console.log('this.$route.params.id = ' + this.$route.params.id);
+
+    var id = this.$route.params.id.match(/\d+/i);
+    if (id != this.$route.params.id) {
+      this.$router.push({ path: '/d/' + id });
+    }
+
     this.item = this._detail;
     this.breadcrumb = this.item.tag;
     this.categoryTo = '/category/' + this.breadcrumb;
@@ -1062,7 +1074,8 @@ export default {
       this.$q.loading.show({
         delay: 400, // ms
       });
-      this.getYunpanItemContent(this.$route.params.id);
+      var id = this.$route.params.id.match(/\d+/i);
+      this.getYunpanItemContent(id);
     }
     //启动谷歌unit广告
     if (window.adsbygoogle == undefined) {
