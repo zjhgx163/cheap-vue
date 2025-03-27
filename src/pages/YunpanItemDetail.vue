@@ -847,16 +847,17 @@ export default {
       platform = 'pc';
     }
     // console.log('platform = ' + platform);
-    const title = ref('好家当 - 最新阿里云盘,夸克网盘资源发布');
+    const title = ref('好家当-最新网盘资源下载');
     const meta = reactive({
       description: {
         name: 'description',
         content:
-          '最新阿里云盘,夸克网盘,迅雷云盘资源发布.4k,1080p高清影视,动漫,综艺节目,游戏,软件,音乐,学习资料,电子书,图片等应有尽有,实现你的网盘自由',
+          '好家当-最新百度网盘、夸克网盘、阿里云盘、UC网盘、迅雷云盘资源发布-4k、1080p高清影视、动漫、综艺节目、游戏、软件、音乐、学习资料、电子书、图片，网盘资源搜索，每天更新最新资源',
       },
       keywords: {
         name: 'keywords',
-        content: '阿里云盘,夸克网盘,迅雷云盘,资源下载,高清影视,动漫,4k,1080p',
+        content:
+          '好家当,百度网盘资源下载,夸克网盘资源下载,阿里云盘资源下载,UC网盘资源下载,迅雷云盘资源下载,网盘资源搜索,最新网盘资源发布,4k,1080p',
       },
       applicationdevice: {
         name: 'applicable-device',
@@ -873,12 +874,12 @@ export default {
       },
       ogtitle: {
         property: 'og:title',
-        content: '好家当 - 最新阿里云盘,夸克网盘资源发布',
+        content: '好家当-最新网盘资源下载',
       },
       ogdescription: {
         property: 'og:description',
         content:
-          '最新阿里云盘,夸克网盘,迅雷云盘资源发布.4k,1080p高清影视,动漫,综艺节目,游戏,软件,音乐,学习资料,电子书,图片等应有尽有,实现你的网盘自由',
+          '好家当-最新百度网盘、夸克网盘、阿里云盘、UC网盘、迅雷云盘资源发布-4k、1080p高清影视、动漫、综艺节目、游戏、软件、音乐、学习资料、电子书、图片，网盘资源搜索，每天更新最新资源',
       },
       ogimage: {
         property: 'og:image',
@@ -985,17 +986,17 @@ export default {
     this.isInvalid = this._isInvalid;
 
     if (Object.keys(this.item).length > 0) {
-      this.setAnotherTitle(this.item.title + ' - 阿里云盘夸克网盘 - 好家当');
+      this.setAnotherTitle(this.item.title + '-阿里云盘夸克网盘-好家当');
       // this.title = this._detail.title;
       // console.log(this._contentStr);
       this.meta.keywords.content = this.item.title + ',阿里云盘,夸克网盘,资源,下载';
-      this.meta.ogtitle.content = this.item.title + ' - 阿里云盘夸克网盘 - 好家当';
+      this.meta.ogtitle.content = this.item.title + '-阿里云盘夸克网盘 - 好家当';
       if (this._contentStr) {
-        this.meta.description.content = this._contentStr + ' - 阿里云盘,夸克网盘,资源,下载';
-        this.meta.ogdescription.content = this._contentStr + ' - 阿里云盘,夸克网盘,资源,下载';
+        this.meta.description.content = this._contentStr + '-阿里云盘,夸克网盘,资源,下载';
+        this.meta.ogdescription.content = this._contentStr + '-阿里云盘,夸克网盘,资源,下载';
       } else {
-        this.meta.description.content = this.item.title + ' - 阿里云盘,夸克网盘,资源,下载';
-        this.meta.ogdescription.content = this.item.title + ' - 阿里云盘,夸克网盘,资源,下载';
+        this.meta.description.content = this.item.title + '-阿里云盘,夸克网盘,资源,下载';
+        this.meta.ogdescription.content = this.item.title + '-阿里云盘,夸克网盘,资源,下载';
       }
     }
 

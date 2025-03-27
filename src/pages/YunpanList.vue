@@ -409,16 +409,17 @@ export default {
     } else {
       platform = 'pc';
     }
-    const title = ref('好家当 - 最新阿里云盘,夸克网盘资源发布');
+    const title = ref('好家当-最新网盘资源下载');
     const meta = reactive({
       description: {
         name: 'description',
         content:
-          '最新阿里云盘,夸克网盘,迅雷云盘资源发布,4k,1080p高清影视,动漫,综艺节目,游戏,软件,音乐,学习资料,电子书,图片等应有尽有,实现你的网盘自由',
+          '好家当-最新百度网盘、夸克网盘、阿里云盘、UC网盘、迅雷云盘资源发布-4k、1080p高清影视、动漫、综艺节目、游戏、软件、音乐、学习资料、电子书、图片，网盘资源搜索，每天更新最新资源',
       },
       keywords: {
         name: 'keywords',
-        content: '阿里云盘,夸克网盘,迅雷云盘,资源下载,4k,1080p,高清影视,动漫,学习资源',
+        content:
+          '好家当,百度网盘资源下载,夸克网盘资源下载,阿里云盘资源下载,UC网盘资源下载,迅雷云盘资源下载,网盘资源搜索,最新网盘资源发布,4k,1080p',
       },
       applicationdevice: {
         name: 'applicable-device',
@@ -430,16 +431,16 @@ export default {
       },
       ogurl: {
         property: 'og:url',
-        content: 'https://www.hjdang.com/list?q=',
+        content: 'https://www.hjdang.com',
       },
       ogtitle: {
         property: 'og:title',
-        content: '好家当 - 最新阿里云盘,夸克网盘资源发布',
+        content: '好家当-最新网盘资源下载',
       },
       ogdescription: {
         property: 'og:description',
         content:
-          '最新阿里云盘,夸克网盘,迅雷云盘资源发布.4k,1080p高清影视,动漫,综艺节目,游戏,软件,音乐,学习资料,电子书,图片等应有尽有,实现你的网盘自由',
+          '好家当-最新百度网盘、夸克网盘、阿里云盘、UC网盘、迅雷云盘资源发布-4k、1080p高清影视、动漫、综艺节目、游戏、软件、音乐、学习资料、电子书、图片，网盘资源搜索，每天更新最新资源',
       },
       ogimage: {
         property: 'og:image',
@@ -527,21 +528,20 @@ export default {
       // this.title = this._detail.title;
       // console.log(this._contentStr);
       this.meta.keywords.content =
-        '阿里云盘,夸克网盘,迅雷云盘,资源下载,4k,1080p - ' + this.category;
-      this.meta.ogtitle.content = this.meta.ogtitle.content + ' - ' + this.category;
-      this.meta.description.content =
-        '最新阿里云盘,夸克网盘,迅雷云盘资源发布,4k,1080p,实现你的网盘自由' + ' - ' + this.category;
-      this.meta.ogdescription.content =
-        '最新阿里云盘,夸克网盘,迅雷云盘资源发布,4k,1080p,实现你的网盘自由' + ' - ' + this.category;
+        '好家当,百度网盘资源发布,夸克网盘资源发布,阿里云盘资源发布,UC网盘资源发布,迅雷云盘资源发布,网盘资源搜索,网盘资源下载,' +
+        this.category;
+      this.meta.ogtitle.content = this.meta.ogtitle.content + '-' + this.category;
+      this.meta.description.content = this.meta.description.content + '-' + this.category;
+      this.meta.ogdescription.content = this.meta.ogdescription.content + '-' + this.category;
     } else {
       if (this.$route.path == '/list') {
-        this.setAnotherTitle(this.title + ' - 列表');
+        this.setAnotherTitle(this.title + '-列表页');
         // this.title = this._detail.title;
         // console.log(this._contentStr);
-        this.meta.keywords.content = this.meta.keywords.content + ' - 列表';
-        this.meta.ogtitle.content = this.meta.ogtitle.content + ' - 列表';
-        this.meta.description.content = this.meta.description.content + ' - 列表';
-        this.meta.ogdescription.content = this.meta.ogdescription.content + ' - 列表';
+        this.meta.keywords.content = this.meta.keywords.content + '-列表页';
+        this.meta.ogtitle.content = this.meta.ogtitle.content + '-列表页';
+        this.meta.description.content = this.meta.description.content + '-列表页';
+        this.meta.ogdescription.content = this.meta.ogdescription.content + '-列表页';
       }
     }
   },
