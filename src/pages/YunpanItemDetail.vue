@@ -986,17 +986,39 @@ export default {
     this.isInvalid = this._isInvalid;
 
     if (Object.keys(this.item).length > 0) {
-      this.setAnotherTitle(this.item.title + '-阿里云盘夸克网盘-好家当');
+      this.setAnotherTitle(this.item.title + '-' + this.item.keywords + '资源下载-好家当');
       // this.title = this._detail.title;
       // console.log(this._contentStr);
-      this.meta.keywords.content = this.item.title + ',阿里云盘,夸克网盘,资源,下载';
-      this.meta.ogtitle.content = this.item.title + '-阿里云盘夸克网盘 - 好家当';
-      if (this._contentStr) {
-        this.meta.description.content = this._contentStr + '-阿里云盘,夸克网盘,资源,下载';
-        this.meta.ogdescription.content = this._contentStr + '-阿里云盘,夸克网盘,资源,下载';
+      if (this.item.worksName != null && this.item.worksName != '') {
+        this.meta.description.content =
+          this.item.worksName + ' —— ' + this.item.keywords + '资源下载';
+        if (this._contentStr) {
+          this.meta.description.content = this.meta.description.content + ' —— ' + this._contentStr;
+          this.meta.ogdescription.content =
+            this.meta.description.content + ' —— ' + this._contentStr;
+        } else {
+          this.meta.description.content = this.meta.description.content + ' —— ' + this.item.title;
+          this.meta.ogdescription.content =
+            this.meta.description.content + ' —— ' + this.item.title;
+        }
+        this.meta.keywords.content =
+          '好家当,' + this.item.worksName + ',' + this.item.keywords + ',资源下载';
+        this.meta.ogtitle.content =
+          '好家当,' + this.item.worksName + ',' + this.item.keywords + ',资源下载';
       } else {
-        this.meta.description.content = this.item.title + '-阿里云盘,夸克网盘,资源,下载';
-        this.meta.ogdescription.content = this.item.title + '-阿里云盘,夸克网盘,资源,下载';
+        if (this._contentStr) {
+          this.meta.description.content =
+            this.item.keywords + '资源下载' + ' —— ' + this._contentStr;
+          this.meta.ogdescription.content =
+            this.item.keywords + '资源下载' + ' —— ' + this._contentStr;
+        } else {
+          this.meta.description.content =
+            this.item.keywords + '资源下载' + ' —— ' + this.item.title;
+          this.meta.ogdescription.content =
+            this.item.keywords + '资源下载' + ' —— ' + this.item.title;
+        }
+        this.meta.keywords.content = '好家当,' + this.item.keywords + ',资源下载';
+        this.meta.ogtitle.content = '好家当,' + this.item.keywords + ',资源下载';
       }
     }
 
@@ -1198,18 +1220,42 @@ export default {
           } else {
             this.isListEnd = false;
           }
-          this.setAnotherTitle(this.item.title + ' - 阿里云盘夸克网盘 - 好家当');
+          this.setAnotherTitle(this.item.title + '-' + this.item.keywords + '资源下载-好家当');
           // this.title = this._detail.title;
-          this.meta.keywords.content = this.item.title + ',阿里云盘,夸克网盘,资源,下载';
-          this.meta.ogtitle.content = this.item.title + ' - 阿里云盘夸克网盘';
-          if (this._contentStr) {
-            this.meta.description.content = this._contentStr + ' - 阿里云盘,夸克网盘,资源,下载';
-            this.meta.ogdescription.content = this._contentStr + ' - 阿里云盘,夸克网盘,资源,下载';
+          // console.log(this._contentStr);
+          if (this.item.worksName != null && this.item.worksName != '') {
+            this.meta.description.content =
+              this.item.worksName + ' —— ' + this.item.keywords + '资源下载';
+            if (this._contentStr) {
+              this.meta.description.content =
+                this.meta.description.content + ' —— ' + this._contentStr;
+              this.meta.ogdescription.content =
+                this.meta.description.content + ' —— ' + this._contentStr;
+            } else {
+              this.meta.description.content =
+                this.meta.description.content + ' —— ' + this.item.title;
+              this.meta.ogdescription.content =
+                this.meta.description.content + ' —— ' + this.item.title;
+            }
+            this.meta.keywords.content =
+              '好家当,' + this.item.worksName + ',' + this.item.keywords + ',资源下载';
+            this.meta.ogtitle.content =
+              '好家当,' + this.item.worksName + ',' + this.item.keywords + ',资源下载';
           } else {
-            this.meta.description.content = this.item.title + ' - 阿里云盘,夸克网盘,资源,下载';
-            this.meta.ogdescription.content = this.item.title + ' - 阿里云盘,夸克网盘,资源,下载';
+            if (this._contentStr) {
+              this.meta.description.content =
+                this.item.keywords + '资源下载' + ' —— ' + this._contentStr;
+              this.meta.ogdescription.content =
+                this.item.keywords + '资源下载' + ' —— ' + this._contentStr;
+            } else {
+              this.meta.description.content =
+                this.item.keywords + '资源下载' + ' —— ' + this.item.title;
+              this.meta.ogdescription.content =
+                this.item.keywords + '资源下载' + ' —— ' + this.item.title;
+            }
+            this.meta.keywords.content = '好家当,' + this.item.keywords + ',资源下载';
+            this.meta.ogtitle.content = '好家当,' + this.item.keywords + ',资源下载';
           }
-
           this.$q.loading.hide();
         }
       });
