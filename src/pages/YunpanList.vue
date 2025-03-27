@@ -523,25 +523,61 @@ export default {
     this.max = this._max;
     this.pageNavigateHidden = this._pageNavigateHidden;
     this.stopLoading = this._stopLoading;
+
     if (this.category != undefined) {
-      this.setAnotherTitle(this.title + ' - ' + this.category);
-      // this.title = this._detail.title;
-      // console.log(this._contentStr);
-      this.meta.keywords.content =
-        '好家当,百度网盘资源发布,夸克网盘资源发布,阿里云盘资源发布,UC网盘资源发布,迅雷云盘资源发布,网盘资源搜索,网盘资源下载,' +
-        this.category;
-      this.meta.ogtitle.content = this.meta.ogtitle.content + '-' + this.category;
-      this.meta.description.content = this.meta.description.content + '-' + this.category;
-      this.meta.ogdescription.content = this.meta.ogdescription.content + '-' + this.category;
+      if (this.$route.path.indexOf('/list') > -1) {
+        let page = this.$route.path.slice(6);
+        if (page != '') {
+          this.setAnotherTitle(this.title + '-' + this.category + '-第' + page + '页');
+          this.meta.keywords.content =
+            '好家当,百度网盘资源发布,夸克网盘资源发布,阿里云盘资源发布,UC网盘资源发布,迅雷云盘资源发布,网盘资源搜索,网盘资源下载,' +
+            this.category +
+            '第' +
+            page +
+            '页';
+          this.meta.ogtitle.content =
+            this.meta.ogtitle.content + '-' + this.category + '-第' + page + '页';
+          this.meta.description.content =
+            this.meta.description.content + '-' + this.category + '-第' + page + '页';
+          this.meta.ogdescription.content =
+            this.meta.ogdescription.content + '-' + this.category + '-第' + page + '页';
+        } else {
+          this.setAnotherTitle(this.title + '-' + this.category + '-第1页');
+          this.meta.keywords.content =
+            '好家当,百度网盘资源发布,夸克网盘资源发布,阿里云盘资源发布,UC网盘资源发布,迅雷云盘资源发布,网盘资源搜索,网盘资源下载,' +
+            '第1页';
+          this.meta.ogtitle.content = this.meta.ogtitle.content + '-' + this.category + '-第1页';
+          this.meta.description.content =
+            this.meta.description.content + '-' + this.category + '-第1页';
+          this.meta.ogdescription.content =
+            this.meta.ogdescription.content + '-' + this.category + '-第1页';
+        }
+      }
     } else {
-      if (this.$route.path == '/list') {
-        this.setAnotherTitle(this.title + '-列表页');
-        // this.title = this._detail.title;
-        // console.log(this._contentStr);
-        this.meta.keywords.content = this.meta.keywords.content + '-列表页';
-        this.meta.ogtitle.content = this.meta.ogtitle.content + '-列表页';
-        this.meta.description.content = this.meta.description.content + '-列表页';
-        this.meta.ogdescription.content = this.meta.ogdescription.content + '-列表页';
+      if (this.$route.path.indexOf('/list') > -1) {
+        let page = this.$route.path.slice(6);
+        if (page != '') {
+          this.setAnotherTitle(this.title + '-第' + page + '页');
+          // this.title = this._detail.title;
+          // console.log(this._contentStr);
+          this.meta.keywords.content =
+            '好家当,百度网盘资源发布,夸克网盘资源发布,阿里云盘资源发布,UC网盘资源发布,迅雷云盘资源发布,网盘资源搜索,网盘资源下载,' +
+            '第' +
+            page +
+            '页';
+          this.meta.ogtitle.content = this.meta.ogtitle.content + '-第' + page + '页';
+          this.meta.description.content = this.meta.description.content + '-第' + page + '页';
+          this.meta.ogdescription.content = this.meta.ogdescription.content + '-第' + page + '页';
+        } else {
+          this.setAnotherTitle(this.title + '-第1页');
+          // this.title = this._detail.title;
+          // console.log(this._contentStr);
+          this.meta.keywords.content =
+            '好家当,百度网盘资源发布,夸克网盘资源发布,阿里云盘资源发布,UC网盘资源发布,迅雷云盘资源发布,网盘资源搜索,网盘资源下载,第1页';
+          this.meta.ogtitle.content = this.meta.ogtitle.content + '-第1页';
+          this.meta.description.content = this.meta.description.content + '-第1页';
+          this.meta.ogdescription.content = this.meta.ogdescription.content + '-第1页';
+        }
       }
     }
   },
