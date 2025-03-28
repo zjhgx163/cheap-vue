@@ -528,30 +528,47 @@ export default {
       if (this.$route.path.indexOf('/list') > -1) {
         let page = this.$route.path.slice(6);
         if (page != '') {
-          this.setAnotherTitle(this.title + '-' + this.category + '-第' + page + '页');
+          this.setAnotherTitle(this.title + '-' + this.category + '板块' + '-第' + page + '页');
           this.meta.keywords.content =
             '好家当,百度网盘资源发布,夸克网盘资源发布,阿里云盘资源发布,UC网盘资源发布,迅雷云盘资源发布,网盘资源搜索,网盘资源下载,' +
             this.category +
+            '板块,' +
             '第' +
             page +
             '页';
           this.meta.ogtitle.content =
-            this.meta.ogtitle.content + '-' + this.category + '-第' + page + '页';
+            this.meta.ogtitle.content + '-' + this.category + '板块' + '-第' + page + '页';
           this.meta.description.content =
-            this.meta.description.content + '-' + this.category + '-第' + page + '页';
+            this.meta.description.content + '-' + this.category + '板块' + '-第' + page + '页';
           this.meta.ogdescription.content =
-            this.meta.ogdescription.content + '-' + this.category + '-第' + page + '页';
+            this.meta.ogdescription.content + '-' + this.category + '板块' + '-第' + page + '页';
         } else {
-          this.setAnotherTitle(this.title + '-' + this.category + '-第1页');
+          this.setAnotherTitle(this.title + '-' + this.category + '板块' + '-第1页');
           this.meta.keywords.content =
             '好家当,百度网盘资源发布,夸克网盘资源发布,阿里云盘资源发布,UC网盘资源发布,迅雷云盘资源发布,网盘资源搜索,网盘资源下载,' +
+            this.category +
+            '板块,' +
             '第1页';
-          this.meta.ogtitle.content = this.meta.ogtitle.content + '-' + this.category + '-第1页';
+          this.meta.ogtitle.content =
+            this.meta.ogtitle.content + '-' + this.category + '板块' + '-第1页';
           this.meta.description.content =
-            this.meta.description.content + '-' + this.category + '-第1页';
+            this.meta.description.content + '-' + this.category + '板块' + '-第1页';
           this.meta.ogdescription.content =
-            this.meta.ogdescription.content + '-' + this.category + '-第1页';
+            this.meta.ogdescription.content + '-' + this.category + '板块' + '-第1页';
         }
+      } else {
+        this.setAnotherTitle(this.title + '-' + this.category);
+        // this.title = this._detail.title;
+        // console.log(this._contentStr);
+        this.meta.keywords.content =
+          '好家当,百度网盘资源发布,夸克网盘资源发布,阿里云盘资源发布,UC网盘资源发布,迅雷云盘资源发布,网盘资源搜索,网盘资源下载,' +
+          this.category +
+          '板块';
+        this.meta.ogtitle.content = this.meta.ogtitle.content + '-' + this.category + '板块';
+        this.meta.description.content =
+          this.meta.description.content + '-' + this.category + '板块';
+        this.meta.ogdescription.content =
+          this.meta.ogdescription.content + '-' + this.category + '板块';
       }
     } else {
       if (this.$route.path.indexOf('/list') > -1) {
