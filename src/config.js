@@ -7,8 +7,10 @@ const imageDomain = '';
 let isProEnv = false;
 // const fullCurrentDomain = window.location.href;
 
-domain = 'http://localhost:8238';
+// domain = 'http://localhost:8238';
+domain = 'http://192.168.1.121:8238';
 local = 'http://127.0.0.1:8238';
+console.log('mode is ' + process.env.MODE);
 // if (fullCurrentDomain.indexOf(domainDev) > -1) {
 if (process.env.DEV) {
   // 测试环境
@@ -17,8 +19,13 @@ if (process.env.DEV) {
   // } else if (fullCurrentDomain.indexOf(domainPro) > -1) {
   // 生产环境
 } else {
-  domain = 'https://web.hjdang.com';
   isProEnv = true;
+
+  if (process.env.MODE === 'capacitor') {
+    domain = 'https://app.hjdang.com';
+  } else {
+    domain = 'https://web.hjdang.com';
+  }
   // 本地调试
   // domain = 'http://192.168.0.108:8238';
   // websocketHost = 'http://10.0.41.110:7979/websocket';

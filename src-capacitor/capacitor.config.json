@@ -1,0 +1,10 @@
+{
+  "appId": "org.capacitor.hjdang",
+  "appName": "好家当",
+  "bundledWebRuntime": false,
+  "npmClient": "[object Object]",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
