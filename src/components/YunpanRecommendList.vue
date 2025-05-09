@@ -161,7 +161,7 @@ export default {
   preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
     console.log('YunpanRecommendList prefetch');
     const platform = process.env.SERVER ? Platform.parseSSR(ssrContext) : Platform; // otherwise we're on client
-    if (platform.is.desktop) {
+    if (platform.is.desktop && process.env.SERVER) {
       const yunpanStore = useYunpanStore(store);
       return yunpanStore.getYunpanRecommendList();
     }

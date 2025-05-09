@@ -7,8 +7,8 @@ const imageDomain = '';
 let isProEnv = false;
 // const fullCurrentDomain = window.location.href;
 
-// domain = 'http://localhost:8238';
-domain = 'http://192.168.1.121:8238';
+domain = 'http://localhost:8238';
+// domain = 'http://192.168.1.121:8238';
 local = 'http://127.0.0.1:8238';
 console.log('mode is ' + process.env.MODE);
 // if (fullCurrentDomain.indexOf(domainDev) > -1) {

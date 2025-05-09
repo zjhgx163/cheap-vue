@@ -2,7 +2,7 @@
   <q-page>
     <div class="row justify-start">
       <div
-        v-for="item in _topCoupons"
+        v-for="item in topCoupons"
         v-bind:key="item.id"
         class="q-pa-lg column q-gutter-sm flex-center"
       >
@@ -56,7 +56,7 @@ export default {
     return {
       uid: 0,
       miniCodeImg: '',
-      // topCoupons: [],
+      topCoupons: [],
       // coupons: [],
     };
   },
@@ -163,7 +163,7 @@ export default {
   },
   created() {
     console.log('coupon page created');
-    // this.topCoupons = this._topCoupons;
+    this.topCoupons = this._topCoupons;
     // this.coupons = this._coupons;
     // this.max = this._replyMax;
   },
@@ -179,8 +179,7 @@ export default {
       this.$q.loading.show({
         delay: 400, // ms
       });
-      const myStore = useCouponStore();
-      myStore.getTopCoupons();
+      this.getTopCoupons();
     }
 
     console.log('actId = ', this.actId);
@@ -191,6 +190,15 @@ export default {
     }
   },
   methods: {
+    getTopCoupons() {
+      this.$axios.post(`${global.config.domain}/coupon/top`, {}).then((res) => {
+        console.log(res.data.data);
+
+        this.topCoupons = res.data.data;
+
+        this.$q.loading.hide();
+      });
+    },
     onClick(actId) {
       // if (!this.userInfo || this.userInfo.id == undefined || this.userInfo.id == null) {
       //   if (this.isWeixin()) {
