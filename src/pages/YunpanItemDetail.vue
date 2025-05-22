@@ -106,25 +106,22 @@
             <q-item dense>
               <!-- <q-item-label class="column flex-center"> </q-item-label> -->
               <q-item-section>
-                <q-item-label :lines="2">
-                  <header>
-                    <h1
-                      class="text-h6 text-bold q-mt-none q-mb-sm"
-                      v-bind:class="{ 'text-grey': isInvalid }"
-                    >
-                      <!-- , YL__invalid_item: isInvalid -->
-                      {{ item.title }}
-                      <!-- <q-icon :name="getTagIcon(item.tag)" :color="getTagColor(item.tag)" /> -->
-
-                      <q-badge
-                        transparent
-                        align="middle"
-                        :color="getTagColor(item.tag)"
-                        :label="item.tag"
-                      >
-                      </q-badge>
-                    </h1>
-                  </header>
+                <q-item-label :lines="3">
+                  <h1
+                    class="text-h6 text-bold q-mt-none q-mb-sm"
+                    v-bind:class="{ 'text-grey': isInvalid }"
+                  >
+                    <!-- , YL__invalid_item: isInvalid -->
+                    {{ item.title }}
+                    <!-- <q-icon :name="getTagIcon(item.tag)" :color="getTagColor(item.tag)" /> -->
+                  </h1>
+                  <q-badge
+                    transparent
+                    align="middle"
+                    :color="getTagColor(item.tag)"
+                    :label="item.tag"
+                  >
+                  </q-badge>
                 </q-item-label>
                 <q-item-label
                   :lines="2"
