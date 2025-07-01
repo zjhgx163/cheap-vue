@@ -4,7 +4,7 @@
       <q-toolbar class="bg-secondary justify-around" v-bind:class="[itemPadding]">
         <div class="col-auto col-sm-auto q-pa-xs">
           <router-link :to="{ path: '/' }">
-            <img
+            <q-img
               src="hjd.png"
               spinner-color="white"
               :width="logoWidth"
@@ -120,7 +120,7 @@
           </q-tabs>
         </nav>
       </q-toolbar>
-      <div v-if="$route.meta.isList" class="q-mt-sm">
+      <!-- <div v-if="$route.meta.isList" class="q-mt-sm">
         <a
           href="https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=bf392d7b57b18de6b92053e1c62293b2&from=console"
           target="_blank"
@@ -140,7 +140,7 @@
             alt="tentent_adver"
           />
         </a>
-      </div>
+      </div> -->
     </q-header>
 
     <q-page-container class="bg-primary">
