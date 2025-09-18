@@ -16,8 +16,8 @@ import routesShop from './routes_shop';
 // };
 let routes = process.env.ROUTE_SHOP ? routesShop : routesYunpan;
 
-console.log(process.env.ROUTE_SHOP + ` #############`);
-console.log(process.env.PORT + ` $$$$$$$$`);
+// console.log(process.env.ROUTE_SHOP + ` #############`);
+console.log(`port :` + process.env.PORT);
 
 // Vue.use(VueRouter);
 

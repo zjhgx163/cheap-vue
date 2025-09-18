@@ -692,6 +692,7 @@ import { useMeta } from 'quasar';
 import { ref } from 'vue';
 import { reactive } from 'vue';
 import { useQuasar } from 'quasar';
+import { useTokenStore } from 'stores/token.js';
 
 export default {
   name: 'YunpanItemDetail',
@@ -906,10 +907,13 @@ export default {
       title.value = value; // will automatically trigger a Meta update due to the binding
     }
 
+    const tokenStore = useTokenStore();
+
     return {
       setAnotherTitle,
       meta,
       slide: ref(1),
+      tokenStore,
     };
   },
   // our hook here
@@ -1079,16 +1083,21 @@ export default {
       // });
     });
 
-    if (this.$q.localStorage.has('userInfo')) {
-      let userInfo = this.$q.localStorage.getItem('userInfo');
-
-      if (userInfo !== undefined && userInfo !== null) {
-        if (userInfo.headimgurl != null && userInfo.headimgurl != '') {
-          this.userAvatar = userInfo.headimgurl;
-        }
+    let userInfo;
+    if (process.env.MODE === 'capacitor') {
+      userInfo = this.tokenStore.userInfo;
+    } else {
+      if (this.$q.localStorage.has('userInfo')) {
+        userInfo = this.$q.localStorage.getItem('userInfo');
+        // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
       }
-      // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
     }
+    if (userInfo !== undefined && userInfo !== null) {
+      if (userInfo.headimgurl != null && userInfo.headimgurl != '') {
+        this.userAvatar = userInfo.headimgurl;
+      }
+    }
+
     if (Object.keys(this.item).length === 0) {
       console.log(this.$route.params.id);
       this.$q.loading.show({
@@ -1184,7 +1193,7 @@ export default {
           this.breadcrumb = this.item.tag;
           this.categoryTo = '/category/' + this.breadcrumb;
           this.isInvalid = res.data.data.invalid;
-          this._contentStr = res.data.data.contentStr;
+          // this._contentStr = res.data.data.contentStr;
           this.previousItem = res.data.data.previousItem;
           this.nextItem = res.data.data.nextItem;
           this.recommendYunpanItems = res.data.data.recommendYunpanItems;
@@ -1223,11 +1232,11 @@ export default {
           if (this.item.worksName != null && this.item.worksName != '') {
             this.meta.description.content =
               this.item.worksName + ' —— ' + this.item.keywords + '资源下载';
-            if (this._contentStr) {
+            if (res.data.data.contentStr) {
               this.meta.description.content =
-                this.meta.description.content + ' —— ' + this._contentStr;
+                this.meta.description.content + ' —— ' + res.data.data.contentStr;
               this.meta.ogdescription.content =
-                this.meta.description.content + ' —— ' + this._contentStr;
+                this.meta.description.content + ' —— ' + res.data.data.contentStr;
             } else {
               this.meta.description.content =
                 this.meta.description.content + ' —— ' + this.item.title;
@@ -1239,11 +1248,11 @@ export default {
             this.meta.ogtitle.content =
               '好家当,' + this.item.worksName + ',' + this.item.keywords + ',资源下载';
           } else {
-            if (this._contentStr) {
+            if (res.data.data.contentStr) {
               this.meta.description.content =
-                this.item.keywords + '资源下载' + ' —— ' + this._contentStr;
+                this.item.keywords + '资源下载' + ' —— ' + res.data.data.contentStr;
               this.meta.ogdescription.content =
-                this.item.keywords + '资源下载' + ' —— ' + this._contentStr;
+                this.item.keywords + '资源下载' + ' —— ' + res.data.data.contentStr;
             } else {
               this.meta.description.content =
                 this.item.keywords + '资源下载' + ' —— ' + this.item.title;

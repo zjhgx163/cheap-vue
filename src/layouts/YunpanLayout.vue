@@ -362,6 +362,8 @@ import { Screen } from 'quasar';
 import 'src/config';
 import LoginQr from 'src/components/LoginQr.vue';
 import WysisygEditor from 'src/components/WysiwygEditor.vue';
+import { useTokenStore } from 'stores/token.js';
+// import { getValue } from 'src/capacitor-preferences';
 
 export default {
   components: { LoginQr, WysisygEditor },
@@ -383,6 +385,9 @@ export default {
       avatar: '/static/not_login_user.png',
       isEditorShowing: false,
       tab: 'all',
+      getPreferences: null,
+      setPreferences: null,
+      removePreferences: null,
     };
   },
   computed: {
@@ -428,8 +433,53 @@ export default {
     //   return this.$refs.child.category;
     // },
   },
+
+  setup() {
+    console.log('YunpanLayout setup');
+    const tokenStore = useTokenStore();
+    return { tokenStore };
+  },
   created() {
     console.log('YunpanLayout created');
+    console.log('user openId is ');
+    console.log(this.tokenStore.userInfo.openId);
+    if (process.env.MODE === 'capacitor') {
+      let that = this;
+      import('src/capacitor-preferences').then(function (result) {
+        console.log('44444447777777');
+        let { setValue, getValue, removeValue } = result;
+        that.getPreferences = getValue;
+        that.setPreferences = setValue;
+        that.removePreferences = removeValue;
+
+        getValue('token').then((result) => {
+          console.log('token is = ' + result);
+          if (result != null && result != '') {
+            console.log('$$$%$%%%%');
+            that.tokenStore.token = result;
+          } else {
+            that.tokenStore.token = 'bearer_initial';
+          }
+        });
+        getValue('userInfo').then((result) => {
+          console.log('user info from preferences is ');
+          console.log(JSON.parse(result));
+          if (result != null && result != '') {
+            that.tokenStore.userInfo = JSON.parse(result);
+            that.userName = that.tokenStore.userInfo.nickname;
+            that.isLogin = true;
+            if (
+              that.tokenStore.userInfo.headimgurl != null &&
+              that.tokenStore.userInfo.headimgurl != ''
+            ) {
+              that.avatar = that.tokenStore.userInfo.headimgurl;
+            }
+          }
+          console.log('user openId is = ' + that.tokenStore.userInfo.openId);
+        });
+        // token.then(value);
+      });
+    }
     // if (process.env.MODE === 'capacitor') {
     //   let obj = import('src/echo-plugin');
     //   const { value } = Echo.echo({ value: 'Hello David!' });
@@ -592,17 +642,19 @@ export default {
     if (windowWidth > 1023.99) {
       this.isBigScreen = true;
     }
-    if (this.$q.localStorage.has('userInfo')) {
-      let userInfo = this.$q.localStorage.getItem('userInfo');
-      console.log(userInfo);
-      if (userInfo !== undefined && userInfo !== null) {
-        this.userName = userInfo.nickname;
-        this.isLogin = true;
-        if (userInfo.headimgurl != null && userInfo.headimgurl != '') {
-          this.avatar = userInfo.headimgurl;
+    if (process.env.MODE !== 'capacitor') {
+      if (this.$q.localStorage.has('userInfo')) {
+        let userInfo = this.$q.localStorage.getItem('userInfo');
+        if (userInfo !== undefined && userInfo !== null) {
+          this.userName = userInfo.nickname;
+          this.isLogin = true;
+          if (userInfo.headimgurl != null && userInfo.headimgurl != '') {
+            this.avatar = userInfo.headimgurl;
+          }
         }
       }
     }
+
     //启动谷歌unit广告
     if (window.adsbygoogle == undefined) {
       this.timer = window.setInterval(() => {
@@ -709,26 +761,61 @@ export default {
       });
     },
     addYunpanItem() {
-      this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
-        console.log(res.data.data);
-        if (res.data.data == true) {
-          this.isEditorShowing = true;
-        } else {
-          //未登陆的话
-          if (this.$refs.child.isWeixin()) {
-            window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
+      if (process.env.MODE === 'capacitor') {
+        this.$axios.post(`${global.config.domain}/capacitor/islogin`, {}).then((res) => {
+          console.log(res.data.data);
+          if (res.data.code == 0) {
+            this.isEditorShowing = true;
           } else {
-            this.needLogin();
+            this.needLogin('add-yunpan-attempt');
           }
-        }
-      });
+        });
+        // if (this.tokenStore.token == null || this.tokenStore.token == '') {
+        //   this.getPreferences('token')
+        //     .then((token) => {
+        //       console.log('token is = ' + token);
+        //       if (token != null && token != '') {
+        //         this.tokenStore.token = token;
+        //       }
+        //       return token;
+        //     })
+        //     .then((token) => {
+        //       if (token == '' || token == null) {
+        //         this.needLogin('add-yunpan-attempt');
+        //       } else {
+        //         this.isEditorShowing = true;
+        //       }
+        //     });
+        // } else {
+        //   this.isEditorShowing = true;
+        // }
+      } else {
+        this.$axios.post(`${global.config.domain}/user/islogin`, {}).then((res) => {
+          console.log(res.data.data);
+          if (res.data.data == true) {
+            this.isEditorShowing = true;
+          } else {
+            //未登陆的话
+            if (this.$refs.child.isWeixin()) {
+              window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa249d330e183eb43&redirect_uri=https://${global.config.domainPro}/auth/xxx&response_type=code&scope=snsapi_userinfo&state=yunpanList#wechat_redirect`;
+            } else {
+              let userInfo = this.$q.localStorage.getItem('userInfo');
+              if (userInfo !== undefined && userInfo !== null) {
+                this.$q.localStorage.remove('userInfo');
+              }
+              this.needLogin('add-yunpan-attempt');
+            }
+          }
+        });
+      }
     },
     needLogin(itemId) {
       console.log('needLogin is trigged:' + itemId);
-      let userInfo = this.$q.localStorage.getItem('userInfo');
-      if (userInfo !== undefined && userInfo !== null) {
-        this.$q.localStorage.remove('userInfo');
-      }
+      // 恢复原状
+      this.userName = '注册/登陆';
+      this.avatar = '/static/not_login_user.png';
+      this.isLogin = false;
+
       this.isLoadingQr = true;
       this.loginCard = true;
       this.$axios.post(`${global.config.domain}/wechat/createQr`, {}).then((res) => {
@@ -739,46 +826,62 @@ export default {
           // 先清除旧的timer
           clearInterval(this.timer);
           this.timer = window.setInterval(() => {
-            this.$axios
-              .post(`${global.config.domain}/user/getScanLoginInfo/${res.data.data.sceneStr}`, {})
-              .then((res) => {
-                if (res.data.code == 0) {
-                  console.log('this.timer = ' + this.timer);
-                  if (res.data.data.loginFlag) {
-                    this.userName = res.data.data.nickname;
-                    this.avatar = res.data.data.avatar;
-                    this.isLogin = true;
-                    this.$q.localStorage.set('userInfo', res.data.data);
-                    window.clearInterval(this.timer); //清除定时器
-                    this.loginCard = false;
-                    if (itemId != undefined) {
-                      this.$refs.child.$emit('logined', itemId);
-                    }
+            let getScanLoginInfoUrl = `${global.config.domain}/user/getScanLoginInfo/${res.data.data.sceneStr}`;
+            if (process.env.MODE === 'capacitor') {
+              getScanLoginInfoUrl = `${global.config.domain}/capacitor/getWechatLoginInfo/${res.data.data.sceneStr}`;
+            }
+
+            this.$axios.post(getScanLoginInfoUrl, {}).then((res) => {
+              if (res.data.code == 0) {
+                console.log('this.timer = ' + this.timer);
+                console.log('response = ' + JSON.stringify(res.data.data));
+                if (res.data.data.loginFlag) {
+                  this.userName = res.data.data.nickname;
+                  this.avatar = res.data.data.avatar;
+                  this.isLogin = true;
+                  if (process.env.MODE === 'capacitor') {
+                    this.tokenStore.setToken(res.data.data.capacitorBearer);
+                    this.tokenStore.setUserInfo(res.data.data);
+                    console.log('capacitor mode set openId is ' + this.tokenStore.userInfo.openId);
+                    this.setPreferences('token', res.data.data.capacitorBearer);
+                    this.setPreferences('userInfo', JSON.stringify(res.data.data));
                   } else {
-                    let now = new Date();
-                    if (now.getTime() - beginTime.getTime() > 10 * 60 * 1000) {
-                      //如果五分钟了还未登陆则二维码过期
-                      console.log('二维码过期');
-                      window.clearInterval(this.timer); //清除定时器
-                      this.$q.notify({
-                        type: 'negative',
-                        message: '二维码已过期，2秒后跳转页面',
-                      });
-                      setTimeout(() => {
-                        this.$router.push({ path: '/' });
-                      }, 2000);
+                    this.$q.localStorage.set('userInfo', res.data.data);
+                  }
+                  window.clearInterval(this.timer); //清除定时器
+                  this.loginCard = false;
+                  if (itemId != undefined) {
+                    if (itemId === 'add-yunpan-attempt' && this.isEditorShowing === false) {
+                      this.isEditorShowing = true;
+                    } else {
+                      this.$refs.child.$emit('logined', itemId);
                     }
                   }
                 } else {
-                  this.$q.notify({
-                    type: 'negative',
-                    message: res.data.msg,
-                  });
-                  console.log('that.timer = ' + this.timer);
-                  window.clearInterval(this.timer); //清除定时器
-                  this.loginCard = false;
+                  let now = new Date();
+                  if (now.getTime() - beginTime.getTime() > 10 * 60 * 1000) {
+                    //如果五分钟了还未登陆则二维码过期
+                    console.log('二维码过期');
+                    window.clearInterval(this.timer); //清除定时器
+                    this.$q.notify({
+                      type: 'negative',
+                      message: '二维码已过期，2秒后跳转页面',
+                    });
+                    setTimeout(() => {
+                      this.$router.push({ path: '/' });
+                    }, 2000);
+                  }
                 }
-              });
+              } else {
+                this.$q.notify({
+                  type: 'negative',
+                  message: res.data.msg,
+                });
+                console.log('that.timer = ' + this.timer);
+                window.clearInterval(this.timer); //清除定时器
+                this.loginCard = false;
+              }
+            });
           }, 1000);
         } else {
           this.$q.notify({
@@ -794,12 +897,26 @@ export default {
     logout() {
       this.$axios.post(`${global.config.domain}/user/logout`, {}).then((res) => {
         if (res.data.code == 0) {
-          if (this.$q.localStorage.has('userInfo')) {
-            this.$q.localStorage.remove('userInfo');
-            this.userName = '注册/登陆';
-            this.avatar = '/static/not_login_user.png';
-            this.isLogin = false;
+          if (process.env.MODE === 'capacitor') {
+            if (this.tokenStore.token != '') {
+              // remove token
+              this.tokenStore.token = 'tokenStore.token';
+              this.tokenStore.userInfo = {};
+              this.getPreferences('token').then((token) => {
+                if (token != null && token != '') {
+                  this.removePreferences('token');
+                  this.removePreferences('userInfo');
+                }
+              });
+            }
+          } else {
+            if (this.$q.localStorage.has('userInfo')) {
+              this.$q.localStorage.remove('userInfo');
+            }
           }
+          this.userName = '注册/登陆';
+          this.avatar = '/static/not_login_user.png';
+          this.isLogin = false;
         } else {
           this.$q.notify({
             type: 'negative',

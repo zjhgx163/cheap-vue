@@ -5,10 +5,11 @@ let domain = '';
 let shareDomain = '';
 const imageDomain = '';
 let isProEnv = false;
+
 // const fullCurrentDomain = window.location.href;
 
 domain = 'http://localhost:8238';
-// domain = 'http://192.168.1.121:8238';
+// domain = 'http://192.168.98.155:8238';
 local = 'http://127.0.0.1:8238';
 console.log('mode is ' + process.env.MODE);
 // if (fullCurrentDomain.indexOf(domainDev) > -1) {
@@ -44,6 +45,17 @@ global.config = {
   isProEnv,
   local,
 };
+
+// if (process.env.MODE === 'capacitor') {
+//   console.log('import begin');
+//   import('@capacitor/preferences').then(function (result) {
+//     let { Preferences } = result;
+//     console.log(Preferences);
+//     if (global.config) {
+//       global.config.Preferences = Preferences;
+//     }
+//   });
+// }
 
 // console.log('+++++++');
 // console.log(global);

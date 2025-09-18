@@ -209,6 +209,7 @@ import { useMeta } from 'quasar';
 import { ref } from 'vue';
 import { reactive } from 'vue';
 import { useQuasar } from 'quasar';
+import { useTokenStore } from 'stores/token.js';
 
 export default {
   name: 'YunpanArticle',
@@ -352,9 +353,12 @@ export default {
       title.value = value; // will automatically trigger a Meta update due to the binding
     }
 
+    const tokenStore = useTokenStore();
+
     return {
       setAnotherTitle,
       meta,
+      tokenStore,
     };
   },
   // our hook here
@@ -419,16 +423,21 @@ export default {
       this.isBigScreen = true;
     }
 
-    if (this.$q.localStorage.has('userInfo')) {
-      let userInfo = this.$q.localStorage.getItem('userInfo');
-
-      if (userInfo !== undefined && userInfo !== null) {
-        if (userInfo.headimgurl != null && userInfo.headimgurl != '') {
-          this.userAvatar = userInfo.headimgurl;
-        }
+    let userInfo;
+    if (process.env.MODE === 'capacitor') {
+      userInfo = this.tokenStore.userInfo;
+    } else {
+      if (this.$q.localStorage.has('userInfo')) {
+        userInfo = this.$q.localStorage.getItem('userInfo');
+        // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
       }
-      // this.userAvatar = this.$q.localStorage.getItem('userInfo').headimgurl;
     }
+    if (userInfo !== undefined && userInfo !== null) {
+      if (userInfo.headimgurl != null && userInfo.headimgurl != '') {
+        this.userAvatar = userInfo.headimgurl;
+      }
+    }
+
     if (Object.keys(this.item).length === 0) {
       this.$q.loading.show({
         delay: 400, // ms
@@ -481,7 +490,7 @@ export default {
         } else {
           this.item = res.data.data.article;
           this.listData = res.data.data.firstReplyPage.records;
-          this._contentStr = res.data.data.contentStr;
+          // this._contentStr = res.data.data.contentStr;
           this.max = Math.ceil(
             res.data.data.firstReplyPage.total / res.data.data.firstReplyPage.size
           );
@@ -492,9 +501,9 @@ export default {
           // this.title = this._detail.title;
           this.meta.keywords.content = this.item.title + ',好家当';
           this.meta.ogtitle.content = this.item.title + ' - 好家当';
-          if (this._contentStr) {
-            this.meta.description.content = this._contentStr + ' - 好家当';
-            this.meta.ogdescription.content = this._contentStr + ' - 好家当';
+          if (res.data.data.contentStr) {
+            this.meta.description.content = res.data.data.contentStr + ' - 好家当';
+            this.meta.ogdescription.content = res.data.data.contentStr + ' - 好家当';
           } else {
             this.meta.description.content = this.item.title + ' - 好家当';
             this.meta.ogdescription.content = this.item.title + ' - 好家当';
@@ -557,6 +566,7 @@ export default {
             page: index,
             itemId: this.item.id,
             isInvalid: this.isInvalid,
+            article: true,
           })
           .then((res) => {
             console.log(res.data.data.records);
@@ -619,6 +629,7 @@ export default {
           page: this.current,
           itemId: this.item.id,
           isInvalid: this.isInvalid,
+          article: true,
         })
         .then((res) => {
           console.log(res.data.data.records);

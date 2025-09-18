@@ -7,7 +7,8 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
 const ESLintPlugin = require('eslint-webpack-plugin');
-module.exports = function (/* ctx */) {
+const webpack = require('webpack');
+module.exports = function (ctx) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -49,6 +50,15 @@ module.exports = function (/* ctx */) {
         ROUTE_SHOP: process.env.PROD_SHOP ? true : false,
         PORT: process.env.PORT ? process.env.PORT : '3000', //用于部署shop应用的端口
       },
+      /**
+       * Public path of your app.
+       * Use it when your public path is something else,
+       * like _“<protocol>://<domain>/some/nested/folder”_ – in this case,
+       * it means the distributables are in _“some/nested/folder”_ on your webserver.
+       *
+       * @default '/'
+       */
+      // publicPath: '.',
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -77,6 +87,18 @@ module.exports = function (/* ctx */) {
       // },
       // new way
       chainWebpack(chain) {
+        // if (ctx.mode.spa || ctx.mode.ssr) {
+        // chain.plugin('ignore-devtool').use(webpack.IgnorePlugin, [
+        //   {
+        //     resourceRegExp: /capacitor-preferences\.js$/, // 匹配文件名
+        //     contextRegExp: /src/, // 限定目录,
+        //   },
+        // ]);
+        // }
+        // chain.plugin('define').tap((args) => {
+        //   args[0]['process.env.BUILD_TARGET'] = JSON.stringify(ctx.modeName);
+        //   return args;
+        // });
         chain.plugin('eslint-webpack-plugin').use(ESLintPlugin, [{ extensions: ['js', 'vue'] }]);
         const nodePolyfillWebpackPlugin = require('node-polyfill-webpack-plugin');
         chain.plugin('node-polyfill').use(nodePolyfillWebpackPlugin);
