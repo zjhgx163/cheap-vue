@@ -9,9 +9,10 @@ axios.defaults.withCredentials = true;
 
 let getPreferences;
 let removePreferences;
+let tokenStore;
 
 if (process.env.MODE === 'capacitor') {
-  const tokenStore = useTokenStore();
+  tokenStore = useTokenStore();
 
   import('src/capacitor-preferences').then((result) => {
     let { removeValue, getValue } = result;
