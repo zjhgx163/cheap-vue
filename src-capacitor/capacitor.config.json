@@ -5,7 +5,6 @@
   "npmClient": "[object Object]",
   "webDir": "www",
   "server": {
-    "androidScheme": "https",
-    "hostname": "app.hjdang.com"
+    "androidScheme": "https"
   }
 }
