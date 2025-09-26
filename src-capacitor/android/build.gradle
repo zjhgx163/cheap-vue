@@ -3,13 +3,25 @@
 buildscript {
 
     repositories {
+        maven {
+          url "https://artifact.bytedance.com/repository/pangle"  //穿山甲融合SDK依赖
+        }
+        // maven {
+        //   url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_support/"  //mintegral SDK依赖
+        // }
+      /********************  测试工具AAR引入  ********************/
+//        maven {
+//          url "http://maven.byted.org/repository/android_public/" //
+//          allowInsecureProtocol = true
+//        }
         google()
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.7.2'
         classpath 'com.google.gms:google-services:4.4.2'
-
+      //Gromore自动拉取 Adapre AAR 插件脚本
+//        classpath 'com.pangle.cn:mediation-auto-adapter:1.0.3'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -19,6 +31,16 @@ apply from: "variables.gradle"
 
 allprojects {
     repositories {
+        maven {
+          url "https://artifact.bytedance.com/repository/pangle"  //穿山甲融合SDK依赖
+        }
+        // maven {
+        //   url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_support/"  //mintegral SDK依赖
+        // }
+//        maven {
+//          url "http://maven.byted.org/repository/android_public/"
+//          allowInsecureProtocol = true
+//        }
         google()
         mavenCentral()
     }

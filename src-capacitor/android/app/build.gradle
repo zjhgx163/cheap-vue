@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+//apply plugin: 'mediation-auto-adapter'
 
 android {
     namespace "org.capacitor.hjdang"
@@ -21,6 +22,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+          // 调试模式一般不开混淆
+          minifyEnabled false
+          shrinkResources false
+      }
     }
 }
 
@@ -31,7 +37,53 @@ repositories {
 }
 
 dependencies {
+    //注：adn如果通过aar方式引入，需要把对应的adn aar放到libs目录下，注意aar名称和版本号需要和下面命令行匹配上
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // implementation 'com.pangle.cn:mediation-sdk:7.1.3.2' //穿山甲融合SDK
+    //---------- GDT ----------
+    // implementation 'com.pangle.cn:mediation-gdt-adapter:4.642.1512.0'
+    // implementation(name: "GDTSDK.unionNormal.4.642.1512", ext: 'aar')  //GDT 优量汇 sdk ,通过aar方式引入， 需要把相关aar放到libs目录下，需要保证aar名称和版本号的准确
+    //---------- baidu ----------
+    // implementation 'com.pangle.cn:mediation-baidu-adapter:9.3941.0'
+    // implementation(name: "Baidu_MobAds_SDK_v9.3941", ext: 'aar')  //Baidu sdk ,通过aar方式引入， 需要把相关aar放到libs目录下，需要保证aar名称和版本号的准确
+//    //---------- ks ----------
+    // implementation 'com.pangle.cn:mediation-ks-adapter:4.6.30.1.0'
+    // implementation(name: "kssdk-ad-4.6.30.1", ext: 'aar') //Ks sdk ,通过aar方式引入， 需要把相关aar放到libs目录下，需要保证aar名称和版本号的准确
+//    //---------- admob ----------
+    // implementation 'com.pangle.cn:mediation-admob-adapter:17.2.0.71'
+    // implementation ('com.google.android.gms:play-services-ads:17.2.0') {
+    //   exclude group: 'com.android.support'
+    // }//admob sdk ,通过maven方式引入， 需要保证maven仓库地址和版本号的准确
+//    //---------- mtg ----------
+    //mintegral adapter
+    // implementation 'com.pangle.cn:mediation-mintegral-adapter:16.6.57.14'
+  //mintegral sdk ,需要同时引入下面的包，通过maven方式引入， 需要保证maven仓库地址和版本号的准确
+    // implementation 'com.mbridge.msdk.support:videojs:16.6.57'
+    // implementation 'com.mbridge.msdk.support:mbjscommon:16.6.57'
+    // implementation 'com.mbridge.msdk.support:playercommon:16.6.57'
+    // implementation 'com.mbridge.msdk.support:reward:16.6.57'
+    // implementation 'com.mbridge.msdk.support:videocommon:16.6.57'
+    // implementation 'com.mbridge.msdk.support:chinasame:16.6.57'
+    // implementation 'com.mbridge.msdk.support:interstitialvideo:16.6.57'
+    // implementation 'com.mbridge.msdk.support:mbnative:16.6.57'
+    // implementation 'com.mbridge.msdk.support:nativeex:16.6.57'
+    // implementation 'com.mbridge.msdk.support:mbnativeadvanced:16.6.57'
+    // implementation 'com.mbridge.msdk.support:interstitial:16.6.57'
+    // implementation 'com.mbridge.msdk.support:mbbanner:16.6.57'
+    // implementation 'com.mbridge.msdk.support:mbsplash:16.6.57'
+    // implementation 'com.mbridge.msdk.support:mbbid:16.6.57'
+    // implementation 'com.mbridge.msdk.support:newinterstitial:16.6.57'
+    //---------- sigmob ----------
+    // implementation 'com.pangle.cn:mediation-sigmob-adapter:4.24.0.0'
+  //sigmob sdk 需要同时引入下面两个aar
+    // implementation(name: "windAd-4.24.0", ext: 'aar') //通过aar方式引入， 需要把相关aar放到libs目录下，需要保证aar名称和版本号的准确
+    // implementation(name: "windAd-common-1.8.3", ext: 'aar') //通过aar方式引入， 需要把相关aar放到libs目录下，需要保证aar名称和版本号的准确
+    //---------- unity ----------
+    // implementation 'com.pangle.cn:mediation-unity-adapter:4.3.0.38'  //unity adapter
+    // implementation(name: "unity-ads-4.3.0", ext: 'aar') //Unity sdk ,通过aar方式引入， 需要把相关aar放到libs目录下，需要保证aar名称和版本号的准确
+
+    // implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    /*** 上面是穿山甲的配置 ***/
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
     implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
@@ -42,8 +94,21 @@ dependencies {
     implementation project(':capacitor-cordova-android-plugins')
     // api 'com.tencent.mm.opensdk:wechat-sdk-android:+' //wechat login
 
-}
+    // 穿山甲测试工具
+    // 请在测试环境中使用，切勿将测试工具带到生产环境
+//    implementation 'com.pangle.cn:mediation-test-tools:7.1.3.2'
+    // implementation(name: "tools-release", ext: 'aar')
 
+}
+//mediationAutoAdapter {
+//  //自动适配adn 所有adn adapter，默认值为true，如果为false脚本功能全部关闭
+//  autoUpdate true
+//  //如果不想全部自动适配，可选择此项，默认值为空[]，可以不填写
+//  //如果autoUpdate设置成false，此项不生效，不会自动适配adn adapter
+//  //如果autoUpdate设置成true，autoUpdateAdn配置了adn，则生效配置的adn。
+//  //autoUpdateAdn没有配置adn，自动适配所有的adn
+//  autoUpdateAdn = ["gdt","baidu","ks","admob","mtg","sigmob","unity"]
+//}
 apply from: 'capacitor.build.gradle'
 
 try {
