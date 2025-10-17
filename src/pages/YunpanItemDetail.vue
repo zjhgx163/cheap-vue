@@ -677,6 +677,24 @@
     height: 312px
 .pc_adsense_dimension
   height: 280px
+.movie-title
+  font-size: 20px
+  margin-bottom: 10px
+  margin-top: 10px
+  position: relative
+  display: inline-block
+  padding-bottom: 2px
+  text-align: center
+.badge-vlo2
+  background: #ffd5d5
+  color: #f06292 !important
+  border-radius: 5px
+  padding: 2px 6px
+  margin-left: 9px
+  font-size: 11px
+  font-weight: bold
+  display: inline-block
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
 </style>
 <!-- ins.adsbygoogle[data-ad-status="unfilled"]
   display: none !important -->
