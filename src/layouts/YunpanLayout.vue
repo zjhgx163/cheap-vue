@@ -447,7 +447,6 @@ export default {
     if (process.env.MODE === 'capacitor') {
       let that = this;
       import('src/capacitor-preferences').then(function (result) {
-        console.log('44444447777777');
         let { setValue, getValue, removeValue } = result;
         that.getPreferences = getValue;
         that.setPreferences = setValue;

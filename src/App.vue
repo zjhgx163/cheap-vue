@@ -18,13 +18,23 @@
 </template>
 
 <script>
+import { useAppstateStore } from 'stores/appstate.js';
+
 export default {
   name: 'App',
+
+  setup() {
+    console.log('App setup');
+    const appStateStore = useAppstateStore();
+    return { appStateStore };
+  },
 
   mounted() {
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
     console.log('App mounted');
+
+    this.importAppPlugin();
 
     // // banner广告示例声明
     // TencentGDT.push({
@@ -72,6 +82,47 @@ export default {
     // window.onresize = () => {
     //   this.windowWidth = window.innerWidth;
     // };
+  },
+
+  methods: {
+    async importAppPlugin() {
+      let { Device } = await import('@capacitor/device');
+
+      let { App } = await import('@capacitor/app');
+      App.addListener('appStateChange', ({ isActive }) => {
+        console.log('App state changed. Is active?', isActive);
+        //记录app运行事件，一天只记一次，记录设备信息
+        if (isActive) {
+          let date = new Date();
+          const year = date.getFullYear();
+          const month = date.getMonth() + 1;
+          const day = date.getDate();
+          const dateStr = `${year}-${month}-${day}`;
+          console.log(dateStr); // 输出格式化的日期和时间
+          if (!this.appStateStore.isStateChangedMap.has(dateStr)) {
+            const logDeviceInfo = async () => {
+              const id = await Device.getId();
+              const deviceInfo = await Device.getInfo();
+
+              console.log(id);
+              console.log(deviceInfo);
+
+              this.appStateStore.isStateChangedMap.set(dateStr, true);
+              this.appStateStore.fireAppEvent(id, deviceInfo);
+            };
+            logDeviceInfo();
+          }
+        }
+      });
+
+      // App.addListener('appUrlOpen', (data) => {
+      //   console.log('App opened with URL:', data);
+      // });
+
+      // App.addListener('resume', () => {
+      //   console.log('app resume:');
+      // });
+    },
   },
 };
 </script>

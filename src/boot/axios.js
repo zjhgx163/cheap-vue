@@ -2,6 +2,9 @@
 import { boot } from 'quasar/wrappers';
 import axios from 'axios';
 import { LocalStorage } from 'quasar';
+// import { createPinia } from 'pinia';
+// import { createApp } from 'vue';
+// import App from '../App.vue';
 // import 'src/config';
 import { useTokenStore } from 'stores/token.js';
 // 请求带cookie
@@ -12,8 +15,10 @@ let removePreferences;
 let tokenStore;
 
 if (process.env.MODE === 'capacitor') {
-  tokenStore = useTokenStore();
-
+  // const pinia = createPinia();
+  // const app = createApp(App);
+  // app.use(pinia);
+  // tokenStore = useTokenStore();
   import('src/capacitor-preferences').then((result) => {
     let { removeValue, getValue } = result;
     getPreferences = getValue;
@@ -27,6 +32,8 @@ axios.interceptors.request.use((req) => {
   console.log('request');
   // you must return the request object after you are done
   if (process.env.MODE === 'capacitor') {
+    // The easiest way to ensure this is always applied is to defer calls of useStore() by placing them inside functions that will always run after pinia is installed.
+    tokenStore = useTokenStore();
     console.log('###XXX' + tokenStore.token);
     if (tokenStore.token != '') {
       req.headers.Authorization = `Bearer ${tokenStore.token}`;
@@ -48,6 +55,8 @@ axios.interceptors.response.use(
       //认证错误
       if (response.data.code == -401) {
         console.log('bearer token 认证失败');
+        tokenStore = useTokenStore();
+        // The easiest way to ensure this is always applied is to defer calls of useStore() by placing them inside functions that will always run after pinia is installed.
         if (tokenStore.token != '') {
           // remove token
           tokenStore.token = 'bearer_initial';
