@@ -1,7 +1,10 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header reveal height-hint="120" class="bg-primary text-grey-8 YL__1000w q-pb-xs">
-      <q-toolbar class="bg-secondary justify-around" v-bind:class="[itemPadding]">
+      <q-toolbar
+        class="bg-secondary justify-around"
+        v-bind:class="[$q.capacitor ? capacitorMt : '', itemPadding]"
+      >
         <div class="col-auto col-sm-auto q-pa-xs">
           <router-link :to="{ path: '/' }">
             <q-img
@@ -55,7 +58,7 @@
         </div>
       </q-toolbar>
 
-      <q-toolbar class="q-mb-xs bg-secondary" v-bind:class="[itemPadding]">
+      <q-toolbar class="q-mb-xs bg-secondary q-py-xs">
         <nav>
           <q-tabs
             dense
@@ -376,6 +379,7 @@ export default {
       isSearching: false,
       host: global.config.domain,
       isBigScreen: false,
+      capacitorMt: 'q-mt-lg',
       // itemPadding: Screen.gt.sm ? 'q-py-lg' : 'q-py-xs',
       userName: '注册/登陆',
       isLogin: false,
@@ -393,7 +397,7 @@ export default {
   },
   computed: {
     itemPadding() {
-      return this.$q.platform.is.desktop ? 'q-py-xs' : 'q-py-xs';
+      return this.$q.capacitor ? 'q-pt-lg' : 'q-py-xs';
     },
     logoWidth() {
       return this.$q.platform.is.desktop ? '110px' : '90px';
@@ -491,6 +495,7 @@ export default {
   },
   mounted() {
     console.log('YunpanLayout mounted');
+    console.log('～～～～～～～～～～～～～');
     console.log('isProEnv = ' + global.config.isProEnv);
 
     let script = document.createElement('script');

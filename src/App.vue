@@ -33,6 +33,8 @@ export default {
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
     console.log('App mounted');
+    console.log('～～～～～～～～～～～～～');
+
     if (process.env.MODE === 'capacitor') {
       const importAppPlugin = async () => {
         let { Device } = await import('@capacitor/device');
