@@ -163,7 +163,7 @@
         </div>
         <aside v-if="$q.platform.is.desktop" class="col bg-secondary q-pl-lg q-ml-lg">
           <div>
-            <q-card flat class="column bg-secondary q-pl-md q-ml-md q-pt-lg q-mt-md">
+            <q-card flat class="column bg-secondary q-pl-md q-ml-md q-pt-sm">
               <q-card-section>
                 <q-btn
                   class="q-pl-sm q-ml-xs q-mb-md"
@@ -175,8 +175,8 @@
                   icon="o_article"
                   @click="addYunpanItem"
                 />
-                <q-card-actions vertical align="left" class="justify-between q-pr-none q-pt-lg">
-                  <q-btn
+                <!-- <q-card-actions vertical align="left" class="justify-between q-pr-none q-pt-lg"> -->
+                <!-- <q-btn
                     flat
                     outline
                     color="indigo-5"
@@ -197,8 +197,8 @@
                     href="https://mall.hjdang.com"
                   >
                     <q-badge transparent rounded align="top" color="pink-4"> 返利 </q-badge></q-btn
-                  >
-                  <!-- <q-btn
+                  > -->
+                <!-- <q-btn
                     outline
                     color="indigo-5"
                     :size="addButtonSize"
@@ -207,7 +207,32 @@
                     icon="o_savings"
                     @click="goGetReward"
                   /> -->
-                </q-card-actions>
+                <!-- </q-card-actions> -->
+              </q-card-section>
+            </q-card>
+
+            <q-card flat class="q-pl-md q-ml-md">
+              <q-card-section>
+                <div class="q-pl-md q-pb-xs text-subtitle2">好家当 安卓App</div>
+                <q-img
+                  fit="cover"
+                  class="q-ml-md q-my-sms"
+                  width="100px"
+                  height="100px"
+                  src="https://file.hjdang.com/apk/hjdang-app-apk.png"
+                >
+                </q-img>
+                <div
+                  class="q-pl-md q-pt-xs"
+                  style="
+                    font-size: 0.58rem;
+                    font-weight: 600;
+                    line-height: 1rem;
+                    letter-spacing: 0.03333em;
+                  "
+                >
+                  安卓手机浏览器扫码下载
+                </div>
               </q-card-section>
             </q-card>
           </div>
@@ -247,7 +272,7 @@
         class="items-center justify-between q-px-lg q-py-xs"
         v-if="$route.meta.isList && $q.platform.is.mobile"
       >
-        <q-btn
+        <!-- <q-btn
           flat
           v-bind:size="shopButtionSize"
           color="indigo-5"
@@ -257,7 +282,7 @@
           to="/coupon"
         >
           <q-badge transparent rounded align="top" color="pink-4"> 返利 </q-badge></q-btn
-        >
+        > -->
         <q-btn
           flat
           color="pink-4"

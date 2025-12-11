@@ -467,7 +467,7 @@
               transition-prev="slide-right"
               transition-next="slide-left"
               animated
-              height="210px"
+              height="180px"
               class="rounded-borders"
             >
               <q-carousel-slide :name="1" class="column no-wrap q-pa-sm">
