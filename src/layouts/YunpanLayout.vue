@@ -18,7 +18,7 @@
         </div>
         <div
           class="col-sm-5 justify-center"
-          :class="[$q.platform.is.android && !$q.capacitor ? 'col-6' : 'col']"
+          :class="[$q.platform.is.android && !$q.capacitor ? searchCol : 'col']"
         >
           <q-input
             ref="searchInput"
@@ -31,6 +31,8 @@
             placeholder="搜索"
             type="search"
             v-on:keyup.enter="search"
+            @focus="searchFocus"
+            @blur="searchBlur"
             hide-bottom-space
           >
             <template v-slot:after>
@@ -49,9 +51,10 @@
             </template>
           </q-input>
         </div>
-        <div v-if="$q.platform.is.android" class="col">
+        <div v-if="$q.platform.is.android && !isTypeing" class="col">
           <q-btn
             label="下载App"
+            dense
             rounded
             unelevated
             color="pink-4"
@@ -401,6 +404,7 @@
 <script>
 // import { fabYoutube } from '@quasar/extras/fontawesome-v5';
 import { Screen } from 'quasar';
+import { ref } from 'vue';
 import 'src/config';
 import LoginQr from 'src/components/LoginQr.vue';
 import WysisygEditor from 'src/components/WysiwygEditor.vue';
@@ -479,8 +483,12 @@ export default {
 
   setup() {
     console.log('YunpanLayout setup');
+    // const searchInput = useTemplateRef('searchInput');
     const tokenStore = useTokenStore();
-    return { tokenStore };
+    const searchCol = ref('col-6');
+    const isTypeing = ref(false);
+
+    return { tokenStore, searchCol, isTypeing };
   },
   created() {
     console.log('YunpanLayout created');
@@ -777,6 +785,19 @@ export default {
             err;
           });
       }, 200);
+    },
+    searchFocus() {
+      // .value is needed in JavaScript
+      this.searchCol = 'col';
+      this.isTypeing = true;
+    },
+    searchBlur() {
+      // .value is needed in JavaScript
+      if (this.searchKey != '' && this.searchKey != null) {
+        return;
+      }
+      this.searchCol = 'col-6';
+      this.isTypeing = false;
     },
     clickUser() {
       if (this.isLogin) {
