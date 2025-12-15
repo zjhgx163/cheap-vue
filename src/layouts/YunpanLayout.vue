@@ -359,8 +359,8 @@
 .YL
   &__auther
     @media(max-width: $breakpoint-xs-max)
-      font-size: 0.82em
-      height: 2.3em
+      font-size: 0.72em
+      height: 2.0em
     @media(min-width: $breakpoint-xs-max)
       font-size: 0.9em
       height: 2.7em
