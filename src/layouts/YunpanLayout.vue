@@ -51,7 +51,7 @@
             </template>
           </q-input>
         </div>
-        <div v-if="$q.platform.is.android && !isTypeing" class="col">
+        <div v-if="$q.platform.is.android && !isTypeing && !$q.capacitor" class="col">
           <q-btn
             label="下载App"
             dense
