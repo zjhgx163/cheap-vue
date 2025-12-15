@@ -5,7 +5,7 @@
         class="bg-secondary justify-around"
         v-bind:class="[$q.capacitor ? capacitorMt : '', itemPadding]"
       >
-        <div class="col-auto col-sm-auto q-pa-xs">
+        <div class="col-auto col-sm-auto q-pa-sm">
           <router-link :to="{ path: '/' }">
             <q-img
               src="hjd.png"
@@ -16,14 +16,17 @@
             />
           </router-link>
         </div>
-        <div class="col col-sm-5 justify-center">
+        <div
+          class="col-sm-5 justify-center"
+          :class="[$q.platform.is.android && !$q.capacitor ? 'col-6' : 'col']"
+        >
           <q-input
             ref="searchInput"
             dense
             clearable
-            filled
+            outlined
             standout="text-white"
-            square
+            rounded
             v-model="searchKey"
             placeholder="搜索"
             type="search"
@@ -45,6 +48,16 @@
               </q-btn>
             </template>
           </q-input>
+        </div>
+        <div v-if="$q.platform.is.android" class="col">
+          <q-btn
+            label="下载App"
+            rounded
+            unelevated
+            color="pink-4"
+            href="https://file.hjdang.com/apk/hjdang-release.apk"
+          >
+          </q-btn>
         </div>
         <div class="col-sm-4 gt-sm row flex-center">
           <q-btn-dropdown unelevated flat :label="userName" @click="clickUser"> </q-btn-dropdown>
@@ -425,10 +438,10 @@ export default {
       return this.$q.capacitor ? 'q-pt-lg' : 'q-py-xs';
     },
     logoWidth() {
-      return this.$q.platform.is.desktop ? '110px' : '90px';
+      return this.$q.platform.is.desktop ? '110px' : '80px';
     },
     logoHeight() {
-      return this.$q.platform.is.desktop ? '46.3px' : '37.9px';
+      return this.$q.platform.is.desktop ? '46.3px' : '36.9px';
     },
     shopButtionSize() {
       return this.$q.platform.is.desktop ? '1.0em' : '0.7em';
