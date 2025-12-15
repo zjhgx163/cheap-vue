@@ -75,69 +75,67 @@
       </q-toolbar>
 
       <q-toolbar class="q-mb-xs bg-secondary q-py-xs">
-        <nav>
-          <q-tabs
-            dense
-            align="left"
-            :active-color="getTagColor"
-            :indicator-color="getTagColor"
-            content-class="text-grey-10"
-            narrow-indicator
-            outside-arrows
-            mobile-arrows
-            v-model="tab"
-            shrink
-          >
-            <q-route-tab :to="{ path: '/list', query: { q: searchKey } }" label="全部" name="all" />
-            <q-route-tab
-              :to="{ path: '/category/影视', query: { q: searchKey } }"
-              label="影视"
-              name="movie"
-            />
-            <q-route-tab
-              :to="{ path: '/category/动漫', query: { q: searchKey } }"
-              label="动漫"
-              name="anime"
-            />
-            <q-route-tab
-              :to="{ path: '/category/学习', query: { q: searchKey } }"
-              label="学习"
-              name="learn"
-            />
-            <q-route-tab
-              :to="{ path: '/category/游戏%2F软件', query: { q: searchKey } }"
-              icon="o_sports_esports"
-              class="text-purple-4"
-              name="game/software"
-            />
-            <q-route-tab
-              :to="{ path: '/category/音乐%2F音频', query: { q: searchKey } }"
-              label="音乐/音频"
-              name="music"
-            />
-            <q-route-tab
-              :to="{ path: '/category/图片', query: { q: searchKey } }"
-              label="图片"
-              name="picture"
-            />
-            <q-route-tab
-              :to="{ path: '/category/书籍', query: { q: searchKey } }"
-              label="书籍"
-              name="books"
-            />
-            <q-route-tab
-              :to="{ path: '/category/求资源', query: { q: searchKey } }"
-              icon="help_outline"
-              class="text-blue-grey-6"
-              name="help"
-            />
-            <q-route-tab
-              :to="{ path: '/category/other', query: { q: searchKey } }"
-              label="其他"
-              name="other"
-            />
-          </q-tabs>
-        </nav>
+        <q-tabs
+          dense
+          align="left"
+          :active-color="getTagColor"
+          :indicator-color="getTagColor"
+          content-class="text-grey-10"
+          narrow-indicator
+          outside-arrows
+          mobile-arrows
+          v-model="tab"
+          shrink
+        >
+          <q-route-tab :to="{ path: '/list', query: { q: searchKey } }" label="全部" name="all" />
+          <q-route-tab
+            :to="{ path: '/category/影视', query: { q: searchKey } }"
+            label="影视"
+            name="movie"
+          />
+          <q-route-tab
+            :to="{ path: '/category/动漫', query: { q: searchKey } }"
+            label="动漫"
+            name="anime"
+          />
+          <q-route-tab
+            :to="{ path: '/category/学习', query: { q: searchKey } }"
+            label="学习"
+            name="learn"
+          />
+          <q-route-tab
+            :to="{ path: '/category/游戏%2F软件', query: { q: searchKey } }"
+            icon="o_sports_esports"
+            class="text-purple-4"
+            name="game/software"
+          />
+          <q-route-tab
+            :to="{ path: '/category/音乐%2F音频', query: { q: searchKey } }"
+            label="音乐/音频"
+            name="music"
+          />
+          <q-route-tab
+            :to="{ path: '/category/图片', query: { q: searchKey } }"
+            label="图片"
+            name="picture"
+          />
+          <q-route-tab
+            :to="{ path: '/category/书籍', query: { q: searchKey } }"
+            label="书籍"
+            name="books"
+          />
+          <q-route-tab
+            :to="{ path: '/category/求资源', query: { q: searchKey } }"
+            icon="help_outline"
+            class="text-blue-grey-6"
+            name="help"
+          />
+          <q-route-tab
+            :to="{ path: '/category/other', query: { q: searchKey } }"
+            label="其他"
+            name="other"
+          />
+        </q-tabs>
       </q-toolbar>
       <!-- <div v-if="$route.meta.isList" class="q-mt-sm">
         <a
