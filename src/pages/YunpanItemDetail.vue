@@ -685,6 +685,16 @@
   display: inline-block
   padding-bottom: 2px
   text-align: center
+.badge-vlo1
+  background: linear-gradient(135deg, #0047abb0 0%, #6b8cff5e 100%)
+  color: #ffffff
+  border-radius: 5px
+  padding: 2px 6px
+  margin-left: 9px
+  font-size: 11px
+  font-weight: bold
+  display: inline-block
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
 .badge-vlo2
   background: #ffd5d5
   color: #f06292 !important
@@ -695,6 +705,30 @@
   font-weight: bold
   display: inline-block
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
+.year
+  color: #888
+  font-size: 16px
+  margin-left: 4px
+.douban-logo
+  color: #fff
+  background-color: #47d05e
+  padding: .4px 3px
+  border-radius: 3px
+  font-size: .9em
+  line-height: 1.2
+  font-weight: 700
+  margin-right: .3em
+  vertical-align: .5px
+.imdb-logo
+  background-color: #ffe7a0
+  color: #3c3b3b
+  padding: .1px 6px
+  border-radius: 3px
+  font-size: .9em
+  line-height: 1.2
+  font-weight: 700
+  margin-right: .5em
+  vertical-align: .5px
 </style>
 <!-- ins.adsbygoogle[data-ad-status="unfilled"]
   display: none !important -->
