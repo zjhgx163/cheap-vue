@@ -219,6 +219,25 @@
             </div>
 
             <q-separator inset />
+            <q-card class="flex-center q-ml-xs" flat>
+              <q-card-section
+                ><a
+                  class="text-indigo-7"
+                  href="https://www.hjdang.com/article/1006"
+                  target="_blank"
+                  style="
+                    font-weight: 500;
+                    font-size: 19px;
+                    line-height: 26px;
+                    margin-bottom: 2px;
+                    text-decoration: underline;
+                  "
+                >
+                  夸克网盘80T扩容和免费SVIP获取攻略</a
+                >
+              </q-card-section>
+            </q-card>
+            <q-separator inset />
             <div v-if="$q.platform.is.desktop">
               <q-item>
                 <q-item-section>
