@@ -115,10 +115,16 @@
 
           <q-separator />
 
-          <q-item dense disable>
-            <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+          <q-item
+            dense
+            :to="{
+              path: '/user/order/auditlist',
+              query: { userId: userInfo.userId },
+            }"
+          >
+            <!-- <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
               <strong>敬请期待</strong>
-            </q-tooltip>
+            </q-tooltip> -->
             <q-item-section avatar top class="q-py-xs">
               <q-avatar icon="approval" color="accent" text-color="white" size="2em" />
             </q-item-section>
@@ -132,10 +138,16 @@
 
           <q-separator />
 
-          <q-item dense disable>
-            <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+          <q-item
+            dense
+            :to="{
+              path: '/user/withdrallist',
+              query: { userId: userInfo.userId, status: '' },
+            }"
+          >
+            <!-- <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
               <strong>敬请期待</strong>
-            </q-tooltip>
+            </q-tooltip> -->
             <q-item-section avatar top class="q-py-xs">
               <q-avatar icon="paid" color="accent" text-color="white" size="2em" />
             </q-item-section>
@@ -252,10 +264,16 @@
               </q-item-section>
             </q-item>
             <q-separator />
-            <q-item dense disable>
-              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+            <q-item
+              dense
+              :to="{
+                path: '/user/order/auditlist',
+                query: { userId: userInfo.userId },
+              }"
+            >
+              <!-- <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                 <strong>敬请期待</strong>
-              </q-tooltip>
+              </q-tooltip> -->
               <q-item-section avatar top class="q-py-xs">
                 <q-avatar icon="approval" color="accent" text-color="white" size="2em" />
               </q-item-section>
@@ -271,10 +289,16 @@
 
         <div class="col-6">
           <q-list class="q-px-sm q-mb-xs bg-secondary" dense>
-            <q-item dense disable>
-              <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+            <q-item
+              dense
+              :to="{
+                path: '/user/withdrallist',
+                query: { userId: userInfo.userId, status: '' },
+              }"
+            >
+              <!-- <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
                 <strong>敬请期待</strong>
-              </q-tooltip>
+              </q-tooltip> -->
               <q-item-section avatar top class="q-py-xs">
                 <q-avatar icon="paid" color="accent" text-color="white" size="2em" />
               </q-item-section>
