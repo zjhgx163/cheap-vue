@@ -118,7 +118,7 @@
           <q-item
             dense
             :to="{
-              path: '/user/order/auditlist',
+              path: '/user/order/settlementlist',
               query: { userId: userInfo.userId },
             }"
           >
@@ -129,7 +129,7 @@
               <q-avatar icon="approval" color="accent" text-color="white" size="2em" />
             </q-item-section>
             <q-item-section>
-              <q-item-label lines="1" class="YL__menu_text">结算记录 </q-item-label>
+              <q-item-label lines="1" class="YL__menu_text">结算记录</q-item-label>
             </q-item-section>
             <q-item-section side>
               <q-icon name="chevron_right" />
@@ -267,7 +267,7 @@
             <q-item
               dense
               :to="{
-                path: '/user/order/auditlist',
+                path: '/user/order/settlementlist',
                 query: { userId: userInfo.userId },
               }"
             >
@@ -278,7 +278,7 @@
                 <q-avatar icon="approval" color="accent" text-color="white" size="2em" />
               </q-item-section>
               <q-item-section>
-                <q-item-label lines="1" class="YL__menu_text">结算记录 </q-item-label>
+                <q-item-label lines="1" class="YL__menu_text">订单结算 </q-item-label>
               </q-item-section>
               <q-item-section side>
                 <q-icon name="chevron_right" />

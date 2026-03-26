@@ -171,6 +171,11 @@ const routes = [
         name: 'withdrallist',
         component: () => import('pages/WithdrawList.vue'),
       },
+      {
+        path: 'order/settlementlist',
+        name: 'settlementlist',
+        component: () => import('pages/SettlementList.vue'),
+      },
       { path: 'converturl', name: 'converturl', component: () => import('pages/Tool.vue') },
       { path: 'withdraw', name: 'withdraw', component: () => import('pages/WithdrawFund.vue') },
     ],

@@ -21,25 +21,22 @@
                       <div class="text-grey-7">{{ formattedDate(item.createdTime) }}</div>
                     </q-item-label>
                     <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]">
-                      <div class="text-grey-7">提现金额</div>
+                      <div class="text-grey-7">返利到账金额</div>
                     </q-item-label>
                     <q-item-label :lines="1" v-bind:class="[textSize, fontFamily, titleHeight]">
-                      ¥{{ item.amount }}</q-item-label
+                      ¥{{ item.userFinalCommissionAmount }}</q-item-label
                     >
+                    <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]">
+                      <span class="text-grey-7">计拥金额：</span> ¥{{ item.actualCosAmount }}
+                    </q-item-label>
 
                     <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]">
-                      <span class="text-grey-7">支付时间：</span>
-                      {{ formattedDate(item.payTime) }}
-                    </q-item-label>
-                  </q-item-section>
-                  <q-item-section no-wrap>
-                    <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]"
-                      ><span class="text-grey-7">支付方式 </span
-                      >{{ getWithdrawTypeText(item.withdrawType) }}</q-item-label
-                    >
-                    <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]">
-                      <span class="text-grey-7">备注：</span
-                      ><span class="text-red-7 text-bold">{{ item.remark }}</span>
+                      <span class="text-grey-7">预估返利：</span> ¥{{
+                        item.userTotalCommissionAmount === null ||
+                        item.userTotalCommissionAmount === 0
+                          ? item.userEstimateCommissionAmount
+                          : item.userTotalCommissionAmount
+                      }}
                     </q-item-label>
                     <q-item-label
                       :lines="1"
@@ -53,10 +50,34 @@
                     >
                       {{ getStatusText(item.status) }}
                     </q-item-label>
-
+                  </q-item-section>
+                  <q-item-section no-wrap>
                     <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]"
-                      ><span class="text-grey-7">付款单号 </span>{{ item.serialNo }}</q-item-label
+                      ><span class="text-grey-7">结算流水号 </span>{{ item.serialNo }}</q-item-label
                     >
+
+                    <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]">
+                      <span class="text-grey-7">订单号：</span
+                      ><span>{{ item.platformOrderNo }}</span>
+                    </q-item-label>
+
+                    <q-item-label :lines="1" v-bind:class="[textSize, fontFamily, titleHeight]">
+                      <div class="text-bold">{{ item.itemTitle }}</div>
+                    </q-item-label>
+                    <q-item-label :lines="1" v-bind:class="[smalltextSize, fontFamily]"
+                      ><span class="text-grey-7">平台: </span
+                      >{{ getPlatformText(item.platform) }}</q-item-label
+                    >
+                    <q-item-label
+                      :lines="1"
+                      v-bind:class="[smalltextSize, fontFamily]"
+                    ></q-item-label>
+                    <q-item-label
+                      :lines="1"
+                      class="text-bold"
+                      v-bind:class="[textSize, fontFamily, titleHeight]"
+                    >
+                    </q-item-label>
 
                     <!-- <q-item-label :lines="1" v-bind:class="[fontFamily]">
                       <q-chip
@@ -69,6 +90,12 @@
                       </q-chip>
                     </q-item-label> -->
                   </q-item-section>
+                </q-item>
+                <q-item dense>
+                  <img
+                    v-bind:src="item.itemImg == null ? '/static/no-data.png' : item.itemImg"
+                    class="YL__settlement_img"
+                  />
                 </q-item>
               </div>
               <!-- <q-separator /> -->
@@ -88,9 +115,16 @@
 
 <style lang="sass">
 .YL
+  &__settlement_img
+    @media(max-width: $breakpoint-xs-max)
+      width: 60px
+      height: 60px
+    @media(min-width: $breakpoint-xs-max)
+      width: 170px
+      height: 170px
   &__title_text
     @media(max-width: $breakpoint-xs-max)
-      font-size: 0.9em
+      font-size: 0.8em
       height: 1.2em
     @media(min-width: $breakpoint-xs-max)
       font-size: 1.2em
@@ -119,7 +153,7 @@ import { Screen } from 'quasar';
 import 'src/config';
 
 export default {
-  name: 'WithdrawList',
+  name: 'SettlementList',
   data() {
     return {
       listData: [],
@@ -148,18 +182,20 @@ export default {
     disable: function () {
       return this.isListEnd ? true : false;
     },
-
-    getWithdrawTypeText: function () {
+    getPlatformText: function () {
       return (parameter) => {
         if (parameter == 1) {
-          return '微信收款码';
+          return '淘宝';
         } else if (parameter == 2) {
-          return '人工转账';
+          return '京东';
         } else if (parameter == 3) {
-          return '微信零钱';
+          return '拼多多';
+        } else if (parameter == 4) {
+          return '美团';
         }
       };
     },
+
     getStatusColor: function () {
       return (parameter) => {
         if (parameter == 0) {
@@ -174,15 +210,31 @@ export default {
     getStatusText: function () {
       return (parameter) => {
         if (parameter == 1) {
-          return '提现成功';
-        } else if (parameter == 0) {
-          return '提现进行中';
+          return '通过';
         } else if (parameter == -1) {
-          return '提现失败';
+          return '拒绝';
+        }
+      };
+    },
+    getStatusTextColor: function () {
+      return (parameter) => {
+        if (parameter === -1) {
+          return 'white';
+        } else {
+          return 'white';
         }
       };
     },
 
+    getDescColor: function () {
+      return (parameter) => {
+        if (parameter == -1) {
+          return 'text-purple-5';
+        } else {
+          return 'text-green-7 ';
+        }
+      };
+    },
     formattedDate: function () {
       return (parameter) => {
         return new Date(parameter).toLocaleString(); // 使用toLocaleString进行本地化日期格式
@@ -191,7 +243,7 @@ export default {
   },
 
   mounted() {
-    console.log('withdrawList mounted');
+    console.log('settlementList mounted');
     if (this.$q.localStorage.has('userInfo')) {
       let userInfo = this.$q.localStorage.getItem('userInfo');
       console.log(userInfo);
@@ -210,7 +262,7 @@ export default {
     //解决iphone移动端的延迟
     // FastClick.attach(document.body);
     // this.selectedTab = 'main';
-    this.getWithdrawList(this.userId, this.status);
+    this.getSettlementList(this.userId, this.status);
 
     // this.windowWidth = window.innerWidth;
     // window.onresize = () => {
@@ -218,18 +270,18 @@ export default {
     // };
   },
   activated() {
-    console.log('withdrawList activated');
+    console.log('settlementList activated');
     console.log('this.isListEnd =' + this.isListEnd);
 
     this.isListEnd = false;
   },
   methods: {
-    getWithdrawList(userId, status, type) {
+    getSettlementList(userId, status) {
       this.$q.loading.show({
         delay: 400, // ms
       });
       this.$axios
-        .post(`${global.config.domain}/user/withdraw/list`, {
+        .post(`${global.config.domain}/order/settlement/list`, {
           userId: userId,
           page: this.page,
         })
@@ -266,7 +318,7 @@ export default {
       }
       setTimeout(() => {
         this.$axios
-          .post(`${global.config.domain}/user/withdraw/list`, {
+          .post(`${global.config.domain}/order/settlement/list`, {
             userId: this.userId,
             page: index,
           })
@@ -300,6 +352,7 @@ export default {
           });
       }, 1000);
     },
+
     isWeixin() {
       let ua;
       if (process.env.CLIENT) {
@@ -317,7 +370,7 @@ export default {
     //列表下拉刷新
     refresh(done) {
       setTimeout(() => {
-        this.getWithdrawList(this.userId, this.status);
+        this.getSettlementList(this.userId, this.status);
         done();
       }, 1000);
     },
