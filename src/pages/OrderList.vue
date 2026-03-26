@@ -35,7 +35,7 @@
                         <span class="text-grey-7">商城：</span>{{ getMall(item.platform) }}
                       </div>
                       <div class="col">
-                        <span class="text-grey-7">付款时间：</span>{{ item.payTime }}
+                        <span class="text-grey-7">付款时间：</span>{{ formattedDate(item.payTime) }}
                       </div>
                     </q-item-label>
 
@@ -52,6 +52,9 @@
                   </q-item-section>
                 </q-item>
                 <q-item>
+                  <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]">
+                    <strong> {{ item.statusRemark }}</strong>
+                  </q-tooltip>
                   <q-item-section>
                     <q-item-label :lines="1" v-bind:class="[fontFamily, smalltextSize]">
                       <span class="text-grey-7">记佣金额</span></q-item-label
@@ -241,6 +244,11 @@ export default {
         }
       };
     },
+    formattedDate: function () {
+      return (parameter) => {
+        return new Date(parameter).toLocaleString(); // 使用toLocaleString进行本地化日期格式
+      };
+    },
   },
 
   mounted() {
@@ -374,7 +382,7 @@ export default {
     //列表下拉刷新
     refresh(done) {
       setTimeout(() => {
-        this.getItemList();
+        this.getOrderList(this.userId, this.status, this.type);
         done();
       }, 1000);
     },
