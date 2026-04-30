@@ -1093,6 +1093,9 @@ export default {
         this.meta.ogtitle.content = '好家当,' + this.item.keywords + ',资源下载';
       }
     }
+    if (this.item.thumbnaiImgs != null && this.item.thumbnaiImgs.length > 0) {
+      this.meta.ogimage.content = this.item.thumbnaiImgs[0];
+    }
 
     this.meta.ogurl.content = 'https://www.hjdang.com/d/' + id;
 
@@ -1332,6 +1335,9 @@ export default {
             }
             this.meta.keywords.content = '好家当,' + this.item.keywords + ',资源下载';
             this.meta.ogtitle.content = '好家当,' + this.item.keywords + ',资源下载';
+          }
+          if (this.item.thumbnaiImgs != null && this.item.thumbnaiImgs.length > 0) {
+            this.meta.ogimage.content = this.item.thumbnaiImgs[0];
           }
           this.$q.loading.hide();
         }
