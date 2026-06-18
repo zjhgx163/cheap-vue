@@ -748,6 +748,12 @@
   font-weight: 700
   margin-right: .5em
   vertical-align: .5px
+.message h3
+  font-size: 18px
+  font-weight: 700
+  margin: 15px 0 20px
+  border-left: 4px solid #007bf5
+  padding: 0 0 0 10px
 </style>
 <!-- ins.adsbygoogle[data-ad-status="unfilled"]
   display: none !important -->
