@@ -1,5 +1,5 @@
 const domainDev = 'localhost'; // 测试环境
-const domainPro = process.env.ROUTE_SHOP == true ? 'mall.hjdang.com' : 'yunpan.hjdang.com'; // 生产环境微信端
+const domainPro = process.env.ROUTE_SHOP == true ? 'mall.hjdang.com' : 'www.hjdang.com'; // 生产环境微信端
 let mobileSite = '';
 let domain = '';
 let shareDomain = '';
@@ -8,8 +8,8 @@ let isProEnv = false;
 
 // const fullCurrentDomain = window.location.href;
 
-// domain = 'http://localhost:8238';
-domain = 'http://192.168.152.155:8238';
+domain = 'http://localhost:8238';
+// domain = 'http://10.152.60.155:8238';
 local = 'http://127.0.0.1:8238';
 console.log('mode is ' + process.env.MODE);
 // if (fullCurrentDomain.indexOf(domainDev) > -1) {
