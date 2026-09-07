@@ -35,7 +35,7 @@ export const useYunpanStore = defineStore('yunpan', {
   },
 
   actions: {
-    getItemList(page, query, tag, x, redirect) {
+    getItemList(page, tag, redirect) {
       // 取top article
       axios.post(`${global.config.local}/yunpan/top/article/list`, {}).then((res) => {
         this.topArticleList = res.data.data;
@@ -45,7 +45,6 @@ export const useYunpanStore = defineStore('yunpan', {
         .post(`${global.config.local}/yunpan/resource/list`, {
           page: page === undefined ? 1 : page,
           tag: tag,
-          query: query,
         })
         .then((res) => {
           const end = Date.now() - start;
@@ -60,19 +59,6 @@ export const useYunpanStore = defineStore('yunpan', {
               this.isListEnd = true;
               this.pageNavigateHidden = false;
               this.stopLoading = true;
-            }
-
-            //只有点击‘搜索’才记录关键词
-            if (x !== undefined && x != null) {
-              axios
-                .post(`${global.config.local}/yunpan/search/log`, {
-                  searchKeyword: query,
-                  total: res.data.data.total,
-                  x: x,
-                })
-                .then((res) => {
-                  console.log(res.data.data);
-                });
             }
           }
 

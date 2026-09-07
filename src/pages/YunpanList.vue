@@ -279,7 +279,7 @@ export default {
       // to: false,
     };
   },
-  props: ['query', 'page', 'x', 'idForLogin'],
+  props: ['page', 'idForLogin'],
   emits: ['need-login', 'logined'],
 
   computed: {
@@ -480,15 +480,15 @@ export default {
     // fetch data, validate route and optionally redirect to some other route...
     if (process.env.SERVER) {
       // to resolve duplicate content issues /list redirect to /list?q=  /category/xx redirect to /category/xx?q=
-      // if (currentRoute.path == '/list') {
-      //   if (currentRoute.query.q == undefined) {
-      //     redirect({ path: '/list', query: { q: '' } }, 301);
-      //   }
-      // } else if (currentRoute.name == 'category') {
-      //   if (currentRoute.query.q == undefined) {
-      //     redirect({ path: currentRoute.path, query: { q: '' } }, 301);
-      //   }
-      // }
+      if (currentRoute.path == '/list') {
+        if (currentRoute.query.q) {
+          redirect({ path: '/list' }, 301);
+        }
+      } else if (currentRoute.name == 'category') {
+        if (currentRoute.query.q) {
+          redirect({ path: currentRoute.path }, 301);
+        }
+      }
       Loading.show();
 
       // ssrContext is available only server-side in SSR mode
@@ -505,9 +505,7 @@ export default {
 
       return myStore.getItemList(
         currentRoute.params.page === undefined ? currentRoute.query.page : currentRoute.params.page,
-        currentRoute.query.q,
         currentRoute.params.category,
-        currentRoute.query.x,
         redirect
       );
     }
@@ -600,7 +598,6 @@ export default {
   },
 
   mounted() {
-    console.log('$$$$$$' + this.query);
     console.log('YunpanList mounted' + this.category);
     let windowWidth = window.screen.width;
     if (windowWidth > 1023.99) {
@@ -769,7 +766,6 @@ export default {
         .post(`${global.config.domain}/yunpan/resource/list`, {
           page: this.current,
           tag: this.$route.params.category,
-          query: this.query,
           sort: this.sort,
         })
         .then((res) => {
@@ -789,21 +785,6 @@ export default {
             this.$axios.post(`${global.config.domain}/yunpan/top/article/list`, {}).then((res) => {
               this.topArticleList = res.data.data;
             });
-            //只有点击‘搜索’才记录关键词
-            if (this.x !== undefined && this.x != null) {
-              this.$axios
-                .post(`${global.config.domain}/yunpan/search/log`, {
-                  searchKeyword: this.query,
-                  total: res.data.data.total,
-                  x: this.x,
-                })
-                .then((res) => {
-                  console.log(res.data.data);
-                });
-            }
-            if (this.$route.query.x) {
-              this.$emit('searchDone');
-            }
           }
 
           console.log('hidden = ' + this.pageNavigateHidden);
@@ -840,7 +821,6 @@ export default {
             .post(`${global.config.domain}/yunpan/resource/list`, {
               page: this.current,
               tag: this.$route.params.category,
-              query: this.query,
               sort: this.sort,
             })
             .then((res) => {
