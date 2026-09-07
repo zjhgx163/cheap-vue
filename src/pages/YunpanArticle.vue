@@ -314,7 +314,7 @@ export default {
       },
       ogurl: {
         property: 'og:url',
-        content: 'https://www.hjdang.com/list?q=',
+        content: 'https://www.hjdang.com/',
       },
       ogtitle: {
         property: 'og:title',
@@ -440,7 +440,7 @@ export default {
 
     if (Object.keys(this.item).length === 0) {
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 200, // ms
       });
       this.getYunpanArticleContent(this.$route.params.id);
     }
@@ -448,7 +448,7 @@ export default {
   methods: {
     getReplyList() {
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 200, // ms
       });
       this.$axios
         .post(`${global.config.domain}/yunpan/reply/list`, {
@@ -486,7 +486,7 @@ export default {
             icon: 'warning',
             message: `${res.data.msg}`,
           });
-          this.$router.push({ path: '/list', query: { q: '' } });
+          this.$router.push({ path: '/list' });
         } else {
           this.item = res.data.data.article;
           this.listData = res.data.data.firstReplyPage.records;

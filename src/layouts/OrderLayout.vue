@@ -110,9 +110,9 @@ export default {
                     this.$q.localStorage.set('userInfo', res.data.data);
                     window.clearInterval(this.timer); //清除定时器
                     this.loginCard = false;
-                    if (itemId != undefined) {
-                      this.$refs.child.$emit('logined', itemId);
-                    }
+                    // if (itemId != undefined) {
+                    //   this.$refs.child.$emit('logined', itemId);
+                    // }
                   } else {
                     let now = new Date();
                     if (now.getTime() - beginTime.getTime() > 10 * 60 * 1000) {

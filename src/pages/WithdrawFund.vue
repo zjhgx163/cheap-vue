@@ -258,7 +258,7 @@ export default {
         return;
       }
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 100, // ms
       });
       this.$axios
         .post(`${global.config.domain}/user/withdraw/apply`, {

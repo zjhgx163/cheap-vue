@@ -74,7 +74,7 @@
         </div>
       </q-toolbar>
 
-      <q-toolbar class="q-mb-xs bg-secondary q-py-xs">
+      <q-toolbar class="q-mb-xs bg-secondary q-py-xs" v-if="!$route.meta.isTabHide">
         <q-tabs
           dense
           align="left"
@@ -87,54 +87,26 @@
           v-model="tab"
           shrink
         >
-          <q-route-tab :to="{ path: '/list', query: { q: searchKey } }" label="全部" name="all" />
+          <q-route-tab :to="{ path: '/list' }" label="全部" name="all" />
+          <q-route-tab :to="{ path: '/category/影视' }" label="影视" name="movie" />
+          <q-route-tab :to="{ path: '/category/动漫' }" label="动漫" name="anime" />
+          <q-route-tab :to="{ path: '/category/学习' }" label="学习" name="learn" />
           <q-route-tab
-            :to="{ path: '/category/影视', query: { q: searchKey } }"
-            label="影视"
-            name="movie"
-          />
-          <q-route-tab
-            :to="{ path: '/category/动漫', query: { q: searchKey } }"
-            label="动漫"
-            name="anime"
-          />
-          <q-route-tab
-            :to="{ path: '/category/学习', query: { q: searchKey } }"
-            label="学习"
-            name="learn"
-          />
-          <q-route-tab
-            :to="{ path: '/category/游戏%2F软件', query: { q: searchKey } }"
+            :to="{ path: '/category/游戏%2F软件' }"
             icon="o_sports_esports"
             class="text-purple-4"
             name="game/software"
           />
+          <q-route-tab :to="{ path: '/category/音乐%2F音频' }" label="音乐/音频" name="music" />
+          <q-route-tab :to="{ path: '/category/图片' }" label="图片" name="picture" />
+          <q-route-tab :to="{ path: '/category/书籍' }" label="书籍" name="books" />
           <q-route-tab
-            :to="{ path: '/category/音乐%2F音频', query: { q: searchKey } }"
-            label="音乐/音频"
-            name="music"
-          />
-          <q-route-tab
-            :to="{ path: '/category/图片', query: { q: searchKey } }"
-            label="图片"
-            name="picture"
-          />
-          <q-route-tab
-            :to="{ path: '/category/书籍', query: { q: searchKey } }"
-            label="书籍"
-            name="books"
-          />
-          <q-route-tab
-            :to="{ path: '/category/求资源', query: { q: searchKey } }"
+            :to="{ path: '/category/求资源' }"
             icon="help_outline"
             class="text-blue-grey-6"
             name="help"
           />
-          <q-route-tab
-            :to="{ path: '/category/other', query: { q: searchKey } }"
-            label="其他"
-            name="other"
-          />
+          <q-route-tab :to="{ path: '/category/other' }" label="其他" name="other" />
         </q-tabs>
       </q-toolbar>
       <!-- <div v-if="$route.meta.isList" class="q-mt-sm">
@@ -177,7 +149,7 @@
         </div>
         <aside v-if="$q.platform.is.desktop" class="col bg-secondary q-pl-lg q-ml-lg">
           <div>
-            <q-card flat class="column bg-secondary q-pl-md q-ml-md q-pt-sm">
+            <q-card flat class="column bg-secondary q-pl-md q-ml-md q-pt-none">
               <q-card-section>
                 <q-btn
                   class="q-pl-sm q-ml-xs q-mb-md"
@@ -776,7 +748,7 @@ export default {
         let randomNum = Math.random();
         that.$router
           .push({
-            path: '/list',
+            path: '/search',
             query: { q: that.searchKey, x: randomNum },
           })
           .catch((err) => {
@@ -997,7 +969,6 @@ export default {
       this.isEditorShowing = value;
       this.$router.push({
         path: '/list/1',
-        query: { q: '' },
       });
     },
   },

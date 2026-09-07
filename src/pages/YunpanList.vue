@@ -480,15 +480,15 @@ export default {
     // fetch data, validate route and optionally redirect to some other route...
     if (process.env.SERVER) {
       // to resolve duplicate content issues /list redirect to /list?q=  /category/xx redirect to /category/xx?q=
-      if (currentRoute.path == '/list') {
-        if (currentRoute.query.q == undefined) {
-          redirect({ path: '/list', query: { q: '' } }, 301);
-        }
-      } else if (currentRoute.name == 'category') {
-        if (currentRoute.query.q == undefined) {
-          redirect({ path: currentRoute.path, query: { q: '' } }, 301);
-        }
-      }
+      // if (currentRoute.path == '/list') {
+      //   if (currentRoute.query.q == undefined) {
+      //     redirect({ path: '/list', query: { q: '' } }, 301);
+      //   }
+      // } else if (currentRoute.name == 'category') {
+      //   if (currentRoute.query.q == undefined) {
+      //     redirect({ path: currentRoute.path, query: { q: '' } }, 301);
+      //   }
+      // }
       Loading.show();
 
       // ssrContext is available only server-side in SSR mode
@@ -600,19 +600,21 @@ export default {
   },
 
   mounted() {
+    console.log('$$$$$$' + this.query);
     console.log('YunpanList mounted' + this.category);
     let windowWidth = window.screen.width;
     if (windowWidth > 1023.99) {
       this.isBigScreen = true;
       this.pageNavigateHidden = false;
     }
+    //yunpanDetail页发现需要登陆跳转到list页，已废弃？
     this.$bus.on('logined', function (itemId) {
       console.log('我是子组件方法' + itemId);
       this.$router.push({
         path: '/d/' + itemId,
       });
     });
-    //在yunpanDetail页面上需要登陆
+    //在yunpanDetail页面上需要登陆，跳到list页，已废弃？
     if (this.idForLogin) {
       //通知父组件
       this.$emit('need-login', this.idForLogin);
@@ -760,7 +762,7 @@ export default {
     getItemList() {
       // console.log('$$$$$$' + this.query);
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 100, // ms
       });
 
       this.$axios
@@ -776,7 +778,8 @@ export default {
             redirect({ path: '/error/404' }, 301);
           } else {
             this.listData = res.data.data.records;
-            this.topArticleList = res.data.data.yunpanTopArticleList;
+            // this.topArticleList = res.data.data.yunpanTopArticleList;
+
             this.max = Math.ceil(res.data.data.total / res.data.data.size);
             if (res.data.data.records.length < 30 || this.$route.params.page >= this.max) {
               this.isListEnd = true;
@@ -912,12 +915,11 @@ export default {
       if (this.$route.params.category != undefined && this.$route.params.category != null) {
         this.$router.push({
           path: this.$route.path,
-          query: { q: this.query, page: this.current },
+          query: { page: this.current },
         });
       } else {
         this.$router.push({
           path: '/list/' + this.current,
-          query: { q: this.query },
         });
       }
       // }

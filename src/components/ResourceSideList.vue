@@ -195,7 +195,7 @@ export default {
     getItemList() {
       // console.log('$$$$$$' + this.query);
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 200, // ms
       });
       this.$axios
         .post(`${global.config.domain}/yunpan/resource/list`, {

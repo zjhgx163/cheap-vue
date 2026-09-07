@@ -945,7 +945,7 @@ export default {
       },
       ogurl: {
         property: 'og:url',
-        content: 'https://www.hjdang.com/list?q=',
+        content: 'https://www.hjdang.com/list',
       },
       ogtitle: {
         property: 'og:title',
@@ -1181,7 +1181,7 @@ export default {
     if (Object.keys(this.item).length === 0) {
       console.log(this.$route.params.id);
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 100, // ms
       });
       var id = this.$route.params.id.match(/\d+/i);
       this.getYunpanItemContent(id);
@@ -1267,7 +1267,7 @@ export default {
             icon: 'warning',
             message: `${res.data.msg}`,
           });
-          this.$router.push({ path: '/list', query: { q: '' } });
+          this.$router.push({ path: '/list' });
         } else {
           this.item = res.data.data.item;
           this.breadcrumb = this.item.tag;

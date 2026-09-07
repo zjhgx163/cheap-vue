@@ -51,11 +51,54 @@ export const useYunpanStore = defineStore('yunpan', {
           const end = Date.now() - start;
           console.log(`list cost ${end}ms`);
           if (res.data.code < 0) {
+            console.log(res.data.code);
             redirect({ path: '/error/404' }, 301);
           } else {
             this.items = res.data.data.records;
             this.max = Math.ceil(res.data.data.total / res.data.data.size);
             if (res.data.data.records.length < 30 || page >= this.max) {
+              this.isListEnd = true;
+              this.pageNavigateHidden = false;
+              this.stopLoading = true;
+            }
+
+            //只有点击‘搜索’才记录关键词
+            if (x !== undefined && x != null) {
+              axios
+                .post(`${global.config.local}/yunpan/search/log`, {
+                  searchKeyword: query,
+                  total: res.data.data.total,
+                  x: x,
+                })
+                .then((res) => {
+                  console.log(res.data.data);
+                });
+            }
+          }
+
+          console.log('hidden = ' + this.pageNavigateHidden);
+          console.log('this.current  = ' + page);
+          console.log('this.isListEnd  = ' + this.isListEnd);
+          Loading.hide();
+        });
+    },
+    search(page, query, x, redirect) {
+      const start = Date.now();
+      return axios
+        .post(`${global.config.local}/yunpan/search`, {
+          page: page === undefined ? 1 : page,
+          query: query,
+        })
+        .then((res) => {
+          const end = Date.now() - start;
+          console.log(`search cost ${end}ms`);
+          if (res.data.code < 0) {
+            redirect({ path: '/error/404' }, 301);
+          } else {
+            this.items = res.data.data.hits;
+            console.log(res.data.data.hits);
+            this.max = res.data.data.totalPages;
+            if (this.items.length < 30 || page >= this.max) {
               this.isListEnd = true;
               this.pageNavigateHidden = false;
               this.stopLoading = true;
@@ -95,9 +138,9 @@ export const useYunpanStore = defineStore('yunpan', {
             message: `${res.data.msg}`,
           });
           if (res.data.code == -210) {
-            redirect({ path: '/list', query: { q: '' } }, 404);
+            redirect({ path: '/list' }, 404);
           } else {
-            redirect({ path: '/list', query: { q: '' } }, 301);
+            redirect({ path: '/list' }, 301);
           }
         } else {
           // console.log(res.data.data.item);
@@ -116,7 +159,7 @@ export const useYunpanStore = defineStore('yunpan', {
           }
 
           if (this.itemDetail == null) {
-            redirect({ path: '/list', query: { q: '' } }, 404);
+            redirect({ path: '/list' }, 404);
           }
           if (res.data.data.redirectId != null && res.data.data.redirectId > 0) {
             redirect({ path: '/d/' + res.data.data.redirectId }, 301);
@@ -137,9 +180,9 @@ export const useYunpanStore = defineStore('yunpan', {
           });
           Loading.hide();
           if (res.data.code == -210) {
-            redirect({ path: '/list', query: { q: '' } }, 404);
+            redirect({ path: '/list' }, 404);
           } else {
-            redirect({ path: '/list', query: { q: '' } }, 301);
+            redirect({ path: '/list' }, 301);
           }
         } else {
           this.itemDetail = res.data.data.article;
@@ -150,7 +193,7 @@ export const useYunpanStore = defineStore('yunpan', {
           );
 
           if (this.itemDetail == null) {
-            redirect({ path: '/list', query: { q: '' } }, 301);
+            redirect({ path: '/list' }, 301);
           }
 
           Loading.hide();

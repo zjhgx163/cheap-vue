@@ -278,7 +278,7 @@ export default {
   methods: {
     getSettlementList(userId, status) {
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 100, // ms
       });
       this.$axios
         .post(`${global.config.domain}/order/settlement/list`, {

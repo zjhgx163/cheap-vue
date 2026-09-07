@@ -69,7 +69,7 @@ export default {
             });
           } else if (this.state == 'yunpanList') {
             this.$router.push({
-              path: '/list?q=',
+              path: '/list',
             });
           } else {
             console.log('order list' + this.state);

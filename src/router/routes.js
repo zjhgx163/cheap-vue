@@ -10,11 +10,11 @@ const routes = [
           recommend: () => import('components/YunpanRecommendList.vue'),
         },
         meta: { isList: true },
-        props: (route) => ({
-          query: route.query.q,
-          x: route.query.x,
-          idForLogin: route.query.idForLogin,
-        }),
+        props: {
+          default: (route) => ({
+            idForLogin: route.query.idForLogin,
+          }),
+        },
       },
       {
         path: 'list',
@@ -23,11 +23,11 @@ const routes = [
           recommend: () => import('components/YunpanRecommendList.vue'),
         },
         meta: { isList: true },
-        props: (route) => ({
-          query: route.query.q,
-          x: route.query.x,
-          idForLogin: route.query.idForLogin,
-        }),
+        props: {
+          default: (route) => ({
+            idForLogin: route.query.idForLogin,
+          }),
+        },
       },
       {
         path: 'list/:page',
@@ -36,7 +36,6 @@ const routes = [
           recommend: () => import('components/YunpanRecommendList.vue'),
         },
         meta: { isList: true },
-        props: (route) => ({ query: route.query.q }),
       },
       {
         path: 'category/:category',
@@ -46,7 +45,11 @@ const routes = [
           default: () => import('pages/YunpanList.vue'),
           recommend: () => import('components/YunpanRecommendList.vue'),
         },
-        props: (route) => ({ query: route.query.q, page: route.query.page }),
+        props: {
+          default: (route) => ({
+            page: route.query.page,
+          }),
+        },
       },
       {
         path: 'd/:id',
@@ -60,6 +63,21 @@ const routes = [
         path: 'article/:id',
         name: 'articleDetail',
         component: () => import('pages/YunpanArticle.vue'),
+      },
+      {
+        path: 'search',
+        components: {
+          default: () => import('pages/YunpanSearch.vue'),
+          recommend: () => import('components/YunpanRecommendList.vue'),
+        },
+        meta: { isList: true, isTabHide: true },
+        props: {
+          // For routes with named views, you have to define the props option for each named view:
+          default: (route) => ({
+            keyword: route.query.q,
+            x: route.query.x,
+          }),
+        },
       },
 
       { path: 'mock/login', name: 'mocklogin', component: () => import('pages/MockLogin.vue') },

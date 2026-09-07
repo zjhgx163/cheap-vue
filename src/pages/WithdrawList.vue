@@ -226,7 +226,7 @@ export default {
   methods: {
     getWithdrawList(userId, status, type) {
       this.$q.loading.show({
-        delay: 400, // ms
+        delay: 100, // ms
       });
       this.$axios
         .post(`${global.config.domain}/user/withdraw/list`, {
