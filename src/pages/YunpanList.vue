@@ -1,8 +1,14 @@
 <template>
   <q-page :style-fn="myTweak">
-    <div id="flowAdverYunpanId"></div>
-    <q-pull-to-refresh @refresh="refresh" no-mouse>
-      <q-list separator class="q-pt-md">
+    <q-pull-to-refresh
+      @refresh="refresh"
+      no-mouse
+      color="orange-2"
+      bg-color="black"
+      icon="autorenew"
+    >
+      <div id="flowAdverYunpanId"></div>
+      <q-list separator class="q-pt-sm">
         <div v-bind:key="item.id" v-for="item in topArticleList" class="q-pb-sm">
           <q-item
             dense
