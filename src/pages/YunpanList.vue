@@ -1,67 +1,67 @@
 <template>
   <q-page :style-fn="myTweak">
     <div id="flowAdverYunpanId"></div>
-    <q-list separator class="q-pt-md">
-      <div v-bind:key="item.id" v-for="item in topArticleList" class="q-pb-sm">
-        <q-item
-          dense
-          v-ripple
-          :to="{
-            name: 'articleDetail',
-            params: { id: item.id },
-          }"
-          class="q-py-sm"
-        >
-          <q-item-section avatar top>
-            <q-avatar size="2.0em">
-              <img src="david_avatar.png" alt="站长" width="2.0em" height="2.0em" />
-            </q-avatar>
-          </q-item-section>
+    <q-pull-to-refresh @refresh="refresh" no-mouse>
+      <q-list separator class="q-pt-md">
+        <div v-bind:key="item.id" v-for="item in topArticleList" class="q-pb-sm">
+          <q-item
+            dense
+            v-ripple
+            :to="{
+              name: 'articleDetail',
+              params: { id: item.id },
+            }"
+            class="q-py-sm"
+          >
+            <q-item-section avatar top>
+              <q-avatar size="2.0em">
+                <img src="david_avatar.png" alt="站长" width="2.0em" height="2.0em" />
+              </q-avatar>
+            </q-item-section>
 
-          <q-item-section class="q-pb-xs">
-            <q-item-label :lines="2" class="text-overline" v-bind:class="[lineHeight]">
-              {{ item.title }}
-            </q-item-label>
-            <div class="row q-mt-sm" v-if="$q.platform.is.desktop">
-              <q-badge color="pink-4" transparent label="置顶" class="col-auto" />
-              <div class="col"></div>
-            </div>
-          </q-item-section>
-          <q-item-section class="q-pb-xs" side>
-            <q-item-label
-              v-if="$q.platform.is.desktop"
-              class="row q-pt-sm q-pb-xs q-pr-xs YL__auther"
-            >
-              <q-btn outline class="text-black" label="点击查看" />
-            </q-item-label>
-            <div v-else class="row">
-              <q-badge color="pink-4" label="置顶" class="col-auto" />
-              <div class="col"></div>
-            </div>
-          </q-item-section>
+            <q-item-section class="q-pb-xs">
+              <q-item-label :lines="2" class="text-overline" v-bind:class="[lineHeight]">
+                {{ item.title }}
+              </q-item-label>
+              <div class="row q-mt-sm" v-if="$q.platform.is.desktop">
+                <q-badge color="pink-4" transparent label="置顶" class="col-auto" />
+                <div class="col"></div>
+              </div>
+            </q-item-section>
+            <q-item-section class="q-pb-xs" side>
+              <q-item-label
+                v-if="$q.platform.is.desktop"
+                class="row q-pt-sm q-pb-xs q-pr-xs YL__auther"
+              >
+                <q-btn outline class="text-black" label="点击查看" />
+              </q-item-label>
+              <div v-else class="row">
+                <q-badge color="pink-4" label="置顶" class="col-auto" />
+                <div class="col"></div>
+              </div>
+            </q-item-section>
 
-          <!-- <q-item-section side top> </q-item-section> -->
-        </q-item>
+            <!-- <q-item-section side top> </q-item-section> -->
+          </q-item>
 
-        <q-separator inset />
+          <q-separator inset />
+        </div>
+      </q-list>
+
+      <div v-if="listData.length === 0" class="column items-center justify-center">
+        <div class="column YL__no_data flex-center">
+          <q-img src="/static/no-data.png" spinner-color="white" alt="空空如也～"> </q-img>
+
+          <div class="text-subtitle2 text-center text-grey">~空空如也~</div>
+        </div>
+
+        <!-- <div class="col-3"></div> -->
       </div>
-    </q-list>
 
-    <div v-if="listData.length === 0" class="column items-center justify-center">
-      <div class="column YL__no_data flex-center">
-        <q-img src="/static/no-data.png" spinner-color="white" alt="空空如也～"> </q-img>
+      <div v-else ref="scrollTargetRef">
+        <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
 
-        <div class="text-subtitle2 text-center text-grey">~空空如也~</div>
-      </div>
-
-      <!-- <div class="col-3"></div> -->
-    </div>
-
-    <div v-else ref="scrollTargetRef">
-      <!--   当使用:scroll-target 时，被指定的container必须要有 style="overflow: auto; max-height: 3000px" -->
-
-      <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
-        <q-pull-to-refresh @refresh="refresh" no-mouse>
+        <q-infinite-scroll @load="onLoad" :offset="250" :initial-index="1" :disable="disable">
           <q-list dense class="q-pt-md">
             <div
               v-bind:key="item.id"
@@ -141,8 +141,7 @@
               <!-- <q-separator spaced /> -->
             </div>
           </q-list>
-        </q-pull-to-refresh>
-        <!-- <div class="adsenseunitlist">
+          <!-- <div class="adsenseunitlist">
           <ins
             class="adsbygoogle"
             style="display: block"
@@ -153,37 +152,38 @@
           ></ins>
         </div> -->
 
-        <template v-slot:loading>
-          <div v-bind:class="{ hidden: !pageNavigateHidden }" class="row justify-center q-my-md">
-            <q-spinner-dots color="accent" size="40px"></q-spinner-dots>
-          </div>
-        </template>
-      </q-infinite-scroll>
-      <div class="YL__list_end q-mb-sm" v-bind:class="{ hidden: !isListEnd }">
-        <span class="YL__endline">我是有底线的</span>
-      </div>
-      <div
-        v-bind:class="{ hidden: pageNavigateHidden }"
-        class="q-my-xs q-pa-md flex flex-center bg-light-green-1"
-      >
-        <q-tooltip> 输入页码跳转</q-tooltip>
-
-        <q-pagination
-          gutter="sm"
-          input
-          :input-class="'text-dark'"
-          v-model="current"
-          :size="paginationSize"
-          color="purple"
-          :max="max"
-          glossy
-          :max-pages="maxPage"
-          boundary-numbers
-          @update:model-value="pageNavigate"
+          <template v-slot:loading>
+            <div v-bind:class="{ hidden: !pageNavigateHidden }" class="row justify-center q-my-md">
+              <q-spinner-dots color="accent" size="40px"></q-spinner-dots>
+            </div>
+          </template>
+        </q-infinite-scroll>
+        <div class="YL__list_end q-mb-sm" v-bind:class="{ hidden: !isListEnd }">
+          <span class="YL__endline">我是有底线的</span>
+        </div>
+        <div
+          v-bind:class="{ hidden: pageNavigateHidden }"
+          class="q-my-xs q-pa-md flex flex-center bg-light-green-1"
         >
-        </q-pagination>
+          <q-tooltip> 输入页码跳转</q-tooltip>
+
+          <q-pagination
+            gutter="sm"
+            input
+            :input-class="'text-dark'"
+            v-model="current"
+            :size="paginationSize"
+            color="purple"
+            :max="max"
+            glossy
+            :max-pages="maxPage"
+            boundary-numbers
+            @update:model-value="pageNavigate"
+          >
+          </q-pagination>
+        </div>
       </div>
-    </div>
+    </q-pull-to-refresh>
   </q-page>
 </template>
 
